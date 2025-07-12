@@ -51,12 +51,23 @@ A comprehensive web application for creating professional, minimalist website de
 
 ## 🚀 Quick Start
 
-1. **Open the App**: Open `index.html` in your web browser
-2. **Choose Style**: Select from 6 design styles
-3. **Pick Layout**: Choose your preferred template
-4. **Customize Content**: Add your text, navigation, and content
-5. **Preview**: See live preview with mobile/desktop views
-6. **Export**: Download your complete website
+1. **Read the Complete Guide**: Open `project-walkthrough.html` for detailed step-by-step instructions
+2. **Open the App**: Open `index.html` in your web browser
+3. **Choose Style**: Select from 6 design styles
+4. **Pick Layout**: Choose your preferred template
+5. **Customize Content**: Add your text, navigation, and content
+6. **Preview**: See live preview with mobile/desktop views
+7. **Export**: Download your complete website
+
+## 📚 Complete Documentation
+
+For non-technical users and detailed Claude Code integration examples, see the **[Complete Project Walkthrough](project-walkthrough.html)**. This comprehensive guide includes:
+
+- Step-by-step tutorials for beginners
+- Detailed Claude Code integration examples
+- Project type recommendations
+- Vercel deployment instructions
+- Troubleshooting and best practices
 
 ## 📁 Project Structure
 
