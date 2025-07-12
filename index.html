@@ -581,6 +581,235 @@
             .template-grid {
                 grid-template-columns: 1fr 1fr;
             }
+            
+            .theme-option span:last-child {
+                display: none;
+            }
+        }
+
+        /* Theme Toggle Styles */
+        .theme-toggle-container {
+            margin-top: 8px;
+        }
+        
+        .theme-toggle {
+            display: flex;
+            background: #f1f3f4;
+            border-radius: 8px;
+            padding: 4px;
+            position: relative;
+        }
+        
+        .theme-toggle input[type="radio"] {
+            display: none;
+        }
+        
+        .theme-option {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 13px;
+            font-weight: 500;
+            color: #6b7280;
+        }
+        
+        .theme-option .theme-icon {
+            font-size: 14px;
+        }
+        
+        .theme-toggle input[type="radio"]:checked + .theme-option {
+            background: white;
+            color: #1f2937;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Brand Color Tools */
+        .brand-color-tools {
+            margin-top: 8px;
+        }
+        
+        .extracted-palette {
+            display: flex;
+            gap: 8px;
+            margin: 8px 0;
+            flex-wrap: wrap;
+        }
+        
+        .color-swatch {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            border: 2px solid #e5e7eb;
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.2s ease;
+        }
+        
+        .color-swatch:hover {
+            transform: scale(1.1);
+        }
+        
+        .color-swatch.selected {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+        }
+        
+        .color-swatch .color-info {
+            position: absolute;
+            bottom: -24px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 10px;
+            color: #6b7280;
+            white-space: nowrap;
+        }
+
+        /* Template Marketplace Styles */
+        .template-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .template-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .template-card:hover {
+            border-color: #3b82f6;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .template-preview {
+            width: 100%;
+            height: 120px;
+            background: #f3f4f6;
+            border-radius: 6px;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6b7280;
+            font-size: 12px;
+        }
+
+        .template-title {
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 0.25rem;
+            font-size: 14px;
+        }
+
+        .template-meta {
+            font-size: 12px;
+            color: #6b7280;
+            margin-bottom: 0.5rem;
+        }
+
+        .template-tags {
+            display: flex;
+            gap: 0.25rem;
+            flex-wrap: wrap;
+        }
+
+        .template-tag {
+            background: #eff6ff;
+            color: #1e40af;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 500;
+        }
+
+        /* Template Modal Styles */
+        .template-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            color: #1f2937;
+            font-size: 1.25rem;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #6b7280;
+            cursor: pointer;
+            padding: 0;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+        }
+
+        .modal-close:hover {
+            background: #f3f4f6;
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .modal-footer {
+            padding: 1.5rem;
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
         }
     </style>
 </head>
@@ -591,10 +820,12 @@
             <a href="project-walkthrough.html" target="_blank" style="background: #10b981; color: white; padding: 0.5rem 1rem; border-radius: 0.375rem; text-decoration: none; font-size: 0.875rem; font-weight: 500; margin-right: 1rem;">📚 Complete Guide</a>
             <nav class="nav-tabs">
                 <button class="nav-tab active" data-tab="design">Design</button>
+                <button class="nav-tab" data-tab="url-import">URL Import</button>
                 <button class="nav-tab" data-tab="components">Components</button>
                 <button class="nav-tab" data-tab="ai">AI Tools</button>
                 <button class="nav-tab" data-tab="animations">Animations</button>
                 <button class="nav-tab" data-tab="accessibility">Accessibility</button>
+                <button class="nav-tab" data-tab="templates">Templates</button>
                 <button class="nav-tab" data-tab="pages">Multi-Page</button>
                 <button class="nav-tab" data-tab="export">Export</button>
             </nav>
@@ -690,6 +921,143 @@ Contact</textarea>
                         <option value="mono">Developer Mono</option>
                         <option value="display">Display Font</option>
                     </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="themeMode">Theme Mode</label>
+                    <div class="theme-toggle-container">
+                        <div class="theme-toggle" id="themeToggle">
+                            <input type="radio" name="themeMode" id="lightMode" value="light" checked>
+                            <label for="lightMode" class="theme-option">
+                                <span class="theme-icon">☀️</span>
+                                <span>Light</span>
+                            </label>
+                            
+                            <input type="radio" name="themeMode" id="darkMode" value="dark">
+                            <label for="darkMode" class="theme-option">
+                                <span class="theme-icon">🌙</span>
+                                <span>Dark</span>
+                            </label>
+                            
+                            <input type="radio" name="themeMode" id="autoMode" value="auto">
+                            <label for="autoMode" class="theme-option">
+                                <span class="theme-icon">🔄</span>
+                                <span>Auto</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="brandColorExtractor">Brand Colors</label>
+                    <div class="brand-color-tools">
+                        <input type="file" id="logoUpload" accept="image/*" style="display: none;">
+                        <button class="btn-secondary" onclick="document.getElementById('logoUpload').click()" style="width: 100%; margin-bottom: 8px;">
+                            🎨 Extract Colors from Logo
+                        </button>
+                        <div id="extractedColors" style="display: none;">
+                            <div class="extracted-palette" id="colorPalette"></div>
+                            <button class="btn-primary" onclick="applyExtractedColors()" style="width: 100%; margin-top: 8px;">
+                                Apply Colors
+                            </button>
+                        </div>
+                        <input type="color" id="customPrimary" placeholder="#3b82f6" style="width: 48%; margin-right: 4%;">
+                        <input type="color" id="customSecondary" placeholder="#8b5cf6" style="width: 48%;">
+                        <button class="btn-secondary" onclick="applyCustomColors()" style="width: 100%; margin-top: 8px;">
+                            Apply Custom Colors
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- URL Import Tab -->
+            <div class="tab-content" data-tab="url-import">
+                <h1>URL Import & Analysis</h1>
+                <p style="color: #6b7280; margin-bottom: 24px; font-size: 14px;">Import and analyze existing websites for design inspiration</p>
+
+                <h2>Website URL</h2>
+                <div class="form-group">
+                    <label for="websiteUrl">Enter URL to analyze</label>
+                    <input type="url" id="websiteUrl" placeholder="https://example.com" style="margin-bottom: 8px;">
+                    <button class="btn-primary" onclick="processURL()" style="width: 100%;" id="processUrlBtn">
+                        🔍 Analyze Website
+                    </button>
+                </div>
+
+                <div id="urlAnalysisLoading" style="display: none; text-align: center; padding: 2rem; color: #6b7280;">
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">⏳</div>
+                    <div>Analyzing website...</div>
+                    <div style="font-size: 0.875rem; margin-top: 0.5rem;">This may take a few seconds</div>
+                </div>
+
+                <div id="urlAnalysisResults" style="display: none;">
+                    <h2>Analysis Results</h2>
+                    
+                    <div class="form-group">
+                        <label>Extracted Website Information</label>
+                        <div id="extractedInfo" style="background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                            <!-- Extracted site info will appear here -->
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Color Palette</label>
+                        <div id="extractedColorPalette" style="display: flex; gap: 8px; margin-bottom: 1rem; flex-wrap: wrap;">
+                            <!-- Extracted colors will appear here -->
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Suggested Design Style</label>
+                        <div id="suggestedStyle" style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                            <!-- Style suggestions will appear here -->
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Content Extraction</label>
+                        <div id="extractedContent" style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; max-height: 200px; overflow-y: auto;">
+                            <!-- Extracted content will appear here -->
+                        </div>
+                    </div>
+
+                    <div class="button-group" style="margin-top: 1.5rem;">
+                        <button class="btn-secondary" onclick="showComparison()" style="flex: 1;">
+                            👀 Preview Comparison
+                        </button>
+                        <button class="btn-primary" onclick="applyAnalysisResults()" style="flex: 1;">
+                            ✨ Apply to Design
+                        </button>
+                    </div>
+                </div>
+
+                <div id="comparisonView" style="display: none; margin-top: 2rem;">
+                    <h2>Before vs After Comparison</h2>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                        <div>
+                            <h3 style="font-size: 1rem; margin-bottom: 0.5rem; color: #374151;">Original Website</h3>
+                            <div id="originalPreview" style="border: 1px solid #d1d5db; border-radius: 8px; padding: 1rem; background: #f9fafb; min-height: 200px; font-size: 0.875rem; color: #6b7280;">
+                                Original website preview will appear here
+                            </div>
+                        </div>
+                        <div>
+                            <h3 style="font-size: 1rem; margin-bottom: 0.5rem; color: #374151;">New Design</h3>
+                            <div id="newDesignPreview" style="border: 1px solid #d1d5db; border-radius: 8px; padding: 1rem; background: #f9fafb; min-height: 200px; font-size: 0.875rem; color: #6b7280;">
+                                New design preview will appear here
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: #fef3c7; border: 1px solid #fbbf24; border-radius: 8px; padding: 1rem; margin-top: 1.5rem;">
+                    <h3 style="color: #92400e; margin-bottom: 0.5rem; font-size: 1rem;">💡 How it works</h3>
+                    <ul style="color: #92400e; font-size: 0.875rem; margin: 0; padding-left: 1.5rem;">
+                        <li>Enter any website URL to analyze its design and content</li>
+                        <li>Extract colors, fonts, layout patterns, and content structure</li>
+                        <li>Get AI-powered design style recommendations</li>
+                        <li>Apply extracted elements to your new design</li>
+                        <li>Preview before/after comparison of improvements</li>
+                    </ul>
                 </div>
             </div>
 
@@ -881,6 +1249,70 @@ Contact</textarea>
                 </div>
             </div>
 
+            <!-- Templates Tab -->
+            <div class="tab-content" data-tab="templates">
+                <h1>Template Marketplace</h1>
+                <p style="color: #6b7280; margin-bottom: 24px; font-size: 14px;">Save, share, and discover design templates</p>
+
+                <div style="margin-bottom: 2rem;">
+                    <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                        <button class="btn-primary" onclick="saveCurrentTemplate()" style="flex: 1;">
+                            💾 Save Current Design
+                        </button>
+                        <button class="btn-secondary" onclick="loadTemplateFile()" style="flex: 1;">
+                            📂 Import Template
+                        </button>
+                    </div>
+                    <input type="file" id="templateFileInput" accept=".json" style="display: none;" onchange="handleTemplateImport(event)">
+                </div>
+
+                <div class="form-group">
+                    <label for="templateSearch">Search Templates</label>
+                    <input type="text" id="templateSearch" placeholder="Search by name, style, or tags..." oninput="filterTemplates()">
+                </div>
+
+                <div class="form-group">
+                    <label for="templateCategory">Category</label>
+                    <select id="templateCategory" onchange="filterTemplates()">
+                        <option value="all">All Templates</option>
+                        <option value="business">Business</option>
+                        <option value="creative">Creative</option>
+                        <option value="portfolio">Portfolio</option>
+                        <option value="ecommerce">E-commerce</option>
+                        <option value="landing">Landing Pages</option>
+                        <option value="dashboard">Dashboards</option>
+                    </select>
+                </div>
+
+                <div id="templateLibrary" style="margin-top: 1.5rem;">
+                    <div class="template-grid" id="templateGrid">
+                        <!-- Templates will be populated here -->
+                    </div>
+                </div>
+
+                <div id="templateModal" class="template-modal" style="display: none;">
+                    <div class="modal-overlay" onclick="closeTemplateModal()"></div>
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 id="modalTemplateTitle">Template Details</h3>
+                            <button class="modal-close" onclick="closeTemplateModal()">×</button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="templatePreviewImage" style="width: 100%; height: 200px; background: #f3f4f6; border-radius: 8px; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; color: #6b7280;">
+                                Template Preview
+                            </div>
+                            <div id="modalTemplateDetails">
+                                <!-- Template details will be shown here -->
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn-secondary" onclick="closeTemplateModal()">Cancel</button>
+                            <button class="btn-primary" onclick="loadTemplate()" id="loadTemplateBtn">Load Template</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Pages Tab -->
             <div class="tab-content" data-tab="pages">
                 <h1>Multi-Page System</h1>
@@ -979,6 +1411,46 @@ Contact</textarea>
                 <button class="btn-secondary" onclick="saveTemplate()" style="width: 100%;">
                     Save Template
                 </button>
+
+                <div style="border-top: 1px solid #e5e7eb; margin: 24px 0; padding-top: 24px;">
+                    <h2>🤖 Claude Code Integration</h2>
+                    <p style="color: #6b7280; margin-bottom: 16px; font-size: 14px;">Generate ready-to-use prompts for Claude Code</p>
+                    
+                    <div class="form-group">
+                        <label for="claudePromptType">Prompt Type</label>
+                        <select id="claudePromptType">
+                            <option value="convert">Convert to Framework</option>
+                            <option value="enhance">Enhance Existing Project</option>
+                            <option value="integrate">Integrate into Codebase</option>
+                            <option value="customize">Customize Design</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="targetFramework">Target Framework</label>
+                        <select id="targetFramework">
+                            <option value="react">React + TypeScript</option>
+                            <option value="nextjs">Next.js</option>
+                            <option value="vue">Vue.js</option>
+                            <option value="nuxt">Nuxt.js</option>
+                            <option value="svelte">SvelteKit</option>
+                            <option value="angular">Angular</option>
+                            <option value="html">Plain HTML/CSS</option>
+                        </select>
+                    </div>
+                    
+                    <button class="btn-primary" onclick="generateClaudePrompt()" style="width: 100%; margin-bottom: 12px;">
+                        Generate Claude Prompt
+                    </button>
+                    
+                    <div id="claudePromptOutput" style="display: none;">
+                        <label>Copy this prompt to Claude Code:</label>
+                        <textarea id="claudePromptText" readonly style="width: 100%; height: 120px; margin-top: 8px; padding: 12px; border: 1px solid #d1d5db; border-radius: 6px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; font-size: 12px; background: #f9fafb; resize: vertical;"></textarea>
+                        <button onclick="copyClaudePrompt()" style="margin-top: 8px; padding: 6px 12px; background: #10b981; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">
+                            📋 Copy to Clipboard
+                        </button>
+                    </div>
+                </div>
             </div>
 
             <div class="button-group">
@@ -1028,6 +1500,9 @@ Contact</textarea>
     <script src="assets/ai-content.js"></script>
     <script src="assets/accessibility.js"></script>
     <script src="assets/animations.js"></script>
+    <script src="assets/content-extractor.js"></script>
+    <script src="assets/style-analyzer.js"></script>
+    <script src="assets/url-processor.js"></script>
     <script src="assets/app.js"></script>
 </body>
 </html>

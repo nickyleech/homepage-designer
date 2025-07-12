@@ -14,7 +14,24 @@ class DesignGenerator {
     init() {
         this.bindEvents();
         this.initComponentLibrary();
+        this.initURLProcessor();
         this.updatePreview();
+    }
+
+    initURLProcessor() {
+        // Initialize URL processing functionality
+        if (window.URLProcessor) {
+            this.urlProcessor = new URLProcessor();
+        }
+        
+        // Initialize content extractor and style analyzer
+        if (window.ContentExtractor) {
+            this.contentExtractor = new ContentExtractor();
+        }
+        
+        if (window.StyleAnalyzer) {
+            this.styleAnalyzer = new StyleAnalyzer();
+        }
     }
 
     initComponentLibrary() {
@@ -220,6 +237,11 @@ class DesignGenerator {
             content.classList.toggle('active', content.dataset.tab === tabName);
         });
 
+        // Handle URL Import tab initialization
+        if (tabName === 'url-import') {
+            this.initURLImportTab();
+        }
+        
         // Switch preview/canvas view
         const previewFrame = document.getElementById('previewFrame');
         const canvasArea = document.getElementById('canvasArea');
@@ -233,6 +255,81 @@ class DesignGenerator {
             canvasArea.style.display = 'none';
             this.updatePreview();
         }
+    }
+
+    initURLImportTab() {
+        // Initialize the URL Import tab with any necessary setup
+        // Clear any previous analysis results
+        const resultsDiv = document.getElementById('urlAnalysisResults');
+        const loadingDiv = document.getElementById('urlAnalysisLoading');
+        const comparisonDiv = document.getElementById('comparisonView');
+        
+        if (resultsDiv) resultsDiv.style.display = 'none';
+        if (loadingDiv) loadingDiv.style.display = 'none';
+        if (comparisonDiv) comparisonDiv.style.display = 'none';
+        
+        // Reset the URL input
+        const urlInput = document.getElementById('websiteUrl');
+        if (urlInput) {
+            urlInput.value = '';
+            urlInput.focus();
+        }
+    }
+
+    // Method to handle extracted data from URL processing
+    applyExtractedData(extractedData) {
+        if (!extractedData) return;
+
+        // Apply content to form fields
+        const titleInput = document.getElementById('siteTitle');
+        const subtitleInput = document.getElementById('siteSubtitle');
+        const contentInput = document.getElementById('mainContent');
+        const navInput = document.getElementById('navLinks');
+
+        if (titleInput && extractedData.title) {
+            titleInput.value = extractedData.title;
+        }
+
+        if (subtitleInput && extractedData.description) {
+            subtitleInput.value = extractedData.description.substring(0, 100);
+        }
+
+        if (contentInput && extractedData.content && extractedData.content.length > 0) {
+            const contentText = extractedData.content
+                .map(item => item.text)
+                .join('\n\n')
+                .substring(0, 400);
+            contentInput.value = contentText;
+        }
+
+        if (navInput && extractedData.navigation && extractedData.navigation.length > 0) {
+            const navText = extractedData.navigation
+                .slice(0, 6)
+                .map(nav => nav.text)
+                .join('\n');
+            navInput.value = navText;
+        }
+
+        // Apply suggested style
+        if (extractedData.styleAnalysis && extractedData.styleAnalysis.style) {
+            this.selectStyle(extractedData.styleAnalysis.style);
+        }
+
+        // Apply colors if available
+        if (extractedData.colors && extractedData.colors.length > 0) {
+            const primaryColorInput = document.getElementById('customPrimary');
+            const secondaryColorInput = document.getElementById('customSecondary');
+            
+            if (primaryColorInput && extractedData.colors[0]) {
+                primaryColorInput.value = extractedData.colors[0];
+            }
+            if (secondaryColorInput && extractedData.colors[1]) {
+                secondaryColorInput.value = extractedData.colors[1];
+            }
+        }
+
+        // Update the preview with new data
+        this.updatePreview();
     }
 
     selectStyle(styleName) {
@@ -1299,7 +1396,791 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+// Claude Code Integration Functions
+function generateClaudePrompt() {
+    const promptType = document.getElementById('claudePromptType').value;
+    const targetFramework = document.getElementById('targetFramework').value;
+    const exportFormat = document.getElementById('exportFormat').value;
+    
+    // Get current design configuration
+    const currentStyle = window.designGenerator.currentStyle;
+    const currentTemplate = window.designGenerator.currentTemplate;
+    const currentPage = window.designGenerator.currentPage;
+    
+    // Get form values
+    const siteTitle = document.getElementById('siteTitle').value || 'Your Website';
+    const siteSubtitle = document.getElementById('siteSubtitle').value || 'Professional website description';
+    const mainContent = document.getElementById('mainContent').value || 'Your main content here';
+    
+    const prompts = {
+        convert: {
+            react: `Convert this ${currentStyle} ${currentTemplate} design to React components with TypeScript:
+
+**Design Specifications:**
+- Style: ${currentStyle.charAt(0).toUpperCase() + currentStyle.slice(1)}
+- Layout: ${currentTemplate.charAt(0).toUpperCase() + currentTemplate.slice(1)}
+- Page Type: ${currentPage}
+- Title: "${siteTitle}"
+- Subtitle: "${siteSubtitle}"
+
+**Requirements:**
+- Use TypeScript for all components
+- Implement responsive design with Tailwind CSS
+- Create reusable component structure
+- Include proper props interfaces
+- Add hover states and smooth transitions
+- Ensure accessibility compliance
+- Export as production-ready components
+
+**Key Features to Include:**
+- Navigation with active states
+- Hero section with call-to-action
+- Responsive grid layouts
+- Modern card components
+- Footer with links
+
+Please create a complete component library that matches this design style and is ready for production use.`,
+
+            nextjs: `Create a Next.js application based on this ${currentStyle} design:
+
+**Project Setup:**
+- Next.js 14 with App Router
+- TypeScript configuration
+- Tailwind CSS for styling
+- Component organization
+
+**Design Details:**
+- Style: ${currentStyle}
+- Layout: ${currentTemplate}
+- Title: "${siteTitle}"
+- Subtitle: "${siteSubtitle}"
+- Content: "${mainContent}"
+
+**Structure Needed:**
+- app/layout.tsx with metadata
+- app/page.tsx for homepage
+- components/ directory with reusable components
+- styles/ directory with global styles
+- Responsive design for all devices
+
+**Components to Create:**
+- Header with navigation
+- Hero section
+- Content sections
+- Footer
+- SEO metadata
+
+Generate a complete, production-ready Next.js application that implements this design.`,
+
+            vue: `Convert this design to Vue.js 3 components using Composition API:
+
+**Design Configuration:**
+- Style: ${currentStyle}
+- Layout: ${currentTemplate}
+- Framework: Vue 3 + TypeScript
+- CSS: Tailwind CSS
+
+**Content:**
+- Site Title: "${siteTitle}"
+- Subtitle: "${siteSubtitle}"
+- Main Content: "${mainContent}"
+
+**Requirements:**
+- Use Composition API with <script setup>
+- TypeScript for type safety
+- Single File Components (SFC)
+- Responsive design
+- Modern Vue patterns
+
+**Components Needed:**
+- AppHeader.vue
+- HeroSection.vue
+- ContentSection.vue
+- AppFooter.vue
+- Main layout component
+
+Create a complete Vue.js application with proper component structure, routing, and styling.`
+        },
+        
+        enhance: {
+            react: `I have an existing React project and want to enhance it with this ${currentStyle} design style:
+
+**Current Project Enhancement:**
+- Apply ${currentStyle} design system to existing components
+- Update color scheme and typography
+- Implement ${currentTemplate} layout pattern
+- Maintain existing functionality
+
+**Design Elements to Apply:**
+- Modern ${currentStyle} styling
+- Responsive ${currentTemplate} layout
+- Professional color palette
+- Clean typography system
+
+**Please:**
+1. Analyze my existing component structure
+2. Update styling to match this design
+3. Ensure consistency across all components
+4. Maintain existing props and functionality
+5. Add any missing responsive breakpoints
+
+Focus on enhancing the visual design while preserving all existing functionality.`,
+
+            generic: `Enhance my existing ${targetFramework} project with this design system:
+
+**Design Style:** ${currentStyle}
+**Layout Pattern:** ${currentTemplate}
+**Target Framework:** ${targetFramework}
+
+**Enhancement Goals:**
+- Apply professional ${currentStyle} styling
+- Implement responsive ${currentTemplate} layout
+- Update color scheme and typography
+- Improve user interface consistency
+
+Please help me integrate this design into my existing codebase while maintaining current functionality.`
+        },
+
+        integrate: {
+            generic: `I want to integrate this ${currentStyle} design pattern into my existing codebase:
+
+**Integration Requirements:**
+- Framework: ${targetFramework}
+- Design Style: ${currentStyle}
+- Layout Pattern: ${currentTemplate}
+- Export Format: ${exportFormat}
+
+**Design Details:**
+- Title: "${siteTitle}"
+- Subtitle: "${siteSubtitle}"
+
+**Integration Approach:**
+1. Analyze my current project structure
+2. Create new components based on this design
+3. Ensure compatibility with existing code
+4. Provide migration guide for gradual adoption
+
+Please help me seamlessly integrate these design elements without breaking existing functionality.`
+        },
+
+        customize: {
+            generic: `Customize this ${currentStyle} design template for my specific needs:
+
+**Base Design:**
+- Style: ${currentStyle}
+- Layout: ${currentTemplate}
+- Framework: ${targetFramework}
+
+**Current Content:**
+- Title: "${siteTitle}"
+- Subtitle: "${siteSubtitle}"
+- Content: "${mainContent}"
+
+**Customization Requests:**
+- Modify colors to match my brand
+- Adjust layout for my content type
+- Add specific components I need
+- Optimize for my target audience
+
+Please help me customize this template to perfectly fit my project requirements while maintaining the professional design quality.`
+        }
+    };
+    
+    // Generate the prompt
+    let prompt = '';
+    
+    if (prompts[promptType] && prompts[promptType][targetFramework]) {
+        prompt = prompts[promptType][targetFramework];
+    } else if (prompts[promptType] && prompts[promptType].generic) {
+        prompt = prompts[promptType].generic;
+    } else {
+        prompt = prompts[promptType][Object.keys(prompts[promptType])[0]];
+    }
+    
+    // Add footer with design generator context
+    prompt += `\n\n**Generated by Homepage Design Generator Pro**
+This prompt was created from a ${currentStyle} ${currentTemplate} design template. 
+You can reference the original design files if needed for additional context.`;
+    
+    // Display the prompt
+    document.getElementById('claudePromptText').value = prompt;
+    document.getElementById('claudePromptOutput').style.display = 'block';
+}
+
+function copyClaudePrompt() {
+    const promptText = document.getElementById('claudePromptText');
+    promptText.select();
+    document.execCommand('copy');
+    
+    // Visual feedback
+    const button = event.target;
+    const originalText = button.textContent;
+    button.textContent = '✅ Copied!';
+    button.style.background = '#059669';
+    
+    setTimeout(() => {
+        button.textContent = originalText;
+        button.style.background = '#10b981';
+    }, 2000);
+}
+
+// Theme Management Functions
+function initThemeSystem() {
+    // Load saved theme preference
+    const savedTheme = localStorage.getItem('designGeneratorTheme') || 'light';
+    const themeToggle = document.querySelector(`input[name="themeMode"][value="${savedTheme}"]`);
+    if (themeToggle) {
+        themeToggle.checked = true;
+    }
+    
+    // Apply initial theme
+    applyTheme(savedTheme);
+    
+    // Theme toggle event listeners
+    document.querySelectorAll('input[name="themeMode"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+            const theme = this.value;
+            applyTheme(theme);
+            localStorage.setItem('designGeneratorTheme', theme);
+            window.designGenerator.updatePreview();
+        });
+    });
+}
+
+function applyTheme(theme) {
+    const root = document.documentElement;
+    
+    if (theme === 'auto') {
+        // Use system preference
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        theme = prefersDark ? 'dark' : 'light';
+    }
+    
+    if (theme === 'dark') {
+        root.classList.add('dark-theme');
+        // Update color scheme to dark
+        document.getElementById('colorScheme').value = 'dark';
+    } else {
+        root.classList.remove('dark-theme');
+        // Revert to previous color scheme if not dark
+        const currentScheme = document.getElementById('colorScheme').value;
+        if (currentScheme === 'dark') {
+            document.getElementById('colorScheme').value = 'blue';
+        }
+    }
+}
+
+// Brand Color Extraction Functions
+function initBrandColorTools() {
+    const logoUpload = document.getElementById('logoUpload');
+    if (logoUpload) {
+        logoUpload.addEventListener('change', handleLogoUpload);
+    }
+}
+
+function handleLogoUpload(event) {
+    const file = event.target.files[0];
+    if (!file || !file.type.startsWith('image/')) {
+        alert('Please select a valid image file');
+        return;
+    }
+    
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        extractColorsFromImage(e.target.result);
+    };
+    reader.readAsDataURL(file);
+}
+
+function extractColorsFromImage(imageSrc) {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    const img = new Image();
+    
+    img.onload = function() {
+        // Resize for faster processing
+        const maxSize = 100;
+        const scale = Math.min(maxSize / img.width, maxSize / img.height);
+        canvas.width = img.width * scale;
+        canvas.height = img.height * scale;
+        
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const colors = getImageColors(imageData);
+        displayExtractedColors(colors);
+    };
+    
+    img.src = imageSrc;
+}
+
+function getImageColors(imageData) {
+    const pixels = imageData.data;
+    const colorMap = new Map();
+    
+    // Sample pixels (every 4th pixel for performance)
+    for (let i = 0; i < pixels.length; i += 16) {
+        const r = pixels[i];
+        const g = pixels[i + 1];
+        const b = pixels[i + 2];
+        const a = pixels[i + 3];
+        
+        // Skip transparent and very light/dark pixels
+        if (a < 128 || (r > 240 && g > 240 && b > 240) || (r < 15 && g < 15 && b < 15)) {
+            continue;
+        }
+        
+        // Quantize colors to reduce similar variations
+        const quantizedR = Math.round(r / 32) * 32;
+        const quantizedG = Math.round(g / 32) * 32;
+        const quantizedB = Math.round(b / 32) * 32;
+        
+        const colorKey = `${quantizedR},${quantizedG},${quantizedB}`;
+        colorMap.set(colorKey, (colorMap.get(colorKey) || 0) + 1);
+    }
+    
+    // Sort by frequency and get top colors
+    const sortedColors = Array.from(colorMap.entries())
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 8)
+        .map(([color, count]) => {
+            const [r, g, b] = color.split(',').map(Number);
+            return {
+                rgb: `rgb(${r}, ${g}, ${b})`,
+                hex: rgbToHex(r, g, b),
+                count
+            };
+        });
+    
+    return sortedColors;
+}
+
+function rgbToHex(r, g, b) {
+    return "#" + [r, g, b].map(x => {
+        const hex = x.toString(16);
+        return hex.length === 1 ? "0" + hex : hex;
+    }).join("");
+}
+
+function displayExtractedColors(colors) {
+    const extractedColors = document.getElementById('extractedColors');
+    const colorPalette = document.getElementById('colorPalette');
+    
+    let html = '';
+    colors.forEach((color, index) => {
+        html += `
+            <div class="color-swatch" 
+                 style="background-color: ${color.hex}" 
+                 data-color="${color.hex}"
+                 data-index="${index}"
+                 onclick="selectExtractedColor(this)">
+                <div class="color-info">${color.hex}</div>
+            </div>
+        `;
+    });
+    
+    colorPalette.innerHTML = html;
+    extractedColors.style.display = 'block';
+    
+    // Store colors for later use
+    window.extractedColorPalette = colors;
+}
+
+function selectExtractedColor(element) {
+    // Remove previous selection
+    document.querySelectorAll('.color-swatch').forEach(swatch => {
+        swatch.classList.remove('selected');
+    });
+    
+    // Select this color
+    element.classList.add('selected');
+    window.selectedExtractedColor = element.dataset.color;
+}
+
+function applyExtractedColors() {
+    if (!window.extractedColorPalette) {
+        alert('Please extract colors from a logo first');
+        return;
+    }
+    
+    const colors = window.extractedColorPalette;
+    if (colors.length >= 2) {
+        // Apply the two most prominent colors
+        document.getElementById('customPrimary').value = colors[0].hex;
+        document.getElementById('customSecondary').value = colors[1].hex;
+        applyCustomColors();
+    }
+}
+
+function applyCustomColors() {
+    const primary = document.getElementById('customPrimary').value;
+    const secondary = document.getElementById('customSecondary').value;
+    
+    if (!primary || !secondary) {
+        alert('Please select both primary and secondary colors');
+        return;
+    }
+    
+    // Create custom color scheme
+    const customScheme = {
+        primary: primary,
+        secondary: secondary,
+        background: '#ffffff',
+        surface: '#f8fafc',
+        text: '#1f2937',
+        accent: lightenColor(primary, 20)
+    };
+    
+    // Apply to design
+    applyColorScheme(customScheme);
+    window.designGenerator.updatePreview();
+    
+    alert('Custom colors applied successfully!');
+}
+
+function lightenColor(hex, percent) {
+    const num = parseInt(hex.replace("#", ""), 16);
+    const amt = Math.round(2.55 * percent);
+    const R = (num >> 16) + amt;
+    const G = (num >> 8 & 0x00FF) + amt;
+    const B = (num & 0x0000FF) + amt;
+    return "#" + (0x1000000 + (R < 255 ? R < 1 ? 0 : R : 255) * 0x10000 +
+        (G < 255 ? G < 1 ? 0 : G : 255) * 0x100 +
+        (B < 255 ? B < 1 ? 0 : B : 255)).toString(16).slice(1);
+}
+
+function applyColorScheme(scheme) {
+    const root = document.documentElement;
+    Object.entries(scheme).forEach(([key, value]) => {
+        root.style.setProperty(`--color-${key}`, value);
+    });
+}
+
+// Template Marketplace Functions
+function initTemplateMarketplace() {
+    loadTemplateLibrary();
+}
+
+function saveCurrentTemplate() {
+    const templateName = prompt('Enter a name for this template:');
+    if (!templateName) return;
+    
+    const currentDesign = {
+        name: templateName,
+        style: window.designGenerator.currentStyle,
+        template: window.designGenerator.currentTemplate,
+        page: window.designGenerator.currentPage,
+        content: {
+            siteTitle: document.getElementById('siteTitle').value,
+            siteSubtitle: document.getElementById('siteSubtitle').value,
+            navLinks: document.getElementById('navLinks').value,
+            mainContent: document.getElementById('mainContent').value,
+        },
+        styling: {
+            colorScheme: document.getElementById('colorScheme').value,
+            fontFamily: document.getElementById('fontFamily').value,
+            themeMode: document.querySelector('input[name="themeMode"]:checked')?.value || 'light'
+        },
+        components: window.designGenerator.canvasComponents || [],
+        created: new Date().toISOString(),
+        category: determineCategory(window.designGenerator.currentStyle),
+        tags: generateTags(window.designGenerator.currentStyle, window.designGenerator.currentTemplate),
+        preview: generateTemplatePreview()
+    };
+    
+    // Save to localStorage
+    const savedTemplates = JSON.parse(localStorage.getItem('designTemplates') || '[]');
+    savedTemplates.push(currentDesign);
+    localStorage.setItem('designTemplates', JSON.stringify(savedTemplates));
+    
+    alert(`Template "${templateName}" saved successfully!`);
+    loadTemplateLibrary();
+}
+
+function determineCategory(style) {
+    const categoryMap = {
+        'minimalist': 'portfolio',
+        'dashboard': 'dashboard',
+        'corporate': 'business',
+        'creative': 'creative',
+        'tech': 'landing',
+        'ecommerce': 'ecommerce'
+    };
+    return categoryMap[style] || 'business';
+}
+
+function generateTags(style, template) {
+    const styleTags = {
+        'minimalist': ['clean', 'simple', 'modern'],
+        'dashboard': ['admin', 'data', 'management'],
+        'corporate': ['professional', 'business', 'enterprise'],
+        'creative': ['artistic', 'portfolio', 'design'],
+        'tech': ['startup', 'saas', 'technology'],
+        'ecommerce': ['shop', 'store', 'products']
+    };
+    
+    const templateTags = {
+        'hero': ['landing', 'header', 'cta'],
+        'centered': ['focused', 'minimal', 'content'],
+        'sidebar': ['navigation', 'organized', 'structured'],
+        'grid': ['cards', 'gallery', 'layout'],
+        'split': ['comparison', 'features', 'divided']
+    };
+    
+    return [...(styleTags[style] || []), ...(templateTags[template] || [])];
+}
+
+function generateTemplatePreview() {
+    // Generate a simple preview representation
+    const canvas = document.createElement('canvas');
+    canvas.width = 200;
+    canvas.height = 120;
+    const ctx = canvas.getContext('2d');
+    
+    // Simple preview drawing
+    ctx.fillStyle = '#f3f4f6';
+    ctx.fillRect(0, 0, 200, 120);
+    
+    ctx.fillStyle = '#3b82f6';
+    ctx.fillRect(10, 10, 180, 20);
+    
+    ctx.fillStyle = '#e5e7eb';
+    ctx.fillRect(10, 40, 180, 10);
+    ctx.fillRect(10, 60, 120, 10);
+    
+    return canvas.toDataURL();
+}
+
+function loadTemplateLibrary() {
+    const savedTemplates = JSON.parse(localStorage.getItem('designTemplates') || '[]');
+    const templateGrid = document.getElementById('templateGrid');
+    
+    if (!templateGrid) return;
+    
+    // Add default templates
+    const defaultTemplates = getDefaultTemplates();
+    const allTemplates = [...defaultTemplates, ...savedTemplates];
+    
+    renderTemplates(allTemplates);
+}
+
+function getDefaultTemplates() {
+    return [
+        {
+            name: 'Modern Landing Page',
+            style: 'minimalist',
+            template: 'hero',
+            category: 'landing',
+            tags: ['modern', 'clean', 'landing'],
+            created: '2024-01-01T00:00:00.000Z',
+            isDefault: true,
+            description: 'Clean, modern landing page perfect for startups and products'
+        },
+        {
+            name: 'Corporate Dashboard',
+            style: 'dashboard',
+            template: 'sidebar',
+            category: 'dashboard',
+            tags: ['corporate', 'admin', 'data'],
+            created: '2024-01-01T00:00:00.000Z',
+            isDefault: true,
+            description: 'Professional dashboard template for business applications'
+        },
+        {
+            name: 'Creative Portfolio',
+            style: 'creative',
+            template: 'grid',
+            category: 'portfolio',
+            tags: ['creative', 'portfolio', 'artistic'],
+            created: '2024-01-01T00:00:00.000Z',
+            isDefault: true,
+            description: 'Artistic portfolio template for creative professionals'
+        },
+        {
+            name: 'Business Homepage',
+            style: 'corporate',
+            template: 'hero',
+            category: 'business',
+            tags: ['business', 'professional', 'corporate'],
+            created: '2024-01-01T00:00:00.000Z',
+            isDefault: true,
+            description: 'Professional business homepage with corporate styling'
+        }
+    ];
+}
+
+function renderTemplates(templates) {
+    const templateGrid = document.getElementById('templateGrid');
+    if (!templateGrid) return;
+    
+    if (templates.length === 0) {
+        templateGrid.innerHTML = '<p style="text-align: center; color: #6b7280; grid-column: 1 / -1;">No templates found. Create your first template!</p>';
+        return;
+    }
+    
+    let html = '';
+    templates.forEach((template, index) => {
+        html += `
+            <div class="template-card" onclick="showTemplateModal(${index})">
+                <div class="template-preview">
+                    ${template.preview ? `<img src="${template.preview}" alt="${template.name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">` : '📄 Preview'}
+                </div>
+                <div class="template-title">${template.name}</div>
+                <div class="template-meta">${template.style} • ${template.template}</div>
+                <div class="template-tags">
+                    ${template.tags.slice(0, 3).map(tag => `<span class="template-tag">${tag}</span>`).join('')}
+                </div>
+            </div>
+        `;
+    });
+    
+    templateGrid.innerHTML = html;
+    window.currentTemplates = templates;
+}
+
+function filterTemplates() {
+    const searchTerm = document.getElementById('templateSearch').value.toLowerCase();
+    const category = document.getElementById('templateCategory').value;
+    
+    if (!window.currentTemplates) return;
+    
+    let filtered = window.currentTemplates.filter(template => {
+        const matchesSearch = !searchTerm || 
+            template.name.toLowerCase().includes(searchTerm) ||
+            template.style.toLowerCase().includes(searchTerm) ||
+            template.tags.some(tag => tag.toLowerCase().includes(searchTerm));
+        
+        const matchesCategory = category === 'all' || template.category === category;
+        
+        return matchesSearch && matchesCategory;
+    });
+    
+    renderTemplates(filtered);
+}
+
+function showTemplateModal(templateIndex) {
+    const template = window.currentTemplates[templateIndex];
+    if (!template) return;
+    
+    const modal = document.getElementById('templateModal');
+    const title = document.getElementById('modalTemplateTitle');
+    const details = document.getElementById('modalTemplateDetails');
+    const loadBtn = document.getElementById('loadTemplateBtn');
+    
+    title.textContent = template.name;
+    
+    let detailsHtml = `
+        <div style="margin-bottom: 1rem;">
+            <h4 style="margin-bottom: 0.5rem; color: #374151;">Description</h4>
+            <p style="color: #6b7280; margin: 0;">${template.description || 'No description available'}</p>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+            <div>
+                <h4 style="margin-bottom: 0.5rem; color: #374151; font-size: 0.875rem;">Style</h4>
+                <p style="margin: 0; color: #6b7280; font-size: 0.875rem;">${template.style}</p>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 0.5rem; color: #374151; font-size: 0.875rem;">Layout</h4>
+                <p style="margin: 0; color: #6b7280; font-size: 0.875rem;">${template.template}</p>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 0.5rem; color: #374151; font-size: 0.875rem;">Category</h4>
+                <p style="margin: 0; color: #6b7280; font-size: 0.875rem;">${template.category}</p>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 0.5rem; color: #374151; font-size: 0.875rem;">Created</h4>
+                <p style="margin: 0; color: #6b7280; font-size: 0.875rem;">${new Date(template.created).toLocaleDateString()}</p>
+            </div>
+        </div>
+        <div>
+            <h4 style="margin-bottom: 0.5rem; color: #374151; font-size: 0.875rem;">Tags</h4>
+            <div class="template-tags">
+                ${template.tags.map(tag => `<span class="template-tag">${tag}</span>`).join('')}
+            </div>
+        </div>
+    `;
+    
+    details.innerHTML = detailsHtml;
+    loadBtn.onclick = () => loadTemplateFromModal(templateIndex);
+    modal.style.display = 'flex';
+    window.selectedTemplateIndex = templateIndex;
+}
+
+function closeTemplateModal() {
+    document.getElementById('templateModal').style.display = 'none';
+}
+
+function loadTemplateFromModal(templateIndex) {
+    const template = window.currentTemplates[templateIndex];
+    if (!template) return;
+    
+    loadTemplateData(template);
+    closeTemplateModal();
+}
+
+function loadTemplateData(template) {
+    // Apply template data to current design
+    if (template.style) {
+        window.designGenerator.currentStyle = template.style;
+        document.querySelector(`[data-style="${template.style}"]`)?.click();
+    }
+    
+    if (template.template) {
+        window.designGenerator.currentTemplate = template.template;
+        document.querySelector(`[data-template="${template.template}"]`)?.click();
+    }
+    
+    if (template.content) {
+        if (template.content.siteTitle) document.getElementById('siteTitle').value = template.content.siteTitle;
+        if (template.content.siteSubtitle) document.getElementById('siteSubtitle').value = template.content.siteSubtitle;
+        if (template.content.navLinks) document.getElementById('navLinks').value = template.content.navLinks;
+        if (template.content.mainContent) document.getElementById('mainContent').value = template.content.mainContent;
+    }
+    
+    if (template.styling) {
+        if (template.styling.colorScheme) document.getElementById('colorScheme').value = template.styling.colorScheme;
+        if (template.styling.fontFamily) document.getElementById('fontFamily').value = template.styling.fontFamily;
+        if (template.styling.themeMode) {
+            const themeRadio = document.querySelector(`input[name="themeMode"][value="${template.styling.themeMode}"]`);
+            if (themeRadio) themeRadio.checked = true;
+        }
+    }
+    
+    if (template.components) {
+        window.designGenerator.canvasComponents = template.components;
+        window.designGenerator.renderCanvas();
+    }
+    
+    // Update preview
+    window.designGenerator.updatePreview();
+    
+    alert(`Template "${template.name}" loaded successfully!`);
+}
+
+function loadTemplateFile() {
+    document.getElementById('templateFileInput').click();
+}
+
+function handleTemplateImport(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        try {
+            const templateData = JSON.parse(e.target.result);
+            loadTemplateData(templateData);
+        } catch (error) {
+            alert('Invalid template file format');
+        }
+    };
+    reader.readAsText(file);
+}
+
 // Initialize the application
 document.addEventListener('DOMContentLoaded', function() {
     window.designGenerator = new DesignGenerator();
+    initThemeSystem();
+    initBrandColorTools();
+    initTemplateMarketplace();
 });
