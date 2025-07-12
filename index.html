@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage Design Generator Pro</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8f9fa;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: white;
+            border-bottom: 1px solid #e1e5e9;
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1f2937;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 2px;
+            background: #f1f3f4;
+            border-radius: 8px;
+            padding: 4px;
+        }
+
+        .nav-tab {
+            padding: 8px 16px;
+            border: none;
+            background: transparent;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            color: #6b7280;
+            transition: all 0.2s;
+        }
+
+        .nav-tab.active {
+            background: white;
+            color: #1f2937;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 380px 1fr;
+            gap: 20px;
+            min-height: calc(100vh - 80px);
+        }
+
+        .controls {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+        }
+
+        .preview-section {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .preview-controls {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .device-selector {
+            display: flex;
+            gap: 8px;
+        }
+
+        .device-btn {
+            padding: 8px 12px;
+            border: 1px solid #d1d5db;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .device-btn.active {
+            background: #3b82f6;
+            color: white;
+            border-color: #3b82f6;
+        }
+
+        .preview {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+            overflow: hidden;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .preview.mobile {
+            max-width: 375px;
+            margin: 0 auto;
+        }
+
+        .preview.tablet {
+            max-width: 768px;
+            margin: 0 auto;
+        }
+
+        .preview-header {
+            background: #f1f3f4;
+            padding: 12px 20px;
+            border-bottom: 1px solid #e1e5e9;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .preview-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .preview-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #d1d5db;
+        }
+
+        .preview-dot:nth-child(1) { background: #ef4444; }
+        .preview-dot:nth-child(2) { background: #f59e0b; }
+        .preview-dot:nth-child(3) { background: #10b981; }
+
+        .preview-frame {
+            background: white;
+            min-height: 600px;
+            overflow-y: auto;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 8px;
+        }
+
+        h2 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 16px;
+            margin-top: 24px;
+        }
+
+        h2:first-of-type {
+            margin-top: 0;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 6px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: inherit;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .style-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .style-option {
+            padding: 16px 12px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: white;
+        }
+
+        .style-option:hover {
+            border-color: #3b82f6;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+        }
+
+        .style-option.active {
+            border-color: #3b82f6;
+            background: #eff6ff;
+        }
+
+        .style-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 4px;
+        }
+
+        .style-desc {
+            font-size: 11px;
+            color: #6b7280;
+            line-height: 1.3;
+        }
+
+        .template-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .template-option {
+            padding: 12px;
+            border: 2px solid #e5e7eb;
+            border-radius: 6px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .template-option:hover {
+            border-color: #3b82f6;
+        }
+
+        .template-option.active {
+            border-color: #3b82f6;
+            background: #eff6ff;
+        }
+
+        .page-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 16px;
+        }
+
+        .page-btn {
+            padding: 6px 12px;
+            border: 1px solid #d1d5db;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .page-btn.active {
+            background: #3b82f6;
+            color: white;
+            border-color: #3b82f6;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 8px;
+            margin-top: 24px;
+        }
+
+        button {
+            flex: 1;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2563eb;
+        }
+
+        .btn-secondary {
+            background: #f3f4f6;
+            color: #374151;
+            border: 1px solid #d1d5db;
+        }
+
+        .btn-secondary:hover {
+            background: #e5e7eb;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .controls {
+                position: static;
+                max-height: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .style-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .template-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">Design Generator Pro</div>
+            <nav class="nav-tabs">
+                <button class="nav-tab active" data-tab="design">Design</button>
+                <button class="nav-tab" data-tab="pages">Multi-Page</button>
+                <button class="nav-tab" data-tab="export">Export</button>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="controls">
+            <!-- Design Tab -->
+            <div class="tab-content active" data-tab="design">
+                <h1>Design Studio</h1>
+                <p style="color: #6b7280; margin-bottom: 24px; font-size: 14px;">Create professional designs with advanced customization</p>
+
+                <h2>Design Style</h2>
+                <div class="style-grid">
+                    <div class="style-option active" data-style="minimalist">
+                        <div class="style-name">Minimalist</div>
+                        <div class="style-desc">Clean, simple layouts</div>
+                    </div>
+                    <div class="style-option" data-style="dashboard">
+                        <div class="style-name">Dashboard</div>
+                        <div class="style-desc">Admin panels & SaaS</div>
+                    </div>
+                    <div class="style-option" data-style="corporate">
+                        <div class="style-name">Corporate</div>
+                        <div class="style-desc">Professional business</div>
+                    </div>
+                    <div class="style-option" data-style="creative">
+                        <div class="style-name">Creative</div>
+                        <div class="style-desc">Artistic & portfolio</div>
+                    </div>
+                    <div class="style-option" data-style="tech">
+                        <div class="style-name">Tech Startup</div>
+                        <div class="style-desc">Modern SaaS & apps</div>
+                    </div>
+                    <div class="style-option" data-style="ecommerce">
+                        <div class="style-name">E-commerce</div>
+                        <div class="style-desc">Product focused</div>
+                    </div>
+                </div>
+
+                <h2>Layout Template</h2>
+                <div class="template-grid">
+                    <div class="template-option active" data-template="hero">Hero</div>
+                    <div class="template-option" data-template="centered">Centered</div>
+                    <div class="template-option" data-template="sidebar">Sidebar</div>
+                    <div class="template-option" data-template="grid">Grid</div>
+                    <div class="template-option" data-template="split">Split</div>
+                </div>
+
+                <h2>Content</h2>
+                <div class="form-group">
+                    <label for="siteTitle">Site Title</label>
+                    <input type="text" id="siteTitle" value="Your Brand" placeholder="Enter site title">
+                </div>
+
+                <div class="form-group">
+                    <label for="siteSubtitle">Subtitle</label>
+                    <input type="text" id="siteSubtitle" value="Creating beautiful experiences" placeholder="Enter subtitle">
+                </div>
+
+                <div class="form-group">
+                    <label for="navLinks">Navigation Links (one per line)</label>
+                    <textarea id="navLinks" placeholder="Home&#10;About&#10;Services&#10;Contact">Home
+About
+Services
+Contact</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="mainContent">Main Content</label>
+                    <textarea id="mainContent" placeholder="Enter your main content">Welcome to our professional homepage. We create modern, responsive designs that focus on user experience and conversion.</textarea>
+                </div>
+
+                <h2>Styling</h2>
+                <div class="form-group">
+                    <label for="colorScheme">Color Scheme</label>
+                    <select id="colorScheme">
+                        <option value="blue">Professional Blue</option>
+                        <option value="monochrome">Monochrome</option>
+                        <option value="green">Success Green</option>
+                        <option value="purple">Creative Purple</option>
+                        <option value="orange">Energetic Orange</option>
+                        <option value="dark">Dark Theme</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="fontFamily">Typography</label>
+                    <select id="fontFamily">
+                        <option value="sans">Modern Sans</option>
+                        <option value="serif">Classic Serif</option>
+                        <option value="mono">Developer Mono</option>
+                        <option value="display">Display Font</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Pages Tab -->
+            <div class="tab-content" data-tab="pages">
+                <h1>Multi-Page System</h1>
+                <p style="color: #6b7280; margin-bottom: 24px; font-size: 14px;">Design consistent page layouts</p>
+
+                <h2>Page Type</h2>
+                <div class="page-selector">
+                    <button class="page-btn active" data-page="home">Home</button>
+                    <button class="page-btn" data-page="about">About</button>
+                    <button class="page-btn" data-page="services">Services</button>
+                    <button class="page-btn" data-page="portfolio">Portfolio</button>
+                    <button class="page-btn" data-page="contact">Contact</button>
+                    <button class="page-btn" data-page="blog">Blog</button>
+                </div>
+
+                <div class="form-group">
+                    <label for="pageTitle">Page Title</label>
+                    <input type="text" id="pageTitle" value="Homepage" placeholder="Enter page title">
+                </div>
+
+                <div class="form-group">
+                    <label for="pageContent">Page Content</label>
+                    <textarea id="pageContent" placeholder="Enter page-specific content" style="min-height: 120px;">This is the homepage content. Customize this for each page type.</textarea>
+                </div>
+
+                <h2>Page Features</h2>
+                <div style="display: grid; gap: 8px;">
+                    <label style="display: flex; align-items: center; gap: 8px; font-weight: normal;">
+                        <input type="checkbox" id="includeHero" checked>
+                        Include Hero Section
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 8px; font-weight: normal;">
+                        <input type="checkbox" id="includeNav" checked>
+                        Include Navigation
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 8px; font-weight: normal;">
+                        <input type="checkbox" id="includeFooter" checked>
+                        Include Footer
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 8px; font-weight: normal;">
+                        <input type="checkbox" id="includeSidebar">
+                        Include Sidebar
+                    </label>
+                </div>
+            </div>
+
+            <!-- Export Tab -->
+            <div class="tab-content" data-tab="export">
+                <h1>Export Options</h1>
+                <p style="color: #6b7280; margin-bottom: 24px; font-size: 14px;">Download your designs</p>
+
+                <h2>Export Format</h2>
+                <div class="form-group">
+                    <label for="exportFormat">Format</label>
+                    <select id="exportFormat">
+                        <option value="html">Complete HTML</option>
+                        <option value="react">React Components</option>
+                        <option value="vue">Vue Components</option>
+                        <option value="css">CSS Only</option>
+                        <option value="zip">Multi-Page ZIP</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="cssFramework">CSS Framework</label>
+                    <select id="cssFramework">
+                        <option value="vanilla">Vanilla CSS</option>
+                        <option value="tailwind">Tailwind CSS</option>
+                        <option value="bootstrap">Bootstrap</option>
+                        <option value="bulma">Bulma</option>
+                    </select>
+                </div>
+
+                <h2>Export Options</h2>
+                <div style="display: grid; gap: 8px; margin-bottom: 24px;">
+                    <label style="display: flex; align-items: center; gap: 8px; font-weight: normal;">
+                        <input type="checkbox" id="includeComments" checked>
+                        Include Code Comments
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 8px; font-weight: normal;">
+                        <input type="checkbox" id="minifyCode">
+                        Minify Code
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 8px; font-weight: normal;">
+                        <input type="checkbox" id="includeReadme" checked>
+                        Include Documentation
+                    </label>
+                </div>
+
+                <button class="btn-primary" onclick="exportDesign()" style="width: 100%; margin-bottom: 12px;">
+                    Download Design
+                </button>
+                <button class="btn-secondary" onclick="saveTemplate()" style="width: 100%;">
+                    Save Template
+                </button>
+            </div>
+
+            <div class="button-group">
+                <button type="button" class="btn-secondary" onclick="resetForm()">Reset</button>
+                <button type="button" class="btn-primary" onclick="downloadHTML()">Quick Export</button>
+            </div>
+        </div>
+
+        <div class="preview-section">
+            <div class="preview-controls">
+                <div class="device-selector">
+                    <button class="device-btn active" data-device="desktop">Desktop</button>
+                    <button class="device-btn" data-device="tablet">Tablet</button>
+                    <button class="device-btn" data-device="mobile">Mobile</button>
+                </div>
+                <span style="font-size: 12px; color: #6b7280;">Live Preview</span>
+            </div>
+
+            <div class="preview desktop" id="preview">
+                <div class="preview-header">
+                    <div class="preview-dots">
+                        <div class="preview-dot"></div>
+                        <div class="preview-dot"></div>
+                        <div class="preview-dot"></div>
+                    </div>
+                    <span style="font-size: 12px; color: #6b7280; margin-left: 8px;">Preview</span>
+                </div>
+                <div class="preview-frame" id="previewFrame">
+                    <!-- Generated preview will appear here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/templates.js"></script>
+    <script src="assets/app.js"></script>
+</body>
+</html>
