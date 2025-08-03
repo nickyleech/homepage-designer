@@ -231,6 +231,14 @@ class DesignGenerator {
         document.querySelectorAll('.nav-tab').forEach(tab => {
             tab.classList.toggle('active', tab.dataset.tab === tabName);
         });
+        
+        // Handle special tabs that don't have corresponding nav-tab buttons
+        if (tabName === 'pa-media') {
+            // Clear all nav-tab active states for PA Media since it doesn't have a nav-tab button
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+        }
 
         // Update tab content
         document.querySelectorAll('.tab-content').forEach(content => {
