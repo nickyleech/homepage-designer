@@ -1,10 +1,10 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code when working with the Homepage Design Generator project.
+This file provides guidance to Claude Code when working with the Homepage Design Generator Pro v2.0 project.
 
 ## Project Overview
 
-**Homepage Design Generator** is a comprehensive web application for creating professional, minimalist website designs with multi-page support and advanced customization options.
+**Homepage Design Generator Pro** is a comprehensive, enterprise-grade web application for creating professional website designs with advanced customisation options, AI-powered features, and seamless deployment integration. This enhanced version includes extensive template libraries, brand-specific templates, and professional-grade export capabilities.
 
 ## Development Commands
 
@@ -51,24 +51,32 @@ npm run test             # Run tests
 - **Style Systems**: `{project}-design-system.html` 
 - **Multi-page**: `{project}-{page}-template.html` (e.g., `corporate-about-template.html`)
 
-## Design Styles Available
+## Design Styles Available (13 Total)
 
-### Minimalist Variations
-- **Clean Corporate**: Professional business layouts
-- **Artistic Portfolio**: Creative showcase designs  
-- **Tech Startup**: Modern SaaS and tech company styles
-- **Creative Agency**: Bold, creative service-focused layouts
+### Core Styles
+- **Minimalist**: Clean, simple layouts with focus on whitespace
+- **Dashboard**: Professional admin panels & SaaS interfaces
+- **Corporate**: Traditional business designs with trust elements
+- **Creative**: Artistic portfolio designs with bold visuals
+- **Tech Startup**: Modern innovation-focused styling
+- **E-commerce**: Product-focused conversion-optimised layouts
 
-### Modern Dashboard
-- **Admin Panels**: Management interfaces with sidebar navigation
-- **Analytics Dashboards**: Data visualization and metrics layouts
-- **SaaS Interfaces**: Application-style designs with cards and components
+### Extended Styles (New in v2.0)
+- **Blog/Magazine**: Content-heavy layouts with typography focus
+- **Restaurant**: Food service designs with appetising imagery
+- **Photography**: Image-centric layouts with gallery features
+- **Real Estate**: Property showcase with professional presentation
+- **Healthcare**: Medical professional designs with trust elements
+- **Education**: Learning-focused layouts with course structure
 
-### Additional Styles
-- **E-commerce**: Product-focused layouts
-- **Blog/Magazine**: Content-heavy reading experiences
-- **Restaurant**: Food service and hospitality designs
-- **Photography Portfolio**: Image-focused showcases
+### Brand-Specific Styles
+- **PA Media**: Professional media brand template suite with:
+  - Website templates (4 responsive designs)
+  - PowerPoint presentations (15+ slide masters)
+  - Microsoft Teams backgrounds (4 HD options)
+  - Style guides and brand guidelines
+  - Social media templates
+  - Print materials (business cards, letterhead, brochures)
 
 ## Multi-Page Consistency
 

@@ -179,14 +179,20 @@
 
         .navigation {
             position: fixed;
-            top: 2rem;
-            right: 2rem;
-            background: white;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            top: 50%;
+            right: 1rem;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 0.75rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
             padding: 1rem;
-            max-width: 250px;
+            max-width: 200px;
+            max-height: 70vh;
+            overflow-y: auto;
             z-index: 100;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: opacity 0.3s ease, transform 0.3s ease;
         }
 
         .navigation h4 {
@@ -210,6 +216,16 @@
 
         .navigation a:hover {
             text-decoration: underline;
+            color: #5a67d8;
+        }
+        
+        .navigation:not(:hover) {
+            opacity: 0.7;
+        }
+        
+        .navigation:hover {
+            opacity: 1;
+            transform: translateY(-50%) scale(1.02);
         }
 
         @media (max-width: 768px) {
