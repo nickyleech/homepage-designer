@@ -269,6 +269,133 @@
             line-height: 1.3;
         }
 
+        /* Professional Style-Specific Styling */
+        .style-option[data-style="minimalist"] {
+            background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+            border-color: #e2e8f0;
+        }
+
+        .style-option[data-style="dashboard"] {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            border-color: #475569;
+        }
+        .style-option[data-style="dashboard"] .style-name {
+            color: #f1f5f9;
+        }
+        .style-option[data-style="dashboard"] .style-desc {
+            color: #cbd5e1;
+        }
+
+        .style-option[data-style="corporate"] {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            border-color: #2563eb;
+        }
+        .style-option[data-style="corporate"] .style-name {
+            color: #ffffff;
+        }
+        .style-option[data-style="corporate"] .style-desc {
+            color: #dbeafe;
+        }
+
+        .style-option[data-style="creative"] {
+            background: linear-gradient(135deg, #7c3aed 0%, #ec4899 100%);
+            border-color: #a855f7;
+        }
+        .style-option[data-style="creative"] .style-name {
+            color: #ffffff;
+        }
+        .style-option[data-style="creative"] .style-desc {
+            color: #f3e8ff;
+        }
+
+        .style-option[data-style="tech"] {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            border-color: #7c3aed;
+        }
+        .style-option[data-style="tech"] .style-name {
+            color: #ffffff;
+        }
+        .style-option[data-style="tech"] .style-desc {
+            color: #e0e7ff;
+        }
+
+        .style-option[data-style="ecommerce"] {
+            background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+            border-color: #047857;
+        }
+        .style-option[data-style="ecommerce"] .style-name {
+            color: #ffffff;
+        }
+        .style-option[data-style="ecommerce"] .style-desc {
+            color: #d1fae5;
+        }
+
+        .style-option[data-style="blog"] {
+            background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+            border-color: #4b5563;
+        }
+        .style-option[data-style="blog"] .style-name {
+            color: #ffffff;
+        }
+        .style-option[data-style="blog"] .style-desc {
+            color: #d1d5db;
+        }
+
+        .style-option[data-style="restaurant"] {
+            background: linear-gradient(135deg, #dc2626 0%, #ea580c 100%);
+            border-color: #c2410c;
+        }
+        .style-option[data-style="restaurant"] .style-name {
+            color: #ffffff;
+        }
+        .style-option[data-style="restaurant"] .style-desc {
+            color: #fed7aa;
+        }
+
+        .style-option[data-style="photography"] {
+            background: linear-gradient(135deg, #1c1917 0%, #292524 100%);
+            border-color: #d97706;
+        }
+        .style-option[data-style="photography"] .style-name {
+            color: #fbbf24;
+        }
+        .style-option[data-style="photography"] .style-desc {
+            color: #fde68a;
+        }
+
+        .style-option[data-style="realestate"] {
+            background: linear-gradient(135deg, #92400e 0%, #d97706 100%);
+            border-color: #b45309;
+        }
+        .style-option[data-style="realestate"] .style-name {
+            color: #ffffff;
+        }
+        .style-option[data-style="realestate"] .style-desc {
+            color: #fef3c7;
+        }
+
+        .style-option[data-style="healthcare"] {
+            background: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%);
+            border-color: #0e7490;
+        }
+        .style-option[data-style="healthcare"] .style-name {
+            color: #ffffff;
+        }
+        .style-option[data-style="healthcare"] .style-desc {
+            color: #cffafe;
+        }
+
+        .style-option[data-style="education"] {
+            background: linear-gradient(135deg, #065f46 0%, #059669 100%);
+            border-color: #047857;
+        }
+        .style-option[data-style="education"] .style-name {
+            color: #ffffff;
+        }
+        .style-option[data-style="education"] .style-desc {
+            color: #d1fae5;
+        }
+
         .template-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
@@ -733,114 +860,6 @@
             font-weight: 500;
         }
 
-        /* Onboarding Modal Styles */
-        .onboarding-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: 2000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(8px);
-        }
-
-        .onboarding-content {
-            background: white;
-            border-radius: 16px;
-            max-width: 600px;
-            width: 90%;
-            max-height: 80vh;
-            position: relative;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .onboarding-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 2rem;
-            text-align: center;
-            border-radius: 16px 16px 0 0;
-        }
-
-        .onboarding-header h2 {
-            font-size: 1.75rem;
-            margin-bottom: 0.5rem;
-            color: white;
-        }
-
-        .onboarding-body {
-            padding: 2rem;
-            flex: 1;
-            overflow-y: auto;
-            min-height: 0;
-        }
-
-        .onboarding-step {
-            display: none;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .onboarding-step.active {
-            display: block;
-        }
-
-        .step-indicator {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 2rem;
-            gap: 0.5rem;
-        }
-
-        .step-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #e5e7eb;
-            transition: all 0.3s;
-        }
-
-        .step-dot.active {
-            background: #667eea;
-            transform: scale(1.2);
-        }
-
-        .quiz-option {
-            background: #f8fafc;
-            border: 2px solid #e5e7eb;
-            border-radius: 12px;
-            padding: 1rem;
-            margin: 0.5rem 0;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-align: left;
-        }
-
-        .quiz-option:hover {
-            border-color: #667eea;
-            background: #eff6ff;
-        }
-
-        .quiz-option.selected {
-            border-color: #667eea;
-            background: #eff6ff;
-        }
-
-        .onboarding-navigation {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.5rem 2rem;
-            border-top: 1px solid #e5e7eb;
-            flex-shrink: 0;
-            background: white;
-            border-radius: 0 0 16px 16px;
-        }
 
         /* Template Modal Styles */
         .template-modal {
@@ -923,134 +942,13 @@
     </style>
 </head>
 <body>
-    <!-- Enhanced Onboarding Modal -->
-    <div id="onboardingModal" class="onboarding-modal" style="display: none;">
-        <div class="onboarding-content">
-            <div class="onboarding-header">
-                <h2>Welcome to Design Generator Pro</h2>
-                <p>Let's create something amazing together!</p>
-            </div>
-            
-            <div class="onboarding-body">
-                <div class="step-indicator" id="stepIndicator">
-                    <div class="step-dot active"></div>
-                    <div class="step-dot"></div>
-                    <div class="step-dot"></div>
-                    <div class="step-dot"></div>
-                </div>
-
-                <!-- Step 1: Welcome -->
-                <div class="onboarding-step active" data-step="1">
-                    <h3 style="margin-bottom: 1rem; color: #374151;">🎨 Professional Design Made Simple</h3>
-                    <p style="margin-bottom: 1.5rem; color: #6b7280; line-height: 1.6;">
-                        Design Generator Pro helps you create stunning, professional websites with advanced customisation options, 
-                        AI-powered content generation, and seamless integration with modern development workflows.
-                    </p>
-                    <div style="background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
-                        <h4 style="color: #0369a1; margin-bottom: 0.5rem;">✨ What's New in This Version:</h4>
-                        <ul style="color: #0369a1; margin: 0; padding-left: 1.5rem; font-size: 0.9rem;">
-                            <li>Enhanced Claude Code integration with project templates</li>
-                            <li>One-click Vercel deployment</li>
-                            <li>100+ professional design templates</li>
-                            <li>Advanced accessibility auditing</li>
-                            <li>Real-time collaboration tools</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Step 2: Project Type Quiz -->
-                <div class="onboarding-step" data-step="2">
-                    <h3 style="margin-bottom: 1rem; color: #374151;">🎯 What Type of Website Are You Creating?</h3>
-                    <p style="margin-bottom: 1.5rem; color: #6b7280;">Help us recommend the perfect design style for your project:</p>
-                    
-                    <div class="quiz-option" data-value="business">
-                        <strong>💼 Business/Corporate Website</strong>
-                        <div style="font-size: 0.9rem; color: #6b7280; margin-top: 0.25rem;">Professional services, consulting, B2B companies</div>
-                    </div>
-                    
-                    <div class="quiz-option" data-value="creative">
-                        <strong>🎨 Creative Portfolio</strong>
-                        <div style="font-size: 0.9rem; color: #6b7280; margin-top: 0.25rem;">Design agencies, artists, photographers, creative professionals</div>
-                    </div>
-                    
-                    <div class="quiz-option" data-value="tech">
-                        <strong>🚀 Tech/SaaS Product</strong>
-                        <div style="font-size: 0.9rem; color: #6b7280; margin-top: 0.25rem;">Software companies, startups, tech products, apps</div>
-                    </div>
-                    
-                    <div class="quiz-option" data-value="ecommerce">
-                        <strong>🛒 E-commerce Store</strong>
-                        <div style="font-size: 0.9rem; color: #6b7280; margin-top: 0.25rem;">Online shops, product catalogues, retail businesses</div>
-                    </div>
-                    
-                    <div class="quiz-option" data-value="blog">
-                        <strong>📝 Blog/Magazine</strong>
-                        <div style="font-size: 0.9rem; color: #6b7280; margin-top: 0.25rem;">Content sites, news, publications, personal blogs</div>
-                    </div>
-                    
-                    <div class="quiz-option" data-value="restaurant">
-                        <strong>🍽️ Restaurant/Food Service</strong>
-                        <div style="font-size: 0.9rem; color: #6b7280; margin-top: 0.25rem;">Restaurants, cafes, food businesses, catering</div>
-                    </div>
-                </div>
-
-                <!-- Step 3: Experience Level -->
-                <div class="onboarding-step" data-step="3">
-                    <h3 style="margin-bottom: 1rem; color: #374151;">🛠️ What's Your Experience Level?</h3>
-                    <p style="margin-bottom: 1.5rem; color: #6b7280;">This helps us customise the interface for you:</p>
-                    
-                    <div class="quiz-option" data-value="beginner">
-                        <strong>🌱 Beginner</strong>
-                        <div style="font-size: 0.9rem; color: #6b7280; margin-top: 0.25rem;">New to web design, prefer guided experiences</div>
-                    </div>
-                    
-                    <div class="quiz-option" data-value="intermediate">
-                        <strong>⚡ Intermediate</strong>
-                        <div style="font-size: 0.9rem; color: #6b7280; margin-top: 0.25rem;">Some design experience, comfortable with customisation</div>
-                    </div>
-                    
-                    <div class="quiz-option" data-value="advanced">
-                        <strong>🎯 Advanced</strong>
-                        <div style="font-size: 0.9rem; color: #6b7280; margin-top: 0.25rem;">Experienced designer/developer, want all features available</div>
-                    </div>
-                </div>
-
-                <!-- Step 4: Setup Complete -->
-                <div class="onboarding-step" data-step="4">
-                    <h3 style="margin-bottom: 1rem; color: #374151;">🎉 You're All Set!</h3>
-                    <div id="recommendedSetup" style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem;">
-                        <h4 style="color: #059669; margin-bottom: 1rem;">📋 Recommended Setup:</h4>
-                        <div id="setupRecommendations" style="color: #059669;"></div>
-                    </div>
-                    
-                    <div style="background: #fef3c7; border: 1px solid #fbbf24; border-radius: 8px; padding: 1rem;">
-                        <h4 style="color: #92400e; margin-bottom: 0.5rem;">💡 Quick Tips:</h4>
-                        <ul style="color: #92400e; margin: 0; padding-left: 1.5rem; font-size: 0.9rem;">
-                            <li>Use the preview panel to see changes in real-time</li>
-                            <li>Try the AI content generator for professional copy</li>
-                            <li>Export your design directly to Claude Code for development</li>
-                            <li>Enable accessibility audit for inclusive design</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="onboarding-navigation">
-                <button class="btn-secondary" id="prevOnboardingBtn" style="display: none;">Previous</button>
-                <div style="display: flex; gap: 0.5rem;">
-                    <button class="btn-secondary" onclick="skipOnboarding()">Skip Tour</button>
-                    <button class="btn-primary" id="nextOnboardingBtn">Next</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <header class="header">
         <div class="header-content">
             <div class="logo">Design Generator Pro</div>
             <div style="display: flex; align-items: center; gap: 1rem;">
-                <button onclick="startOnboarding()" style="background: #8b5cf6; color: white; padding: 0.5rem 1rem; border-radius: 0.375rem; border: none; font-size: 0.875rem; font-weight: 500; cursor: pointer;">🚀 Get Started</button>
-                <a href="project-walkthrough.html" target="_blank" style="background: #10b981; color: white; padding: 0.5rem 1rem; border-radius: 0.375rem; text-decoration: none; font-size: 0.875rem; font-weight: 500;">📚 Complete Guide</a>
+                <button onclick="switchToTab('pa-media')" style="background: #825FFF; color: white; padding: 0.5rem 1rem; border-radius: 0.375rem; border: none; font-size: 0.875rem; font-weight: 500; cursor: pointer;">PA Media Templates</button>
+                <a href="project-walkthrough.html" target="_blank" style="background: #10b981; color: white; padding: 0.5rem 1rem; border-radius: 0.375rem; text-decoration: none; font-size: 0.875rem; font-weight: 500;">Complete Guide</a>
             </div>
             <nav class="nav-tabs">
                 <button class="nav-tab active" data-tab="design">Design</button>
@@ -1060,6 +958,7 @@
                 <button class="nav-tab" data-tab="animations">Animations</button>
                 <button class="nav-tab" data-tab="accessibility">Accessibility</button>
                 <button class="nav-tab" data-tab="templates">Templates</button>
+                <button class="nav-tab" data-tab="pa-media" style="color: #825FFF;">PA Media</button>
                 <button class="nav-tab" data-tab="pages">Multi-Page</button>
                 <button class="nav-tab" data-tab="vercel">Vercel Deploy</button>
                 <button class="nav-tab" data-tab="export">Export</button>
@@ -1586,6 +1485,113 @@ Contact</textarea>
                 </div>
             </div>
 
+            <!-- PA Media Tab -->
+            <div class="tab-content" data-tab="pa-media">
+                <h1>PA Media Brand Templates</h1>
+                <p style="color: #6b7280; margin-bottom: 24px; font-size: 14px;">Professional branded templates and design assets for PA Media Group</p>
+
+                <div style="background: linear-gradient(135deg, #825FFF 0%, #3D3677 100%); color: white; padding: 2rem; border-radius: 12px; margin-bottom: 2rem;">
+                    <h2 style="color: white; margin-bottom: 1rem; font-size: 1.5rem;">PA Media Design System</h2>
+                    <p style="color: #e0d4ff; margin-bottom: 1.5rem;">Complete branded template suite designed specifically for PA Media Group's professional requirements.</p>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1.5rem;">
+                        <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
+                            <h4 style="color: white; margin-bottom: 0.5rem;">Brand Colors</h4>
+                            <p style="color: #e0d4ff; font-size: 0.9rem;">#825FFF Primary<br>#3D3677 Secondary</p>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
+                            <h4 style="color: white; margin-bottom: 0.5rem;">Typography</h4>
+                            <p style="color: #e0d4ff; font-size: 0.9rem;">Professional Sans-Serif<br>Clean & Modern</p>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
+                            <h4 style="color: white; margin-bottom: 0.5rem;">Templates</h4>
+                            <p style="color: #e0d4ff; font-size: 0.9rem;">15+ Professional<br>Ready-to-use Assets</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h2>Template Categories</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+                    
+                    <div style="border: 1px solid #e5e7eb; border-radius: 12px; padding: 1.5rem; background: white;">
+                        <h3 style="color: #825FFF; margin-bottom: 1rem;">Website Templates</h3>
+                        <p style="color: #6b7280; margin-bottom: 1rem; font-size: 0.9rem;">Professional website designs with PA Media branding</p>
+                        <ul style="color: #4b5563; font-size: 0.9rem; margin-bottom: 1.5rem; padding-left: 1.2rem;">
+                            <li>Corporate Homepage</li>
+                            <li>News Portal Layout</li>
+                            <li>Service Pages</li>
+                            <li>Contact Templates</li>
+                        </ul>
+                        <button onclick="downloadPATemplate('website')" style="background: #825FFF; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 6px; font-size: 0.9rem; font-weight: 500; cursor: pointer; width: 100%;">Download Website Templates</button>
+                    </div>
+
+                    <div style="border: 1px solid #e5e7eb; border-radius: 12px; padding: 1.5rem; background: white;">
+                        <h3 style="color: #825FFF; margin-bottom: 1rem;">Presentation Assets</h3>
+                        <p style="color: #6b7280; margin-bottom: 1rem; font-size: 0.9rem;">Professional PowerPoint and presentation materials</p>
+                        <ul style="color: #4b5563; font-size: 0.9rem; margin-bottom: 1.5rem; padding-left: 1.2rem;">
+                            <li>Master Slide Templates</li>
+                            <li>Corporate Presentations</li>
+                            <li>Chart & Graph Templates</li>
+                            <li>Brand Guidelines Deck</li>
+                        </ul>
+                        <button onclick="downloadPATemplate('presentation')" style="background: #825FFF; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 6px; font-size: 0.9rem; font-weight: 500; cursor: pointer; width: 100%;">Download Presentation Kit</button>
+                    </div>
+
+                    <div style="border: 1px solid #e5e7eb; border-radius: 12px; padding: 1.5rem; background: white;">
+                        <h3 style="color: #825FFF; margin-bottom: 1rem;">Digital Assets</h3>
+                        <p style="color: #6b7280; margin-bottom: 1rem; font-size: 0.9rem;">Teams backgrounds and digital brand materials</p>
+                        <ul style="color: #4b5563; font-size: 0.9rem; margin-bottom: 1.5rem; padding-left: 1.2rem;">
+                            <li>Teams Meeting Backgrounds</li>
+                            <li>Social Media Templates</li>
+                            <li>Email Signatures</li>
+                            <li>Digital Letterheads</li>
+                        </ul>
+                        <button onclick="downloadPATemplate('digital')" style="background: #825FFF; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 6px; font-size: 0.9rem; font-weight: 500; cursor: pointer; width: 100%;">Download Digital Assets</button>
+                    </div>
+
+                    <div style="border: 1px solid #e5e7eb; border-radius: 12px; padding: 1.5rem; background: white;">
+                        <h3 style="color: #825FFF; margin-bottom: 1rem;">Print Materials</h3>
+                        <p style="color: #6b7280; margin-bottom: 1rem; font-size: 0.9rem;">Professional print-ready templates and stationery</p>
+                        <ul style="color: #4b5563; font-size: 0.9rem; margin-bottom: 1.5rem; padding-left: 1.2rem;">
+                            <li>Business Card Templates</li>
+                            <li>Letterhead Designs</li>
+                            <li>Brochure Layouts</li>
+                            <li>Report Templates</li>
+                        </ul>
+                        <button onclick="downloadPATemplate('print')" style="background: #825FFF; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 6px; font-size: 0.9rem; font-weight: 500; cursor: pointer; width: 100%;">Download Print Templates</button>
+                    </div>
+                </div>
+
+                <h2>Brand Guidelines</h2>
+                <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 2rem; margin-bottom: 2rem;">
+                    <h3 style="color: #374151; margin-bottom: 1rem;">PA Media Brand Standards</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+                        <div>
+                            <h4 style="color: #825FFF; margin-bottom: 0.5rem;">Color Palette</h4>
+                            <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                                <div style="width: 40px; height: 40px; background: #825FFF; border-radius: 6px; border: 2px solid #e5e7eb;"></div>
+                                <div style="width: 40px; height: 40px; background: #3D3677; border-radius: 6px; border: 2px solid #e5e7eb;"></div>
+                                <div style="width: 40px; height: 40px; background: #ffffff; border-radius: 6px; border: 2px solid #e5e7eb;"></div>
+                            </div>
+                            <p style="color: #6b7280; font-size: 0.9rem;">Primary: #825FFF<br>Secondary: #3D3677<br>Neutral: #FFFFFF</p>
+                        </div>
+                        <div>
+                            <h4 style="color: #825FFF; margin-bottom: 0.5rem;">Typography Guidelines</h4>
+                            <p style="color: #6b7280; font-size: 0.9rem; margin-bottom: 1rem;">Professional sans-serif typography with clear hierarchy and excellent readability for all applications.</p>
+                        </div>
+                        <div>
+                            <h4 style="color: #825FFF; margin-bottom: 0.5rem;">Logo Usage</h4>
+                            <p style="color: #6b7280; font-size: 0.9rem; margin-bottom: 1rem;">Consistent logo application across all materials with proper spacing and color variants.</p>
+                        </div>
+                    </div>
+                    <button onclick="downloadBrandGuidelines()" style="background: #374151; color: white; border: none; padding: 1rem 2rem; border-radius: 6px; font-weight: 500; cursor: pointer; margin-top: 1.5rem;">Download Complete Brand Guidelines</button>
+                </div>
+
+                <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                    <button onclick="downloadAllPATemplates()" style="background: #825FFF; color: white; border: none; padding: 1rem 2rem; border-radius: 6px; font-weight: 500; cursor: pointer; flex: 1;">Download Complete Template Suite</button>
+                    <button onclick="previewPATemplates()" style="background: #f3f4f6; color: #374151; border: 1px solid #d1d5db; padding: 1rem 2rem; border-radius: 6px; font-weight: 500; cursor: pointer; flex: 1;">Preview All Templates</button>
+                </div>
+            </div>
+
             <!-- Pages Tab -->
             <div class="tab-content" data-tab="pages">
                 <h1>Multi-Page System</h1>
@@ -2007,10 +2013,39 @@ Contact</textarea>
     <script src="assets/content-extractor.js"></script>
     <script src="assets/style-analyzer.js"></script>
     <script src="assets/url-processor.js"></script>
-    <script src="assets/onboarding.js"></script>
     <script src="assets/vercel-integration.js"></script>
     <script src="assets/claude-integration.js"></script>
     <script src="assets/pa-media-templates.js"></script>
     <script src="assets/app.js"></script>
+    
+    <script>
+        // Global helper functions
+        function switchToTab(tabName) {
+            if (window.designGenerator) {
+                window.designGenerator.switchTab(tabName);
+            }
+        }
+        
+        // PA Media Template Functions (stubs - will integrate with existing PA Media system)
+        function downloadPATemplate(type) {
+            console.log('Downloading PA Media template:', type);
+            // Will integrate with existing PA Media template system
+        }
+        
+        function downloadBrandGuidelines() {
+            console.log('Downloading PA Media brand guidelines');
+            // Will integrate with existing brand guidelines system
+        }
+        
+        function downloadAllPATemplates() {
+            console.log('Downloading complete PA Media template suite');
+            // Will integrate with existing template download system
+        }
+        
+        function previewPATemplates() {
+            console.log('Previewing PA Media templates');
+            // Will show preview modal of all PA Media templates
+        }
+    </script>
 </body>
 </html>
