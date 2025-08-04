@@ -902,13 +902,16 @@ class DesignGenerator {
             } else {
                 // Use regular layout template - check both layouts and root level templates
                 let template = DesignTemplates.layouts[data.template];
+                console.log(`Looking for template '${data.template}' in layouts:`, !!template);
                 
                 // If not found in layouts, check root level templates (components)
                 if (!template) {
                     template = DesignTemplates[data.template];
+                    console.log(`Looking for template '${data.template}' in root:`, !!template);
                 }
                 
                 if (!template) {
+                    console.error(`TEMPLATE NOT FOUND: '${data.template}'`);
                     console.error('Available layout templates:', Object.keys(DesignTemplates.layouts || {}));
                     console.error('Available component templates:', Object.keys(DesignTemplates).filter(key => 
                         typeof DesignTemplates[key] === 'object' && 
