@@ -475,6 +475,72 @@
             background: #eff6ff;
         }
 
+        .template-category {
+            margin-bottom: 32px;
+            padding: 20px;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            background: #fafafa;
+        }
+
+        .template-category-title {
+            margin: 0 0 8px 0;
+            font-size: 18px;
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        .template-category-desc {
+            margin: 0 0 16px 0;
+            font-size: 14px;
+            color: #6b7280;
+            line-height: 1.4;
+        }
+
+        .template-option {
+            padding: 16px 12px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 12px;
+            font-weight: 500;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .template-option:hover {
+            border-color: #3b82f6;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+        }
+
+        .template-preview {
+            width: 100%;
+            height: 40px;
+            background: #f3f4f6;
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 4px;
+        }
+
+        .template-name {
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 4px;
+        }
+
+        .template-desc {
+            font-size: 10px;
+            color: #6b7280;
+            line-height: 1.3;
+        }
+
         .page-selector {
             display: flex;
             flex-wrap: wrap;
@@ -1788,33 +1854,149 @@
                 <!-- Hidden design style - always use minimalist clean style -->
                 <input type="hidden" id="designStyle" value="minimalist">
                 
-                <h2>Layout Template</h2>
-                <div class="template-grid">
-                    <div class="template-option active" data-template="hero">Hero</div>
-                    <div class="template-option" data-template="centered">Centred</div>
-                    <div class="template-option" data-template="sidebar">Sidebar</div>
-                    <div class="template-option" data-template="grid">Grid</div>
-                    <div class="template-option" data-template="split">Split</div>
-                    <div class="template-option" data-template="masonry">Masonry</div>
-                    <div class="template-option" data-template="fullscreen">Full-Screen</div>
-                    <div class="template-option" data-template="timeline">Timeline</div>
-                    <div class="template-option" data-template="magazine">Magazine</div>
-                    <div class="template-option" data-template="portfolio">Portfolio</div>
-                    <div class="template-option" data-template="landing">Landing</div>
-                    <div class="template-option" data-template="dashboard-pro">Dashboard Pro</div>
-                    <div class="template-option" data-template="blog-modern">Blog Modern</div>
-                    <div class="template-option" data-template="cards">Card-Based</div>
-                    <div class="template-option" data-template="ecommerce-grid">E-commerce Grid</div>
-                    <div class="template-option" data-template="pricing">Pricing Table</div>
-                    <div class="template-option" data-template="testimonials">Testimonials</div>
-                    <div class="template-option" data-template="features">Features Grid</div>
-                    <div class="template-option" data-template="comparison">Comparison</div>
-                    <div class="template-option" data-template="stats">Statistics</div>
-                    <div class="template-option" data-template="cta">Call-to-Action</div>
-                    <div class="template-option" data-template="gallery">Image Gallery</div>
-                    <div class="template-option" data-template="contact">Contact Form</div>
-                    <div class="template-option" data-template="team">Team Members</div>
-                    <div class="template-option" data-template="faq">FAQ Section</div>
+                <h2>Design Templates</h2>
+                <p style="color: #6b7280; margin-bottom: 24px; font-size: 14px;">Choose from professionally designed layouts and components</p>
+
+                <!-- Page Layouts -->
+                <div class="template-category">
+                    <h3 class="template-category-title">Page Layouts</h3>
+                    <p class="template-category-desc">Complete page structures for different purposes</p>
+                    <div class="template-grid">
+                        <div class="template-option active" data-template="hero" title="Bold hero section with large headings and call-to-action">
+                            <div class="template-preview"></div>
+                            <span class="template-name">Hero</span>
+                            <span class="template-desc">Large banner with CTA</span>
+                        </div>
+                        <div class="template-option" data-template="centered" title="Clean centered layout perfect for focus content">
+                            <div class="template-preview"></div>
+                            <span class="template-name">Centred</span>
+                            <span class="template-desc">Clean focused layout</span>
+                        </div>
+                        <div class="template-option" data-template="sidebar" title="Two-column layout with navigation sidebar">
+                            <div class="template-preview"></div>
+                            <span class="template-name">Sidebar</span>
+                            <span class="template-desc">Two-column with nav</span>
+                        </div>
+                        <div class="template-option" data-template="grid" title="Multi-column grid layout for content display">
+                            <div class="template-preview"></div>
+                            <span class="template-name">Grid</span>
+                            <span class="template-desc">Multi-column layout</span>
+                        </div>
+                        <div class="template-option" data-template="split" title="Split-screen design with image and content">
+                            <div class="template-preview"></div>
+                            <span class="template-name">Split</span>
+                            <span class="template-desc">Half image, half content</span>
+                        </div>
+                        <div class="template-option" data-template="landing" title="Optimized landing page for conversions">
+                            <div class="template-preview"></div>
+                            <span class="template-name">Landing</span>
+                            <span class="template-desc">Conversion focused</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Specialized Layouts -->  
+                <div class="template-category">
+                    <h3 class="template-category-title">Specialized Layouts</h3>
+                    <p class="template-category-desc">Purpose-built designs for specific industries</p>
+                    <div class="template-grid">
+                        <div class="template-option" data-template="dashboard-pro" title="Professional dashboard interface with data widgets">
+                            <div class="template-preview"></div>
+                            <span class="template-name">Dashboard</span>
+                            <span class="template-desc">Admin interface</span>
+                        </div>
+                        <div class="template-option" data-template="portfolio" title="Creative portfolio showcase for designers and artists">
+                            <div class="template-preview"></div>
+                            <span class="template-name">Portfolio</span>
+                            <span class="template-desc">Creative showcase</span>
+                        </div>
+                        <div class="template-option" data-template="blog-modern" title="Modern blog layout with article previews">
+                            <div class="template-preview"></div>
+                            <span class="template-name">Blog</span>
+                            <span class="template-desc">Article layout</span>
+                        </div>
+                        <div class="template-option" data-template="ecommerce-grid" title="Product grid layout for online stores">
+                            <div class="template-preview"></div>
+                            <span class="template-name">E-commerce</span>
+                            <span class="template-desc">Product showcase</span>
+                        </div>
+                        <div class="template-option" data-template="magazine" title="Editorial magazine-style layout">
+                            <div class="template-preview"></div>
+                            <span class="template-name">Magazine</span>
+                            <span class="template-desc">Editorial style</span>
+                        </div>
+                        <div class="template-option" data-template="timeline" title="Chronological timeline layout for events">
+                            <div class="template-preview"></div>
+                            <span class="template-name">Timeline</span>
+                            <span class="template-desc">Event chronology</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Components -->
+                <div class="template-category">
+                    <h3 class="template-category-title">Interactive Components</h3>
+                    <p class="template-category-desc">Ready-to-use sections for any website</p>
+                    <div class="template-grid">
+                        <div class="template-option" data-template="pricing" title="Professional pricing table with plan comparison">
+                            <div class="template-preview"></div>
+                            <span class="template-name">Pricing Table</span>
+                            <span class="template-desc">Plan comparison</span>
+                        </div>
+                        <div class="template-option" data-template="testimonials" title="Customer testimonials with star ratings">
+                            <div class="template-preview"></div>
+                            <span class="template-name">Testimonials</span>
+                            <span class="template-desc">Customer reviews</span>
+                        </div>
+                        <div class="template-option" data-template="features" title="Feature grid highlighting key benefits">
+                            <div class="template-preview"></div>
+                            <span class="template-name">Features Grid</span>
+                            <span class="template-desc">Key benefits</span>
+                        </div>
+                        <div class="template-option" data-template="contact" title="Professional contact form with validation">
+                            <div class="template-preview"></div>
+                            <span class="template-name">Contact Form</span>
+                            <span class="template-desc">Get in touch</span>
+                        </div>
+                        <div class="template-option" data-template="team" title="Team member profiles with photos and roles">
+                            <div class="template-preview"></div>
+                            <span class="template-name">Team Members</span>
+                            <span class="template-desc">Staff profiles</span>
+                        </div>
+                        <div class="template-option" data-template="gallery" title="Image gallery with responsive grid layout">
+                            <div class="template-preview"></div>
+                            <span class="template-name">Gallery</span>
+                            <span class="template-desc">Image showcase</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Business Components -->
+                <div class="template-category">
+                    <h3 class="template-category-title">Business Components</h3>
+                    <p class="template-category-desc">Professional elements for business websites</p>
+                    <div class="template-grid">
+                        <div class="template-option" data-template="stats" title="Key statistics and metrics display">
+                            <div class="template-preview"></div>
+                            <span class="template-name">Statistics</span>
+                            <span class="template-desc">Key metrics</span>
+                        </div>
+                        <div class="template-option" data-template="comparison" title="Side-by-side feature comparison table">
+                            <div class="template-preview"></div>
+                            <span class="template-name">Comparison</span>
+                            <span class="template-desc">Feature comparison</span>
+                        </div>
+                        <div class="template-option" data-template="cta" title="Call-to-action section to drive conversions">
+                            <div class="template-preview"></div>
+                            <span class="template-name">Call-to-Action</span>
+                            <span class="template-desc">Drive conversions</span>
+                        </div>
+                        <div class="template-option" data-template="faq" title="Frequently asked questions section">
+                            <div class="template-preview"></div>
+                            <span class="template-name">FAQ Section</span>
+                            <span class="template-desc">Common questions</span>
+                        </div>
+                    </div>
                 </div>
 
                 <h2>Layout Customization</h2>
