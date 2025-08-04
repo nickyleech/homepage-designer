@@ -257,6 +257,7 @@ const DesignTemplates = {
             name: 'Hero',
             generate: (data, style, colors) => `
                 <div style="font-family: ${DesignTemplates.fonts[data.fontFamily].family}; background: ${colors.background}; min-height: 100vh;">
+                    <div style="background: ${colors.primary}; color: ${colors.background}; padding: 4px 8px; font-size: 10px; font-weight: bold;">HERO TEMPLATE</div>
                     ${DesignTemplates.generateNavigation(data, colors)}
                     <header style="min-height: 80vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 2rem; background: linear-gradient(135deg, ${colors.primary}15, ${colors.surface});">
                         <div style="max-width: 800px;">
@@ -302,6 +303,7 @@ const DesignTemplates = {
             generate: (data, style, colors) => `
                 <div style="display: grid; grid-template-columns: 280px 1fr; min-height: 100vh; font-family: ${DesignTemplates.fonts[data.fontFamily].family};">
                     <nav style="background: ${colors.surface}; padding: 2rem; border-right: 1px solid ${colors.border};">
+                        <div style="background: ${colors.primary}; color: ${colors.background}; padding: 4px 8px; font-size: 10px; font-weight: bold; margin-bottom: 1rem;">SIDEBAR TEMPLATE</div>
                         <h2 style="font-size: 1.5rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.semibold}; color: ${colors.primary}; margin-bottom: 2rem;">${data.siteTitle}</h2>
                         <ul style="list-style: none; padding: 0;">
                             ${data.navLinks.map(link => `<li style="margin-bottom: 1rem;"><a href="#" style="color: ${colors.text}; text-decoration: none; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.normal}; transition: color 0.3s; display: block; padding: 0.5rem 0;">${link}</a></li>`).join('')}
@@ -321,6 +323,7 @@ const DesignTemplates = {
             name: 'Grid',
             generate: (data, style, colors) => `
                 <div style="font-family: ${DesignTemplates.fonts[data.fontFamily].family}; padding: 2rem; background: ${colors.surface}; min-height: 100vh;">
+                    <div style="background: ${colors.primary}; color: ${colors.background}; padding: 4px 8px; font-size: 10px; font-weight: bold; margin-bottom: 1rem;">GRID TEMPLATE</div>
                     <header style="text-align: center; margin-bottom: 3rem; padding: 2rem 0;">
                         <h1 style="font-size: clamp(2rem, 4vw, 3rem); font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.semibold}; color: ${colors.primary}; margin-bottom: 0.5rem;">${data.siteTitle}</h1>
                         <p style="font-size: clamp(1rem, 2vw, 1.2rem); color: ${colors.secondary}; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.normal};">${data.siteSubtitle}</p>
@@ -1051,6 +1054,7 @@ const DesignTemplates = {
         name: 'Contact Form',
         generate: (data, style, colors) => `
             <div style="font-family: ${DesignTemplates.fonts[data.fontFamily].family}; background: ${colors.background}; padding: 3rem 2rem;">
+                <div style="background: ${colors.primary}; color: ${colors.background}; padding: 4px 8px; font-size: 10px; font-weight: bold; margin-bottom: 1rem; text-align: center;">CONTACT TEMPLATE</div>
                 <div style="max-width: 600px; margin: 0 auto;">
                     <h2 style="text-align: center; font-size: 2rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 3rem;">Contact Us</h2>
                     <div style="background: ${colors.surface}; padding: 2rem; border-radius: 0.5rem; border: 1px solid ${colors.border};">
@@ -1087,6 +1091,7 @@ const DesignTemplates = {
         name: 'Team Members',
         generate: (data, style, colors) => `
             <div style="font-family: ${DesignTemplates.fonts[data.fontFamily].family}; background: ${colors.background}; padding: 3rem 2rem;">
+                <div style="background: ${colors.primary}; color: ${colors.background}; padding: 4px 8px; font-size: 10px; font-weight: bold; margin-bottom: 1rem; text-align: center;">TEAM TEMPLATE</div>
                 <div style="max-width: 900px; margin: 0 auto;">
                     <h2 style="text-align: center; font-size: 2rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 3rem;">Our Team</h2>
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
