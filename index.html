@@ -966,13 +966,7 @@
             <nav class="nav-tabs">
                 <button class="nav-tab active" data-tab="design">Design</button>
                 <button class="nav-tab" data-tab="url-import">URL Import</button>
-                <button class="nav-tab" data-tab="components">Components</button>
-                <button class="nav-tab" data-tab="animations">Animations</button>
-                <button class="nav-tab" data-tab="accessibility">Accessibility</button>
-                <button class="nav-tab" data-tab="templates">Templates</button>
                 <button class="nav-tab" data-tab="pa-media">PA Media</button>
-                <button class="nav-tab" data-tab="pages">Multi-Page</button>
-                <button class="nav-tab" data-tab="export">Export</button>
             </nav>
         </div>
     </header>
@@ -985,55 +979,22 @@
                 <p style="color: #6b7280; margin-bottom: 24px; font-size: 14px;">Create professional designs with advanced customisation</p>
 
                 <h2>Design Style</h2>
-                <div class="style-grid">
-                    <div class="style-option active" data-style="minimalist">
-                        <div class="style-name">Minimalist</div>
-                        <div class="style-desc">Clean, simple layouts</div>
-                    </div>
-                    <div class="style-option" data-style="dashboard">
-                        <div class="style-name">Dashboard</div>
-                        <div class="style-desc">Admin panels & SaaS</div>
-                    </div>
-                    <div class="style-option" data-style="corporate">
-                        <div class="style-name">Corporate</div>
-                        <div class="style-desc">Professional business</div>
-                    </div>
-                    <div class="style-option" data-style="creative">
-                        <div class="style-name">Creative</div>
-                        <div class="style-desc">Artistic & portfolio</div>
-                    </div>
-                    <div class="style-option" data-style="tech">
-                        <div class="style-name">Tech Startup</div>
-                        <div class="style-desc">Modern SaaS & apps</div>
-                    </div>
-                    <div class="style-option" data-style="ecommerce">
-                        <div class="style-name">E-commerce</div>
-                        <div class="style-desc">Product focused</div>
-                    </div>
-                    <div class="style-option" data-style="blog">
-                        <div class="style-name">Blog/Magazine</div>
-                        <div class="style-desc">Content & typography</div>
-                    </div>
-                    <div class="style-option" data-style="restaurant">
-                        <div class="style-name">Restaurant</div>
-                        <div class="style-desc">Food & hospitality</div>
-                    </div>
-                    <div class="style-option" data-style="photography">
-                        <div class="style-name">Photography</div>
-                        <div class="style-desc">Image galleries</div>
-                    </div>
-                    <div class="style-option" data-style="realestate">
-                        <div class="style-name">Real Estate</div>
-                        <div class="style-desc">Property showcase</div>
-                    </div>
-                    <div class="style-option" data-style="healthcare">
-                        <div class="style-name">Healthcare</div>
-                        <div class="style-desc">Medical & wellness</div>
-                    </div>
-                    <div class="style-option" data-style="education">
-                        <div class="style-name">Education</div>
-                        <div class="style-desc">Learning & courses</div>
-                    </div>
+                <div class="form-group">
+                    <label for="designStyle">Choose Your Style</label>
+                    <select id="designStyle">
+                        <option value="minimalist" selected>Minimalist - Clean, simple layouts</option>
+                        <option value="dashboard">Dashboard - Admin panels & SaaS</option>
+                        <option value="corporate">Corporate - Professional business</option>
+                        <option value="creative">Creative - Artistic & portfolio</option>
+                        <option value="tech">Tech Startup - Modern SaaS & apps</option>
+                        <option value="ecommerce">E-commerce - Product focused</option>
+                        <option value="blog">Blog/Magazine - Content & typography</option>
+                        <option value="restaurant">Restaurant - Food & hospitality</option>
+                        <option value="photography">Photography - Image galleries</option>
+                        <option value="realestate">Real Estate - Property showcase</option>
+                        <option value="healthcare">Healthcare - Medical & wellness</option>
+                        <option value="education">Education - Learning & courses</option>
+                    </select>
                 </div>
 
                 <h2>Layout Template</h2>
@@ -1053,6 +1014,62 @@
                     <div class="template-option" data-template="blog-modern">Blog Modern</div>
                     <div class="template-option" data-template="cards">Card-Based</div>
                     <div class="template-option" data-template="ecommerce-grid">E-commerce Grid</div>
+                    <div class="template-option" data-template="pricing">Pricing Table</div>
+                    <div class="template-option" data-template="testimonials">Testimonials</div>
+                    <div class="template-option" data-template="features">Features Grid</div>
+                    <div class="template-option" data-template="comparison">Comparison</div>
+                    <div class="template-option" data-template="stats">Statistics</div>
+                    <div class="template-option" data-template="cta">Call-to-Action</div>
+                    <div class="template-option" data-template="gallery">Image Gallery</div>
+                    <div class="template-option" data-template="contact">Contact Form</div>
+                    <div class="template-option" data-template="team">Team Members</div>
+                    <div class="template-option" data-template="faq">FAQ Section</div>
+                </div>
+
+                <h2>Layout Customization</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label for="layoutDensity">Component Density</label>
+                        <select id="layoutDensity">
+                            <option value="compact">Compact - Tight spacing</option>
+                            <option value="comfortable" selected>Comfortable - Balanced spacing</option>
+                            <option value="spacious">Spacious - Generous spacing</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="containerWidth">Container Width</label>
+                        <select id="containerWidth">
+                            <option value="narrow">Narrow (960px)</option>
+                            <option value="standard" selected>Standard (1200px)</option>
+                            <option value="wide">Wide (1400px)</option>
+                            <option value="full">Full Width</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label for="borderRadius">Border Radius</label>
+                        <select id="borderRadius">
+                            <option value="none">Sharp (0px)</option>
+                            <option value="small">Small (4px)</option>
+                            <option value="medium" selected>Medium (8px)</option>
+                            <option value="large">Large (16px)</option>
+                            <option value="full">Rounded (24px)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="shadowIntensity">Shadow Depth</label>
+                        <select id="shadowIntensity">
+                            <option value="none">No Shadow</option>
+                            <option value="subtle" selected>Subtle</option>
+                            <option value="medium">Medium</option>
+                            <option value="strong">Strong</option>
+                            <option value="dramatic">Dramatic</option>
+                        </select>
+                    </div>
                 </div>
 
                 <h2>Content</h2>
@@ -1240,203 +1257,9 @@ Contact</textarea>
                 </div>
             </div>
 
-            <!-- Components Tab -->
-            <div class="tab-content" data-tab="components">
-                <h1>Component Library</h1>
-                <p style="color: #6b7280; margin-bottom: 24px; font-size: 14px;">Drag and drop professional components</p>
 
-                <div class="component-editor" id="componentEditor">
-                    <div class="editor-header">
-                        <span class="editor-title" id="editorTitle">Edit Component</span>
-                        <button class="editor-close" onclick="closeComponentEditor()">×</button>
-                    </div>
-                    <div id="componentProps">
-                        <!-- Component properties will be rendered here -->
-                    </div>
-                    <button class="btn-primary" onclick="updateComponent()" style="width: 100%; margin-top: 1rem;">Update Component</button>
-                </div>
 
-                <div class="component-library" id="componentLibrary">
-                    <!-- Component categories will be rendered here -->
-                </div>
 
-                <div class="button-group" style="margin-top: 2rem;">
-                    <button type="button" class="btn-secondary" onclick="clearCanvas()">Clear Canvas</button>
-                    <button type="button" class="btn-primary" onclick="saveComponents()">Save Layout</button>
-                </div>
-            </div>
-
-            <!-- Animations Tab -->
-            <div class="tab-content" data-tab="animations">
-                <h1>Micro-Interactions</h1>
-                <p style="color: #6b7280; margin-bottom: 24px; font-size: 14px;">Add smooth animations and interactions</p>
-
-                <h2>Animation Preset</h2>
-                <div class="form-group">
-                    <label for="animationPreset">Choose Style</label>
-                    <select id="animationPreset">
-                        <option value="subtle">Subtle (200ms)</option>
-                        <option value="smooth" selected>Smooth (300ms)</option>
-                        <option value="bouncy">Bouncy (400ms)</option>
-                        <option value="dramatic">Dramatic (600ms)</option>
-                    </select>
-                </div>
-
-                <h2>Component Animations</h2>
-                <div style="display: grid; gap: 8px; margin-bottom: 2rem;">
-                    <label style="display: flex; align-items: center; gap: 8px; font-weight: normal;">
-                        <input type="checkbox" id="animateButtons" checked>
-                        Button hover effects and interactions
-                    </label>
-                    <label style="display: flex; align-items: center; gap: 8px; font-weight: normal;">
-                        <input type="checkbox" id="animateCards" checked>
-                        Card hover and lift animations
-                    </label>
-                    <label style="display: flex; align-items: center; gap: 8px; font-weight: normal;">
-                        <input type="checkbox" id="animateInputs">
-                        Input focus and validation animations
-                    </label>
-                    <label style="display: flex; align-items: center; gap: 8px; font-weight: normal;">
-                        <input type="checkbox" id="animateNavigation">
-                        Navigation link animations
-                    </label>
-                    <label style="display: flex; align-items: center; gap: 8px; font-weight: normal;">
-                        <input type="checkbox" id="animateScrolling">
-                        Scroll-based fade-in animations
-                    </label>
-                </div>
-
-                <h2>Page Transitions</h2>
-                <div class="form-group">
-                    <label for="pageTransition">Transition Style</label>
-                    <select id="pageTransition">
-                        <option value="fadeIn">Fade In</option>
-                        <option value="slideInUp">Slide In Up</option>
-                        <option value="slideInLeft">Slide In Left</option>
-                        <option value="scaleIn">Scale In</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="staggerDelay">Stagger Delay (ms)</label>
-                    <input type="range" id="staggerDelay" min="0" max="500" value="100" style="width: 100%;">
-                    <small style="color: #6b7280;">Controls delay between animated elements: <span id="staggerValue">100ms</span></small>
-                </div>
-
-                <button class="btn-primary" onclick="previewAnimations()" style="width: 100%; margin-bottom: 1rem;">Preview Animations</button>
-                <button class="btn-secondary" onclick="applyAnimations()" style="width: 100%;">Apply to Design</button>
-            </div>
-
-            <!-- Accessibility Tab -->
-            <div class="tab-content" data-tab="accessibility">
-                <h1>Accessibility Audit</h1>
-                <p style="color: #6b7280; margin-bottom: 24px; font-size: 14px;">Ensure WCAG compliance and inclusive design</p>
-
-                <div id="accessibilityScore" style="background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 0.5rem; padding: 1.5rem; margin-bottom: 2rem; text-align: center;">
-                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">--</div>
-                    <div style="font-weight: 600; color: #374151;">Accessibility Score</div>
-                    <div style="font-size: 0.875rem; color: #6b7280;">Run audit to see results</div>
-                </div>
-
-                <button class="btn-primary" onclick="runAccessibilityAudit()" style="width: 100%; margin-bottom: 2rem;">Run Accessibility Audit</button>
-
-                <div id="accessibilityResults" style="display: none;">
-                    <h2>Audit Results</h2>
-                    
-                    <div id="complianceLevel" style="margin-bottom: 1.5rem;">
-                        <!-- Compliance level will be shown here -->
-                    </div>
-
-                    <div id="accessibilityIssues">
-                        <!-- Issues will be listed here -->
-                    </div>
-
-                    <div id="accessibilitySuggestions">
-                        <!-- Suggestions will be shown here -->
-                    </div>
-
-                    <div style="margin-top: 2rem;">
-                        <button class="btn-secondary" onclick="fixAccessibilityIssues()" style="width: 100%; margin-bottom: 1rem;">Auto-Fix Issues</button>
-                        <button class="btn-primary" onclick="exportAccessibilityReport()" style="width: 100%;">Export Report</button>
-                    </div>
-                </div>
-
-                <h2>Accessibility Guidelines</h2>
-                <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 0.5rem; padding: 1rem; margin-top: 1rem;">
-                    <h3 style="color: #1e40af; margin-bottom: 0.5rem; font-size: 1rem;">WCAG 2.1 Standards</h3>
-                    <ul style="color: #1e40af; font-size: 0.875rem; margin: 0; padding-left: 1.5rem;">
-                        <li>Color contrast ratio: 4.5:1 (AA) / 7:1 (AAA)</li>
-                        <li>All images have descriptive alt text</li>
-                        <li>Proper heading hierarchy (h1, h2, h3...)</li>
-                        <li>Keyboard navigation support</li>
-                        <li>Form labels and ARIA attributes</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Templates Tab -->
-            <div class="tab-content" data-tab="templates">
-                <h1>Template Marketplace</h1>
-                <p style="color: #6b7280; margin-bottom: 24px; font-size: 14px;">Save, share, and discover design templates</p>
-
-                <div style="margin-bottom: 2rem;">
-                    <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-                        <button class="btn-primary" onclick="saveCurrentTemplate()" style="flex: 1;">
-                            💾 Save Current Design
-                        </button>
-                        <button class="btn-secondary" onclick="loadTemplateFile()" style="flex: 1;">
-                            📂 Import Template
-                        </button>
-                    </div>
-                    <input type="file" id="templateFileInput" accept=".json" style="display: none;" onchange="handleTemplateImport(event)">
-                </div>
-
-                <div class="form-group">
-                    <label for="templateSearch">Search Templates</label>
-                    <input type="text" id="templateSearch" placeholder="Search by name, style, or tags..." oninput="filterTemplates()">
-                </div>
-
-                <div class="form-group">
-                    <label for="templateCategory">Category</label>
-                    <select id="templateCategory" onchange="filterTemplates()">
-                        <option value="all">All Templates</option>
-                        <option value="business">Business</option>
-                        <option value="creative">Creative</option>
-                        <option value="portfolio">Portfolio</option>
-                        <option value="ecommerce">E-commerce</option>
-                        <option value="landing">Landing Pages</option>
-                        <option value="dashboard">Dashboards</option>
-                    </select>
-                </div>
-
-                <div id="templateLibrary" style="margin-top: 1.5rem;">
-                    <div class="template-grid" id="templateGrid">
-                        <!-- Templates will be populated here -->
-                    </div>
-                </div>
-
-                <div id="templateModal" class="template-modal" style="display: none;">
-                    <div class="modal-overlay" onclick="closeTemplateModal()"></div>
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h3 id="modalTemplateTitle">Template Details</h3>
-                            <button class="modal-close" onclick="closeTemplateModal()">×</button>
-                        </div>
-                        <div class="modal-body">
-                            <div id="templatePreviewImage" style="width: 100%; height: 200px; background: #f3f4f6; border-radius: 8px; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; color: #6b7280;">
-                                Template Preview
-                            </div>
-                            <div id="modalTemplateDetails">
-                                <!-- Template details will be shown here -->
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn-secondary" onclick="closeTemplateModal()">Cancel</button>
-                            <button class="btn-primary" onclick="loadTemplate()" id="loadTemplateBtn">Load Template</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <!-- PA Media Tab -->
             <div class="tab-content" data-tab="pa-media">
@@ -1545,51 +1368,6 @@ Contact</textarea>
                 </div>
             </div>
 
-            <!-- Pages Tab -->
-            <div class="tab-content" data-tab="pages">
-                <h1>Multi-Page System</h1>
-                <p style="color: #6b7280; margin-bottom: 24px; font-size: 14px;">Design consistent page layouts</p>
-
-                <h2>Page Type</h2>
-                <div class="page-selector">
-                    <button class="page-btn active" data-page="home">Home</button>
-                    <button class="page-btn" data-page="about">About</button>
-                    <button class="page-btn" data-page="services">Services</button>
-                    <button class="page-btn" data-page="portfolio">Portfolio</button>
-                    <button class="page-btn" data-page="contact">Contact</button>
-                    <button class="page-btn" data-page="blog">Blog</button>
-                </div>
-
-                <div class="form-group">
-                    <label for="pageTitle">Page Title</label>
-                    <input type="text" id="pageTitle" value="Homepage" placeholder="Enter page title">
-                </div>
-
-                <div class="form-group">
-                    <label for="pageContent">Page Content</label>
-                    <textarea id="pageContent" placeholder="Enter page-specific content" style="min-height: 120px;">This is the homepage content. Customize this for each page type.</textarea>
-                </div>
-
-                <h2>Page Features</h2>
-                <div style="display: grid; gap: 8px;">
-                    <label style="display: flex; align-items: center; gap: 8px; font-weight: normal;">
-                        <input type="checkbox" id="includeHero" checked>
-                        Include Hero Section
-                    </label>
-                    <label style="display: flex; align-items: center; gap: 8px; font-weight: normal;">
-                        <input type="checkbox" id="includeNav" checked>
-                        Include Navigation
-                    </label>
-                    <label style="display: flex; align-items: center; gap: 8px; font-weight: normal;">
-                        <input type="checkbox" id="includeFooter" checked>
-                        Include Footer
-                    </label>
-                    <label style="display: flex; align-items: center; gap: 8px; font-weight: normal;">
-                        <input type="checkbox" id="includeSidebar">
-                        Include Sidebar
-                    </label>
-                </div>
-            </div>
 
 
 
@@ -1599,205 +1377,10 @@ Contact</textarea>
 
 
 
-
-
-
-
-            <!-- Export Tab -->
-            <div class="tab-content" data-tab="export">
-                <h1>Export Options</h1>
-                <p style="color: #6b7280; margin-bottom: 24px; font-size: 14px;">Download your designs</p>
-
-                <h2>Export Format</h2>
-                <div class="form-group">
-                    <label for="exportFormat">Format</label>
-                    <select id="exportFormat">
-                        <option value="html">Complete HTML</option>
-                        <option value="react">React Components</option>
-                        <option value="nextjs">Next.js Project</option>
-                        <option value="vue">Vue Components</option>
-                        <option value="nuxtjs">Nuxt.js Project</option>
-                        <option value="svelte">Svelte Components</option>
-                        <option value="css">CSS Only</option>
-                        <option value="tokens">Design Tokens</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="cssFramework">CSS Framework</label>
-                    <select id="cssFramework">
-                        <option value="vanilla">Vanilla CSS</option>
-                        <option value="tailwind">Tailwind CSS</option>
-                        <option value="bootstrap">Bootstrap</option>
-                        <option value="bulma">Bulma</option>
-                    </select>
-                </div>
-
-                <h2>Export Options</h2>
-                <div style="display: grid; gap: 8px; margin-bottom: 24px;">
-                    <label style="display: flex; align-items: center; gap: 8px; font-weight: normal;">
-                        <input type="checkbox" id="includeComments" checked>
-                        Include Code Comments
-                    </label>
-                    <label style="display: flex; align-items: center; gap: 8px; font-weight: normal;">
-                        <input type="checkbox" id="minifyCode">
-                        Minify Code
-                    </label>
-                    <label style="display: flex; align-items: center; gap: 8px; font-weight: normal;">
-                        <input type="checkbox" id="includeReadme" checked>
-                        Include Documentation
-                    </label>
-                </div>
-
-                <button class="btn-primary" onclick="exportDesign()" style="width: 100%; margin-bottom: 12px;">
-                    Download Design
-                </button>
-                <button class="btn-secondary" onclick="saveTemplate()" style="width: 100%;">
-                    Save Template
-                </button>
-
-                <div style="border-top: 1px solid #e5e7eb; margin: 24px 0; padding-top: 24px;">
-                    <h2>🤖 Enhanced Claude Code Integration</h2>
-                    <p style="color: #6b7280; margin-bottom: 16px; font-size: 14px;">Generate complete project templates optimised for Claude Code workflows</p>
-                    
-                    <div style="background: #fef3c7; border: 1px solid #fbbf24; border-radius: 8px; padding: 1rem; margin-bottom: 1.5rem;">
-                        <h4 style="color: #92400e; margin-bottom: 0.5rem;">✨ New Enhanced Features:</h4>
-                        <ul style="color: #92400e; margin: 0; padding-left: 1.5rem; font-size: 0.9rem;">
-                            <li>Complete project folder structure generation</li>
-                            <li>Comprehensive CLAUDE.md integration guides</li>
-                            <li>Context-aware prompts with full project details</li>
-                            <li>Automatic dependency management and configuration</li>
-                            <li>Production-ready project setup</li>
-                            <li>Accessibility and performance optimisation built-in</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="claudePromptType">Integration Type</label>
-                        <select id="claudePromptType">
-                            <option value="new-project">🚀 New Project (Complete Setup)</option>
-                            <option value="convert">🔄 Convert to Framework</option>
-                            <option value="enhance">⚡ Enhance Existing Project</option>
-                            <option value="integrate">🔗 Integrate into Codebase</option>
-                            <option value="component-library">📦 Component Library</option>
-                            <option value="design-system">🎨 Design System Export</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="targetFramework">Target Framework</label>
-                        <select id="targetFramework">
-                            <option value="nextjs">Next.js + TypeScript (Recommended)</option>
-                            <option value="react-vite">React + Vite + TypeScript</option>
-                            <option value="vue">Vue.js + TypeScript</option>
-                            <option value="nuxt">Nuxt.js</option>
-                            <option value="svelte">SvelteKit</option>
-                            <option value="angular">Angular</option>
-                            <option value="html">Static HTML/CSS</option>
-                            <option value="astro">Astro</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="deploymentTarget">Deployment Target</label>
-                        <select id="deploymentTarget">
-                            <option value="netlify">Netlify</option>
-                            <option value="github-pages">GitHub Pages</option>
-                            <option value="aws">AWS Amplify</option>
-                            <option value="cloudflare">Cloudflare Pages</option>
-                            <option value="self-hosted">Self-Hosted</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="projectComplexity">Project Complexity</label>
-                        <select id="projectComplexity">
-                            <option value="simple">Simple (Landing page, basic site)</option>
-                            <option value="medium">Medium (Multi-page, forms, CMS)</option>
-                            <option value="complex">Complex (Full application, authentication)</option>
-                            <option value="enterprise">Enterprise (Advanced features, scaling)</option>
-                        </select>
-                    </div>
-
-                    <div style="display: grid; gap: 8px; margin-bottom: 24px;">
-                        <label style="display: flex; align-items: center; gap: 8px; font-weight: normal;">
-                            <input type="checkbox" id="includeClaudeMd" checked>
-                            Generate comprehensive CLAUDE.md integration guide
-                        </label>
-                        <label style="display: flex; align-items: center; gap: 8px; font-weight: normal;">
-                            <input type="checkbox" id="includeProjectStructure" checked>
-                            Create complete project folder structure
-                        </label>
-                        <label style="display: flex; align-items: center; gap: 8px; font-weight: normal;">
-                            <input type="checkbox" id="includeDependencies" checked>
-                            Generate optimised package.json with dependencies
-                        </label>
-                        <label style="display: flex; align-items: center; gap: 8px; font-weight: normal;">
-                            <input type="checkbox" id="includeEnvConfig" checked>
-                            Include environment configuration files
-                        </label>
-                        <label style="display: flex; align-items: center; gap: 8px; font-weight: normal;">
-                            <input type="checkbox" id="includeTests">
-                            Add testing framework setup and sample tests
-                        </label>
-                        <label style="display: flex; align-items: center; gap: 8px; font-weight: normal;">
-                            <input type="checkbox" id="includeDocumentation" checked>
-                            Generate comprehensive project documentation
-                        </label>
-                    </div>
-                    
-                    <div class="button-group" style="margin-bottom: 1.5rem;">
-                        <button class="btn-secondary" onclick="previewClaudeIntegration()" style="flex: 1;">
-                            👀 Preview Setup
-                        </button>
-                        <button class="btn-primary" onclick="generateClaudePrompt()" style="flex: 2;">
-                            🚀 Generate Claude Package
-                        </button>
-                    </div>
-                    
-                    <div id="claudePromptOutput" style="display: none;">
-                        <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
-                            <h4 style="color: #059669; margin-bottom: 0.5rem;">📦 Claude Code Package Generated!</h4>
-                            <p style="color: #059669; margin: 0; font-size: 0.9rem;">Your complete project template is ready for Claude Code integration</p>
-                        </div>
-                        
-                        <div style="margin-bottom: 1rem;">
-                            <label style="font-weight: 600; color: #374151; margin-bottom: 0.5rem; display: block;">🎯 Primary Prompt (Copy to Claude Code):</label>
-                            <textarea id="claudePromptText" readonly style="width: 100%; height: 150px; padding: 12px; border: 1px solid #d1d5db; border-radius: 6px; font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace; font-size: 12px; background: #f9fafb; resize: vertical; line-height: 1.4;"></textarea>
-                        </div>
-
-                        <div id="projectFiles" style="margin-bottom: 1rem;">
-                            <label style="font-weight: 600; color: #374151; margin-bottom: 0.5rem; display: block;">📁 Project Structure Preview:</label>
-                            <div style="background: #1f2937; color: #10b981; padding: 1rem; border-radius: 6px; font-family: 'SF Mono', Monaco, monospace; font-size: 0.85rem; line-height: 1.4; max-height: 200px; overflow-y: auto;">
-                                <div id="projectStructurePreview"></div>
-                            </div>
-                        </div>
-
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 1rem;">
-                            <button onclick="copyClaudePrompt()" style="padding: 8px 12px; background: #10b981; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: 500;">
-                                📋 Copy Main Prompt
-                            </button>
-                            <button onclick="downloadProjectTemplate()" style="padding: 8px 12px; background: #3b82f6; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: 500;">
-                                💾 Download Template
-                            </button>
-                        </div>
-
-                        <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 6px; padding: 1rem;">
-                            <h5 style="color: #1e40af; margin-bottom: 0.5rem; font-size: 0.9rem;">🎯 Next Steps:</h5>
-                            <ol style="color: #1e40af; margin: 0; padding-left: 1.5rem; font-size: 0.8rem; line-height: 1.4;">
-                                <li>Copy the main prompt to Claude Code</li>
-                                <li>Create a new project folder on your computer</li>
-                                <li>Download and extract the project template</li>
-                                <li>Follow the generated CLAUDE.md integration guide</li>
-                                <li>Use "claude-code --resume" to continue development</li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <div class="button-group">
                 <button type="button" class="btn-secondary" onclick="resetForm()">Reset</button>
+                <button type="button" class="btn-secondary" onclick="generateClaudeCodePrompt()" style="background: #10b981; color: white;">🤖 Generate Claude Prompt</button>
                 <button type="button" class="btn-primary" onclick="downloadHTML()">Quick Export</button>
             </div>
         </div>

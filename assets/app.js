@@ -324,7 +324,7 @@ class DesignGenerator {
             
             // Collections (cached once to avoid repeated queries)
             navTabs: document.querySelectorAll('.nav-tab'),
-            styleOptions: document.querySelectorAll('.style-option'),
+            designStyle: document.getElementById('designStyle'),
             templateOptions: document.querySelectorAll('.template-option'),
             pageButtons: document.querySelectorAll('.page-btn'),
             deviceButtons: document.querySelectorAll('.device-btn'),
@@ -525,9 +525,7 @@ class DesignGenerator {
         });
 
         // Style selection
-        this.domCache.styleOptions.forEach(option => {
-            option.addEventListener('click', (e) => this.selectStyle(e.target.closest('.style-option').dataset.style), { signal: this.abortController.signal });
-        });
+        this.domCache.designStyle.addEventListener('change', (e) => this.selectStyle(e.target.value), { signal: this.abortController.signal });
 
         // Template selection
         this.domCache.templateOptions.forEach(option => {
@@ -734,10 +732,10 @@ class DesignGenerator {
     selectStyle(styleName) {
         this.currentStyle = styleName;
         
-        // Update UI
-        document.querySelectorAll('.style-option').forEach(option => {
-            option.classList.toggle('active', option.dataset.style === styleName);
-        });
+        // Update UI - set the select dropdown value
+        if (this.domCache.designStyle) {
+            this.domCache.designStyle.value = styleName;
+        }
 
         this.updatePreview();
     }
@@ -2832,8 +2830,7 @@ function loadTemplateFromModal(templateIndex) {
 function loadTemplateData(template) {
     // Apply template data to current design
     if (template.style) {
-        window.designGenerator.currentStyle = template.style;
-        document.querySelector(`[data-style="${template.style}"]`)?.click();
+        window.designGenerator.selectStyle(template.style);
     }
     
     if (template.template) {
@@ -2886,6 +2883,58 @@ function handleTemplateImport(event) {
         }
     };
     reader.readAsText(file);
+}
+
+// Claude Code prompt generation function
+function generateClaudeCodePrompt() {
+    const generator = window.designGenerator;
+    const data = generator.getFormData();
+    
+    const prompt = `Convert this ${data.style} design template to a modern, responsive website:
+
+**Design Specifications:**
+- Style: ${data.style.charAt(0).toUpperCase() + data.style.slice(1)}
+- Layout: ${data.template.charAt(0).toUpperCase() + data.template.slice(1)}
+- Title: "${data.siteTitle}"
+- Subtitle: "${data.siteSubtitle}"
+- Color Scheme: ${data.colorScheme}
+- Typography: ${data.fontFamily}
+
+**Navigation Links:**
+${data.navLinks.split('\n').map(link => `- ${link.trim()}`).join('\n')}
+
+**Main Content:**
+${data.mainContent}
+
+**Requirements:**
+- Use modern HTML5 semantic elements
+- Include responsive CSS with mobile-first approach
+- Add smooth hover effects and transitions
+- Ensure accessibility (ARIA labels, proper contrast)
+- Include meta tags for SEO
+- Use CSS Grid and Flexbox for layouts
+- Make it production-ready
+
+**Framework Preference:** You can suggest React, Vue, or vanilla HTML/CSS based on the design complexity.
+
+Please create a complete, professional implementation following the ${data.style} design aesthetic.`;
+
+    // Copy to clipboard
+    navigator.clipboard.writeText(prompt).then(() => {
+        // Show success message
+        const button = document.querySelector('[onclick="generateClaudeCodePrompt()"]');
+        const originalText = button.textContent;
+        button.textContent = '✅ Copied to Clipboard!';
+        button.style.background = '#059669';
+        
+        setTimeout(() => {
+            button.textContent = originalText;
+            button.style.background = '#10b981';
+        }, 2000);
+    }).catch(() => {
+        // Fallback: show prompt in modal or textarea
+        alert('Claude Code Prompt:\n\n' + prompt);
+    });
 }
 
 // Initialize the application
