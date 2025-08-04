@@ -900,10 +900,21 @@ class DesignGenerator {
                 }
                 html = pageTemplate.generate(data, data.style, colors);
             } else {
-                // Use regular layout template
-                const template = DesignTemplates.layouts[data.template];
+                // Use regular layout template - check both layouts and root level templates
+                let template = DesignTemplates.layouts[data.template];
+                
+                // If not found in layouts, check root level templates (components)
                 if (!template) {
-                    console.error('Available templates:', Object.keys(DesignTemplates.layouts || {}));
+                    template = DesignTemplates[data.template];
+                }
+                
+                if (!template) {
+                    console.error('Available layout templates:', Object.keys(DesignTemplates.layouts || {}));
+                    console.error('Available component templates:', Object.keys(DesignTemplates).filter(key => 
+                        typeof DesignTemplates[key] === 'object' && 
+                        DesignTemplates[key].generate && 
+                        !['layouts', 'styles', 'colorSchemes', 'fonts', 'dashboardLayouts', 'pageTemplates'].includes(key)
+                    ));
                     console.warn(`Template '${data.template}' not found, falling back to 'hero' template`);
                     
                     // Fallback to hero template if the requested template doesn't exist

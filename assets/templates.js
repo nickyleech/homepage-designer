@@ -849,6 +849,7 @@ const DesignTemplates = {
         name: 'Pricing Table',
         generate: (data, style, colors) => `
             <div style="font-family: ${DesignTemplates.fonts[data.fontFamily].family}; background: ${colors.background}; padding: 3rem 2rem;">
+                <div style="background: ${colors.primary}; color: ${colors.background}; padding: 4px 8px; font-size: 10px; font-weight: bold; margin-bottom: 1rem; text-align: center;">PRICING TEMPLATE</div>
                 <div style="max-width: 900px; margin: 0 auto;">
                     <h2 style="text-align: center; font-size: 2rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 3rem;">Pricing Plans</h2>
                     <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;">
@@ -1011,6 +1012,7 @@ const DesignTemplates = {
         name: 'Call-to-Action',
         generate: (data, style, colors) => `
             <div style="font-family: ${DesignTemplates.fonts[data.fontFamily].family}; background: ${colors.background}; padding: 3rem 2rem;">
+                <div style="background: ${colors.primary}; color: ${colors.background}; padding: 4px 8px; font-size: 10px; font-weight: bold; margin-bottom: 1rem; text-align: center;">CTA TEMPLATE</div>
                 <div style="max-width: 600px; margin: 0 auto;">
                     <div style="background: ${colors.primary}; color: ${colors.background}; padding: 3rem 2rem; border-radius: 0.5rem; text-align: center;">
                         <h2 style="font-size: 2rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; margin-bottom: 1rem; line-height: 1.2;">Ready to Get Started?</h2>
