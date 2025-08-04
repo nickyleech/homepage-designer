@@ -306,110 +306,144 @@ Contact</textarea>
     </div>
 
     <script>
+        // Security utility for HTML sanitization
+        function sanitizeHTML(html) {
+            const tempDiv = document.createElement('div');
+            tempDiv.textContent = html;
+            return tempDiv.innerHTML;
+        }
+        
+        // Safe template helper
+        function safeData(data) {
+            return {
+                siteTitle: sanitizeHTML(data.siteTitle || ''),
+                siteSubtitle: sanitizeHTML(data.siteSubtitle || ''),
+                mainContent: sanitizeHTML(data.mainContent || ''),
+                navLinks: (data.navLinks || []).map(link => sanitizeHTML(link)),
+                colorScheme: data.colorScheme,
+                fontFamily: data.fontFamily
+            };
+        }
+        
         // Template definitions
         const templates = {
             centered: {
                 name: 'Centered',
-                generate: (data) => `
-                    <div style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; font-family: ${getFontFamily(data.fontFamily)}; background: ${getColorScheme(data.colorScheme).background};">
-                        <div style="text-align: center; max-width: 600px;">
-                            <h1 style="font-size: 3rem; font-weight: 300; color: ${getColorScheme(data.colorScheme).primary}; margin-bottom: 1rem; line-height: 1.2;">${data.siteTitle}</h1>
-                            <p style="font-size: 1.2rem; color: ${getColorScheme(data.colorScheme).secondary}; margin-bottom: 2rem; font-weight: 300;">${data.siteSubtitle}</p>
-                            <nav style="margin-bottom: 3rem;">
-                                ${data.navLinks.map(link => `<a href="#" style="color: ${getColorScheme(data.colorScheme).text}; text-decoration: none; margin: 0 1.5rem; font-weight: 400; transition: color 0.3s;">${link}</a>`).join('')}
-                            </nav>
-                            <div style="font-size: 1rem; line-height: 1.6; color: ${getColorScheme(data.colorScheme).text}; max-width: 500px; margin: 0 auto;">
-                                ${data.mainContent}
+                generate: (data) => {
+                    const safe = safeData(data);
+                    return `
+                        <div style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; font-family: ${getFontFamily(data.fontFamily)}; background: ${getColorScheme(data.colorScheme).background};">
+                            <div style="text-align: center; max-width: 600px;">
+                                <h1 style="font-size: 3rem; font-weight: 300; color: ${getColorScheme(data.colorScheme).primary}; margin-bottom: 1rem; line-height: 1.2;">${safe.siteTitle}</h1>
+                                <p style="font-size: 1.2rem; color: ${getColorScheme(data.colorScheme).secondary}; margin-bottom: 2rem; font-weight: 300;">${safe.siteSubtitle}</p>
+                                <nav style="margin-bottom: 3rem;">
+                                    ${safe.navLinks.map(link => `<a href="#" style="color: ${getColorScheme(data.colorScheme).text}; text-decoration: none; margin: 0 1.5rem; font-weight: 400; transition: color 0.3s;">${link}</a>`).join('')}
+                                </nav>
+                                <div style="font-size: 1rem; line-height: 1.6; color: ${getColorScheme(data.colorScheme).text}; max-width: 500px; margin: 0 auto;">
+                                    ${safe.mainContent}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                `
+                    `;
+                }
             },
             sidebar: {
                 name: 'Sidebar',
-                generate: (data) => `
-                    <div style="display: grid; grid-template-columns: 250px 1fr; min-height: 100vh; font-family: ${getFontFamily(data.fontFamily)};">
-                        <nav style="background: ${getColorScheme(data.colorScheme).background}; padding: 2rem; border-right: 1px solid ${getColorScheme(data.colorScheme).border};">
-                            <h2 style="font-size: 1.5rem; font-weight: 600; color: ${getColorScheme(data.colorScheme).primary}; margin-bottom: 2rem;">${data.siteTitle}</h2>
-                            <ul style="list-style: none; padding: 0;">
-                                ${data.navLinks.map(link => `<li style="margin-bottom: 1rem;"><a href="#" style="color: ${getColorScheme(data.colorScheme).text}; text-decoration: none; font-weight: 400; transition: color 0.3s;">${link}</a></li>`).join('')}
-                            </ul>
-                        </nav>
-                        <main style="padding: 3rem; background: white;">
-                            <h1 style="font-size: 2.5rem; font-weight: 300; color: ${getColorScheme(data.colorScheme).primary}; margin-bottom: 1rem;">${data.siteSubtitle}</h1>
-                            <div style="font-size: 1.1rem; line-height: 1.6; color: ${getColorScheme(data.colorScheme).text}; max-width: 700px;">
-                                ${data.mainContent}
-                            </div>
-                        </main>
-                    </div>
-                `
+                generate: (data) => {
+                    const safe = safeData(data);
+                    return `
+                        <div style="display: grid; grid-template-columns: 250px 1fr; min-height: 100vh; font-family: ${getFontFamily(data.fontFamily)};">
+                            <nav style="background: ${getColorScheme(data.colorScheme).background}; padding: 2rem; border-right: 1px solid ${getColorScheme(data.colorScheme).border};">
+                                <h2 style="font-size: 1.5rem; font-weight: 600; color: ${getColorScheme(data.colorScheme).primary}; margin-bottom: 2rem;">${safe.siteTitle}</h2>
+                                <ul style="list-style: none; padding: 0;">
+                                    ${safe.navLinks.map(link => `<li style="margin-bottom: 1rem;"><a href="#" style="color: ${getColorScheme(data.colorScheme).text}; text-decoration: none; font-weight: 400; transition: color 0.3s;">${link}</a></li>`).join('')}
+                                </ul>
+                            </nav>
+                            <main style="padding: 3rem; background: white;">
+                                <h1 style="font-size: 2.5rem; font-weight: 300; color: ${getColorScheme(data.colorScheme).primary}; margin-bottom: 1rem;">${safe.siteSubtitle}</h1>
+                                <div style="font-size: 1.1rem; line-height: 1.6; color: ${getColorScheme(data.colorScheme).text}; max-width: 700px;">
+                                    ${safe.mainContent}
+                                </div>
+                            </main>
+                        </div>
+                    `;
+                }
             },
             hero: {
                 name: 'Hero',
-                generate: (data) => `
-                    <div style="font-family: ${getFontFamily(data.fontFamily)};">
-                        <header style="background: linear-gradient(135deg, ${getColorScheme(data.colorScheme).primary}15, ${getColorScheme(data.colorScheme).background}); min-height: 70vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 2rem;">
-                            <div>
-                                <h1 style="font-size: 4rem; font-weight: 200; color: ${getColorScheme(data.colorScheme).primary}; margin-bottom: 1rem; line-height: 1.1;">${data.siteTitle}</h1>
-                                <p style="font-size: 1.3rem; color: ${getColorScheme(data.colorScheme).secondary}; margin-bottom: 2rem; font-weight: 300;">${data.siteSubtitle}</p>
-                                <nav>
-                                    ${data.navLinks.map(link => `<a href="#" style="color: ${getColorScheme(data.colorScheme).text}; text-decoration: none; margin: 0 2rem; font-weight: 400; padding: 0.5rem 0; border-bottom: 2px solid transparent; transition: border-color 0.3s;">${link}</a>`).join('')}
-                                </nav>
-                            </div>
-                        </header>
-                        <section style="padding: 4rem 2rem; max-width: 800px; margin: 0 auto; text-align: center;">
-                            <div style="font-size: 1.1rem; line-height: 1.7; color: ${getColorScheme(data.colorScheme).text};">
-                                ${data.mainContent}
-                            </div>
-                        </section>
-                    </div>
-                `
+                generate: (data) => {
+                    const safe = safeData(data);
+                    return `
+                        <div style="font-family: ${getFontFamily(data.fontFamily)};">
+                            <header style="background: linear-gradient(135deg, ${getColorScheme(data.colorScheme).primary}15, ${getColorScheme(data.colorScheme).background}); min-height: 70vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 2rem;">
+                                <div>
+                                    <h1 style="font-size: 4rem; font-weight: 200; color: ${getColorScheme(data.colorScheme).primary}; margin-bottom: 1rem; line-height: 1.1;">${safe.siteTitle}</h1>
+                                    <p style="font-size: 1.3rem; color: ${getColorScheme(data.colorScheme).secondary}; margin-bottom: 2rem; font-weight: 300;">${safe.siteSubtitle}</p>
+                                    <nav>
+                                        ${safe.navLinks.map(link => `<a href="#" style="color: ${getColorScheme(data.colorScheme).text}; text-decoration: none; margin: 0 2rem; font-weight: 400; padding: 0.5rem 0; border-bottom: 2px solid transparent; transition: border-color 0.3s;">${link}</a>`).join('')}
+                                    </nav>
+                                </div>
+                            </header>
+                            <section style="padding: 4rem 2rem; max-width: 800px; margin: 0 auto; text-align: center;">
+                                <div style="font-size: 1.1rem; line-height: 1.7; color: ${getColorScheme(data.colorScheme).text};">
+                                    ${safe.mainContent}
+                                </div>
+                            </section>
+                        </div>
+                    `;
+                }
             },
             grid: {
                 name: 'Grid',
-                generate: (data) => `
-                    <div style="font-family: ${getFontFamily(data.fontFamily)}; padding: 2rem; background: ${getColorScheme(data.colorScheme).background}; min-height: 100vh;">
-                        <header style="text-align: center; margin-bottom: 3rem;">
-                            <h1 style="font-size: 2.5rem; font-weight: 600; color: ${getColorScheme(data.colorScheme).primary}; margin-bottom: 0.5rem;">${data.siteTitle}</h1>
-                            <p style="font-size: 1.1rem; color: ${getColorScheme(data.colorScheme).secondary}; font-weight: 300;">${data.siteSubtitle}</p>
-                        </header>
-                        <nav style="text-align: center; margin-bottom: 3rem;">
-                            ${data.navLinks.map(link => `<a href="#" style="color: ${getColorScheme(data.colorScheme).text}; text-decoration: none; margin: 0 1.5rem; font-weight: 500; transition: color 0.3s;">${link}</a>`).join('')}
-                        </nav>
-                        <main style="max-width: 1000px; margin: 0 auto;">
-                            <div style="background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                                <div style="font-size: 1rem; line-height: 1.6; color: ${getColorScheme(data.colorScheme).text};">
-                                    ${data.mainContent}
+                generate: (data) => {
+                    const safe = safeData(data);
+                    return `
+                        <div style="font-family: ${getFontFamily(data.fontFamily)}; padding: 2rem; background: ${getColorScheme(data.colorScheme).background}; min-height: 100vh;">
+                            <header style="text-align: center; margin-bottom: 3rem;">
+                                <h1 style="font-size: 2.5rem; font-weight: 600; color: ${getColorScheme(data.colorScheme).primary}; margin-bottom: 0.5rem;">${safe.siteTitle}</h1>
+                                <p style="font-size: 1.1rem; color: ${getColorScheme(data.colorScheme).secondary}; font-weight: 300;">${safe.siteSubtitle}</p>
+                            </header>
+                            <nav style="text-align: center; margin-bottom: 3rem;">
+                                ${safe.navLinks.map(link => `<a href="#" style="color: ${getColorScheme(data.colorScheme).text}; text-decoration: none; margin: 0 1.5rem; font-weight: 500; transition: color 0.3s;">${link}</a>`).join('')}
+                            </nav>
+                            <main style="max-width: 1000px; margin: 0 auto;">
+                                <div style="background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                    <div style="font-size: 1rem; line-height: 1.6; color: ${getColorScheme(data.colorScheme).text};">
+                                        ${safe.mainContent}
+                                    </div>
                                 </div>
-                            </div>
-                        </main>
-                    </div>
-                `
+                            </main>
+                        </div>
+                    `;
+                }
             },
             portfolio: {
                 name: 'Portfolio',
-                generate: (data) => `
-                    <div style="font-family: ${getFontFamily(data.fontFamily)}; background: white;">
-                        <header style="padding: 2rem; border-bottom: 1px solid ${getColorScheme(data.colorScheme).border};">
-                            <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
-                                <h1 style="font-size: 1.8rem; font-weight: 400; color: ${getColorScheme(data.colorScheme).primary}; margin: 0;">${data.siteTitle}</h1>
-                                <nav>
-                                    ${data.navLinks.map(link => `<a href="#" style="color: ${getColorScheme(data.colorScheme).text}; text-decoration: none; margin-left: 2rem; font-weight: 400;">${link}</a>`).join('')}
-                                </nav>
-                            </div>
-                        </header>
-                        <main style="padding: 4rem 2rem;">
-                            <div style="max-width: 1200px; margin: 0 auto;">
-                                <div style="text-align: center; margin-bottom: 3rem;">
-                                    <h2 style="font-size: 2.2rem; font-weight: 300; color: ${getColorScheme(data.colorScheme).primary}; margin-bottom: 1rem;">${data.siteSubtitle}</h2>
-                                    <div style="font-size: 1rem; line-height: 1.6; color: ${getColorScheme(data.colorScheme).text}; max-width: 600px; margin: 0 auto;">
-                                        ${data.mainContent}
+                generate: (data) => {
+                    const safe = safeData(data);
+                    return `
+                        <div style="font-family: ${getFontFamily(data.fontFamily)}; background: white;">
+                            <header style="padding: 2rem; border-bottom: 1px solid ${getColorScheme(data.colorScheme).border};">
+                                <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+                                    <h1 style="font-size: 1.8rem; font-weight: 400; color: ${getColorScheme(data.colorScheme).primary}; margin: 0;">${safe.siteTitle}</h1>
+                                    <nav>
+                                        ${safe.navLinks.map(link => `<a href="#" style="color: ${getColorScheme(data.colorScheme).text}; text-decoration: none; margin-left: 2rem; font-weight: 400;">${link}</a>`).join('')}
+                                    </nav>
+                                </div>
+                            </header>
+                            <main style="padding: 4rem 2rem;">
+                                <div style="max-width: 1200px; margin: 0 auto;">
+                                    <div style="text-align: center; margin-bottom: 3rem;">
+                                        <h2 style="font-size: 2.2rem; font-weight: 300; color: ${getColorScheme(data.colorScheme).primary}; margin-bottom: 1rem;">${safe.siteSubtitle}</h2>
+                                        <div style="font-size: 1rem; line-height: 1.6; color: ${getColorScheme(data.colorScheme).text}; max-width: 600px; margin: 0 auto;">
+                                            ${safe.mainContent}
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </main>
-                    </div>
-                `
+                            </main>
+                        </div>
+                    `;
+                }
             }
         };
 
@@ -521,7 +555,7 @@ Contact</textarea>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${data.siteTitle}</title>
+    <title>${sanitizeHTML(data.siteTitle)}</title>
     <style>
         * {
             margin: 0;
@@ -567,7 +601,7 @@ Contact</textarea>
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `${data.siteTitle.toLowerCase().replace(/\s+/g, '-')}-homepage.html`;
+            a.download = `${sanitizeHTML(data.siteTitle).toLowerCase().replace(/\s+/g, '-')}-homepage.html`;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);

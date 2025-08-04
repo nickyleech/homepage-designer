@@ -11,6 +11,11 @@ class URLProcessor {
             if (!this.isValidURL(url)) {
                 throw new Error('Please enter a valid URL (e.g., https://example.com)');
             }
+            
+            // Security check for allowed domains
+            if (!this.isAllowedURL(url)) {
+                throw new Error('URL not allowed. For security reasons, only whitelisted domains are permitted.');
+            }
 
             // Show loading state
             this.showLoading(true);
@@ -31,8 +36,16 @@ class URLProcessor {
             return extractedData;
 
         } catch (error) {
-            console.error('URL processing error:', error);
-            this.showError(error.message);
+            if (window.ErrorHandler) {
+                if (error.message.includes('not allowed')) {
+                    window.ErrorHandler.handle(new NetworkError('Domain not whitelisted for security', url), 'URLProcessor.processURL');
+                } else {
+                    window.ErrorHandler.handle(new NetworkError(error.message, url), 'URLProcessor.processURL');
+                }
+            } else {
+                console.error('URL processing error:', error);
+                this.showError(error.message);
+            }
         } finally {
             this.showLoading(false);
         }
@@ -42,6 +55,31 @@ class URLProcessor {
         try {
             const url = new URL(string);
             return url.protocol === 'http:' || url.protocol === 'https:';
+        } catch (_) {
+            return false;
+        }
+    }
+    
+    // Security: Check if URL is from allowed domains
+    isAllowedURL(url) {
+        const allowedDomains = [
+            'example.com',
+            'github.com',
+            'stackoverflow.com',
+            'developer.mozilla.org',
+            'w3.org',
+            'wikipedia.org'
+        ];
+        
+        try {
+            const urlObj = new URL(url);
+            const hostname = urlObj.hostname.toLowerCase();
+            
+            // Allow common development and educational domains
+            // In production, this should be more restrictive
+            return allowedDomains.some(domain => 
+                hostname === domain || hostname.endsWith('.' + domain)
+            ) || hostname === 'localhost' || hostname.match(/^192\.168\./);
         } catch (_) {
             return false;
         }
@@ -422,38 +460,58 @@ class URLProcessor {
 
     displayExtractedInfo(data) {
         const infoDiv = document.getElementById('extractedInfo');
+        
+        // Sanitize all user-provided data
+        const safeTitle = this.sanitizeHTML(data.title);
+        const safeDescription = this.sanitizeHTML(data.description);
+        const safeStructure = this.sanitizeHTML(data.layout.structure);
+        const safeUrl = this.sanitizeHTML(data.url);
+        const safeNavItems = data.navigation.slice(0, 5).map(nav => 
+            `<span style="background: #e5e7eb; padding:2px 6px; border-radius: 4px; margin: 0 2px; font-size: 0.8rem;">${this.sanitizeHTML(nav.text)}</span>`
+        ).join('');
+        
         infoDiv.innerHTML = `
             <div style="margin-bottom: 1rem;">
-                <strong>Title:</strong> ${data.title}
+                <strong>Title:</strong> ${safeTitle}
             </div>
             <div style="margin-bottom: 1rem;">
-                <strong>Description:</strong> ${data.description}
+                <strong>Description:</strong> ${safeDescription}
             </div>
             <div style="margin-bottom: 1rem;">
-                <strong>Layout:</strong> ${data.layout.structure} 
+                <strong>Layout:</strong> ${safeStructure} 
                 ${data.layout.hasHero ? '(with hero section)' : ''}
             </div>
             <div style="margin-bottom: 1rem;">
                 <strong>Navigation:</strong> ${data.navigation.length} items
-                ${data.navigation.slice(0, 5).map(nav => `<span style="background: #e5e7eb; padding: 2px 6px; border-radius: 4px; margin: 0 2px; font-size: 0.8rem;">${nav.text}</span>`).join('')}
+                ${safeNavItems}
             </div>
             <div>
-                <strong>URL:</strong> <a href="${data.url}" target="_blank" style="color: #3b82f6; text-decoration: none;">${data.url}</a>
+                <strong>URL:</strong> <a href="${safeUrl}" target="_blank" style="color: #3b82f6; text-decoration: none;">${safeUrl}</a>
             </div>
         `;
+    }
+    
+    // Security utility for sanitizing HTML
+    sanitizeHTML(html) {
+        const tempDiv = document.createElement('div');
+        tempDiv.textContent = html;
+        return tempDiv.innerHTML;
     }
 
     displayColorPalette(colors) {
         const paletteDiv = document.getElementById('extractedColorPalette');
-        paletteDiv.innerHTML = colors.map(color => `
-            <div class="color-swatch" style="background-color: ${color}; width: 40px; height: 40px; border-radius: 8px; border: 2px solid #e5e7eb; cursor: pointer; position: relative;" 
-                 onclick="selectExtractedColor('${color}')" 
-                 title="${color}">
-                <div style="position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%); font-size: 10px; color: #6b7280; white-space: nowrap;">
-                    ${color}
+        paletteDiv.innerHTML = colors.map(color => {
+            const safeColor = this.sanitizeHTML(color);
+            return `
+                <div class="color-swatch" style="background-color: ${safeColor}; width: 40px; height: 40px; border-radius: 8px; border: 2px solid #e5e7eb; cursor: pointer; position: relative;" 
+                     onclick="selectExtractedColor('${safeColor}')" 
+                     title="${safeColor}">
+                    <div style="position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%); font-size: 10px; color: #6b7280; white-space: nowrap;">
+                        ${safeColor}
+                    </div>
                 </div>
-            </div>
-        `).join('') + (colors.length === 0 ? '<span style="color: #6b7280; font-size: 0.875rem;">No colors extracted</span>' : '');
+            `;
+        }).join('') + (colors.length === 0 ? '<span style="color: #6b7280; font-size: 0.875rem;">No colors extracted</span>' : '');
     }
 
     displayStyleSuggestion(styleAnalysis) {
@@ -479,16 +537,20 @@ class URLProcessor {
 
     displayExtractedContent(content) {
         const contentDiv = document.getElementById('extractedContent');
-        contentDiv.innerHTML = content.map(item => `
-            <div style="margin-bottom: 1rem; padding: 0.75rem; background: white; border-radius: 6px; border: 1px solid #e5e7eb;">
-                <div style="font-weight: 600; color: #374151; margin-bottom: 0.25rem; font-size: 0.8rem; text-transform: uppercase;">
-                    ${item.type}
+        contentDiv.innerHTML = content.map(item => {
+            const safeType = this.sanitizeHTML(item.type);
+            const safeText = this.sanitizeHTML(item.text);
+            return `
+                <div style="margin-bottom: 1rem; padding: 0.75rem; background: white; border-radius: 6px; border: 1px solid #e5e7eb;">
+                    <div style="font-weight: 600; color: #374151; margin-bottom: 0.25rem; font-size: 0.8rem; text-transform: uppercase;">
+                        ${safeType}
+                    </div>
+                    <div style="color: #6b7280; font-size: 0.875rem; line-height: 1.4;">
+                        ${safeText}
+                    </div>
                 </div>
-                <div style="color: #6b7280; font-size: 0.875rem; line-height: 1.4;">
-                    ${item.text}
-                </div>
-            </div>
-        `).join('') + (content.length === 0 ? '<span style="color: #6b7280; font-size: 0.875rem;">No content extracted</span>' : '');
+            `;
+        }).join('') + (content.length === 0 ? '<span style="color: #6b7280; font-size: 0.875rem;">No content extracted</span>' : '');
     }
 
     showLoading(show) {

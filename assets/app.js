@@ -1,3 +1,286 @@
+// Custom Error Classes
+class DesignGeneratorError extends Error {
+    constructor(message, type = 'GENERAL') {
+        super(message);
+        this.name = 'DesignGeneratorError';
+        this.type = type;
+        this.timestamp = new Date().toISOString();
+    }
+}
+
+class TemplateError extends DesignGeneratorError {
+    constructor(message, templateName = '') {
+        super(message, 'TEMPLATE_ERROR');
+        this.name = 'TemplateError';
+        this.templateName = templateName;
+    }
+}
+
+class ValidationError extends DesignGeneratorError {
+    constructor(message, field = '') {
+        super(message, 'VALIDATION_ERROR');
+        this.name = 'ValidationError';
+        this.field = field;
+    }
+}
+
+class NetworkError extends DesignGeneratorError {
+    constructor(message, url = '') {
+        super(message, 'NETWORK_ERROR');
+        this.name = 'NetworkError';
+        this.url = url;
+    }
+}
+
+class ComponentError extends DesignGeneratorError {
+    constructor(message, componentId = '') {
+        super(message, 'COMPONENT_ERROR');
+        this.name = 'ComponentError';
+        this.componentId = componentId;
+    }
+}
+
+// Error Handler Utility
+const ErrorHandler = {
+    handle(error, context = '') {
+        console.error(`[${context}]`, error);
+        
+        // Show user-friendly error message
+        if (error instanceof ValidationError) {
+            this.showUserError(`Invalid ${error.field}: ${error.message}`);
+        } else if (error instanceof TemplateError) {
+            this.showUserError(`Template Error: Unable to generate ${error.templateName} template. Please try a different template.`);
+        } else if (error instanceof NetworkError) {
+            this.showUserError(`Network Error: Unable to fetch data from ${error.url}. Please check your connection.`);
+        } else if (error instanceof ComponentError) {
+            this.showUserError(`Component Error: Issue with ${error.componentId} component. Please try again.`);
+        } else {
+            this.showUserError('An unexpected error occurred. Please try again.');
+        }
+        
+        // Log to analytics/monitoring service in production
+        if (window.location.hostname !== 'localhost') {
+            this.logError(error, context);
+        }
+    },
+    
+    showUserError(message) {
+        // Create or update error notification
+        let errorDiv = document.getElementById('error-notification');
+        if (!errorDiv) {
+            errorDiv = document.createElement('div');
+            errorDiv.id = 'error-notification';
+            errorDiv.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #fee2e2;
+                border: 1px solid #fca5a5;
+                color: #991b1b;
+                padding: 12px 16px;
+                border-radius: 8px;
+                max-width: 400px;
+                z-index: 10000;
+                font-size: 14px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            `;
+            document.body.appendChild(errorDiv);
+        }
+        
+        errorDiv.textContent = message;
+        errorDiv.style.display = 'block';
+        
+        // Auto-hide after 5 seconds
+        setTimeout(() => {
+            if (errorDiv) {
+                errorDiv.style.display = 'none';
+            }
+        }, 5000);
+    },
+    
+    logError(error, context) {
+        // In production, send to monitoring service
+        // For now, just log detailed info
+        console.log('Error details:', {
+            message: error.message,
+            type: error.type || 'UNKNOWN',
+            context: context,
+            timestamp: error.timestamp || new Date().toISOString(),
+            stack: error.stack,
+            userAgent: navigator.userAgent,
+            url: window.location.href
+        });
+    }
+};
+
+// Input Validation Utilities
+const ValidationUtils = {
+    // Text field validation
+    validateText(value, field, minLength = 0, maxLength = 1000) {
+        if (typeof value !== 'string') {
+            throw new ValidationError('Must be text', field);
+        }
+        
+        if (value.length < minLength) {
+            throw new ValidationError(`Must be at least ${minLength} characters`, field);
+        }
+        
+        if (value.length > maxLength) {
+            throw new ValidationError(`Must be no more than ${maxLength} characters`, field);
+        }
+        
+        return value.trim();
+    },
+    
+    // URL validation
+    validateURL(url, field = 'URL') {
+        if (!url || typeof url !== 'string') {
+            throw new ValidationError('URL is required', field);
+        }
+        
+        try {
+            const urlObj = new URL(url);
+            if (!['http:', 'https:'].includes(urlObj.protocol)) {
+                throw new ValidationError('Must be HTTP or HTTPS URL', field);
+            }
+            return url;
+        } catch (e) {
+            throw new ValidationError('Invalid URL format', field);
+        }
+    },
+    
+    // Email validation
+    validateEmail(email, field = 'Email') {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email || !emailRegex.test(email)) {
+            throw new ValidationError('Invalid email format', field);
+        }
+        return email.toLowerCase().trim();
+    },
+    
+    // Color validation
+    validateColor(color, field = 'Color') {
+        const hexColorRegex = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
+        const namedColors = ['red', 'blue', 'green', 'yellow', 'orange', 'purple', 'black', 'white', 'gray'];
+        
+        if (!color) return '#000000'; // Default color
+        
+        if (hexColorRegex.test(color) || namedColors.includes(color.toLowerCase())) {
+            return color;
+        }
+        
+        throw new ValidationError('Invalid color format (use hex codes like #FF0000 or named colors)', field);
+    },
+    
+    // Navigation links validation
+    validateNavLinks(navLinksText, field = 'Navigation Links') {
+        if (!navLinksText) return [];
+        
+        const links = navLinksText.split('\n').filter(link => link.trim());
+        
+        if (links.length > 10) {
+            throw new ValidationError('Maximum 10 navigation links allowed', field);
+        }
+        
+        return links.map(link => {
+            const trimmed = link.trim();
+            if (trimmed.length > 50) {
+                throw new ValidationError('Navigation link text too long (max 50 characters)', field);
+            }
+            return trimmed;
+        });
+    },
+    
+    // Template/Style validation
+    validateChoice(value, validChoices, field = 'Selection') {
+        if (!validChoices.includes(value)) {
+            throw new ValidationError(`Invalid choice. Must be one of: ${validChoices.join(', ')}`, field);
+        }
+        return value;
+    },
+    
+    // General form data validation
+    validateFormData(data) {
+        const validated = {};
+        
+        try {
+            // Validate site title
+            validated.siteTitle = this.validateText(data.siteTitle || '', 'Site Title', 1, 100);
+            
+            // Validate site subtitle
+            validated.siteSubtitle = this.validateText(data.siteSubtitle || '', 'Site Subtitle', 0, 200);
+            
+            // Validate main content
+            validated.mainContent = this.validateText(data.mainContent || '', 'Main Content', 0, 5000);
+            
+            // Validate page title and content
+            validated.pageTitle = this.validateText(data.pageTitle || '', 'Page Title', 0, 100);
+            validated.pageContent = this.validateText(data.pageContent || '', 'Page Content', 0, 5000);
+            
+            // Validate navigation links
+            validated.navLinks = this.validateNavLinks(data.navLinks);
+            
+            // Validate template choices
+            const validTemplates = ['hero', 'centered', 'sidebar', 'grid', 'portfolio'];
+            const validStyles = ['minimalist', 'dashboard', 'corporate', 'creative', 'tech-startup', 'e-commerce'];
+            const validColorSchemes = ['blue', 'monochrome', 'green', 'purple', 'orange', 'dark'];
+            const validFonts = ['sans', 'serif', 'mono', 'display'];
+            const validPages = ['home', 'about', 'services', 'portfolio', 'contact', 'blog'];
+            
+            validated.template = this.validateChoice(data.template, validTemplates, 'Template');
+            validated.style = this.validateChoice(data.style, validStyles, 'Style');
+            validated.colorScheme = this.validateChoice(data.colorScheme, validColorSchemes, 'Color Scheme');
+            validated.fontFamily = this.validateChoice(data.fontFamily, validFonts, 'Font Family');
+            validated.page = this.validateChoice(data.page, validPages, 'Page');
+            
+            // Boolean values don't need validation but ensure they're boolean
+            validated.includeHero = Boolean(data.includeHero);
+            validated.includeNav = Boolean(data.includeNav);
+            validated.includeFooter = Boolean(data.includeFooter);  
+            validated.includeSidebar = Boolean(data.includeSidebar);
+            
+            return validated;
+            
+        } catch (error) {
+            if (error instanceof ValidationError) {
+                throw error;
+            }
+            throw new ValidationError('Invalid form data', 'Form');
+        }
+    }
+};
+
+// Security Utilities
+const SecurityUtils = {
+    // Sanitize HTML content to prevent XSS
+    sanitizeHTML(html) {
+        const tempDiv = document.createElement('div');
+        tempDiv.textContent = html;
+        return tempDiv.innerHTML;
+    },
+    
+    // Safe way to set content that may contain HTML
+    setContent(element, content, allowHTML = false) {
+        if (!element) return;
+        
+        if (allowHTML) {
+            // For trusted content only - sanitize first
+            element.innerHTML = this.sanitizeHTML(content);
+        } else {
+            // Safe for user input
+            element.textContent = content;
+        }
+    },
+    
+    // Create safe HTML with escaped user content
+    createSafeHTML(template, userContent) {
+        const escaped = typeof userContent === 'object' 
+            ? Object.fromEntries(Object.entries(userContent).map(([k, v]) => [k, this.sanitizeHTML(String(v))]))
+            : this.sanitizeHTML(String(userContent));
+        return template.replace(/\${(\w+)}/g, (match, key) => escaped[key] || '');
+    }
+};
+
 // Main Application Logic
 class DesignGenerator {
     constructor() {
@@ -8,7 +291,56 @@ class DesignGenerator {
         this.currentTab = 'design';
         this.canvasComponents = [];
         this.selectedComponent = null;
+        this.abortController = new AbortController();
+        
+        // Cache frequently accessed DOM elements
+        this.domCache = {};
+        this.initDOMCache();
         this.init();
+    }
+    
+    initDOMCache() {
+        this.domCache = {
+            // Main containers
+            componentLibrary: document.getElementById('componentLibrary'),
+            canvasComponents: document.getElementById('canvasComponents'),
+            previewFrame: document.getElementById('previewFrame'),
+            
+            // Form elements
+            siteTitle: document.getElementById('siteTitle'),
+            siteSubtitle: document.getElementById('siteSubtitle'),
+            navLinks: document.getElementById('navLinks'),
+            mainContent: document.getElementById('mainContent'),
+            pageTitle: document.getElementById('pageTitle'),
+            pageContent: document.getElementById('pageContent'),
+            colorScheme: document.getElementById('colorScheme'),
+            fontFamily: document.getElementById('fontFamily'),
+            
+            // Checkboxes
+            includeHero: document.getElementById('includeHero'),
+            includeNav: document.getElementById('includeNav'),
+            includeFooter: document.getElementById('includeFooter'),
+            includeSidebar: document.getElementById('includeSidebar'),
+            
+            // Collections (cached once to avoid repeated queries)
+            navTabs: document.querySelectorAll('.nav-tab'),
+            styleOptions: document.querySelectorAll('.style-option'),
+            templateOptions: document.querySelectorAll('.template-option'),
+            pageButtons: document.querySelectorAll('.page-btn'),
+            deviceButtons: document.querySelectorAll('.device-btn'),
+            formInputs: document.querySelectorAll('input, select, textarea'),
+            checkboxes: document.querySelectorAll('input[type="checkbox"]'),
+            
+            // Drop zones
+            dropZone: document.getElementById('dropZone'),
+            canvasArea: document.getElementById('canvasArea')
+        };
+    }
+    
+    // Clean up all event listeners
+    destroy() {
+        this.abortController.abort();
+        this.abortController = new AbortController();
     }
 
     init() {
@@ -40,7 +372,7 @@ class DesignGenerator {
     }
 
     renderComponentLibrary() {
-        const library = document.getElementById('componentLibrary');
+        const library = this.domCache.componentLibrary;
         if (!library) return;
 
         let html = '';
@@ -80,30 +412,29 @@ class DesignGenerator {
                 e.dataTransfer.setData('text/plain', e.target.dataset.component);
                 e.target.style.opacity = '0.5';
             }
-        });
+        }, { signal: this.abortController.signal });
 
         // Component drag end
         document.addEventListener('dragend', (e) => {
             if (e.target.classList.contains('component-card')) {
                 e.target.style.opacity = '1';
             }
-        });
+        }, { signal: this.abortController.signal });
 
         // Drop zone events
-        const dropZone = document.getElementById('dropZone');
-        const canvasArea = document.getElementById('canvasArea');
+        const { dropZone, canvasArea } = this.domCache;
         
         if (dropZone && canvasArea) {
             [dropZone, canvasArea].forEach(area => {
                 area.addEventListener('dragover', (e) => {
                     e.preventDefault();
                     area.classList.add('drag-over');
-                });
+                }, { signal: this.abortController.signal });
 
                 area.addEventListener('dragleave', (e) => {
                     e.preventDefault();
                     area.classList.remove('drag-over');
-                });
+                }, { signal: this.abortController.signal });
 
                 area.addEventListener('drop', (e) => {
                     e.preventDefault();
@@ -113,7 +444,7 @@ class DesignGenerator {
                     if (componentId) {
                         this.addComponentToCanvas(componentId);
                     }
-                });
+                }, { signal: this.abortController.signal });
             });
         }
     }
@@ -189,39 +520,99 @@ class DesignGenerator {
 
     bindEvents() {
         // Tab navigation
-        document.querySelectorAll('.nav-tab').forEach(tab => {
-            tab.addEventListener('click', (e) => this.switchTab(e.target.dataset.tab));
+        this.domCache.navTabs.forEach(tab => {
+            tab.addEventListener('click', (e) => this.switchTab(e.target.dataset.tab), { signal: this.abortController.signal });
         });
 
         // Style selection
-        document.querySelectorAll('.style-option').forEach(option => {
-            option.addEventListener('click', (e) => this.selectStyle(e.target.closest('.style-option').dataset.style));
+        this.domCache.styleOptions.forEach(option => {
+            option.addEventListener('click', (e) => this.selectStyle(e.target.closest('.style-option').dataset.style), { signal: this.abortController.signal });
         });
 
         // Template selection
-        document.querySelectorAll('.template-option').forEach(option => {
-            option.addEventListener('click', (e) => this.selectTemplate(e.target.dataset.template));
+        this.domCache.templateOptions.forEach(option => {
+            option.addEventListener('click', (e) => this.selectTemplate(e.target.dataset.template), { signal: this.abortController.signal });
         });
 
         // Page selection
-        document.querySelectorAll('.page-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => this.selectPage(e.target.dataset.page));
+        this.domCache.pageButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => this.selectPage(e.target.dataset.page), { signal: this.abortController.signal });
         });
 
         // Device selection
-        document.querySelectorAll('.device-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => this.selectDevice(e.target.dataset.device));
+        this.domCache.deviceButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => this.selectDevice(e.target.dataset.device), { signal: this.abortController.signal });
         });
 
-        // Form inputs
-        document.querySelectorAll('input, select, textarea').forEach(input => {
-            input.addEventListener('input', () => this.updatePreview());
+        // Form inputs with validation
+        this.domCache.formInputs.forEach(input => {
+            input.addEventListener('input', () => {
+                this.validateInput(input);
+                this.updatePreview();
+            }, { signal: this.abortController.signal });
         });
 
         // Checkboxes
-        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-            checkbox.addEventListener('change', () => this.updatePreview());
+        this.domCache.checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', () => this.updatePreview(), { signal: this.abortController.signal });
         });
+    }
+
+    // Validate individual input fields
+    validateInput(input) {
+        const value = input.value;
+        const id = input.id;
+        
+        // Remove existing error styling
+        input.classList.remove('validation-error');
+        const existingError = input.parentNode.querySelector('.validation-error-message');
+        if (existingError) {
+            existingError.remove();
+        }
+        
+        try {
+            switch (id) {
+                case 'siteTitle':
+                    ValidationUtils.validateText(value, 'Site Title', 1, 100);
+                    break;
+                case 'siteSubtitle':
+                    ValidationUtils.validateText(value, 'Site Subtitle', 0, 200);
+                    break;
+                case 'mainContent':
+                    ValidationUtils.validateText(value, 'Main Content', 0, 5000);
+                    break;
+                case 'pageTitle':
+                    ValidationUtils.validateText(value, 'Page Title', 0, 100);
+                    break;
+                case 'pageContent':
+                    ValidationUtils.validateText(value, 'Page Content', 0, 5000);
+                    break;
+                case 'navLinks':
+                    ValidationUtils.validateNavLinks(value);
+                    break;
+            }
+        } catch (error) {
+            if (error instanceof ValidationError) {
+                this.showFieldError(input, error.message);
+            }
+        }
+    }
+    
+    // Show field-specific validation error
+    showFieldError(input, message) {
+        input.classList.add('validation-error');
+        
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'validation-error-message';
+        errorDiv.textContent = message;
+        errorDiv.style.cssText = `
+            color: #ef4444;
+            font-size: 0.75rem;
+            margin-top: 0.25rem;
+            display: block;
+        `;
+        
+        input.parentNode.appendChild(errorDiv);
     }
 
     switchTab(tabName) {
@@ -389,8 +780,7 @@ class DesignGenerator {
     }
 
     updatePageContent(pageName) {
-        const pageTitle = document.getElementById('pageTitle');
-        const pageContent = document.getElementById('pageContent');
+        const { pageTitle, pageContent } = this.domCache;
 
         const pageDefaults = {
             home: {
@@ -426,23 +816,37 @@ class DesignGenerator {
     }
 
     getFormData() {
-        return {
+        const {
+            siteTitle, siteSubtitle, navLinks, mainContent, pageTitle, pageContent,
+            colorScheme, fontFamily, includeHero, includeNav, includeFooter, includeSidebar
+        } = this.domCache;
+        
+        const rawData = {
             template: this.currentTemplate,
             style: this.currentStyle,
             page: this.currentPage,
-            siteTitle: document.getElementById('siteTitle').value,
-            siteSubtitle: document.getElementById('siteSubtitle').value,
-            navLinks: document.getElementById('navLinks').value.split('\n').filter(link => link.trim()),
-            mainContent: document.getElementById('mainContent').value,
-            pageTitle: document.getElementById('pageTitle')?.value || '',
-            pageContent: document.getElementById('pageContent')?.value || '',
-            colorScheme: document.getElementById('colorScheme').value,
-            fontFamily: document.getElementById('fontFamily').value,
-            includeHero: document.getElementById('includeHero')?.checked || false,
-            includeNav: document.getElementById('includeNav')?.checked || false,
-            includeFooter: document.getElementById('includeFooter')?.checked || false,
-            includeSidebar: document.getElementById('includeSidebar')?.checked || false
+            siteTitle: siteTitle?.value || '',
+            siteSubtitle: siteSubtitle?.value || '',
+            navLinks: navLinks?.value || '',
+            mainContent: mainContent?.value || '',
+            pageTitle: pageTitle?.value || '',
+            pageContent: pageContent?.value || '',
+            colorScheme: colorScheme?.value || 'blue',
+            fontFamily: fontFamily?.value || 'sans',
+            includeHero: includeHero?.checked || false,
+            includeNav: includeNav?.checked || false,
+            includeFooter: includeFooter?.checked || false,
+            includeSidebar: includeSidebar?.checked || false
         };
+        
+        // Validate form data
+        try {
+            return ValidationUtils.validateFormData(rawData);
+        } catch (error) {
+            ErrorHandler.handle(error, 'getFormData');
+            // Return raw data as fallback but log the validation error
+            return rawData;
+        }
     }
 
     updatePreview() {
@@ -459,25 +863,37 @@ class DesignGenerator {
         try {
             if (data.style === 'dashboard' && data.template === 'hero') {
                 // Use dashboard layout for dashboard style
+                if (!DesignTemplates.dashboardLayouts?.admin) {
+                    throw new TemplateError('Dashboard template not found', 'dashboard-admin');
+                }
                 html = DesignTemplates.dashboardLayouts.admin.generate(data, data.style, colors);
             } else if (data.page !== 'home' && DesignTemplates.pageTemplates[data.page]) {
                 // Use page-specific template
-                html = DesignTemplates.pageTemplates[data.page].generate(data, data.style, colors);
+                const pageTemplate = DesignTemplates.pageTemplates[data.page];
+                if (!pageTemplate) {
+                    throw new TemplateError(`Page template not found for ${data.page}`, data.page);
+                }
+                html = pageTemplate.generate(data, data.style, colors);
             } else {
                 // Use regular layout template
                 const template = DesignTemplates.layouts[data.template];
-                if (template) {
-                    html = template.generate(data, data.style, colors);
+                if (!template) {
+                    throw new TemplateError(`Layout template not found: ${data.template}`, data.template);
                 }
+                html = template.generate(data, data.style, colors);
+            }
+
+            if (!html || html.trim() === '') {
+                throw new TemplateError('Generated template is empty', data.template);
             }
 
             // Add responsive CSS
             html = this.addResponsiveStyles(html);
 
-            document.getElementById('previewFrame').innerHTML = html;
+            this.domCache.previewFrame.innerHTML = html;
         } catch (error) {
-            console.error('Error generating preview:', error);
-            document.getElementById('previewFrame').innerHTML = '<div style="padding: 2rem; text-align: center; color: #ef4444;">Error generating preview</div>';
+            ErrorHandler.handle(error, 'updatePreview');
+            this.domCache.previewFrame.innerHTML = '<div style="padding: 2rem; text-align: center; color: #ef4444;">Unable to generate preview. Please try a different template or check your settings.</div>';
         }
     }
 
@@ -694,56 +1110,69 @@ function exportDesign() {
     }
 }
 
-function exportReactComponents() {
+// Utility function for getting export configuration
+function getExportOptions() {
+    return {
+        minify: document.getElementById('minifyCode')?.checked || false,
+        includeComments: document.getElementById('includeComments')?.checked || true
+    };
+}
+
+// Utility function for handling export errors
+function handleExportError(error, framework) {
+    ErrorHandler.handle(new ComponentError(`${framework} export failed: ${error.message}`, framework), 'export');
+}
+
+// Utility function for common export data preparation
+function prepareExportData() {
     const generator = window.designGenerator;
     const data = generator.getFormData();
     const colors = getColorsForData(data);
     const fonts = DesignTemplates.fonts[data.fontFamily] || DesignTemplates.fonts.sans;
     
+    return { generator, data, colors, fonts };
+}
+
+function exportReactComponents() {
     try {
+        const { generator, data, colors, fonts } = prepareExportData();
+        const options = getExportOptions();
+        
         const exportData = ExportPipeline.generateExport(
             'react', 
             generator.canvasComponents, 
             data, 
             colors, 
             fonts,
-            {
-                minify: document.getElementById('minifyCode')?.checked || false,
-                includeComments: document.getElementById('includeComments')?.checked || true
-            }
+            options
         );
         
         // Create a ZIP file with all components
-        createAndDownloadZip(exportData, `${data.siteTitle.toLowerCase().replace(/\s+/g, '-')}-react-export`);
+        const filename = `${data.siteTitle.toLowerCase().replace(/\s+/g, '-')}-react-export`;
+        createAndDownloadZip(exportData, filename);
     } catch (error) {
-        console.error('Export failed:', error);
-        alert('Export failed. Please try again.');
+        handleExportError(error, 'React');
     }
 }
 
 function exportVueComponents() {
-    const generator = window.designGenerator;
-    const data = generator.getFormData();
-    const colors = getColorsForData(data);
-    const fonts = DesignTemplates.fonts[data.fontFamily] || DesignTemplates.fonts.sans;
-    
     try {
+        const { generator, data, colors, fonts } = prepareExportData();
+        const options = getExportOptions();
+        
         const exportData = ExportPipeline.generateExport(
             'vue', 
             generator.canvasComponents, 
             data, 
             colors, 
             fonts,
-            {
-                minify: document.getElementById('minifyCode')?.checked || false,
-                includeComments: document.getElementById('includeComments')?.checked || true
-            }
+            options
         );
         
-        createAndDownloadZip(exportData, `${data.siteTitle.toLowerCase().replace(/\s+/g, '-')}-vue-export`);
+        const filename = `${data.siteTitle.toLowerCase().replace(/\s+/g, '-')}-vue-export`;
+        createAndDownloadZip(exportData, filename);
     } catch (error) {
-        console.error('Export failed:', error);
-        alert('Export failed. Please try again.');
+        handleExportError(error, 'Vue');
     }
 }
 
@@ -1099,14 +1528,18 @@ function generateAIContent() {
     const contentDiv = document.getElementById('aiContentText');
     
     if (content) {
-        let displayText = '';
         if (typeof content === 'object') {
-            displayText = Object.entries(content).map(([key, value]) => `<strong>${key}:</strong> ${value}`).join('<br><br>');
+            // Create safe HTML for object display
+            const safeEntries = Object.entries(content).map(([key, value]) => {
+                const safeKey = SecurityUtils.sanitizeHTML(String(key));
+                const safeValue = SecurityUtils.sanitizeHTML(String(value));
+                return `<strong>${safeKey}:</strong> ${safeValue}`;
+            }).join('<br><br>');
+            contentDiv.innerHTML = safeEntries;
         } else {
-            displayText = content;
+            // Use textContent for plain strings to prevent XSS
+            SecurityUtils.setContent(contentDiv, content);
         }
-        
-        contentDiv.innerHTML = displayText;
         resultDiv.style.display = 'block';
         
         // Store for later application
@@ -1245,25 +1678,34 @@ function runAccessibilityAudit() {
     
     // Display score
     const scoreDiv = document.getElementById('accessibilityScore');
+    const scoreColor = auditResults.score.percentage >= 85 ? '#10b981' : auditResults.score.percentage >= 70 ? '#f59e0b' : '#ef4444';
+    const safeDescription = SecurityUtils.sanitizeHTML(auditResults.compliance.description);
     scoreDiv.innerHTML = `
-        <div style="font-size: 2rem; margin-bottom: 0.5rem; color: ${auditResults.score.percentage >= 85 ? '#10b981' : auditResults.score.percentage >= 70 ? '#f59e0b' : '#ef4444'};">
-            ${auditResults.score.percentage}%
+        <div style="font-size: 2rem; margin-bottom: 0.5rem; color: ${scoreColor};">
+            ${parseInt(auditResults.score.percentage)}%
         </div>
         <div style="font-weight: 600; color: #374151;">Accessibility Score</div>
-        <div style="font-size: 0.875rem; color: #6b7280;">${auditResults.compliance.description}</div>
+        <div style="font-size: 0.875rem; color: #6b7280;">${safeDescription}</div>
     `;
     
     // Display compliance level
     const complianceDiv = document.getElementById('complianceLevel');
+    const level = auditResults.compliance.level;
+    const bgColor = level === 'AAA' ? '#d1fae5' : level === 'AA' ? '#dbeafe' : '#fee2e2';
+    const borderColor = level === 'AAA' ? '#10b981' : level === 'AA' ? '#3b82f6' : '#ef4444';
+    const textColor = level === 'AAA' ? '#065f46' : level === 'AA' ? '#1e40af' : '#991b1b';
+    const safeLevel = SecurityUtils.sanitizeHTML(level);
+    const safeComplianceDesc = SecurityUtils.sanitizeHTML(auditResults.compliance.description);
+    
     complianceDiv.innerHTML = `
-        <div style="background: ${auditResults.compliance.level === 'AAA' ? '#d1fae5' : auditResults.compliance.level === 'AA' ? '#dbeafe' : '#fee2e2'}; 
-                    border: 1px solid ${auditResults.compliance.level === 'AAA' ? '#10b981' : auditResults.compliance.level === 'AA' ? '#3b82f6' : '#ef4444'}; 
+        <div style="background: ${bgColor}; 
+                    border: 1px solid ${borderColor}; 
                     border-radius: 0.5rem; padding: 1rem; text-align: center;">
-            <div style="font-size: 1.5rem; font-weight: bold; color: ${auditResults.compliance.level === 'AAA' ? '#065f46' : auditResults.compliance.level === 'AA' ? '#1e40af' : '#991b1b'};">
-                WCAG ${auditResults.compliance.level}
+            <div style="font-size: 1.5rem; font-weight: bold; color: ${textColor};">
+                WCAG ${safeLevel}
             </div>
-            <div style="color: ${auditResults.compliance.level === 'AAA' ? '#065f46' : auditResults.compliance.level === 'AA' ? '#1e40af' : '#991b1b'};">
-                ${auditResults.compliance.description}
+            <div style="color: ${textColor};">
+                ${safeComplianceDesc}
             </div>
         </div>
     `;
@@ -1276,15 +1718,22 @@ function runAccessibilityAudit() {
         let issuesHTML = '<h3 style="color: #374151; margin-bottom: 1rem;">Issues Found:</h3>';
         auditResults.issues.forEach(issue => {
             const severityColor = issue.severity === 'error' ? '#ef4444' : '#f59e0b';
+            const safeSeverity = SecurityUtils.sanitizeHTML(String(issue.severity));
+            const safeType = SecurityUtils.sanitizeHTML(String(issue.type));
+            const safeMessage = SecurityUtils.sanitizeHTML(String(issue.message));
+            const safeElement = issue.element ? SecurityUtils.sanitizeHTML(String(issue.element)) : '';
+            const safeSuggestion = SecurityUtils.sanitizeHTML(String(issue.suggestion));
+            const safeWcag = SecurityUtils.sanitizeHTML(String(issue.wcag));
+            
             issuesHTML += `
                 <div style="background: #fef2f2; border-left: 4px solid ${severityColor}; padding: 1rem; margin-bottom: 1rem; border-radius: 0 0.5rem 0.5rem 0;">
                     <div style="font-weight: 600; color: ${severityColor}; margin-bottom: 0.5rem;">
-                        ${issue.severity.toUpperCase()}: ${issue.type}
+                        ${safeSeverity.toUpperCase()}: ${safeType}
                     </div>
-                    <div style="color: #374151; font-size: 0.9rem; margin-bottom: 0.5rem;">${issue.message}</div>
-                    ${issue.element ? `<div style="color: #6b7280; font-size: 0.8rem; margin-bottom: 0.5rem;">Element: ${issue.element}</div>` : ''}
-                    <div style="color: #059669; font-size: 0.85rem;">💡 ${issue.suggestion}</div>
-                    <div style="color: #6b7280; font-size: 0.75rem; margin-top: 0.5rem;">WCAG ${issue.wcag} Level</div>
+                    <div style="color: #374151; font-size: 0.9rem; margin-bottom: 0.5rem;">${safeMessage}</div>
+                    ${safeElement ? `<div style="color: #6b7280; font-size: 0.8rem; margin-bottom: 0.5rem;">Element: ${safeElement}</div>` : ''}
+                    <div style="color: #059669; font-size: 0.85rem;">💡 ${safeSuggestion}</div>
+                    <div style="color: #6b7280; font-size: 0.75rem; margin-top: 0.5rem;">WCAG ${safeWcag} Level</div>
                 </div>
             `;
         });
@@ -1296,12 +1745,16 @@ function runAccessibilityAudit() {
     if (auditResults.suggestions.length > 0) {
         let suggestionsHTML = '<h3 style="color: #374151; margin-bottom: 1rem;">Improvement Suggestions:</h3>';
         auditResults.suggestions.forEach(suggestion => {
+            const safeTitle = SecurityUtils.sanitizeHTML(String(suggestion.title));
+            const safeDescription = SecurityUtils.sanitizeHTML(String(suggestion.description));
+            const safeActions = suggestion.actions.map(action => `<li>${SecurityUtils.sanitizeHTML(String(action))}</li>`).join('');
+            
             suggestionsHTML += `
                 <div style="background: #f0f9ff; border: 1px solid #0ea5e9; border-radius: 0.5rem; padding: 1rem; margin-bottom: 1rem;">
-                    <h4 style="color: #0c4a6e; margin-bottom: 0.5rem;">${suggestion.title}</h4>
-                    <p style="color: #0c4a6e; margin-bottom: 0.5rem; font-size: 0.9rem;">${suggestion.description}</p>
+                    <h4 style="color: #0c4a6e; margin-bottom: 0.5rem;">${safeTitle}</h4>
+                    <p style="color: #0c4a6e; margin-bottom: 0.5rem; font-size: 0.9rem;">${safeDescription}</p>
                     <ul style="color: #0c4a6e; font-size: 0.85rem; margin-left: 1.5rem;">
-                        ${suggestion.actions.map(action => `<li>${action}</li>`).join('')}
+                        ${safeActions}
                     </ul>
                 </div>
             `;
@@ -1632,6 +2085,17 @@ function copyClaudePrompt() {
     }, 2000);
 }
 
+// Global event cleanup controller
+const globalEventController = new AbortController();
+
+// Global cleanup function
+function cleanupAllEventListeners() {
+    globalEventController.abort();
+    if (window.designGenerator) {
+        window.designGenerator.destroy();
+    }
+}
+
 // Theme Management Functions
 function initThemeSystem() {
     // Load saved theme preference
@@ -1651,7 +2115,7 @@ function initThemeSystem() {
             applyTheme(theme);
             localStorage.setItem('designGeneratorTheme', theme);
             window.designGenerator.updatePreview();
-        });
+        }, { signal: globalEventController.signal });
     });
 }
 
@@ -1682,7 +2146,7 @@ function applyTheme(theme) {
 function initBrandColorTools() {
     const logoUpload = document.getElementById('logoUpload');
     if (logoUpload) {
-        logoUpload.addEventListener('change', handleLogoUpload);
+        logoUpload.addEventListener('change', handleLogoUpload, { signal: globalEventController.signal });
     }
 }
 
