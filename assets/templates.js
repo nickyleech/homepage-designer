@@ -841,6 +841,339 @@ const DesignTemplates = {
         }
     },
 
+    // Component templates for sidebar options
+    pricing: {
+        name: 'Pricing Table',
+        generate: (data, style, colors) => `
+            <div style="font-family: ${DesignTemplates.fonts[data.fontFamily].family}; background: ${colors.background}; min-height: 100vh; padding: 4rem 2rem;">
+                <div style="max-width: 1200px; margin: 0 auto;">
+                    <header style="text-align: center; margin-bottom: 4rem;">
+                        <h1 style="font-size: clamp(2.5rem, 4vw, 3.5rem); font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 1rem;">Choose Your Plan</h1>
+                        <p style="font-size: 1.2rem; color: ${colors.secondary}; max-width: 600px; margin: 0 auto; line-height: 1.6;">Select the perfect plan for your needs</p>
+                    </header>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width: 1000px; margin: 0 auto;">
+                        ${['Basic', 'Professional', 'Enterprise'].map((plan, index) => `
+                            <div style="background: ${colors.surface}; border: ${index === 1 ? `3px solid ${colors.primary}` : `1px solid ${colors.border}`}; border-radius: 1rem; padding: 2.5rem; text-align: center; position: relative; ${index === 1 ? `transform: scale(1.05); box-shadow: 0 20px 40px rgba(0,0,0,0.1);` : ''}">
+                                ${index === 1 ? `<div style="position: absolute; top: -0.75rem; left: 50%; transform: translateX(-50%); background: ${colors.primary}; color: ${colors.background}; padding: 0.5rem 1.5rem; border-radius: 2rem; font-size: 0.9rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.semibold};">Most Popular</div>` : ''}
+                                <h3 style="font-size: 1.5rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 1rem;">${plan}</h3>
+                                <div style="margin-bottom: 2rem;">
+                                    <span style="font-size: 3rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary};">$${[29, 59, 99][index]}</span>
+                                    <span style="color: ${colors.secondary}; font-size: 1.1rem;">/month</span>
+                                </div>
+                                <ul style="list-style: none; padding: 0; margin: 0 0 2rem 0;">
+                                    ${[
+                                        ['5 Projects', '10GB Storage', 'Email Support'],
+                                        ['Unlimited Projects', '100GB Storage', 'Priority Support', 'Advanced Analytics'],
+                                        ['Unlimited Everything', '1TB Storage', '24/7 Phone Support', 'Custom Integrations', 'Dedicated Manager']
+                                    ][index].map(feature => `
+                                        <li style="padding: 0.75rem 0; color: ${colors.text}; border-bottom: 1px solid ${colors.border}; display: flex; align-items: center;">
+                                            <span style="color: ${colors.primary}; margin-right: 0.75rem; font-weight: bold;">✓</span>
+                                            ${feature}       
+                                        </li>
+                                    `).join('')}
+                                </ul>
+                                <button style="width: 100%; background: ${index === 1 ? colors.primary : 'transparent'}; color: ${index === 1 ? colors.background : colors.primary}; border: 2px solid ${colors.primary}; padding: 1rem 2rem; border-radius: 0.5rem; font-size: 1.1rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.semibold}; cursor: pointer; transition: all 0.3s;">
+                                    Get Started
+                                </button>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            </div>
+        `
+    },
+
+    testimonials: {
+        name: 'Testimonials',
+        generate: (data, style, colors) => `
+            <div style="font-family: ${DesignTemplates.fonts[data.fontFamily].family}; background: ${colors.background}; min-height: 100vh; padding: 4rem 2rem;">
+                <div style="max-width: 1200px; margin: 0 auto;">
+                    <header style="text-align: center; margin-bottom: 4rem;">
+                        <h1 style="font-size: clamp(2.5rem, 4vw, 3.5rem); font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 1rem;">What Our Clients Say</h1>
+                        <p style="font-size: 1.2rem; color: ${colors.secondary}; max-width: 600px; margin: 0 auto; line-height: 1.6;">Real feedback from real customers</p>
+                    </header>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem;">
+                        ${[
+                            { name: 'Sarah Johnson', role: 'CEO, TechCorp', text: 'Outstanding service and incredible results. The team exceeded all our expectations and delivered on time.' },
+                            { name: 'Michael Chen', role: 'Designer, CreativeStudio', text: 'Professional, responsive, and innovative. Working with them was a game-changer for our business.' },
+                            { name: 'Emily Rodriguez', role: 'Marketing Director', text: 'The attention to detail and quality of work is unmatched. Highly recommend to anyone looking for excellence.' }
+                        ].map(testimonial => `
+                            <div style="background: ${colors.surface}; padding: 2.5rem; border-radius: 1rem; border: 1px solid ${colors.border}; position: relative;">
+                                <div style="color: ${colors.primary}; font-size: 3rem; line-height: 1; margin-bottom: 1rem; opacity: 0.3;">"</div>
+                                <p style="color: ${colors.text}; font-size: 1.1rem; line-height: 1.7; margin-bottom: 2rem; font-style: italic;">${testimonial.text}</p>
+                                <div style="display: flex; align-items: center;">
+                                    <div style="width: 50px; height: 50px; background: ${colors.primary}; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
+                                        <span style="color: ${colors.background}; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; font-size: 1.2rem;">${testimonial.name[0]}</span>
+                                    </div>
+                                    <div>
+                                        <div style="font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.semibold}; color: ${colors.primary}; margin-bottom: 0.25rem;">${testimonial.name}</div>
+                                        <div style="color: ${colors.secondary}; font-size: 0.9rem;">${testimonial.role}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            </div>
+        `
+    },
+
+    features: {
+        name: 'Features Grid',
+        generate: (data, style, colors) => `
+            <div style="font-family: ${DesignTemplates.fonts[data.fontFamily].family}; background: ${colors.background}; min-height: 100vh; padding: 4rem 2rem;">
+                <div style="max-width: 1200px; margin: 0 auto;">
+                    <header style="text-align: center; margin-bottom: 4rem;">
+                        <h1 style="font-size: clamp(2.5rem, 4vw, 3.5rem); font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 1rem;">Powerful Features</h1>
+                        <p style="font-size: 1.2rem; color: ${colors.secondary}; max-width: 600px; margin: 0 auto; line-height: 1.6;">Everything you need to succeed</p>
+                    </header>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                        ${[
+                            { icon: '🚀', title: 'Fast Performance', desc: 'Lightning-fast load times and optimized performance for the best user experience.' },
+                            { icon: '🔒', title: 'Secure & Safe', desc: 'Enterprise-grade security with end-to-end encryption and data protection.' },
+                            { icon: '📱', title: 'Mobile Ready', desc: 'Fully responsive design that works perfectly on all devices and screen sizes.' },
+                            { icon: '🎨', title: 'Customizable', desc: 'Extensive customization options to match your brand and requirements.' },
+                            { icon: '📊', title: 'Analytics', desc: 'Detailed insights and analytics to track performance and user engagement.' },
+                            { icon: '🌐', title: 'Global CDN', desc: 'Worldwide content delivery network for fast loading anywhere in the world.' }
+                        ].map(feature => `
+                            <div style="background: ${colors.surface}; padding: 2.5rem; border-radius: 1rem; text-align: center; border: 1px solid ${colors.border}; transition: transform 0.3s;">
+                                <div style="font-size: 3rem; margin-bottom: 1.5rem;">${feature.icon}</div>
+                                <h3 style="font-size: 1.3rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.semibold}; color: ${colors.primary}; margin-bottom: 1rem;">${feature.title}</h3>
+                                <p style="color: ${colors.text}; line-height: 1.6;">${feature.desc}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            </div>
+        `
+    },
+
+    comparison: {
+        name: 'Comparison',
+        generate: (data, style, colors) => `
+            <div style="font-family: ${DesignTemplates.fonts[data.fontFamily].family}; background: ${colors.background}; min-height: 100vh; padding: 4rem 2rem;">
+                <div style="max-width: 1200px; margin: 0 auto;">
+                    <header style="text-align: center; margin-bottom: 4rem;">
+                        <h1 style="font-size: clamp(2.5rem, 4vw, 3.5rem); font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 1rem;">Compare Solutions</h1>
+                        <p style="font-size: 1.2rem; color: ${colors.secondary}; max-width: 600px; margin: 0 auto; line-height: 1.6;">Choose the right option for your needs</p>
+                    </header>
+                    <div style="background: ${colors.surface}; border-radius: 1rem; overflow: hidden; border: 1px solid ${colors.border};">
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <thead style="background: ${colors.primary}; color: ${colors.background};">
+                                <tr>
+                                    <th style="padding: 1.5rem; text-align: left; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.semibold};">Feature</th>
+                                    <th style="padding: 1.5rem; text-align: center; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.semibold};">Basic</th>
+                                    <th style="padding: 1.5rem; text-align: center; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.semibold};">Pro</th>
+                                    <th style="padding: 1.5rem; text-align: center; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.semibold};">Enterprise</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${[
+                                    { feature: 'Storage Space', basic: '5GB', pro: '100GB', enterprise: '1TB' },
+                                    { feature: 'Users', basic: '1', pro: '10', enterprise: 'Unlimited' },
+                                    { feature: '24/7 Support', basic: '❌', pro: '✅', enterprise: '✅' },
+                                    { feature: 'API Access', basic: '❌', pro: '✅', enterprise: '✅' },
+                                    { feature: 'Custom Integrations', basic: '❌', pro: '❌', enterprise: '✅' },
+                                    { feature: 'Advanced Analytics', basic: '❌', pro: '✅', enterprise: '✅' }
+                                ].map((row, index) => `
+                                    <tr style="border-bottom: 1px solid ${colors.border}; ${index % 2 === 0 ? `background: ${colors.background};` : ''}">
+                                        <td style="padding: 1.5rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.medium}; color: ${colors.text};">${row.feature}</td>
+                                        <td style="padding: 1.5rem; text-align: center; color: ${colors.text};">${row.basic}</td>
+                                        <td style="padding: 1.5rem; text-align: center; color: ${colors.text};">${row.pro}</td>
+                                        <td style="padding: 1.5rem; text-align: center; color: ${colors.text};">${row.enterprise}</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        `
+    },
+
+    stats: {
+        name: 'Statistics',
+        generate: (data, style, colors) => `
+            <div style="font-family: ${DesignTemplates.fonts[data.fontFamily].family}; background: ${colors.background}; min-height: 100vh; padding: 4rem 2rem;">
+                <div style="max-width: 1200px; margin: 0 auto;">
+                    <header style="text-align: center; margin-bottom: 4rem;">
+                        <h1 style="font-size: clamp(2.5rem, 4vw, 3.5rem); font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 1rem;">Our Impact</h1>
+                        <p style="font-size: 1.2rem; color: ${colors.secondary}; max-width: 600px; margin: 0 auto; line-height: 1.6;">Numbers that speak for themselves</p>
+                    </header>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem;">
+                        ${[
+                            { number: '10,000+', label: 'Happy Customers', icon: '😊' },
+                            { number: '99.9%', label: 'Uptime', icon: '⚡' },
+                            { number: '50+', label: 'Countries', icon: '🌍' },
+                            { number: '24/7', label: 'Support', icon: '🛟' }
+                        ].map(stat => `
+                            <div style="text-align: center;">
+                                <div style="font-size: 4rem; margin-bottom: 1rem;">${stat.icon}</div>
+                                <div style="font-size: 3.5rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 0.5rem;">${stat.number}</div>
+                                <div style="font-size: 1.3rem; color: ${colors.secondary}; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.medium};">${stat.label}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            </div>
+        `
+    },
+
+    cta: {
+        name: 'Call-to-Action',
+        generate: (data, style, colors) => `
+            <div style="font-family: ${DesignTemplates.fonts[data.fontFamily].family}; background: ${colors.background}; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 4rem 2rem;">
+                <div style="background: linear-gradient(135deg, ${colors.primary} 0%, ${colors.secondary || colors.primary} 100%); color: ${colors.background}; padding: 4rem; border-radius: 2rem; text-align: center; max-width: 800px; width: 100%; box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
+                    <h1 style="font-size: clamp(2.5rem, 4vw, 4rem); font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; margin-bottom: 1.5rem; line-height: 1.2;">Ready to Get Started?</h1>
+                    <p style="font-size: 1.3rem; margin-bottom: 3rem; opacity: 0.9; line-height: 1.6;">Join thousands of satisfied customers who have transformed their business with our solution.</p>
+                    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                        <button style="background: ${colors.background}; color: ${colors.primary}; border: none; padding: 1.25rem 2.5rem; border-radius: 0.75rem; font-size: 1.2rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.semibold}; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                            Start Free Trial
+                        </button>
+                        <button style="background: transparent; color: ${colors.background}; border: 2px solid ${colors.background}; padding: 1.25rem 2.5rem; border-radius: 0.75rem; font-size: 1.2rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.semibold}; cursor: pointer; transition: all 0.3s;">
+                            Learn More
+                        </button>
+                    </div>
+                    <p style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.7;">No credit card required • Cancel anytime • 30-day money-back guarantee</p>
+                </div>
+            </div>
+        `
+    },
+
+    gallery: {
+        name: 'Image Gallery',
+        generate: (data, style, colors) => `
+            <div style="font-family: ${DesignTemplates.fonts[data.fontFamily].family}; background: ${colors.background}; min-height: 100vh; padding: 4rem 2rem;">
+                <div style="max-width: 1200px; margin: 0 auto;">
+                    <header style="text-align: center; margin-bottom: 4rem;">
+                        <h1 style="font-size: clamp(2.5rem, 4vw, 3.5rem); font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 1rem;">Our Gallery</h1>
+                        <p style="font-size: 1.2rem; color: ${colors.secondary}; max-width: 600px; margin: 0 auto; line-height: 1.6;">A showcase of our best work</p>
+                    </header>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                        ${Array.from({length: 9}, (_, i) => `
+                            <div style="background: ${colors.surface}; border-radius: 1rem; overflow: hidden; border: 1px solid ${colors.border}; transition: transform 0.3s; aspect-ratio: 4/3;">
+                                <div style="width: 100%; height: 70%; background: linear-gradient(135deg, ${colors.primary}20, ${colors.secondary || colors.primary}20); display: flex; align-items: center; justify-content: center; color: ${colors.primary}; font-size: 3rem;">
+                                    📸
+                                </div>
+                                <div style="padding: 1.5rem;">
+                                    <h3 style="font-size: 1.1rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.semibold}; color: ${colors.primary}; margin-bottom: 0.5rem;">Project ${i + 1}</h3>
+                                    <p style="color: ${colors.secondary}; font-size: 0.9rem;">Beautiful design showcase</p>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            </div>
+        `
+    },
+
+    contact: {
+        name: 'Contact Form',
+        generate: (data, style, colors) => `
+            <div style="font-family: ${DesignTemplates.fonts[data.fontFamily].family}; background: ${colors.background}; min-height: 100vh; padding: 4rem 2rem;">
+                <div style="max-width: 800px; margin: 0 auto;">
+                    <header style="text-align: center; margin-bottom: 4rem;">
+                        <h1 style="font-size: clamp(2.5rem, 4vw, 3.5rem); font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 1rem;">Get In Touch</h1>
+                        <p style="font-size: 1.2rem; color: ${colors.secondary}; max-width: 600px; margin: 0 auto; line-height: 1.6;">We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+                    </header>
+                    <div style="background: ${colors.surface}; padding: 3rem; border-radius: 1rem; border: 1px solid ${colors.border};">
+                        <form style="display: flex; flex-direction: column; gap: 1.5rem;">
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                                <div>
+                                    <label style="display: block; margin-bottom: 0.5rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.medium}; color: ${colors.text};">First Name</label>
+                                    <input type="text" style="width: 100%; padding: 1rem; border: 2px solid ${colors.border}; border-radius: 0.5rem; font-size: 1rem; background: ${colors.background}; color: ${colors.text};" placeholder="Your first name">
+                                </div>
+                                <div>
+                                    <label style="display: block; margin-bottom: 0.5rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.medium}; color: ${colors.text};">Last Name</label>
+                                    <input type="text" style="width: 100%; padding: 1rem; border: 2px solid ${colors.border}; border-radius: 0.5rem; font-size: 1rem; background: ${colors.background}; color: ${colors.text};" placeholder="Your last name">
+                                </div>
+                            </div>
+                            <div>
+                                <label style="display: block; margin-bottom: 0.5rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.medium}; color: ${colors.text};">Email</label>
+                                <input type="email" style="width: 100%; padding: 1rem; border: 2px solid ${colors.border}; border-radius: 0.5rem; font-size: 1rem; background: ${colors.background}; color: ${colors.text};" placeholder="your.email@example.com">
+                            </div>
+                            <div>
+                                <label style="display: block; margin-bottom: 0.5rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.medium}; color: ${colors.text};">Subject</label>
+                                <input type="text" style="width: 100%; padding: 1rem; border: 2px solid ${colors.border}; border-radius: 0.5rem; font-size: 1rem; background: ${colors.background}; color: ${colors.text};" placeholder="What's this about?">
+                            </div>
+                            <div>
+                                <label style="display: block; margin-bottom: 0.5rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.medium}; color: ${colors.text};">Message</label>
+                                <textarea style="width: 100%; padding: 1rem; border: 2px solid ${colors.border}; border-radius: 0.5rem; font-size: 1rem; background: ${colors.background}; color: ${colors.text}; min-height: 120px; resize: vertical;" placeholder="Tell us more..."></textarea>
+                            </div>
+                            <button type="submit" style="background: ${colors.primary}; color: ${colors.background}; border: none; padding: 1.25rem 2rem; border-radius: 0.5rem; font-size: 1.1rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.semibold}; cursor: pointer; transition: all 0.3s;">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        `
+    },
+
+    team: {
+        name: 'Team Members',
+        generate: (data, style, colors) => `
+            <div style="font-family: ${DesignTemplates.fonts[data.fontFamily].family}; background: ${colors.background}; min-height: 100vh; padding: 4rem 2rem;">
+                <div style="max-width: 1200px; margin: 0 auto;">
+                    <header style="text-align: center; margin-bottom: 4rem;">
+                        <h1 style="font-size: clamp(2.5rem, 4vw, 3.5rem); font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 1rem;">Meet Our Team</h1>
+                        <p style="font-size: 1.2rem; color: ${colors.secondary}; max-width: 600px; margin: 0 auto; line-height: 1.6;">The talented people behind our success</p>
+                    </header>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                        ${[
+                            { name: 'Sarah Johnson', role: 'CEO & Founder', bio: 'Visionary leader with 15+ years in tech.' },
+                            { name: 'Michael Chen', role: 'Lead Developer', bio: 'Full-stack expert passionate about innovation.' },
+                            { name: 'Emily Rodriguez', role: 'Design Director', bio: 'Creative mind focused on user experience.' },
+                            { name: 'David Wilson', role: 'Marketing Head', bio: 'Growth strategist with proven results.' }
+                        ].map(member => `
+                            <div style="background: ${colors.surface}; padding: 2rem; border-radius: 1rem; text-align: center; border: 1px solid ${colors.border};">
+                                <div style="width: 120px; height: 120px; background: ${colors.primary}; border-radius: 50%; margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; color: ${colors.background}; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold};">
+                                    ${member.name[0]}
+                                </div>
+                                <h3 style="font-size: 1.3rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.semibold}; color: ${colors.primary}; margin-bottom: 0.5rem;">${member.name}</h3>
+                                <p style="color: ${colors.secondary}; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.medium}; margin-bottom: 1rem;">${member.role}</p>
+                                <p style="color: ${colors.text}; line-height: 1.6; font-size: 0.95rem;">${member.bio}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            </div>
+        `
+    },
+
+    faq: {
+        name: 'FAQ Section',
+        generate: (data, style, colors) => `
+            <div style="font-family: ${DesignTemplates.fonts[data.fontFamily].family}; background: ${colors.background}; min-height: 100vh; padding: 4rem 2rem;">
+                <div style="max-width: 800px; margin: 0 auto;">
+                    <header style="text-align: center; margin-bottom: 4rem;">
+                        <h1 style="font-size: clamp(2.5rem, 4vw, 3.5rem); font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 1rem;">Frequently Asked Questions</h1>
+                        <p style="font-size: 1.2rem; color: ${colors.secondary}; max-width: 600px; margin: 0 auto; line-height: 1.6;">Find answers to common questions</p>
+                    </header>
+                    <div style="space-y: 1rem;">
+                        ${[
+                            { q: 'How do I get started?', a: 'Simply sign up for an account and follow our onboarding process. We\'ll guide you through every step.' },
+                            { q: 'What payment methods do you accept?', a: 'We accept all major credit cards, PayPal, and bank transfers for enterprise customers.' },
+                            { q: 'Is there a free trial?', a: 'Yes! We offer a 30-day free trial with full access to all features. No credit card required.' },
+                            { q: 'Can I cancel anytime?', a: 'Absolutely. You can cancel your subscription at any time from your account settings.' },
+                            { q: 'Do you offer customer support?', a: '24/7 customer support is available via chat, email, and phone for all paid plans.' }
+                        ].map((faq, index) => `
+                            <div style="background: ${colors.surface}; border: 1px solid ${colors.border}; border-radius: 1rem; margin-bottom: 1rem; overflow: hidden;">
+                                <button style="width: 100%; background: none; border: none; padding: 1.5rem; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+                                    <span style="font-size: 1.1rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.semibold}; color: ${colors.primary};">${faq.q}</span>
+                                    <span style="color: ${colors.primary}; font-size: 1.5rem;">+</span>
+                                </button>
+                                <div style="padding: 0 1.5rem 1.5rem 1.5rem; color: ${colors.text}; line-height: 1.6;">
+                                    ${faq.a}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            </div>
+        `
+    },
+
     // Utility function to generate navigation
     generateNavigation: (data, colors) => `
         <nav style="background: ${colors.background}; border-bottom: 1px solid ${colors.border}; padding: 1rem 0; position: sticky; top: 0; z-index: 100;">

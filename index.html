@@ -824,9 +824,672 @@
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
         
-        /* Brand Color Tools */
+        /* Brand Colour Tools */
         .brand-color-tools {
             margin-top: 8px;
+        }
+        
+        .colour-section-divider {
+            margin-top: 16px; 
+            padding-top: 16px; 
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .colour-section-title {
+            margin: 0 0 12px 0; 
+            font-size: 14px; 
+            font-weight: 600; 
+            color: #374151;
+        }
+        
+        .colour-input-group {
+            margin-bottom: 12px;
+        }
+        
+        .colour-input-label {
+            display: block; 
+            margin-bottom: 6px; 
+            font-size: 13px; 
+            font-weight: 500; 
+            color: #6b7280;
+        }
+        
+        .colour-picker {
+            width: 100%; 
+            height: 44px; 
+            border: 2px solid #d1d5db; 
+            border-radius: 6px; 
+            cursor: pointer;
+        }
+        
+        .extracted-colours-container {
+            display: none; 
+            margin-top: 12px; 
+            padding: 16px; 
+            background: #f8f9fa; 
+            border-radius: 8px; 
+            border: 1px solid #e9ecef;
+        }
+        
+        /* Enhanced Colour Section Styles */
+        .colour-section {
+            margin-bottom: 16px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .section-header {
+            padding: 12px 16px;
+            background: #f9fafb;
+            cursor: pointer;
+            user-select: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background-color 0.2s;
+            position: relative;
+        }
+        
+        .section-header:hover {
+            background: #f3f4f6;
+        }
+        
+        .section-header .colour-section-title {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .toggle-icon {
+            font-size: 12px;
+            transition: transform 0.2s;
+            color: #6b7280;
+        }
+        
+        .section-header.collapsed .toggle-icon {
+            transform: rotate(-90deg);
+        }
+        
+        .tooltip {
+            position: absolute;
+            bottom: -28px;
+            left: 16px;
+            background: #1f2937;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+            z-index: 10;
+        }
+        
+        .section-header:hover .tooltip {
+            opacity: 1;
+        }
+        
+        .collapsible-section {
+            padding: 16px;
+            transition: all 0.3s ease;
+            max-height: 500px;
+            opacity: 1;
+        }
+        
+        .collapsible-section.collapsed {
+            max-height: 0;
+            padding: 0 16px;
+            opacity: 0;
+        }
+        
+        /* Colour Input Enhancements */
+        .colour-input-wrapper {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            position: relative;
+        }
+        
+        .colour-picker {
+            flex: 0 0 60px;
+            height: 44px;
+            border: 2px solid #d1d5db;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        
+        .colour-picker:hover {
+            border-color: #9ca3af;
+        }
+        
+        .colour-picker:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        
+        .hex-input {
+            flex: 1;
+            height: 44px;
+            padding: 8px 12px;
+            border: 2px solid #d1d5db;
+            border-radius: 6px;
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 14px;
+            text-transform: uppercase;
+            transition: border-color 0.2s;
+        }
+        
+        .hex-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+        }
+        
+        .contrast-indicator {
+            flex: 0 0 44px;
+            height: 44px;
+            border-radius: 6px;
+            border: 2px solid #d1d5db;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            position: relative;
+            cursor: help;
+        }
+        
+        .contrast-indicator.good {
+            background: #10b981;
+            color: white;
+            border-color: #059669;
+        }
+        
+        .contrast-indicator.warning {
+            background: #f59e0b;
+            color: white;
+            border-color: #d97706;
+        }
+        
+        .contrast-indicator.poor {
+            background: #ef4444;
+            color: white;
+            border-color: #dc2626;
+        }
+        
+        /* Colour Tools */
+        .colour-tools {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+        }
+        
+        .btn-small {
+            flex: 1;
+            padding: 8px 12px;
+            font-size: 12px;
+            font-weight: 500;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            background: white;
+            color: #374151;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .btn-small:hover {
+            background: #f9fafb;
+            border-color: #9ca3af;
+        }
+        
+        /* Presets Grid */
+        .presets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+        
+        .preset-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 8px;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .preset-item:hover {
+            border-color: #3b82f6;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .preset-colours {
+            display: flex;
+            gap: 2px;
+            margin-bottom: 6px;
+        }
+        
+        .preset-swatch {
+            width: 20px;
+            height: 20px;
+            border-radius: 3px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .preset-name {
+            font-size: 11px;
+            font-weight: 500;
+            color: #6b7280;
+            text-align: center;
+        }
+        
+        /* History Swatches */
+        .history-swatches {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        
+        .history-swatch {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            border: 2px solid #e5e7eb;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s;
+        }
+        
+        .history-swatch:hover {
+            transform: scale(1.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .history-swatch .favourite-star {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            width: 16px;
+            height: 16px;
+            background: #fbbf24;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8px;
+            color: white;
+        }
+        
+        /* Messages */
+        .colour-message {
+            margin-top: 12px;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .colour-message.success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+        }
+        
+        .colour-message.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fca5a5;
+        }
+        
+        /* Loading Spinner */
+        .loading-spinner {
+            width: 24px;
+            height: 24px;
+            border: 3px solid #f3f4f6;
+            border-top: 3px solid #3b82f6;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .section-divider {
+            height: 1px;
+            background: #e5e7eb;
+            margin: 12px 0;
+        }
+        
+        /* Kanban Board Styles */
+        .kanban-board {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin: 24px 0;
+            min-height: 600px;
+        }
+        
+        .kanban-column {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .kanban-column-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        .kanban-column-header h3 {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 600;
+            color: #374151;
+        }
+        
+        .task-count {
+            background: #6b7280;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+            min-width: 20px;
+            text-align: center;
+        }
+        
+        .kanban-tasks {
+            flex: 1;
+            min-height: 400px;
+            margin-bottom: 12px;
+        }
+        
+        .kanban-task {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 8px;
+            cursor: move;
+            transition: all 0.2s;
+            position: relative;
+        }
+        
+        .kanban-task:hover {
+            border-color: #3b82f6;
+            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.15);
+            transform: translateY(-1px);
+        }
+        
+        .kanban-task.dragging {
+            opacity: 0.5;
+            transform: rotate(5deg);
+        }
+        
+        .task-title {
+            font-weight: 600;
+            font-size: 14px;
+            color: #374151;
+            margin-bottom: 6px;
+            line-height: 1.3;
+        }
+        
+        .task-description {
+            font-size: 12px;
+            color: #6b7280;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        
+        .task-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+            color: #9ca3af;
+        }
+        
+        .task-project {
+            background: #ddd6fe;
+            color: #5b21b6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+        
+        .task-priority {
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+        
+        .task-priority.high {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+        
+        .task-priority.medium {
+            background: #fef3c7;
+            color: #d97706;
+        }
+        
+        .task-priority.low {
+            background: #d1fae5;
+            color: #059669;
+        }
+        
+        .task-actions {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            opacity: 0;
+            transition: opacity 0.2s;
+            display: flex;
+            gap: 4px;
+        }
+        
+        .kanban-task:hover .task-actions {
+            opacity: 1;
+        }
+        
+        .task-action-btn {
+            width: 20px;
+            height: 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        
+        .edit-btn {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+        
+        .edit-btn:hover {
+            background: #bfdbfe;
+        }
+        
+        .delete-btn {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+        
+        .delete-btn:hover {
+            background: #fecaca;
+        }
+        
+        .add-task-btn {
+            width: 100%;
+            padding: 8px;
+            border: 2px dashed #d1d5db;
+            border-radius: 6px;
+            background: transparent;
+            color: #6b7280;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .add-task-btn:hover {
+            border-color: #3b82f6;
+            color: #3b82f6;
+            background: #f0f9ff;
+        }
+        
+        .kanban-column[data-status="backlog"] .task-count {
+            background: #6b7280;
+        }
+        
+        .kanban-column[data-status="design"] .task-count {
+            background: #3b82f6;
+        }
+        
+        .kanban-column[data-status="review"] .task-count {
+            background: #f59e0b;
+        }
+        
+        .kanban-column[data-status="done"] .task-count {
+            background: #10b981;
+        }
+        
+        .kanban-column.drag-over {
+            background: #f0f9ff;
+            border-color: #3b82f6;
+        }
+        
+        /* Stats Cards */
+        .stat-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #3b82f6;
+            margin-bottom: 8px;
+        }
+        
+        .stat-label {
+            color: #6b7280;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        /* Task Modal */
+        .task-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        
+        .task-modal-content {
+            background: white;
+            border-radius: 8px;
+            padding: 24px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .task-modal h3 {
+            margin: 0 0 16px 0;
+            color: #374151;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        
+        .form-field {
+            margin-bottom: 16px;
+        }
+        
+        .form-field label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+            color: #374151;
+            font-size: 14px;
+        }
+        
+        .form-field input,
+        .form-field select,
+        .form-field textarea {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        
+        .form-field textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+        
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            margin-top: 24px;
+        }
+        
+        @media (max-width: 768px) {
+            .kanban-board {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            
+            .kanban-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .kanban-controls button,
+            .kanban-controls select {
+                width: 100%;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
         }
         
         .extracted-palette {
@@ -1123,6 +1786,9 @@
                 <button class="nav-tab" data-tab="pa-media">
                     <span>📺</span> PA Media
                 </button>
+                <button class="nav-tab" data-tab="kanban">
+                    <span>📋</span> Project Kanban
+                </button>
             </nav>
         </div>
     </header>
@@ -1263,23 +1929,89 @@ Contact</textarea>
 
 
                 <div class="form-group">
-                    <label for="brandColorExtractor">Brand Colors</label>
+                    <label for="brandColorExtractor">Brand Colours</label>
                     <div class="brand-color-tools">
-                        <input type="file" id="logoUpload" accept="image/*" style="display: none;">
-                        <button class="btn-secondary" onclick="document.getElementById('logoUpload').click()" style="width: 100%; margin-bottom: 8px;">
-                            🎨 Extract Colors from Logo
-                        </button>
-                        <div id="extractedColors" style="display: none;">
-                            <div class="extracted-palette" id="colorPalette"></div>
-                            <button class="btn-primary" onclick="applyExtractedColors()" style="width: 100%; margin-top: 8px;">
-                                Apply Colors
-                            </button>
+                        
+                        <!-- Logo Extraction Section -->
+                        <div class="colour-section">
+                            <div class="section-header" onclick="toggleSection('logoSection')">
+                                <h4 class="colour-section-title">Extract from Logo <span class="toggle-icon">▼</span></h4>
+                                <div class="tooltip">Upload a logo to automatically extract brand colours</div>
+                            </div>
+                            <div id="logoSection" class="collapsible-section">
+                                <input type="file" id="logoUpload" accept="image/*" style="display: none;">
+                                <button class="btn-secondary" onclick="document.getElementById('logoUpload').click()" style="width: 100%; margin-bottom: 12px; height: 44px; font-weight: 500;">
+                                    Extract Colours from Logo
+                                </button>
+                                <div id="logoPreview" style="display: none; margin-bottom: 12px; text-align: center;">
+                                    <img id="logoImage" style="max-width: 100%; max-height: 80px; border-radius: 6px; border: 1px solid #d1d5db;">
+                                </div>
+                                <div id="extractedColors" class="extracted-colours-container">
+                                    <div class="extraction-info" id="extractionInfo" style="display: none; margin-bottom: 12px; font-size: 12px; color: #6b7280;"></div>
+                                    <div class="extracted-palette" id="colorPalette"></div>
+                                    <button class="btn-primary" onclick="applyExtractedColors()" style="width: 100%; margin-top: 12px; height: 40px; font-weight: 500; display: none;" id="applyExtractedBtn">
+                                        Apply Selected Colours
+                                    </button>
+                                </div>
+                                <div id="logoLoadingState" style="display: none; text-align: center; padding: 20px; color: #6b7280;">
+                                    <div class="loading-spinner"></div>
+                                    <div style="margin-top: 8px;">Extracting colours...</div>
+                                </div>
+                            </div>
                         </div>
-                        <input type="color" id="customPrimary" placeholder="#3b82f6" style="width: 48%; margin-right: 4%;">
-                        <input type="color" id="customSecondary" placeholder="#8b5cf6" style="width: 48%;">
-                        <button class="btn-secondary" onclick="applyCustomColors()" style="width: 100%; margin-top: 8px;">
-                            Apply Custom Colors
-                        </button>
+
+                        <!-- Custom Colours Section -->
+                        <div class="colour-section">
+                            <div class="section-header" onclick="toggleSection('customSection')">
+                                <h4 class="colour-section-title">Custom Colours <span class="toggle-icon">▼</span></h4>
+                                <div class="tooltip">Manually select your brand colours</div>
+                            </div>
+                            <div id="customSection" class="collapsible-section">
+                                <div class="colour-input-group">
+                                    <label for="customPrimary" class="colour-input-label">Primary Colour</label>
+                                    <div class="colour-input-wrapper">
+                                        <input type="color" id="customPrimary" value="#3b82f6" class="colour-picker" oninput="updateColourPreview('primary', this.value)">
+                                        <input type="text" id="primaryHex" value="#3b82f6" class="hex-input" oninput="updateColourFromHex('primary', this.value)" maxlength="7">
+                                        <div class="contrast-indicator" id="primaryContrast"></div>
+                                    </div>
+                                </div>
+                                <div class="colour-input-group">
+                                    <label for="customSecondary" class="colour-input-label">Secondary Colour</label>
+                                    <div class="colour-input-wrapper">
+                                        <input type="color" id="customSecondary" value="#8b5cf6" class="colour-picker" oninput="updateColourPreview('secondary', this.value)">
+                                        <input type="text" id="secondaryHex" value="#8b5cf6" class="hex-input" oninput="updateColourFromHex('secondary', this.value)" maxlength="7">
+                                        <div class="contrast-indicator" id="secondaryContrast"></div>
+                                    </div>
+                                </div>
+                                <div class="colour-tools">
+                                    <button class="btn-small" onclick="generateHarmony()">Generate Harmony</button>
+                                    <button class="btn-small" onclick="adjustBrightness(10)">Brighter</button>
+                                    <button class="btn-small" onclick="adjustBrightness(-10)">Darker</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Colour Presets Section -->
+                        <div class="colour-section">
+                            <div class="section-header" onclick="toggleSection('presetsSection')">
+                                <h4 class="colour-section-title">Colour Presets <span class="toggle-icon">▼</span></h4>
+                                <div class="tooltip">Quick access to popular colour schemes</div>
+                            </div>
+                            <div id="presetsSection" class="collapsible-section collapsed">
+                                <div class="presets-grid" id="presetsGrid">
+                                    <!-- Presets will be populated by JavaScript -->
+                                </div>
+                                <div class="section-divider"></div>
+                                <div class="colour-history" id="colourHistory">
+                                    <h5 style="font-size: 12px; color: #6b7280; margin-bottom: 8px;">Recent Colours</h5>
+                                    <div class="history-swatches" id="historySwatches"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Success/Error Messages -->
+                        <div id="colourMessage" class="colour-message" style="display: none;"></div>
+                        
                     </div>
                 </div>
             </div>
@@ -1294,7 +2026,7 @@ Contact</textarea>
                     <label for="websiteUrl">Enter URL to analyse</label>
                     <input type="url" id="websiteUrl" placeholder="https://example.com" style="margin-bottom: 8px;">
                     <button class="btn-primary" onclick="processURL()" style="width: 100%;" id="processUrlBtn">
-                        🔍 Analyse Website
+                        Analyse Website
                     </button>
                 </div>
 
@@ -1498,15 +2230,94 @@ Contact</textarea>
                 </div>
             </div>
 
+            <!-- Kanban Tab -->
+            <div class="tab-content" data-tab="kanban">
+                <h1>Project Kanban Board</h1>
+                <p style="color: #6b7280; margin-bottom: 24px; font-size: 14px;">Organize and track your design projects with visual task management</p>
 
+                <!-- Kanban Controls -->
+                <div class="kanban-controls" style="margin-bottom: 24px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+                    <button class="btn-primary" onclick="createNewProject()" style="font-size: 14px; padding: 8px 16px;">
+                        + New Project
+                    </button>
+                    <button class="btn-secondary" onclick="createNewTask()" style="font-size: 14px; padding: 8px 16px;">
+                        + Add Task
+                    </button>
+                    <select id="projectFilter" onchange="filterByProject()" style="padding: 8px 12px; border: 1px solid #d1d5db; border-radius: 4px; font-size: 14px;">
+                        <option value="">All Projects</option>
+                    </select>
+                    <button class="btn-secondary" onclick="exportKanbanData()" style="font-size: 14px; padding: 8px 16px;">
+                        Export Data
+                    </button>
+                </div>
 
+                <!-- Kanban Board -->
+                <div class="kanban-board" id="kanbanBoard">
+                    <div class="kanban-column" data-status="backlog">
+                        <div class="kanban-column-header">
+                            <h3>📝 Backlog</h3>
+                            <span class="task-count" id="backlog-count">0</span>
+                        </div>
+                        <div class="kanban-tasks" id="backlog-tasks" ondrop="dropTask(event)" ondragover="allowDrop(event)">
+                            <!-- Tasks will be added here -->
+                        </div>
+                        <button class="add-task-btn" onclick="addTaskToColumn('backlog')">+ Add Task</button>
+                    </div>
 
+                    <div class="kanban-column" data-status="design">
+                        <div class="kanban-column-header">
+                            <h3>🎨 In Design</h3>
+                            <span class="task-count" id="design-count">0</span>
+                        </div>
+                        <div class="kanban-tasks" id="design-tasks" ondrop="dropTask(event)" ondragover="allowDrop(event)">
+                            <!-- Tasks will be added here -->
+                        </div>
+                        <button class="add-task-btn" onclick="addTaskToColumn('design')">+ Add Task</button>
+                    </div>
 
+                    <div class="kanban-column" data-status="review">
+                        <div class="kanban-column-header">
+                            <h3>👀 Review</h3>
+                            <span class="task-count" id="review-count">0</span>
+                        </div>
+                        <div class="kanban-tasks" id="review-tasks" ondrop="dropTask(event)" ondragover="allowDrop(event)">
+                            <!-- Tasks will be added here -->
+                        </div>
+                        <button class="add-task-btn" onclick="addTaskToColumn('review')">+ Add Task</button>
+                    </div>
 
+                    <div class="kanban-column" data-status="done">
+                        <div class="kanban-column-header">
+                            <h3>✅ Done</h3>
+                            <span class="task-count" id="done-count">0</span>
+                        </div>
+                        <div class="kanban-tasks" id="done-tasks" ondrop="dropTask(event)" ondragover="allowDrop(event)">
+                            <!-- Tasks will be added here -->
+                        </div>
+                        <button class="add-task-btn" onclick="addTaskToColumn('done')">+ Add Task</button>
+                    </div>
+                </div>
 
-
-
-
+                <!-- Project Stats -->
+                <div class="project-stats" style="margin-top: 32px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalTasks">0</div>
+                        <div class="stat-label">Total Tasks</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="completedTasks">0</div>
+                        <div class="stat-label">Completed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="activeTasks">0</div>
+                        <div class="stat-label">In Progress</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="completionRate">0%</div>
+                        <div class="stat-label">Completion Rate</div>
+                    </div>
+                </div>
+            </div>
 
             <div class="button-group">
                 <button type="button" class="btn-secondary" onclick="resetForm()">Reset</button>
@@ -1576,6 +2387,754 @@ Contact</textarea>
             if (window.designGenerator) {
                 window.designGenerator.switchTab(tabName);
             }
+        }
+
+        // Enhanced Colour System Variables
+        let colourHistory = JSON.parse(localStorage.getItem('colourHistory') || '[]');
+        let favouriteColours = JSON.parse(localStorage.getItem('favouriteColours') || '[]');
+        
+        // Colour Presets
+        const colourPresets = [
+            { name: 'Material Blue', primary: '#2196F3', secondary: '#03A9F4' },
+            { name: 'Material Purple', primary: '#9C27B0', secondary: '#673AB7' },
+            { name: 'Material Teal', primary: '#009688', secondary: '#00BCD4' },
+            { name: 'Material Orange', primary: '#FF9800', secondary: '#FF5722' },
+            { name: 'Tailwind Blue', primary: '#3B82F6', secondary: '#1D4ED8' },
+            { name: 'Tailwind Emerald', primary: '#10B981', secondary: '#059669' },
+            { name: 'Tailwind Rose', primary: '#F43F5E', secondary: '#E11D48' },
+            { name: 'Tailwind Violet', primary: '#8B5CF6', secondary: '#7C3AED' },
+            { name: 'Corporate Blue', primary: '#1E3A8A', secondary: '#3B82F6' },
+            { name: 'Forest Green', primary: '#047857', secondary: '#10B981' },
+            { name: 'Sunset Orange', primary: '#EA580C', secondary: '#F97316' },
+            { name: 'Royal Purple', primary: '#6B21A8', secondary: '#A855F7' }
+        ];
+
+        // Enhanced Colour Functions
+        function toggleSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            const header = section.previousElementSibling;
+            
+            if (section.classList.contains('collapsed')) {
+                section.classList.remove('collapsed');
+                header.classList.remove('collapsed');
+            } else {
+                section.classList.add('collapsed');
+                header.classList.add('collapsed');
+            }
+        }
+
+        function updateColourPreview(type, colour) {
+            // Real-time preview update
+            if (window.designGenerator && window.designGenerator.updatePreview) {
+                const data = window.designGenerator.getCurrentData();
+                if (type === 'primary') {
+                    data.primaryColor = colour;
+                    document.getElementById('primaryHex').value = colour;
+                } else if (type === 'secondary') {
+                    data.secondaryColor = colour;
+                    document.getElementById('secondaryHex').value = colour;
+                }
+                window.designGenerator.updatePreview();
+            }
+            
+            // Update contrast indicators
+            updateContrastIndicator(type, colour);
+            
+            // Add to history
+            addToColourHistory(colour);
+        }
+
+        function updateColourFromHex(type, hexValue) {
+            if (hexValue.match(/^#[0-9A-F]{6}$/i)) {
+                const colorInput = document.getElementById(type === 'primary' ? 'customPrimary' : 'customSecondary');
+                colorInput.value = hexValue;
+                updateColourPreview(type, hexValue);
+            }
+        }
+
+        function updateContrastIndicator(type, colour) {
+            const indicator = document.getElementById(type + 'Contrast');
+            const contrastRatio = getContrastRatio(colour, '#FFFFFF');
+            
+            indicator.classList.remove('good', 'warning', 'poor');
+            
+            if (contrastRatio >= 7) {
+                indicator.classList.add('good');
+                indicator.textContent = 'AAA';
+                indicator.title = `Contrast ratio: ${contrastRatio.toFixed(1)}:1 (Excellent)`;
+            } else if (contrastRatio >= 4.5) {
+                indicator.classList.add('warning');
+                indicator.textContent = 'AA';
+                indicator.title = `Contrast ratio: ${contrastRatio.toFixed(1)}:1 (Good)`;
+            } else {
+                indicator.classList.add('poor');
+                indicator.textContent = 'FAIL';
+                indicator.title = `Contrast ratio: ${contrastRatio.toFixed(1)}:1 (Poor accessibility)`;
+            }
+        }
+
+        function getContrastRatio(color1, color2) {
+            const l1 = getLuminance(color1);
+            const l2 = getLuminance(color2);
+            const lighter = Math.max(l1, l2);
+            const darker = Math.min(l1, l2);
+            return (lighter + 0.05) / (darker + 0.05);
+        }
+
+        function getLuminance(hex) {
+            const rgb = hexToRgb(hex);
+            const [r, g, b] = [rgb.r, rgb.g, rgb.b].map(c => {
+                c = c / 255;
+                return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+            });
+            return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+        }
+
+        function hexToRgb(hex) {
+            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return result ? {
+                r: parseInt(result[1], 16),
+                g: parseInt(result[2], 16),
+                b: parseInt(result[3], 16)
+            } : null;
+        }
+
+        function generateHarmony() {
+            const primaryColour = document.getElementById('customPrimary').value;
+            const hsl = hexToHsl(primaryColour);
+            
+            // Generate complementary colour
+            const complementaryHue = (hsl.h + 180) % 360;
+            const complementaryColour = hslToHex(complementaryHue, hsl.s, hsl.l);
+            
+            document.getElementById('customSecondary').value = complementaryColour;
+            document.getElementById('secondaryHex').value = complementaryColour;
+            updateColourPreview('secondary', complementaryColour);
+            
+            showColourMessage('Generated complementary colour scheme!', 'success');
+        }
+
+        function adjustBrightness(adjustment) {
+            const primaryColour = document.getElementById('customPrimary').value;
+            const secondaryColour = document.getElementById('customSecondary').value;
+            
+            const newPrimary = adjustColourBrightness(primaryColour, adjustment);
+            const newSecondary = adjustColourBrightness(secondaryColour, adjustment);
+            
+            document.getElementById('customPrimary').value = newPrimary;
+            document.getElementById('primaryHex').value = newPrimary;
+            document.getElementById('customSecondary').value = newSecondary;
+            document.getElementById('secondaryHex').value = newSecondary;
+            
+            updateColourPreview('primary', newPrimary);
+            updateColourPreview('secondary', newSecondary);
+            
+            showColourMessage(`Adjusted brightness by ${adjustment > 0 ? '+' : ''}${adjustment}%`, 'success');
+        }
+
+        function adjustColourBrightness(hex, percent) {
+            const rgb = hexToRgb(hex);
+            const factor = percent / 100;
+            
+            const newR = Math.min(255, Math.max(0, rgb.r + (rgb.r * factor)));
+            const newG = Math.min(255, Math.max(0, rgb.g + (rgb.g * factor)));
+            const newB = Math.min(255, Math.max(0, rgb.b + (rgb.b * factor)));
+            
+            return rgbToHex(Math.round(newR), Math.round(newG), Math.round(newB));
+        }
+
+        function hexToHsl(hex) {
+            const rgb = hexToRgb(hex);
+            const r = rgb.r / 255;
+            const g = rgb.g / 255;
+            const b = rgb.b / 255;
+            
+            const max = Math.max(r, g, b);
+            const min = Math.min(r, g, b);
+            let h, s, l = (max + min) / 2;
+            
+            if (max === min) {
+                h = s = 0;
+            } else {
+                const d = max - min;
+                s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+                switch (max) {
+                    case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+                    case g: h = (b - r) / d + 2; break;
+                    case b: h = (r - g) / d + 4; break;
+                }
+                h /= 6;
+            }
+            
+            return { h: h * 360, s: s * 100, l: l * 100 };
+        }
+
+        function hslToHex(h, s, l) {
+            h = h / 360;
+            s = s / 100;
+            l = l / 100;
+            
+            const hue2rgb = (p, q, t) => {
+                if (t < 0) t += 1;
+                if (t > 1) t -= 1;
+                if (t < 1/6) return p + (q - p) * 6 * t;
+                if (t < 1/2) return q;
+                if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+                return p;
+            };
+            
+            let r, g, b;
+            if (s === 0) {
+                r = g = b = l;
+            } else {
+                const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+                const p = 2 * l - q;
+                r = hue2rgb(p, q, h + 1/3);
+                g = hue2rgb(p, q, h);
+                b = hue2rgb(p, q, h - 1/3);
+            }
+            
+            return rgbToHex(Math.round(r * 255), Math.round(g * 255), Math.round(b * 255));
+        }
+
+        function rgbToHex(r, g, b) {
+            return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+        }
+
+        function addToColourHistory(colour) {
+            if (!colourHistory.includes(colour)) {
+                colourHistory.unshift(colour);
+                if (colourHistory.length > 12) {
+                    colourHistory.pop();
+                }
+                localStorage.setItem('colourHistory', JSON.stringify(colourHistory));
+                updateHistoryDisplay();
+            }
+        }
+
+        function updateHistoryDisplay() {
+            const container = document.getElementById('historySwatches');
+            container.innerHTML = '';
+            
+            colourHistory.forEach(colour => {
+                const swatch = document.createElement('div');
+                swatch.className = 'history-swatch';
+                swatch.style.backgroundColor = colour;
+                swatch.title = colour;
+                swatch.onclick = () => applyHistoryColour(colour);
+                
+                if (favouriteColours.includes(colour)) {
+                    const star = document.createElement('div');
+                    star.className = 'favourite-star';
+                    star.textContent = '★';
+                    swatch.appendChild(star);
+                }
+                
+                container.appendChild(swatch);
+            });
+        }
+
+        function applyHistoryColour(colour) {
+            document.getElementById('customPrimary').value = colour;
+            document.getElementById('primaryHex').value = colour;
+            updateColourPreview('primary', colour);
+            showColourMessage('Applied colour from history!', 'success');
+        }
+
+        function applyPreset(preset) {
+            document.getElementById('customPrimary').value = preset.primary;
+            document.getElementById('primaryHex').value = preset.primary;
+            document.getElementById('customSecondary').value = preset.secondary;
+            document.getElementById('secondaryHex').value = preset.secondary;
+            
+            updateColourPreview('primary', preset.primary);
+            updateColourPreview('secondary', preset.secondary);
+            
+            showColourMessage(`Applied ${preset.name} preset!`, 'success');
+        }
+
+        function showColourMessage(message, type) {
+            const messageEl = document.getElementById('colourMessage');
+            messageEl.textContent = message;
+            messageEl.className = `colour-message ${type}`;
+            messageEl.style.display = 'block';
+            
+            setTimeout(() => {
+                messageEl.style.display = 'none';
+            }, 3000);
+        }
+
+        function initializeColourSystem() {
+            // Initialize presets
+            const presetsGrid = document.getElementById('presetsGrid');
+            colourPresets.forEach(preset => {
+                const presetEl = document.createElement('div');
+                presetEl.className = 'preset-item';
+                presetEl.onclick = () => applyPreset(preset);
+                
+                presetEl.innerHTML = `
+                    <div class="preset-colours">
+                        <div class="preset-swatch" style="background-color: ${preset.primary}"></div>
+                        <div class="preset-swatch" style="background-color: ${preset.secondary}"></div>
+                    </div>
+                    <div class="preset-name">${preset.name}</div>
+                `;
+                
+                presetsGrid.appendChild(presetEl);
+            });
+            
+            // Initialize history
+            updateHistoryDisplay();
+            
+            // Initialize contrast indicators
+            updateContrastIndicator('primary', '#3b82f6');
+            updateContrastIndicator('secondary', '#8b5cf6');
+            
+            // Enhanced logo upload handler
+            document.getElementById('logoUpload').addEventListener('change', handleLogoUpload);
+        }
+
+        function handleLogoUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            // Show loading state
+            document.getElementById('logoLoadingState').style.display = 'block';
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    // Show logo preview
+                    const logoImage = document.getElementById('logoImage');
+                    logoImage.src = e.target.result;
+                    document.getElementById('logoPreview').style.display = 'block';
+                    
+                    // Extract colours
+                    extractColoursFromImage(img);
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function extractColoursFromImage(img) {
+            // Create canvas for colour extraction
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = img.width;
+            canvas.height = img.height;
+            ctx.drawImage(img, 0, 0);
+            
+            // Get image data
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            const data = imageData.data;
+            
+            // Extract colours
+            const colourMap = new Map();
+            for (let i = 0; i < data.length; i += 4) {
+                const r = data[i];
+                const g = data[i + 1];
+                const b = data[i + 2];
+                const alpha = data[i + 3];
+                
+                if (alpha > 128) { // Skip transparent pixels
+                    const hex = rgbToHex(r, g, b);
+                    colourMap.set(hex, (colourMap.get(hex) || 0) + 1);
+                }
+            }
+            
+            // Sort by frequency and get top colours
+            const sortedColours = Array.from(colourMap.entries())
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 8)
+                .map(([colour, count]) => ({ colour, count }));
+            
+            displayExtractedColours(sortedColours);
+            
+            // Hide loading state
+            document.getElementById('logoLoadingState').style.display = 'none';
+        }
+
+        function displayExtractedColours(colours) {
+            const palette = document.getElementById('colorPalette');
+            const info = document.getElementById('extractionInfo');
+            const container = document.getElementById('extractedColors');
+            const applyBtn = document.getElementById('applyExtractedBtn');
+            
+            palette.innerHTML = '';
+            
+            colours.forEach(({ colour, count }, index) => {
+                const swatch = document.createElement('div');
+                swatch.className = 'color-swatch extracted-swatch';
+                swatch.style.backgroundColor = colour;
+                swatch.title = `${colour} (${count} pixels)`;
+                swatch.dataset.colour = colour;
+                swatch.dataset.selected = 'false';
+                
+                swatch.onclick = () => {
+                    swatch.dataset.selected = swatch.dataset.selected === 'true' ? 'false' : 'true';
+                    swatch.style.border = swatch.dataset.selected === 'true' ? '3px solid #3b82f6' : '2px solid #e5e7eb';
+                };
+                
+                // Auto-select first two colours
+                if (index < 2) {
+                    swatch.dataset.selected = 'true';
+                    swatch.style.border = '3px solid #3b82f6';
+                }
+                
+                palette.appendChild(swatch);
+            });
+            
+            info.textContent = `Extracted ${colours.length} dominant colours`;
+            info.style.display = 'block';
+            container.style.display = 'block';
+            applyBtn.style.display = 'block';
+        }
+
+        function applyExtractedColors() {
+            const selectedSwatches = document.querySelectorAll('.extracted-swatch[data-selected="true"]');
+            if (selectedSwatches.length >= 1) {
+                const primaryColour = selectedSwatches[0].dataset.colour;
+                const secondaryColour = selectedSwatches.length > 1 ? selectedSwatches[1].dataset.colour : primaryColour;
+                
+                document.getElementById('customPrimary').value = primaryColour;
+                document.getElementById('primaryHex').value = primaryColour;
+                document.getElementById('customSecondary').value = secondaryColour;
+                document.getElementById('secondaryHex').value = secondaryColour;
+                
+                updateColourPreview('primary', primaryColour);
+                updateColourPreview('secondary', secondaryColour);
+                
+                showColourMessage('Applied extracted colours!', 'success');
+            } else {
+                showColourMessage('Please select at least one colour.', 'error');
+            }
+        }
+
+        // Legacy function for compatibility
+        function applyCustomColors() {
+            const primary = document.getElementById('customPrimary').value;
+            const secondary = document.getElementById('customSecondary').value;
+            updateColourPreview('primary', primary);
+            updateColourPreview('secondary', secondary);
+            showColourMessage('Custom colours applied!', 'success');
+        }
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeColourSystem();
+            initializeKanban();
+        });
+
+        // Kanban System Variables
+        let kanbanTasks = JSON.parse(localStorage.getItem('kanbanTasks') || '[]');
+        let kanbanProjects = JSON.parse(localStorage.getItem('kanbanProjects') || '["Website Redesign", "Mobile App", "Brand Guidelines"]');
+        let currentEditTask = null;
+
+        // Kanban Functions
+        function initializeKanban() {
+            updateProjectFilter();
+            renderKanbanBoard();
+            updateStats();
+            
+            // Add some sample tasks if none exist
+            if (kanbanTasks.length === 0) {
+                kanbanTasks = [
+                    {
+                        id: generateId(),
+                        title: 'Design homepage hero section',
+                        description: 'Create compelling hero section with call-to-action',
+                        project: 'Website Redesign',
+                        priority: 'high',
+                        status: 'backlog',
+                        createdAt: new Date().toISOString()
+                    },
+                    {
+                        id: generateId(),
+                        title: 'Choose colour palette',
+                        description: 'Research and select brand colours',
+                        project: 'Brand Guidelines',
+                        priority: 'medium',
+                        status: 'design',
+                        createdAt: new Date().toISOString()
+                    },
+                    {
+                        id: generateId(),
+                        title: 'Mobile responsiveness testing',
+                        description: 'Test design across different devices',
+                        project: 'Mobile App',
+                        priority: 'high',
+                        status: 'review',
+                        createdAt: new Date().toISOString()
+                    }
+                ];
+                saveKanbanData();
+                renderKanbanBoard();
+                updateStats();
+            }
+        }
+
+        function generateId() {
+            return Date.now().toString(36) + Math.random().toString(36).substr(2);
+        }
+
+        function createNewProject() {
+            const projectName = prompt('Enter project name:');
+            if (projectName && !kanbanProjects.includes(projectName)) {
+                kanbanProjects.push(projectName);
+                localStorage.setItem('kanbanProjects', JSON.stringify(kanbanProjects));
+                updateProjectFilter();
+            }
+        }
+
+        function createNewTask() {
+            showTaskModal();
+        }
+
+        function addTaskToColumn(status) {
+            showTaskModal(null, status);
+        }
+
+        function showTaskModal(task = null, defaultStatus = 'backlog') {
+            const isEdit = task !== null;
+            currentEditTask = task;
+            
+            const modal = document.createElement('div');
+            modal.className = 'task-modal';
+            modal.innerHTML = `
+                <div class="task-modal-content">
+                    <h3>${isEdit ? 'Edit Task' : 'New Task'}</h3>
+                    <form onsubmit="saveTask(event)">
+                        <div class="form-field">
+                            <label for="taskTitle">Title *</label>
+                            <input type="text" id="taskTitle" value="${task ? task.title : ''}" required>
+                        </div>
+                        <div class="form-field">
+                            <label for="taskDescription">Description</label>
+                            <textarea id="taskDescription">${task ? task.description : ''}</textarea>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label for="taskProject">Project</label>
+                                <select id="taskProject">
+                                    ${kanbanProjects.map(project => 
+                                        `<option value="${project}" ${task && task.project === project ? 'selected' : ''}>${project}</option>`
+                                    ).join('')}
+                                </select>
+                            </div>
+                            <div class="form-field">
+                                <label for="taskPriority">Priority</label>
+                                <select id="taskPriority">
+                                    <option value="low" ${task && task.priority === 'low' ? 'selected' : ''}>Low</option>
+                                    <option value="medium" ${task && task.priority === 'medium' ? 'selected' : ''}>Medium</option>
+                                    <option value="high" ${task && task.priority === 'high' ? 'selected' : ''}>High</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-field">
+                            <label for="taskStatus">Status</label>
+                            <select id="taskStatus">
+                                <option value="backlog" ${(task ? task.status : defaultStatus) === 'backlog' ? 'selected' : ''}>Backlog</option>
+                                <option value="design" ${(task ? task.status : defaultStatus) === 'design' ? 'selected' : ''}>In Design</option>
+                                <option value="review" ${(task ? task.status : defaultStatus) === 'review' ? 'selected' : ''}>Review</option>
+                                <option value="done" ${(task ? task.status : defaultStatus) === 'done' ? 'selected' : ''}>Done</option>
+                            </select>
+                        </div>
+                        <div class="modal-actions">
+                            <button type="button" class="btn-secondary" onclick="closeTaskModal()">Cancel</button>
+                            <button type="submit" class="btn-primary">${isEdit ? 'Update' : 'Create'} Task</button>
+                        </div>
+                    </form>
+                </div>
+            `;
+            
+            modal.onclick = (e) => {
+                if (e.target === modal) closeTaskModal();
+            };
+            
+            document.body.appendChild(modal);
+        }
+
+        function saveTask(event) {
+            event.preventDefault();
+            
+            const title = document.getElementById('taskTitle').value;
+            const description = document.getElementById('taskDescription').value;
+            const project = document.getElementById('taskProject').value;
+            const priority = document.getElementById('taskPriority').value;
+            const status = document.getElementById('taskStatus').value;
+            
+            if (currentEditTask) {
+                // Update existing task
+                const taskIndex = kanbanTasks.findIndex(t => t.id === currentEditTask.id);
+                if (taskIndex !== -1) {
+                    kanbanTasks[taskIndex] = {
+                        ...kanbanTasks[taskIndex],
+                        title,
+                        description,
+                        project,
+                        priority,
+                        status,
+                        updatedAt: new Date().toISOString()
+                    };
+                }
+            } else {
+                // Create new task
+                kanbanTasks.push({
+                    id: generateId(),
+                    title,
+                    description,
+                    project,
+                    priority,
+                    status,
+                    createdAt: new Date().toISOString()
+                });
+            }
+            
+            saveKanbanData();
+            renderKanbanBoard();
+            updateStats();
+            closeTaskModal();
+        }
+
+        function closeTaskModal() {
+            const modal = document.querySelector('.task-modal');
+            if (modal) {
+                modal.remove();
+            }
+            currentEditTask = null;
+        }
+
+        function deleteTask(taskId) {
+            if (confirm('Are you sure you want to delete this task?')) {
+                kanbanTasks = kanbanTasks.filter(task => task.id !== taskId);
+                saveKanbanData();
+                renderKanbanBoard();
+                updateStats();
+            }
+        }
+
+        function editTask(taskId) {
+            const task = kanbanTasks.find(t => t.id === taskId);
+            if (task) {
+                showTaskModal(task);
+            }
+        }
+
+        function renderKanbanBoard() {
+            const columns = ['backlog', 'design', 'review', 'done'];
+            const filter = document.getElementById('projectFilter')?.value || '';
+            
+            columns.forEach(status => {
+                const container = document.getElementById(`${status}-tasks`);
+                const countEl = document.getElementById(`${status}-count`);
+                
+                if (!container || !countEl) return;
+                
+                const filteredTasks = kanbanTasks.filter(task => {
+                    return task.status === status && (filter === '' || task.project === filter);
+                });
+                
+                countEl.textContent = filteredTasks.length;
+                
+                container.innerHTML = filteredTasks.map(task => `
+                    <div class="kanban-task" draggable="true" data-task-id="${task.id}" 
+                         ondragstart="dragStart(event)" ondragend="dragEnd(event)">
+                        <div class="task-actions">
+                            <button class="task-action-btn edit-btn" onclick="editTask('${task.id}')" title="Edit">✏</button>
+                            <button class="task-action-btn delete-btn" onclick="deleteTask('${task.id}')" title="Delete">✕</button>
+                        </div>
+                        <div class="task-title">${task.title}</div>
+                        <div class="task-description">${task.description}</div>
+                        <div class="task-meta">
+                            <span class="task-project">${task.project}</span>
+                            <span class="task-priority ${task.priority}">${task.priority.toUpperCase()}</span>
+                        </div>
+                    </div>
+                `).join('');
+            });
+        }
+
+        function updateProjectFilter() {
+            const select = document.getElementById('projectFilter');
+            if (!select) return;
+            
+            select.innerHTML = '<option value="">All Projects</option>' + 
+                kanbanProjects.map(project => `<option value="${project}">${project}</option>`).join('');
+        }
+
+        function filterByProject() {
+            renderKanbanBoard();
+        }
+
+        function updateStats() {
+            const total = kanbanTasks.length;
+            const completed = kanbanTasks.filter(task => task.status === 'done').length;
+            const active = kanbanTasks.filter(task => task.status === 'design' || task.status === 'review').length;
+            const completionRate = total > 0 ? Math.round((completed / total) * 100) : 0;
+            
+            document.getElementById('totalTasks').textContent = total;
+            document.getElementById('completedTasks').textContent = completed;
+            document.getElementById('activeTasks').textContent = active;
+            document.getElementById('completionRate').textContent = completionRate + '%';
+        }
+
+        function saveKanbanData() {
+            localStorage.setItem('kanbanTasks', JSON.stringify(kanbanTasks));
+        }
+
+        function exportKanbanData() {
+            const data = {
+                tasks: kanbanTasks,
+                projects: kanbanProjects,
+                exportDate: new Date().toISOString()
+            };
+            
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `kanban-export-${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Drag and Drop Functions
+        function allowDrop(event) {
+            event.preventDefault();
+            event.currentTarget.closest('.kanban-column').classList.add('drag-over');
+        }
+
+        function dragStart(event) {
+            event.dataTransfer.setData('text/plain', event.target.dataset.taskId);
+            event.target.classList.add('dragging');
+        }
+
+        function dragEnd(event) {
+            event.target.classList.remove('dragging');
+            document.querySelectorAll('.kanban-column').forEach(col => {
+                col.classList.remove('drag-over');
+            });
+        }
+
+        function dropTask(event) {
+            event.preventDefault();
+            const taskId = event.dataTransfer.getData('text/plain');
+            const newStatus = event.currentTarget.closest('.kanban-column').dataset.status;
+            
+            const task = kanbanTasks.find(t => t.id === taskId);
+            if (task && task.status !== newStatus) {
+                task.status = newStatus;
+                task.updatedAt = new Date().toISOString();
+                saveKanbanData();
+                renderKanbanBoard();
+                updateStats();
+            }
+            
+            event.currentTarget.closest('.kanban-column').classList.remove('drag-over');
         }
         
         // PA Media Template Functions - Integrated with PA Media Templates System
