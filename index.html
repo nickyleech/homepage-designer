@@ -1073,25 +1073,10 @@
                 <h1>Design Studio</h1>
                 <p style="color: #6b7280; margin-bottom: 24px; font-size: 14px;">Create professional designs with advanced customisation</p>
 
-                <h2>Design Style</h2>
-                <div class="form-group">
-                    <label for="designStyle">Choose Your Style</label>
-                    <select id="designStyle">
-                        <option value="minimalist" selected>Minimalist - Clean, simple layouts</option>
-                        <option value="dashboard">Dashboard - Admin panels & SaaS</option>
-                        <option value="corporate">Corporate - Professional business</option>
-                        <option value="creative">Creative - Artistic & portfolio</option>
-                        <option value="tech">Tech Startup - Modern SaaS & apps</option>
-                        <option value="ecommerce">E-commerce - Product focused</option>
-                        <option value="blog">Blog/Magazine - Content & typography</option>
-                        <option value="restaurant">Restaurant - Food & hospitality</option>
-                        <option value="photography">Photography - Image galleries</option>
-                        <option value="realestate">Real Estate - Property showcase</option>
-                        <option value="healthcare">Healthcare - Medical & wellness</option>
-                        <option value="education">Education - Learning & courses</option>
-                    </select>
-                </div>
 
+                <!-- Hidden design style - always use minimalist clean style -->
+                <input type="hidden" id="designStyle" value="minimalist">
+                
                 <h2>Layout Template</h2>
                 <div class="template-grid">
                     <div class="template-option active" data-template="hero">Hero</div>
@@ -1393,7 +1378,10 @@ Contact</textarea>
                             <li>Service Pages</li>
                             <li>Contact Templates</li>
                         </ul>
-                        <button onclick="downloadPATemplate('website')" style="background: #825FFF; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 6px; font-size: 0.9rem; font-weight: 500; cursor: pointer; width: 100%;">Download Website Templates</button>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                            <button onclick="previewPATemplate('website')" style="background: #e5e7eb; color: #374151; border: none; padding: 0.75rem 1rem; border-radius: 6px; font-size: 0.9rem; font-weight: 500; cursor: pointer;">Preview</button>
+                            <button onclick="downloadPATemplate('website')" style="background: #825FFF; color: white; border: none; padding: 0.75rem 1rem; border-radius: 6px; font-size: 0.9rem; font-weight: 500; cursor: pointer;">Download</button>
+                        </div>
                     </div>
 
                     <div style="border: 1px solid #e5e7eb; border-radius: 12px; padding: 1.5rem; background: white;">
@@ -1405,7 +1393,10 @@ Contact</textarea>
                             <li>Chart & Graph Templates</li>
                             <li>Brand Guidelines Deck</li>
                         </ul>
-                        <button onclick="downloadPATemplate('presentation')" style="background: #825FFF; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 6px; font-size: 0.9rem; font-weight: 500; cursor: pointer; width: 100%;">Download Presentation Kit</button>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                            <button onclick="previewPATemplate('presentation')" style="background: #e5e7eb; color: #374151; border: none; padding: 0.75rem 1rem; border-radius: 6px; font-size: 0.9rem; font-weight: 500; cursor: pointer;">Preview</button>
+                            <button onclick="downloadPATemplate('presentation')" style="background: #825FFF; color: white; border: none; padding: 0.75rem 1rem; border-radius: 6px; font-size: 0.9rem; font-weight: 500; cursor: pointer;">Download</button>
+                        </div>
                     </div>
 
                     <div style="border: 1px solid #e5e7eb; border-radius: 12px; padding: 1.5rem; background: white;">
@@ -1417,7 +1408,10 @@ Contact</textarea>
                             <li>Email Signatures</li>
                             <li>Digital Letterheads</li>
                         </ul>
-                        <button onclick="downloadPATemplate('digital')" style="background: #825FFF; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 6px; font-size: 0.9rem; font-weight: 500; cursor: pointer; width: 100%;">Download Digital Assets</button>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                            <button onclick="previewPATemplate('digital')" style="background: #e5e7eb; color: #374151; border: none; padding: 0.75rem 1rem; border-radius: 6px; font-size: 0.9rem; font-weight: 500; cursor: pointer;">Preview</button>
+                            <button onclick="downloadPATemplate('digital')" style="background: #825FFF; color: white; border: none; padding: 0.75rem 1rem; border-radius: 6px; font-size: 0.9rem; font-weight: 500; cursor: pointer;">Download</button>
+                        </div>
                     </div>
 
                     <div style="border: 1px solid #e5e7eb; border-radius: 12px; padding: 1.5rem; background: white;">
@@ -1429,7 +1423,10 @@ Contact</textarea>
                             <li>Brochure Layouts</li>
                             <li>Report Templates</li>
                         </ul>
-                        <button onclick="downloadPATemplate('print')" style="background: #825FFF; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 6px; font-size: 0.9rem; font-weight: 500; cursor: pointer; width: 100%;">Download Print Templates</button>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                            <button onclick="previewPATemplate('print')" style="background: #e5e7eb; color: #374151; border: none; padding: 0.75rem 1rem; border-radius: 6px; font-size: 0.9rem; font-weight: 500; cursor: pointer;">Preview</button>
+                            <button onclick="downloadPATemplate('print')" style="background: #825FFF; color: white; border: none; padding: 0.75rem 1rem; border-radius: 6px; font-size: 0.9rem; font-weight: 500; cursor: pointer;">Download</button>
+                        </div>
                     </div>
                 </div>
 
@@ -2416,6 +2413,71 @@ Contact</textarea>
             if (event.target === modal) {
                 closeWalkthroughModal();
             }
+            
+            const previewModal = document.getElementById('paPreviewModal');
+            if (event.target === previewModal) {
+                closePAPreviewModal();
+            }
+        }
+
+        function previewPATemplate(type) {
+            let content = '';
+            let title = '';
+            
+            if (type === 'website') {
+                title = 'PA Media Website Templates Preview';
+                content = generatePAWebsiteTemplate();
+            } else if (type === 'presentation') {
+                title = 'PA Media Presentation Templates Preview';
+                content = generatePAPresentationTemplate();
+            } else if (type === 'digital') {
+                title = 'PA Media Digital Assets Preview';
+                content = generatePADigitalAssets();
+            } else if (type === 'print') {
+                title = 'PA Media Print Templates Preview';
+                content = `<div style="padding: 2rem; background: #f8fafc;">
+                    <h2 style="color: #825FFF; margin-bottom: 1rem;">Print Template Preview</h2>
+                    <p style="color: #6b7280; margin-bottom: 2rem;">Professional print-ready templates with PA Media branding</p>
+                    <div style="background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                        <div style="text-align: center; border-bottom: 3px solid #825FFF; padding-bottom: 1rem; margin-bottom: 2rem;">
+                            <h1 style="color: #825FFF; font-size: 2rem; margin-bottom: 0.5rem;">PA MEDIA</h1>
+                            <p style="color: #3D3677; font-size: 1.1rem;">Professional Communication Solutions</p>
+                        </div>
+                        <div style="margin-bottom: 2rem;">
+                            <h3 style="color: #374151; margin-bottom: 1rem;">Business Card Template</h3>
+                            <div style="background: #825FFF; color: white; padding: 1.5rem; border-radius: 8px; display: inline-block;">
+                                <h4 style="color: white; margin-bottom: 0.5rem;">PA MEDIA</h4>
+                                <p style="font-size: 0.9rem; margin-bottom: 1rem;">Your Name • Your Title</p>
+                                <p style="font-size: 0.8rem; line-height: 1.4;">
+                                    email@pamedia.com<br>
+                                    www.pamedia.com<br>
+                                    +44 20 1234 5678
+                                </p>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 style="color: #374151; margin-bottom: 1rem;">Letterhead Template</h3>
+                            <div style="border: 1px solid #e5e7eb; padding: 2rem; background: white;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #825FFF; padding-bottom: 1rem; margin-bottom: 2rem;">
+                                    <h2 style="color: #825FFF; margin: 0;">PA MEDIA</h2>
+                                    <p style="color: #6b7280; margin: 0; font-size: 0.9rem;">Professional Communication Solutions</p>
+                                </div>
+                                <p style="color: #374151; line-height: 1.6;">
+                                    [Your letter content goes here. This letterhead template provides a professional foundation for all PA Media correspondence.]
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+            }
+            
+            document.getElementById('paPreviewTitle').textContent = title;
+            document.getElementById('paPreviewContent').innerHTML = content;
+            document.getElementById('paPreviewModal').style.display = 'flex';
+        }
+
+        function closePAPreviewModal() {
+            document.getElementById('paPreviewModal').style.display = 'none';
         }
     </script>
 
@@ -2429,16 +2491,16 @@ Contact</textarea>
             </div>
             <div class="walkthrough-body">
                 <div class="walkthrough-step">
-                    <h3>1. Choose Your Design Style</h3>
-                    <p>Select from 13 professional design styles including Minimalist, Corporate, Tech Startup, E-commerce, and more. Each style comes with pre-configured layouts and styling.</p>
+                    <h3>1. Choose Your Layout Template</h3>
+                    <p>Select from professional layout templates including Hero, Centred, Sidebar, Grid, Split, and Masonry. All templates use a clean, simple design aesthetic.</p>
                 </div>
                 <div class="walkthrough-step">
-                    <h3>2. Customise Your Layout</h3>
-                    <p>Use the advanced layout controls to adjust density, width, borders, and shadows. Customize colours, typography, and content to match your brand.</p>
+                    <h3>2. Customise Your Design</h3>
+                    <p>Use the advanced customisation controls to adjust density, width, borders, and shadows. Customise colours, typography, and content to match your brand.</p>
                 </div>
                 <div class="walkthrough-step">
-                    <h3>3. Generate & Export</h3>
-                    <p>Click "Generate Design" to see your homepage preview, then use "Quick Export" to download complete HTML files ready for deployment.</p>
+                    <h3>3. Preview & Export</h3>
+                    <p>Your design preview updates automatically as you make changes. Use "Quick Export" to download complete HTML files ready for deployment.</p>
                 </div>
                 <div class="walkthrough-step">
                     <h3>4. Additional Features</h3>
@@ -2447,6 +2509,22 @@ Contact</textarea>
                         <li><strong>PA Media Templates:</strong> Access professional media brand templates</li>
                         <li><strong>Claude Code Integration:</strong> Generate prompts for further development</li>
                     </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PA Media Preview Modal -->
+    <div id="paPreviewModal" class="walkthrough-modal" style="display: none;">
+        <div class="modal-overlay" onclick="closePAPreviewModal()"></div>
+        <div class="walkthrough-content" style="max-width: 900px; max-height: 90vh;">
+            <div class="walkthrough-header">
+                <h2 id="paPreviewTitle">PA Media Template Preview</h2>
+                <button onclick="closePAPreviewModal()" class="modal-close">&times;</button>
+            </div>
+            <div class="walkthrough-body" style="max-height: 70vh; overflow-y: auto;">
+                <div id="paPreviewContent">
+                    <!-- Preview content will be inserted here -->
                 </div>
             </div>
         </div>

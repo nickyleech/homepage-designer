@@ -1403,42 +1403,42 @@ function generatePageContent(pageType, baseData, colors, fonts) {
             pageTitle: 'Home',
             siteTitle: baseData.siteTitle,
             siteSubtitle: baseData.siteSubtitle,
-            navLinks: baseData.navLinks.split('\n').filter(link => link.trim()),
+            navLinks: Array.isArray(baseData.navLinks) ? baseData.navLinks : baseData.navLinks.split('\n').filter(link => link.trim()),
             mainContent: baseData.mainContent
         },
         about: {
             pageTitle: 'About Us',
             siteTitle: baseData.siteTitle,
             siteSubtitle: 'Learn more about our story and mission',
-            navLinks: baseData.navLinks.split('\n').filter(link => link.trim()),
+            navLinks: Array.isArray(baseData.navLinks) ? baseData.navLinks : baseData.navLinks.split('\n').filter(link => link.trim()),
             mainContent: `We are ${baseData.siteTitle}, dedicated to ${baseData.siteSubtitle.toLowerCase()}. Our team brings years of experience and passion to everything we do. We believe in creating exceptional experiences that make a lasting impact.`
         },
         services: {
             pageTitle: 'Our Services',
             siteTitle: baseData.siteTitle,
             siteSubtitle: 'What we offer to help you succeed',
-            navLinks: baseData.navLinks.split('\n').filter(link => link.trim()),
+            navLinks: Array.isArray(baseData.navLinks) ? baseData.navLinks : baseData.navLinks.split('\n').filter(link => link.trim()),
             mainContent: 'Our comprehensive services are designed to meet your needs and exceed your expectations. From consultation to implementation, we provide end-to-end solutions that drive results.'
         },
         portfolio: {
             pageTitle: 'Portfolio',
             siteTitle: baseData.siteTitle,
             siteSubtitle: 'Showcasing our best work and achievements',
-            navLinks: baseData.navLinks.split('\n').filter(link => link.trim()),
+            navLinks: Array.isArray(baseData.navLinks) ? baseData.navLinks : baseData.navLinks.split('\n').filter(link => link.trim()),
             mainContent: 'Explore our portfolio of successful projects and see how we have helped clients achieve their goals. Each project represents our commitment to quality and innovation.'
         },
         contact: {
             pageTitle: 'Contact Us',
             siteTitle: baseData.siteTitle,
             siteSubtitle: 'Get in touch with our team',
-            navLinks: baseData.navLinks.split('\n').filter(link => link.trim()),
+            navLinks: Array.isArray(baseData.navLinks) ? baseData.navLinks : baseData.navLinks.split('\n').filter(link => link.trim()),
             mainContent: 'Ready to start your project? Contact us today to discuss your needs and learn how we can help you achieve your goals. We look forward to hearing from you.'
         },
         blog: {
             pageTitle: 'Blog',
             siteTitle: baseData.siteTitle,
             siteSubtitle: 'Insights, tips, and industry updates',
-            navLinks: baseData.navLinks.split('\n').filter(link => link.trim()),
+            navLinks: Array.isArray(baseData.navLinks) ? baseData.navLinks : baseData.navLinks.split('\n').filter(link => link.trim()),
             mainContent: 'Stay updated with the latest insights, trends, and tips from our experts. Our blog covers industry news, best practices, and helpful guides to keep you informed.'
         }
     };
@@ -2901,7 +2901,7 @@ function generateClaudeCodePrompt() {
 - Typography: ${data.fontFamily}
 
 **Navigation Links:**
-${data.navLinks.split('\n').map(link => `- ${link.trim()}`).join('\n')}
+${Array.isArray(data.navLinks) ? data.navLinks.map(link => `- ${link.trim()}`).join('\n') : data.navLinks.split('\n').map(link => `- ${link.trim()}`).join('\n')}
 
 **Main Content:**
 ${data.mainContent}
