@@ -850,8 +850,16 @@ class DesignGenerator {
     }
 
     updatePreview() {
+        if (!this.domCache.previewFrame) {
+            console.warn('Preview frame not found');
+            return;
+        }
+
         const data = this.getFormData();
         let html = '';
+
+        // Debug logging
+        console.log('Preview data:', { style: data.style, template: data.template, page: data.page });
 
         // Get colors based on current style and color scheme
         const styleColors = DesignTemplates.styles[data.style]?.colors || DesignTemplates.styles.minimalist.colors;
@@ -861,13 +869,18 @@ class DesignGenerator {
         const colors = { ...styleColors, ...schemeColors };
 
         try {
+            // Validate required objects exist
+            if (!DesignTemplates) {
+                throw new Error('DesignTemplates not loaded');
+            }
+
             if (data.style === 'dashboard' && data.template === 'hero') {
                 // Use dashboard layout for dashboard style
                 if (!DesignTemplates.dashboardLayouts?.admin) {
                     throw new TemplateError('Dashboard template not found', 'dashboard-admin');
                 }
                 html = DesignTemplates.dashboardLayouts.admin.generate(data, data.style, colors);
-            } else if (data.page !== 'home' && DesignTemplates.pageTemplates[data.page]) {
+            } else if (data.page !== 'home' && DesignTemplates.pageTemplates && DesignTemplates.pageTemplates[data.page]) {
                 // Use page-specific template
                 const pageTemplate = DesignTemplates.pageTemplates[data.page];
                 if (!pageTemplate) {
@@ -878,6 +891,7 @@ class DesignGenerator {
                 // Use regular layout template
                 const template = DesignTemplates.layouts[data.template];
                 if (!template) {
+                    console.error('Available templates:', Object.keys(DesignTemplates.layouts || {}));
                     throw new TemplateError(`Layout template not found: ${data.template}`, data.template);
                 }
                 html = template.generate(data, data.style, colors);
@@ -892,8 +906,16 @@ class DesignGenerator {
 
             this.domCache.previewFrame.innerHTML = html;
         } catch (error) {
+            console.error('Preview generation error:', error);
             ErrorHandler.handle(error, 'updatePreview');
-            this.domCache.previewFrame.innerHTML = '<div style="padding: 2rem; text-align: center; color: #ef4444;">Unable to generate preview. Please try a different template or check your settings.</div>';
+            this.domCache.previewFrame.innerHTML = `
+                <div style="padding: 2rem; text-align: center; color: #ef4444;">
+                    <h3>Preview Generation Error</h3>
+                    <p>Unable to generate preview for style: ${data.style}, template: ${data.template}</p>
+                    <p>Error: ${error.message}</p>
+                    <p style="margin-top: 1rem; font-size: 0.9rem; color: #666;">Try selecting a different design style or template.</p>
+                </div>
+            `;
         }
     }
 

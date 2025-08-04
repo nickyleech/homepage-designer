@@ -446,31 +446,46 @@ class PAMediaTemplates {
 
     renderTemplateCard(template) {
         return `
-            <div class="pa-template-card" onclick="previewPATemplate('${template.id}')">
-                <div class="pa-template-preview">
+            <div class="pa-template-card">
+                <div class="pa-template-preview" onclick="previewPATemplate('${template.id}')">
                     ${template.preview}
+                    <div class="preview-overlay">
+                        <div class="preview-text">👁 Click to Preview</div>
+                    </div>
                 </div>
-                <div class="pa-template-title">${template.name}</div>
-                <div class="pa-template-description">${template.description}</div>
-                ${template.formats ? `
-                    <div style="margin-top: 1rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                        ${template.formats.map(format => `
-                            <span style="background: ${this.brandColors.surface}; color: ${this.brandColors.textSecondary}; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem; font-weight: ${this.typography.weights.medium};">
-                                ${format}
-                            </span>
-                        `).join('')}
+                <div class="pa-template-content">
+                    <div class="pa-template-title">${template.name}</div>
+                    <div class="pa-template-description">${template.description}</div>
+                    ${template.formats ? `
+                        <div style="margin-top: 1rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                            ${template.formats.map(format => `
+                                <span style="background: ${this.brandColors.surface}; color: ${this.brandColors.textSecondary}; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem; font-weight: ${this.typography.weights.medium};">
+                                    ${format}
+                                </span>
+                            `).join('')}
+                        </div>
+                    ` : ''}
+                    ${template.slides ? `
+                        <div style="margin-top: 0.5rem; color: ${this.brandColors.textSecondary}; font-size: 0.8rem;">
+                            ${template.slides.length} slides included
+                        </div>
+                    ` : ''}
+                    ${template.dimensions ? `
+                        <div style="margin-top: 0.5rem; color: ${this.brandColors.textSecondary}; font-size: 0.8rem;">
+                            ${template.dimensions}
+                        </div>
+                    ` : ''}
+                    <div class="pa-template-actions" style="margin-top: 1rem; display: flex; gap: 0.5rem;">
+                        <button onclick="event.stopPropagation(); downloadIndividualPATemplate('${template.id}')" 
+                                style="background: ${this.brandColors.primary}; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-size: 0.8rem; font-weight: ${this.typography.weights.medium}; flex: 1;">
+                            📥 Download
+                        </button>
+                        <button onclick="event.stopPropagation(); previewPATemplate('${template.id}')" 
+                                style="background: transparent; color: ${this.brandColors.primary}; border: 1px solid ${this.brandColors.primary}; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-size: 0.8rem; font-weight: ${this.typography.weights.medium}; flex: 1;">
+                            👁 Preview
+                        </button>
                     </div>
-                ` : ''}
-                ${template.slides ? `
-                    <div style="margin-top: 0.5rem; color: ${this.brandColors.textSecondary}; font-size: 0.8rem;">
-                        ${template.slides.length} slides included
-                    </div>
-                ` : ''}
-                ${template.dimensions ? `
-                    <div style="margin-top: 0.5rem; color: ${this.brandColors.textSecondary}; font-size: 0.8rem;">
-                        ${template.dimensions}
-                    </div>
-                ` : ''}
+                </div>
             </div>
         `;
     }
@@ -1205,6 +1220,70 @@ function previewPATemplate(templateId) {
     document.body.appendChild(modal);
 }
 
+function downloadIndividualPATemplate(templateId) {
+    // Check if JSZip is available
+    if (typeof JSZip === 'undefined') {
+        console.error('JSZip library not loaded');
+        alert('ZIP functionality not available. Please refresh the page and try again.');
+        return;
+    }
+
+    const templates = new PAMediaTemplates();
+    const zip = new JSZip();
+    
+    // Find the specific template
+    let template = null;
+    let categoryName = '';
+    Object.entries(templates.templates).forEach(([category, templateList]) => {
+        const found = templateList.find(t => t.id === templateId);
+        if (found) {
+            template = found;
+            categoryName = category;
+        }
+    });
+    
+    if (!template) {
+        alert('Template not found!');
+        return;
+    }
+    
+    try {
+        // Add template files based on category
+        if (categoryName === 'website' && template.code) {
+            zip.file(`${template.name.replace(/\s+/g, '-')}.html`, template.code.html);
+            zip.file(`${template.name.replace(/\s+/g, '-')}.css`, template.code.css);
+        } else {
+            // For other template types, create sample content
+            const sampleContent = generateSampleContent(template, categoryName);
+            zip.file(`${template.name.replace(/\s+/g, '-')}.${getSampleExtension(categoryName)}`, sampleContent);
+        }
+        
+        // Add README
+        zip.file('README.txt', `PA Media Template: ${template.name}\n\nDescription: ${template.description}\n\nGenerated by Design Generator Pro\n\nFor support, please contact your design team.`);
+        
+        // Generate and download
+        zip.generateAsync({ type: 'blob' })
+            .then(function(content) {
+                const url = URL.createObjectURL(content);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `PA-Media-${template.name.replace(/\s+/g, '-')}.zip`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            })
+            .catch(function(error) {
+                console.error('Individual template ZIP generation failed:', error);
+                alert('Failed to create template ZIP. Please try again.');
+            });
+            
+    } catch (error) {
+        console.error('Individual template creation error:', error);
+        alert('Failed to create template. Please try again.');
+    }
+}
+
 function downloadPATemplate(templateId) {
     // Check if JSZip is available
     if (typeof JSZip === 'undefined') {
@@ -1517,6 +1596,88 @@ function downloadPAStyleGuide() {
     link.href = 'data:text/plain;charset=utf-8,PA Media Group - Complete Brand Guidelines\n\nGenerated by Design Generator Pro\n\nThis comprehensive style guide includes:\n- Brand colours and usage\n- Typography specifications\n- Logo guidelines\n- Template applications\n- Digital and print standards';
     link.download = 'PA-Media-Brand-Guidelines.pdf';
     link.click();
+}
+
+// Helper functions for individual template downloads
+function generateSampleContent(template, categoryName) {
+    switch (categoryName) {
+        case 'powerpoint':
+            return `PA Media PowerPoint Template: ${template.name}
+
+This is a sample PowerPoint template file.
+In a production environment, this would be a .pptx file with:
+- Branded slide masters
+- Consistent typography
+- PA Media color scheme
+- Professional layouts
+
+Template includes: ${template.slides ? template.slides.join(', ') : 'Multiple slide layouts'}
+Available formats: ${template.formats ? template.formats.join(', ') : 'PPTX, PDF'}`;
+
+        case 'teams':
+            return `PA Media Teams Background: ${template.name}
+
+This is a sample Teams background template.
+In production, this would be a high-resolution image file (${template.dimensions}) with:
+- PA Media branding
+- Professional background design
+- Optimized for video calls
+
+Available formats: ${template.formats ? template.formats.join(', ') : 'JPG, PNG'}`;
+
+        case 'social':
+            return `PA Media Social Media Template: ${template.name}
+
+This is a sample social media template.
+Template specifications:
+- Dimensions: ${template.dimensions}
+- Variations: ${template.variations ? template.variations.join(', ') : 'Multiple designs'}
+- Formats: ${template.formats ? template.formats.join(', ') : 'PNG, JPG, PSD'}
+
+Perfect for maintaining brand consistency across social platforms.`;
+
+        case 'print':
+            return `PA Media Print Template: ${template.name}
+
+This is a sample print template file.
+Template specifications:
+- Size: ${template.dimensions}
+- Print-ready design
+- PA Media branding
+- Professional layout
+
+Available formats: ${template.formats ? template.formats.join(', ') : 'PDF, AI, InDesign'}`;
+
+        case 'styleguide':
+            return `PA Media Style Guide: ${template.name}
+
+This is a comprehensive brand guidelines document.
+Contents: ${template.sections ? template.sections.join(', ') : 'Brand guidelines and standards'}
+
+This style guide ensures consistent application of PA Media's brand identity across all materials.
+
+Available formats: ${template.formats ? template.formats.join(', ') : 'PDF, Figma, Sketch'}`;
+
+        default:
+            return `PA Media Template: ${template.name}
+
+${template.description}
+
+This template maintains PA Media's brand consistency and professional standards.
+Generated by Design Generator Pro.`;
+    }
+}
+
+function getSampleExtension(categoryName) {
+    const extensions = {
+        powerpoint: 'txt',
+        teams: 'txt',
+        social: 'txt',
+        print: 'txt',
+        styleguide: 'txt',
+        website: 'html'
+    };
+    return extensions[categoryName] || 'txt';
 }
 
 // Initialize PA Media templates when DOM is loaded
