@@ -2114,13 +2114,49 @@ Contact</textarea>
         }
         
         function generatePresentationHTML(template) {
+            // Build slides content separately to avoid nested template literal issues
+            let slidesContent = '';
+            if (template.slides && template.slides.length > 1) {
+                for (let i = 1; i < template.slides.length; i++) {
+                    const slide = template.slides[i];
+                    const slideNumber = i + 1;
+                    const chartPlaceholder = (slide.includes('Data') || slide.includes('Chart')) ? '<div class="chart-placeholder">[Chart/Data Visualization Here]</div>' : '';
+                    const imagePlaceholder = slide.includes('Image') ? '<div class="image-placeholder">[High-Quality Image Here]</div>' : '';
+                    
+                    slidesContent += `
+        <!-- ${slide} Slide -->
+        <div class="slide" data-slide="${slideNumber}">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <div class="pa-logo">PA MEDIA</div>
+                </div>
+                <div class="slide-body">
+                    <h2 class="slide-title">${slide}</h2>
+                    <div class="slide-main">
+                        <p>Your content goes here. Customize this section with relevant information for the ${slide.toLowerCase()} slide.</p>
+                        ${chartPlaceholder}
+                        ${imagePlaceholder}
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <div class="slide-number">Slide ${slideNumber}</div>
+                </div>
+            </div>
+        </div>`;
+                }
+            }
+            
+            const totalSlides = template.slides ? template.slides.length + 1 : 2;
+            const templateName = template.name || 'PA Media Presentation';
+            const fileName = templateName.toLowerCase().replace(/\s+/g, '-');
+            
             return `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${template.name} - PA Media Presentation</title>
-    <link rel="stylesheet" href="${template.name.toLowerCase().replace(/\s+/g, '-')}-styles.css">
+    <title>${templateName} - PA Media Presentation</title>
+    <link rel="stylesheet" href="${fileName}-styles.css">
 </head>
 <body class="pa-presentation">
     <div class="presentation-container">
@@ -2131,37 +2167,17 @@ Contact</textarea>
                     <div class="pa-logo">PA MEDIA</div>
                 </div>
                 <div class="slide-body">
-                    <h1 class="presentation-title">${template.name}</h1>
+                    <h1 class="presentation-title">${templateName}</h1>
                     <p class="presentation-subtitle">Professional Media Solutions</p>
                     <div class="presentation-date">${new Date().toLocaleDateString()}</div>
                 </div>
             </div>
         </div>
         
-        ${template.slides.slice(1).map((slide, index) => `
-        <!-- ${slide} Slide -->
-        <div class="slide" data-slide="${index + 2}">
-            <div class="slide-content">
-                <div class="slide-header">
-                    <div class="pa-logo">PA MEDIA</div>
-                </div>
-                <div class="slide-body">
-                    <h2 class="slide-title">${slide}</h2>
-                    <div class="slide-main">
-                        <p>Your content goes here. Customize this section with relevant information for the ${slide.toLowerCase()} slide.</p>
-                        ${slide.includes('Data') || slide.includes('Chart') ? '<div class="chart-placeholder">[Chart/Data Visualization Here]</div>' : ''}
-                        ${slide.includes('Image') ? '<div class="image-placeholder">[High-Quality Image Here]</div>' : ''}
-                    </div>
-                </div>
-                <div class="slide-footer">
-                    <div class="slide-number">Slide ${index + 2}</div>
-                </div>
-            </div>
-        </div>
-        `).join('')}
+        ${slidesContent}
         
         <!-- Thank You Slide -->
-        <div class="slide" data-slide="${template.slides.length + 1}">
+        <div class="slide" data-slide="${totalSlides}">
             <div class="slide-content thank-you-slide">
                 <div class="slide-header">
                     <div class="pa-logo">PA MEDIA</div>
@@ -2181,13 +2197,13 @@ Contact</textarea>
     <!-- Navigation Controls -->
     <div class="presentation-controls">
         <button class="nav-btn" onclick="previousSlide()">‹ Previous</button>
-        <span class="slide-counter">1 / ${template.slides.length + 1}</span>
+        <span class="slide-counter">1 / ${totalSlides}</span>
         <button class="nav-btn" onclick="nextSlide()">Next ›</button>
     </div>
     
     <script>
         let currentSlide = 1;
-        const totalSlides = ${template.slides.length + 1};
+        const totalSlides = ${totalSlides};
         
         function showSlide(n) {
             const slides = document.querySelectorAll('.slide');
