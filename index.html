@@ -908,6 +908,101 @@
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
         }
 
+        /* Walkthrough Modal Styles */
+        .walkthrough-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .walkthrough-content {
+            background: white;
+            border-radius: 12px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .walkthrough-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .walkthrough-header h2 {
+            margin: 0;
+            color: #1f2937;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #6b7280;
+            cursor: pointer;
+            padding: 0;
+            width: 2rem;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .modal-close:hover {
+            background: #f3f4f6;
+            color: #374151;
+        }
+
+        .walkthrough-body {
+            padding: 1.5rem;
+        }
+
+        .walkthrough-step {
+            margin-bottom: 2rem;
+        }
+
+        .walkthrough-step:last-child {
+            margin-bottom: 0;
+        }
+
+        .walkthrough-step h3 {
+            color: #1f2937;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .walkthrough-step p {
+            color: #4b5563;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+
+        .walkthrough-step ul {
+            color: #4b5563;
+            line-height: 1.6;
+            margin-left: 1rem;
+        }
+
+        .walkthrough-step li {
+            margin-bottom: 0.25rem;
+        }
+
         .modal-header {
             padding: 1.5rem;
             border-bottom: 1px solid #e5e7eb;
@@ -961,7 +1056,7 @@
         <div class="header-content">
             <div class="logo">Design Generator Pro</div>
             <div style="display: flex; align-items: center; gap: 1rem;">
-                <a href="project-walkthrough.html" target="_blank" style="background: #10b981; color: white; padding: 0.5rem 1rem; border-radius: 0.375rem; text-decoration: none; font-size: 0.875rem; font-weight: 500;">Complete Guide</a>
+                <button onclick="openWalkthroughModal()" style="background: #10b981; color: white; padding: 0.5rem 1rem; border-radius: 0.375rem; border: none; font-size: 0.875rem; font-weight: 500; cursor: pointer;">Walkthrough</button>
             </div>
             <nav class="nav-tabs">
                 <button class="nav-tab active" data-tab="design">Design</button>
@@ -1098,14 +1193,15 @@ Contact</textarea>
 
                 <h2>Styling</h2>
                 <div class="form-group">
-                    <label for="colorScheme">Color Scheme</label>
+                    <label for="colorScheme">Colour Scheme</label>
                     <select id="colorScheme">
-                        <option value="blue">Professional Blue</option>
-                        <option value="monochrome">Monochrome</option>
-                        <option value="green">Success Green</option>
-                        <option value="purple">Creative Purple</option>
-                        <option value="orange">Energetic Orange</option>
-                        <option value="dark">Dark Theme</option>
+                        <option value="blue">Blue</option>
+                        <option value="monochrome">Grey</option>
+                        <option value="green">Green</option>
+                        <option value="purple">Purple</option>
+                        <option value="orange">Orange</option>
+                        <option value="dark">Dark</option>
+                        <option value="colorblind">Colourblind Friendly</option>
                     </select>
                 </div>
 
@@ -1380,7 +1476,7 @@ Contact</textarea>
 
             <div class="button-group">
                 <button type="button" class="btn-secondary" onclick="resetForm()">Reset</button>
-                <button type="button" class="btn-secondary" onclick="generateClaudeCodePrompt()" style="background: #10b981; color: white;">🤖 Generate Claude Prompt</button>
+                <button type="button" class="btn-secondary" onclick="generateClaudeCodePrompt()" style="background: #10b981; color: white;">Generate Claude Prompt</button>
                 <button type="button" class="btn-primary" onclick="downloadHTML()">Quick Export</button>
             </div>
         </div>
@@ -1449,25 +1545,720 @@ Contact</textarea>
             button.textContent = 'Downloading...';
             button.disabled = true;
             
-            // Use the existing PA Media templates system
             setTimeout(() => {
                 try {
-                    // Use the main PA Media template download function
-                    downloadPATemplate(type);
+                    let filename = '';
+                    let content = '';
+                    
+                    if (type === 'website') {
+                        filename = 'pa-media-website-templates.html';
+                        content = generatePAWebsiteTemplate();
+                    } else if (type === 'presentation') {
+                        filename = 'pa-media-presentation-templates.html';
+                        content = generatePAPresentationTemplate();
+                    } else if (type === 'digital') {
+                        filename = 'pa-media-digital-assets.html';
+                        content = generatePADigitalAssets();
+                    }
+                    
+                    // Create and download the file
+                    const blob = new Blob([content], { type: 'text/html' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = filename;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
                     
                     // Show success message
-                    showDownloadSuccess(type);
+                    button.textContent = '✅ Downloaded!';
+                    button.style.background = '#059669';
                 } catch (error) {
                     console.error('Download failed:', error);
-                    showDownloadError(type);
+                    button.textContent = '❌ Error';
+                    button.style.background = '#dc2626';
                 } finally {
-                    // Restore button
-                    button.textContent = originalText;
-                    button.disabled = false;
+                    // Restore button after 2 seconds
+                    setTimeout(() => {
+                        button.textContent = originalText;
+                        button.style.background = '#825FFF';
+                        button.disabled = false;
+                    }, 2000);
                 }
             }, 1000);
         }
         
+        // PA Media Template Generators
+        function generatePAWebsiteTemplate() {
+            return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PA Media - Professional Website Template</title>
+    <style>
+        :root {
+            --pa-primary: #825FFF;
+            --pa-secondary: #3D3677;
+            --pa-accent: #A855F7;
+            --pa-text: #1F2937;
+            --pa-light: #F8FAFC;
+            --pa-white: #FFFFFF;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--pa-text);
+        }
+        
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+        
+        header {
+            background: linear-gradient(135deg, var(--pa-primary) 0%, var(--pa-secondary) 100%);
+            color: var(--pa-white);
+            padding: 2rem 0;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--pa-white);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav a {
+            color: var(--pa-white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+        
+        nav a:hover { opacity: 0.8; }
+        
+        .hero {
+            background: var(--pa-light);
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--pa-primary);
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            color: var(--pa-secondary);
+        }
+        
+        .btn {
+            background: var(--pa-primary);
+            color: var(--pa-white);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(130, 95, 255, 0.3);
+        }
+        
+        .features {
+            padding: 4rem 0;
+            background: var(--pa-white);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .feature {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid #E5E7EB;
+        }
+        
+        .feature h3 {
+            color: var(--pa-primary);
+            margin-bottom: 1rem;
+        }
+        
+        footer {
+            background: var(--pa-secondary);
+            color: var(--pa-white);
+            padding: 2rem 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">PA Media</div>
+                <nav>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <h1>Professional Media Solutions</h1>
+            <p>Delivering exceptional content and communication services</p>
+            <button class="btn">Get Started</button>
+        </div>
+    </section>
+    
+    <section class="features">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 1rem; color: var(--pa-primary);">Our Services</h2>
+            <div class="features-grid">
+                <div class="feature">
+                    <h3>Content Creation</h3>
+                    <p>Professional content development and editorial services</p>
+                </div>
+                <div class="feature">
+                    <h3>Media Distribution</h3>
+                    <p>Wide-reaching distribution across multiple platforms</p>
+                </div>
+                <div class="feature">
+                    <h3>Digital Solutions</h3>
+                    <p>Cutting-edge digital media and technology solutions</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 PA Media Group. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>`;
+        }
+        
+        function generatePAPresentationTemplate() {
+            return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PA Media - Presentation Templates</title>
+    <style>
+        :root {
+            --pa-primary: #825FFF;
+            --pa-secondary: #3D3677;
+            --pa-white: #FFFFFF;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 2rem;
+            background: #F8FAFC;
+        }
+        
+        .slide {
+            width: 1920px;
+            height: 1080px;
+            background: var(--pa-white);
+            margin: 2rem auto;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .slide-header {
+            background: linear-gradient(135deg, var(--pa-primary) 0%, var(--pa-secondary) 100%);
+            color: var(--pa-white);
+            padding: 3rem;
+            text-align: center;
+        }
+        
+        .slide-title {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .slide-subtitle {
+            font-size: 2rem;
+            opacity: 0.9;
+        }
+        
+        .slide-content {
+            flex: 1;
+            padding: 4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            width: 100%;
+        }
+        
+        .slide-footer {
+            background: var(--pa-secondary);
+            color: var(--pa-white);
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        h1, h2, h3 { color: var(--pa-primary); }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--pa-primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="slide-header">
+            <div class="slide-title">PA Media</div>
+            <div class="slide-subtitle">Professional Presentation Template</div>
+        </div>
+        <div class="slide-content">
+            <div class="content-grid">
+                <div>
+                    <h2>Title Slide</h2>
+                    <p>Use this template for professional presentations with PA Media branding.</p>
+                </div>
+                <div>
+                    <h3>Features</h3>
+                    <ul>
+                        <li>Consistent branding</li>
+                        <li>Professional layout</li>
+                        <li>Ready for customization</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            PA Media Group - Professional Communication Solutions
+        </div>
+    </div>
+    
+    <div class="slide">
+        <div style="padding: 4rem; text-align: center;">
+            <div class="logo">PA Media</div>
+            <h1 style="margin: 2rem 0;">Content Slide Template</h1>
+            <div class="content-grid">
+                <div>
+                    <h3>Key Points</h3>
+                    <ul style="text-align: left; font-size: 1.5rem; line-height: 2;">
+                        <li>Professional design</li>
+                        <li>Brand consistency</li>
+                        <li>Easy customization</li>
+                        <li>Multiple layouts</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Benefits</h3>
+                    <p style="font-size: 1.5rem; line-height: 1.8;">This template provides a professional foundation for all PA Media presentations, ensuring brand consistency and visual appeal.</p>
+                </div>
+            </div>
+        </div>
+        <div class="slide-footer">
+            © 2024 PA Media Group
+        </div>
+    </div>
+</body>
+</html>`;
+        }
+        
+        function generatePADigitalAssets() {
+            return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PA Media - Digital Assets Collection</title>
+    <style>
+        :root {
+            --pa-primary: #825FFF;
+            --pa-secondary: #3D3677;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 2rem;
+            background: #F8FAFC;
+        }
+        
+        .asset-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .asset {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+        
+        .teams-bg {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--pa-primary) 0%, var(--pa-secondary) 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .social-template {
+            width: 100%;
+            height: 300px;
+            background: var(--pa-primary);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        
+        h1 { color: var(--pa-primary); text-align: center; }
+        h2 { color: var(--pa-primary); }
+    </style>
+</head>
+<body>
+    <h1>PA Media Digital Assets Collection</h1>
+    
+    <div class="asset-grid">
+        <div class="asset">
+            <h2>Teams Background #1</h2>
+            <div class="teams-bg">PA Media</div>
+            <p><strong>Dimensions:</strong> 1920x1080 (16:9)</p>
+            <p><strong>Format:</strong> Use as virtual background in Microsoft Teams</p>
+            <p><strong>Description:</strong> Professional gradient background with PA Media branding</p>
+        </div>
+        
+        <div class="asset">
+            <h2>Teams Background #2</h2>
+            <div class="teams-bg" style="background: var(--pa-secondary);">Professional</div>
+            <p><strong>Dimensions:</strong> 1920x1080 (16:9)</p>
+            <p><strong>Format:</strong> Use as virtual background in Microsoft Teams</p>
+            <p><strong>Description:</strong> Solid color background with professional styling</p>
+        </div>
+        
+        <div class="asset">
+            <h2>Social Media Template</h2>
+            <div class="social-template">
+                <h3 style="margin: 0;">PA Media</h3>
+                <p style="margin: 1rem 0;">Professional Communication</p>
+                <div style="font-size: 0.9rem; opacity: 0.9;">#PAMedia #Professional</div>
+            </div>
+            <p><strong>Dimensions:</strong> 1080x1080 (Square)</p>
+            <p><strong>Format:</strong> Perfect for Instagram, LinkedIn, Facebook posts</p>
+        </div>
+        
+        <div class="asset">
+            <h2>Email Signature</h2>
+            <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; font-size: 0.9rem;">
+                <div style="color: var(--pa-primary); font-weight: bold; margin-bottom: 0.5rem;">John Smith</div>
+                <div style="color: var(--pa-secondary);">Senior Manager</div>
+                <div style="color: var(--pa-primary); font-weight: bold; margin-top: 0.5rem;">PA Media Group</div>
+                <div style="font-size: 0.8rem; color: #666; margin-top: 0.5rem;">
+                    📧 john.smith@pamedia.com<br>
+                    📱 +44 123 456 7890<br>
+                    🌐 www.pamedia.com
+                </div>
+            </div>
+            <p><strong>Format:</strong> HTML email signature template</p>
+            <p><strong>Description:</strong> Professional email signature with PA Media branding</p>
+        </div>
+    </div>
+    
+    <div style="background: white; padding: 2rem; border-radius: 12px; margin-top: 2rem; text-align: center;">
+        <h2>Usage Instructions</h2>
+        <p>These digital assets are designed for PA Media Group's professional communications. Use them to maintain brand consistency across all digital platforms.</p>
+        <ul style="text-align: left; max-width: 600px; margin: 1rem auto;">
+            <li><strong>Teams Backgrounds:</strong> Download and add to Microsoft Teams virtual backgrounds</li>
+            <li><strong>Social Media:</strong> Customize text and use for professional social media posts</li>
+            <li><strong>Email Signatures:</strong> Copy HTML code and paste into email client signature settings</li>
+        </ul>
+    </div>
+</body>
+</html>`;
+        }
+        
+        function generatePABrandGuidelines() {
+            return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PA Media - Brand Guidelines</title>
+    <style>
+        :root {
+            --pa-primary: #825FFF;
+            --pa-secondary: #3D3677;
+            --pa-accent: #A855F7;
+            --pa-text: #1F2937;
+            --pa-light: #F8FAFC;
+            --pa-white: #FFFFFF;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--pa-text);
+            background: var(--pa-light);
+        }
+        
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+        
+        .header {
+            background: linear-gradient(135deg, var(--pa-primary) 0%, var(--pa-secondary) 100%);
+            color: var(--pa-white);
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section {
+            background: var(--pa-white);
+            border-radius: 12px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+        
+        .color-palette {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .color-swatch {
+            text-align: center;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .color-display {
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .color-info {
+            padding: 1rem;
+            background: var(--pa-white);
+        }
+        
+        .typography-demo {
+            margin: 2rem 0;
+        }
+        
+        .logo-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .logo-variant {
+            text-align: center;
+            padding: 2rem;
+            border: 1px solid #E5E7EB;
+            border-radius: 8px;
+        }
+        
+        h1, h2, h3 { color: var(--pa-primary); margin-bottom: 1rem; }
+        h1 { font-size: 3rem; }
+        h2 { font-size: 2rem; }
+        h3 { font-size: 1.5rem; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>PA Media Brand Guidelines</h1>
+        <p style="font-size: 1.2rem; opacity: 0.9;">Professional brand identity and usage guidelines</p>
+    </div>
+    
+    <div class="container">
+        <div class="section">
+            <h2>Brand Colors</h2>
+            <p>Our color palette reflects professionalism, innovation, and trust.</p>
+            <div class="color-palette">
+                <div class="color-swatch">
+                    <div class="color-display" style="background: var(--pa-primary);">Primary</div>
+                    <div class="color-info">
+                        <strong>#825FFF</strong><br>
+                        RGB(130, 95, 255)<br>
+                        Main brand color
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-display" style="background: var(--pa-secondary);">Secondary</div>
+                    <div class="color-info">
+                        <strong>#3D3677</strong><br>
+                        RGB(61, 54, 119)<br>
+                        Supporting color
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-display" style="background: var(--pa-accent);">Accent</div>
+                    <div class="color-info">
+                        <strong>#A855F7</strong><br>
+                        RGB(168, 85, 247)<br>
+                        Highlight color
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Typography</h2>
+            <div class="typography-demo">
+                <h1 style="margin-bottom: 0.5rem;">Heading 1 - 3rem</h1>
+                <p style="margin-bottom: 2rem; color: #6B7280;">Used for main page titles and hero headings</p>
+                
+                <h2 style="margin-bottom: 0.5rem;">Heading 2 - 2rem</h2>
+                <p style="margin-bottom: 2rem; color: #6B7280;">Used for section headings and major content divisions</p>
+                
+                <h3 style="margin-bottom: 0.5rem;">Heading 3 - 1.5rem</h3>
+                <p style="margin-bottom: 2rem; color: #6B7280;">Used for subsections and card titles</p>
+                
+                <p style="font-size: 1rem; margin-bottom: 1rem;"><strong>Body Text Regular - 1rem</strong></p>
+                <p style="margin-bottom: 2rem; color: #6B7280;">Standard body text used for content, descriptions, and general information.</p>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Logo Usage</h2>
+            <div class="logo-showcase">
+                <div class="logo-variant">
+                    <div style="font-size: 2rem; font-weight: bold; color: var(--pa-primary); margin-bottom: 1rem;">PA Media</div>
+                    <p><strong>Primary Logo</strong><br>Use on light backgrounds</p>
+                </div>
+                <div class="logo-variant" style="background: var(--pa-primary); color: white;">
+                    <div style="font-size: 2rem; font-weight: bold; margin-bottom: 1rem;">PA Media</div>
+                    <p><strong>Reverse Logo</strong><br>Use on dark backgrounds</p>
+                </div>
+                <div class="logo-variant">
+                    <div style="font-size: 1.5rem; font-weight: bold; color: var(--pa-secondary); margin-bottom: 1rem;">PA MEDIA</div>
+                    <p><strong>Text Only</strong><br>For small applications</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Usage Guidelines</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                <div>
+                    <h3 style="color: #10B981;">✓ Do</h3>
+                    <ul style="color: #374151;">
+                        <li>Use approved color combinations</li>
+                        <li>Maintain consistent typography</li>
+                        <li>Ensure proper logo spacing</li>
+                        <li>Keep designs clean and professional</li>
+                        <li>Use high-resolution assets</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color: #DC2626;">✗ Don't</h3>
+                    <ul style="color: #374151;">
+                        <li>Alter logo proportions or colors</li>
+                        <li>Use unauthorized fonts</li>
+                        <li>Crowd the logo with other elements</li>
+                        <li>Use low-quality or pixelated images</li>
+                        <li>Apply effects or distortions to the logo</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Applications</h2>
+            <p>These guidelines apply to all PA Media communications including:</p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 2rem 0;">
+                <div style="background: var(--pa-light); padding: 1rem; border-radius: 8px; text-align: center;">
+                    <strong>Websites</strong><br>Digital platforms
+                </div>
+                <div style="background: var(--pa-light); padding: 1rem; border-radius: 8px; text-align: center;">
+                    <strong>Presentations</strong><br>PowerPoint & slides
+                </div>
+                <div style="background: var(--pa-light); padding: 1rem; border-radius: 8px; text-align: center;">
+                    <strong>Print Materials</strong><br>Brochures & flyers
+                </div>
+                <div style="background: var(--pa-light); padding: 1rem; border-radius: 8px; text-align: center;">
+                    <strong>Digital Assets</strong><br>Social media & email
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer style="background: var(--pa-secondary); color: var(--pa-white); padding: 2rem; text-align: center;">
+        <p>&copy; 2024 PA Media Group. Brand Guidelines v1.0</p>
+    </footer>
+</body>
+</html>`;
+        }
+
         function downloadBrandGuidelines() {
             const button = event.target;
             const originalText = button.textContent;
@@ -1476,20 +2267,29 @@ Contact</textarea>
             
             setTimeout(() => {
                 try {
-                    // Call the existing brand guidelines function
-                    if (typeof downloadPABrandGuidelines === 'function') {
-                        downloadPABrandGuidelines();
-                    } else {
-                        // Fallback implementation
-                        generateBrandGuidelinesDownload();
-                    }
-                    showDownloadSuccess('brand-guidelines');
+                    const content = generatePABrandGuidelines();
+                    const blob = new Blob([content], { type: 'text/html' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'pa-media-brand-guidelines.html';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                    
+                    button.textContent = '✅ Downloaded!';
+                    button.style.background = '#059669';
                 } catch (error) {
                     console.error('Brand guidelines download failed:', error);
-                    showDownloadError('brand-guidelines');
+                    button.textContent = '❌ Error';
+                    button.style.background = '#dc2626';
                 } finally {
-                    button.textContent = originalText;
-                    button.disabled = false;
+                    setTimeout(() => {
+                        button.textContent = originalText;
+                        button.style.background = '#374151';
+                        button.disabled = false;
+                    }, 2000);
                 }
             }, 1500);
         }
@@ -1502,975 +2302,74 @@ Contact</textarea>
             
             setTimeout(() => {
                 try {
-                    // Call the existing complete download function
-                    if (typeof downloadAllPATemplates !== 'undefined' && window.downloadAllPATemplates) {
-                        window.downloadAllPATemplates();
-                    } else {
-                        // Fallback to generate complete suite
-                        generateCompletePASuite();
-                    }
-                    showDownloadSuccess('complete-suite');
+                    // Download all templates as separate files
+                    const templates = [
+                        { name: 'pa-media-website-templates.html', content: generatePAWebsiteTemplate() },
+                        { name: 'pa-media-presentation-templates.html', content: generatePAPresentationTemplate() },
+                        { name: 'pa-media-digital-assets.html', content: generatePADigitalAssets() },
+                        { name: 'pa-media-brand-guidelines.html', content: generatePABrandGuidelines() }
+                    ];
+                    
+                    templates.forEach((template, index) => {
+                        setTimeout(() => {
+                            const blob = new Blob([template.content], { type: 'text/html' });
+                            const url = URL.createObjectURL(blob);
+                            const a = document.createElement('a');
+                            a.href = url;
+                            a.download = template.name;
+                            document.body.appendChild(a);
+                            a.click();
+                            document.body.removeChild(a);
+                            URL.revokeObjectURL(url);
+                        }, index * 500);
+                    });
+                    
+                    button.textContent = '✅ Complete Suite Downloaded!';
+                    button.style.background = '#059669';
                 } catch (error) {
                     console.error('Complete suite download failed:', error);
-                    showDownloadError('complete-suite');
+                    button.textContent = '❌ Error';
+                    button.style.background = '#dc2626';
                 } finally {
-                    button.textContent = originalText;
-                    button.disabled = false;
+                    setTimeout(() => {
+                        button.textContent = originalText;
+                        button.style.background = '#825FFF';
+                        button.disabled = false;
+                    }, 3000);
                 }
             }, 2000);
         }
         
         function previewPATemplates() {
-            // Call the existing preview function or create our own
-            if (typeof showPATemplatePreview === 'function') {
-                showPATemplatePreview();
-            } else {
-                // Create our own preview modal
-                createPATemplatePreviewModal();
-            }
+            alert('PA Media Template Preview:\n\n• Website Templates - Professional homepage and service pages\n• Presentation Templates - PowerPoint-style slide layouts\n• Digital Assets - Teams backgrounds and social media templates\n• Brand Guidelines - Complete brand identity documentation\n\nUse the download buttons to get the complete template files.');
         }
-        
-        // Helper functions for PA Media downloads
-        function downloadPAWebsiteTemplates() {
-            const templates = new PAMediaTemplates();
-            const websiteTemplates = templates.templates.website;
-            
-            // Create comprehensive website templates package
-            let packageContent = 'PA MEDIA WEBSITE TEMPLATES\n';
-            packageContent += '='.repeat(40) + '\n\n';
-            packageContent += 'This package contains professional website templates with PA Media branding.\n';
-            packageContent += 'Each template includes complete HTML and CSS ready for customization.\n\n';
-            
-            websiteTemplates.forEach((template, index) => {
-                packageContent += `\n${'='.repeat(60)}\n`;
-                packageContent += `TEMPLATE ${index + 1}: ${template.name.toUpperCase()}\n`;
-                packageContent += `${'='.repeat(60)}\n\n`;
-                packageContent += `Description: ${template.description}\n`;
-                packageContent += `Category: ${template.category}\n\n`;
-                
-                // HTML File
-                packageContent += `--- HTML FILE (${template.name.toLowerCase().replace(/\s+/g, '-')}.html) ---\n`;
-                packageContent += template.code.html + '\n\n';
-                
-                // CSS File
-                packageContent += `--- CSS FILE (${template.name.toLowerCase().replace(/\s+/g, '-')}.css) ---\n`;
-                packageContent += template.code.css + '\n\n';
-                
-                // Usage Instructions
-                packageContent += '--- USAGE INSTRUCTIONS ---\n';
-                packageContent += `1. Save HTML content as "${template.name.toLowerCase().replace(/\s+/g, '-')}.html"\n`;
-                packageContent += `2. Save CSS content as "${template.name.toLowerCase().replace(/\s+/g, '-')}.css"\n`;
-                packageContent += '3. Ensure CSS file is in the same directory as HTML file\n';
-                packageContent += '4. Customize colors, content, and images as needed\n';
-                packageContent += '5. Test responsiveness on mobile and desktop\n\n';
-            });
-            
-            packageContent += '\n' + '='.repeat(60) + '\n';
-            packageContent += 'BRAND GUIDELINES\n';
-            packageContent += '='.repeat(60) + '\n';
-            packageContent += 'Primary Color: #825FFF (PA Media Purple)\n';
-            packageContent += 'Secondary Color: #3D3677 (Dark Purple)\n';
-            packageContent += 'Text Color: #000000 (Black)\n';
-            packageContent += 'Background: #FFFFFF (White)\n';
-            packageContent += 'Font: Greycliff CF or system sans-serif\n\n';
-            packageContent += 'Generated by PA Media Design System - Professional Template Suite\n';
-            
-            const link = document.createElement('a');
-            link.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(packageContent);
-            link.download = 'PA-Media-Website-Templates-Complete.txt';
-            link.click();
-        }
-        
-        function downloadPAPresentationTemplates() {
-            const templates = new PAMediaTemplates();
-            const presentationTemplates = templates.templates.powerpoint;
-            
-            let packageContent = 'PA MEDIA PRESENTATION ASSETS\n';
-            packageContent += '='.repeat(45) + '\n\n';
-            packageContent += 'Professional PowerPoint-style templates with PA Media branding.\n';
-            packageContent += 'These templates can be used for HTML presentations or converted to PowerPoint.\n\n';
-            
-            presentationTemplates.forEach((template, index) => {
-                packageContent += `\n${'='.repeat(60)}\n`;
-                packageContent += `PRESENTATION ${index + 1}: ${template.name.toUpperCase()}\n`;
-                packageContent += `${'='.repeat(60)}\n\n`;
-                packageContent += `Description: ${template.description}\n`;
-                packageContent += `Slide Count: ${template.slides.length} slides\n`;
-                packageContent += `Available Formats: ${template.formats.join(', ')}\n`;
-                packageContent += `Slides Included: ${template.slides.join(' • ')}\n\n`;
-                
-                // Generate HTML presentation structure
-                packageContent += `--- HTML PRESENTATION FILE (${template.name.toLowerCase().replace(/\s+/g, '-')}-presentation.html) ---\n`;
-                packageContent += generatePresentationHTML(template) + '\n\n';
-                
-                // Generate corresponding CSS
-                packageContent += `--- CSS STYLES FILE (${template.name.toLowerCase().replace(/\s+/g, '-')}-styles.css) ---\n`;
-                packageContent += generatePresentationCSS() + '\n\n';
-                
-                // Usage instructions
-                packageContent += '--- PRESENTATION USAGE GUIDE ---\n';
-                packageContent += '1. Save HTML content as presentation file\n';
-                packageContent += '2. Save CSS content as styles file\n';
-                packageContent += '3. Open HTML file in modern browser for presentation\n';
-                packageContent += '4. Use arrow keys or mouse to navigate slides\n';
-                packageContent += '5. Press F11 for fullscreen presentation mode\n';
-                packageContent += '6. Customize content and branding as needed\n\n';
-                
-                // PowerPoint conversion notes
-                packageContent += '--- POWERPOINT CONVERSION NOTES ---\n';
-                packageContent += '• Use slide dimensions: 16:9 (1920x1080) for best results\n';
-                packageContent += '• Primary brand color: #825FFF\n';
-                packageContent += '• Secondary brand color: #3D3677\n';
-                packageContent += '• Recommended fonts: Calibri, Arial, or similar sans-serif\n';
-                packageContent += '• Include PA Media logo on master slides\n\n';
-            });
-            
-            packageContent += '\n' + '='.repeat(60) + '\n';
-            packageContent += 'PRESENTATION BRAND STANDARDS\n';
-            packageContent += '='.repeat(60) + '\n';
-            packageContent += '• Always use PA Media brand colors consistently\n';
-            packageContent += '• Maintain professional typography and spacing\n';
-            packageContent += '• Include PA Media branding on title and closing slides\n';
-            packageContent += '• Use high-quality images and graphics only\n';
-            packageContent += '• Ensure text contrast meets accessibility standards\n\n';
-            packageContent += 'Generated by PA Media Design System - Presentation Suite\n';
-            
-            const link = document.createElement('a');
-            link.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(packageContent);
-            link.download = 'PA-Media-Presentation-Assets-Complete.txt';
-            link.click();
-        }
-        
-        function generatePresentationHTML(template) {
-            // Build slides content separately to avoid nested template literal issues
-            let slidesContent = '';
-            if (template.slides && template.slides.length > 1) {
-                for (let i = 1; i < template.slides.length; i++) {
-                    const slide = template.slides[i];
-                    const slideNumber = i + 1;
-                    const chartPlaceholder = (slide.includes('Data') || slide.includes('Chart')) ? '<div class="chart-placeholder">[Chart/Data Visualization Here]</div>' : '';
-                    const imagePlaceholder = slide.includes('Image') ? '<div class="image-placeholder">[High-Quality Image Here]</div>' : '';
-                    
-                    slidesContent += `
-        <!-- ${slide} Slide -->
-        <div class="slide" data-slide="${slideNumber}">
-            <div class="slide-content">
-                <div class="slide-header">
-                    <div class="pa-logo">PA MEDIA</div>
-                </div>
-                <div class="slide-body">
-                    <h2 class="slide-title">${slide}</h2>
-                    <div class="slide-main">
-                        <p>Your content goes here. Customize this section with relevant information for the ${slide.toLowerCase()} slide.</p>
-                        ${chartPlaceholder}
-                        ${imagePlaceholder}
-                    </div>
-                </div>
-                <div class="slide-footer">
-                    <div class="slide-number">Slide ${slideNumber}</div>
-                </div>
-            </div>
-        </div>`;
-                }
-            }
-            
-            const totalSlides = template.slides ? template.slides.length + 1 : 2;
-            const templateName = template.name || 'PA Media Presentation';
-            const fileName = templateName.toLowerCase().replace(/\s+/g, '-');
-            
-            return `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${templateName} - PA Media Presentation</title>
-    <link rel="stylesheet" href="${fileName}-styles.css">
-</head>
-<body class="pa-presentation">
-    <div class="presentation-container">
-        <!-- Title Slide -->
-        <div class="slide active" data-slide="1">
-            <div class="slide-content title-slide">
-                <div class="slide-header">
-                    <div class="pa-logo">PA MEDIA</div>
-                </div>
-                <div class="slide-body">
-                    <h1 class="presentation-title">${templateName}</h1>
-                    <p class="presentation-subtitle">Professional Media Solutions</p>
-                    <div class="presentation-date">${new Date().toLocaleDateString()}</div>
-                </div>
-            </div>
-        </div>
-        
-        ${slidesContent}
-        
-        <!-- Thank You Slide -->
-        <div class="slide" data-slide="${totalSlides}">
-            <div class="slide-content thank-you-slide">
-                <div class="slide-header">
-                    <div class="pa-logo">PA MEDIA</div>
-                </div>
-                <div class="slide-body">
-                    <h1>Thank You</h1>
-                    <p class="contact-info">
-                        PA Media Group<br>
-                        Professional Media Solutions<br>
-                        <strong>contact@pa.media</strong>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Navigation Controls -->
-    <div class="presentation-controls">
-        <button class="nav-btn" onclick="previousSlide()">‹ Previous</button>
-        <span class="slide-counter">1 / ${totalSlides}</span>
-        <button class="nav-btn" onclick="nextSlide()">Next ›</button>
-    </div>
-    
-    <script>
-        let currentSlide = 1;
-        const totalSlides = ${totalSlides};
-        
-        function showSlide(n) {
-            const slides = document.querySelectorAll('.slide');
-            if (n > totalSlides) currentSlide = 1;
-            if (n < 1) currentSlide = totalSlides;
-            
-            slides.forEach(slide => slide.classList.remove('active'));
-            slides[currentSlide - 1].classList.add('active');
-            
-            document.querySelector('.slide-counter').textContent = currentSlide + ' / ' + totalSlides;
-        }
-        
-        function nextSlide() {
-            showSlide(currentSlide += 1);
-        }
-        
-        function previousSlide() {
-            showSlide(currentSlide -= 1);
-        }
-        
-        // Keyboard navigation
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
-            if (e.key === 'ArrowLeft') previousSlide();
-        });
     </script>
-</body>
-</html>`;
-        }
-        
-        function generatePresentationCSS() {
-            return `/* PA Media Presentation Styles */
-:root {
-    --pa-primary: #825FFF;
-    --pa-secondary: #3D3677;
-    --pa-text: #000000;
-    --pa-white: #FFFFFF;
-    --pa-light-gray: #F8F9FA;
-    --pa-gradient: linear-gradient(135deg, #825FFF 0%, #3D3677 100%);
-}
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body.pa-presentation {
-    font-family: "Calibri", "Arial", sans-serif;
-    background: var(--pa-light-gray);
-    overflow: hidden;
-    height: 100vh;
-}
-
-.presentation-container {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-}
-
-.slide {
-    display: none;
-    width: 100%;
-    height: 100%;
-    background: var(--pa-white);
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
-.slide.active {
-    display: block;
-}
-
-.slide-content {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    padding: 3rem;
-}
-
-.slide-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-    border-bottom: 3px solid var(--pa-primary);
-    padding-bottom: 1rem;
-}
-
-.pa-logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--pa-primary);
-    letter-spacing: 2px;
-}
-
-.slide-body {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-}
-
-.title-slide .slide-body {
-    background: var(--pa-gradient);
-    color: var(--pa-white);
-    margin: -3rem;
-    margin-top: 0;
-    padding: 6rem 3rem 3rem;
-    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
-}
-
-.presentation-title {
-    font-size: 3.5rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-    line-height: 1.2;
-}
-
-.presentation-subtitle {
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
-    opacity: 0.9;
-}
-
-.presentation-date {
-    font-size: 1.1rem;
-    opacity: 0.8;
-}
-
-.slide-title {
-    font-size: 2.5rem;
-    color: var(--pa-primary);
-    margin-bottom: 2rem;
-    font-weight: bold;
-}
-
-.slide-main {
-    font-size: 1.3rem;
-    line-height: 1.6;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.chart-placeholder,
-.image-placeholder {
-    background: var(--pa-light-gray);
-    border: 2px dashed var(--pa-primary);
-    padding: 3rem;
-    margin: 2rem 0;
-    border-radius: 8px;
-    font-style: italic;
-    color: var(--pa-secondary);
-}
-
-.slide-footer {
-    margin-top: auto;
-    text-align: right;
-    color: var(--pa-secondary);
-    font-size: 0.9rem;
-}
-
-.thank-you-slide .slide-body {
-    background: var(--pa-gradient);
-    color: var(--pa-white);
-    margin: -3rem;
-    margin-top: 0;
-    padding: 6rem 3rem 3rem;
-}
-
-.thank-you-slide h1 {
-    font-size: 4rem;
-    margin-bottom: 2rem;
-}
-
-.contact-info {
-    font-size: 1.2rem;
-    line-height: 1.8;
-}
-
-.presentation-controls {
-    position: fixed;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    background: rgba(0,0,0,0.8);
-    padding: 0.8rem 1.5rem;
-    border-radius: 25px;
-    color: white;
-    z-index: 1000;
-}
-
-.nav-btn {
-    background: var(--pa-primary);
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    cursor: pointer;
-    font-weight: 500;
-    transition: background 0.3s ease;
-}
-
-.nav-btn:hover {
-    background: var(--pa-secondary);
-}
-
-.slide-counter {
-    font-size: 0.9rem;
-    min-width: 60px;
-    text-align: center;
-}
-
-@media print {
-    .presentation-controls {
-        display: none;
-    }
-    
-    .slide {
-        display: block !important;
-        page-break-after: always;
-        height: 100vh;
-    }
-}`;
-        }
-        
-        function downloadPADigitalAssets() {
-            const templates = new PAMediaTemplates();
-            const digitalAssets = [...templates.templates.teams, ...templates.templates.social];
-            
-            let packageContent = 'PA MEDIA DIGITAL ASSETS COLLECTION\n';
-            packageContent += '='.repeat(50) + '\n\n';
-            packageContent += 'Professional digital assets including Teams backgrounds, social media templates,\n';
-            packageContent += 'email signatures, and digital brand materials with PA Media styling.\n\n';
-            
-            // Teams Backgrounds Section
-            packageContent += '🎥 MICROSOFT TEAMS BACKGROUNDS\n';
-            packageContent += '-'.repeat(40) + '\n\n';
-            
-            const teamsAssets = digitalAssets.filter(asset => asset.type === 'teams-background' || asset.name.includes('Teams'));
-            teamsAssets.forEach((asset, index) => {
-                packageContent += `BACKGROUND ${index + 1}: ${asset.name.toUpperCase()}\n`;
-                packageContent += `Description: ${asset.description}\n`;
-                packageContent += `Dimensions: 1920x1080 (16:9 ratio)\n`;
-                packageContent += `Format: HTML/CSS (convert to image as needed)\n\n`;
-                
-                packageContent += `--- HTML CODE (${asset.name.toLowerCase().replace(/\s+/g, '-')}-background.html) ---\n`;
-                packageContent += generateTeamsBackgroundHTML(asset) + '\n\n';
-                
-                packageContent += `--- CSS CODE (${asset.name.toLowerCase().replace(/\s+/g, '-')}-background.css) ---\n`;
-                packageContent += generateTeamsBackgroundCSS(asset) + '\n\n';
-                
-                packageContent += '--- USAGE INSTRUCTIONS ---\n';
-                packageContent += '1. Open HTML file in browser\n';
-                packageContent += '2. Take screenshot at 1920x1080 resolution\n';
-                packageContent += '3. Save as JPG or PNG for Teams\n';
-                packageContent += '4. Upload to Teams > Settings > Backgrounds\n\n';
-                packageContent += '~'.repeat(50) + '\n\n';
-            });
-            
-            // Social Media Templates Section
-            packageContent += '📱 SOCIAL MEDIA TEMPLATES\n';
-            packageContent += '-'.repeat(40) + '\n\n';
-            
-            const socialAssets = digitalAssets.filter(asset => asset.type === 'social-media' || asset.name.includes('Social'));
-            socialAssets.forEach((asset, index) => {
-                packageContent += `TEMPLATE ${index + 1}: ${asset.name.toUpperCase()}\n`;
-                packageContent += `Description: ${asset.description}\n`;
-                packageContent += `Platform: LinkedIn, Twitter, Facebook\n`;
-                packageContent += `Dimensions: Responsive (1080x1080 square recommended)\n\n`;
-                
-                packageContent += `--- HTML CODE (${asset.name.toLowerCase().replace(/\s+/g, '-')}-social.html) ---\n`;
-                packageContent += generateSocialMediaHTML(asset) + '\n\n';
-                
-                packageContent += `--- CSS CODE (${asset.name.toLowerCase().replace(/\s+/g, '-')}-social.css) ---\n`;
-                packageContent += generateSocialMediaCSS() + '\n\n';
-                
-                packageContent += '--- SOCIAL MEDIA GUIDELINES ---\n';
-                packageContent += '• LinkedIn: 1080x1080 (square) or 1200x627 (landscape)\n';
-                packageContent += '• Twitter: 1200x675 (landscape) or 1080x1080 (square)\n';
-                packageContent += '• Facebook: 1200x630 (landscape)\n';
-                packageContent += '• Instagram: 1080x1080 (square) or 1080x1350 (portrait)\n\n';
-                packageContent += '~'.repeat(50) + '\n\n';
-            });
-            
-            // Email Signature Section
-            packageContent += '✉️ EMAIL SIGNATURE TEMPLATE\n';
-            packageContent += '-'.repeat(40) + '\n\n';
-            packageContent += 'Professional email signature with PA Media branding\n\n';
-            
-            packageContent += '--- EMAIL SIGNATURE HTML ---\n';
-            packageContent += generateEmailSignatureHTML() + '\n\n';
-            
-            packageContent += '--- EMAIL SIGNATURE USAGE ---\n';
-            packageContent += '1. Copy HTML code\n';
-            packageContent += '2. Open your email client settings\n';
-            packageContent += '3. Paste into signature field (HTML mode)\n';
-            packageContent += '4. Customize name, title, and contact details\n';
-            packageContent += '5. Test signature in new email\n\n';
-            
-            packageContent += '\n' + '='.repeat(60) + '\n';
-            packageContent += 'DIGITAL ASSET BRAND STANDARDS\n';
-            packageContent += '='.repeat(60) + '\n';
-            packageContent += '• Always maintain PA Media brand colors (#825FFF, #3D3677)\n';
-            packageContent += '• Use professional typography and clear readability\n';
-            packageContent += '• Ensure high resolution for print and digital use\n';
-            packageContent += '• Include PA Media logo or branding on all materials\n';
-            packageContent += '• Test across different devices and platforms\n\n';
-            packageContent += 'Generated by PA Media Design System - Digital Assets Suite\n';
-            
-            const link = document.createElement('a');
-            link.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(packageContent);
-            link.download = 'PA-Media-Digital-Assets-Complete.txt';
-            link.click();
-        }
-        
-        function generateTeamsBackgroundHTML(asset) {
-            return `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${asset.name} - PA Media Teams Background</title>
-    <link rel="stylesheet" href="${asset.name.toLowerCase().replace(/\s+/g, '-')}-background.css">
-</head>
-<body class="teams-background">
-    <div class="background-container">
-        <div class="background-gradient"></div>
-        <div class="brand-logo">
-            <div class="pa-logo-text">PA MEDIA</div>
-        </div>
-        <div class="background-pattern"></div>
-        <div class="bottom-accent"></div>
-    </div>
-</body>
-</html>`;
-        }
-        
-        function generateTeamsBackgroundCSS(asset) {
-            return `/* PA Media Teams Background - ${asset.name} */
-:root {
-    --pa-primary: #825FFF;
-    --pa-secondary: #3D3677;
-    --pa-white: #FFFFFF;
-    --pa-accent: #6C5CE7;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body.teams-background {
-    width: 1920px;
-    height: 1080px;
-    overflow: hidden;
-    font-family: "Calibri", "Arial", sans-serif;
-}
-
-.background-container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, var(--pa-primary) 0%, var(--pa-secondary) 100%);
-}
-
-.background-gradient {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at 30% 70%, rgba(255,255,255,0.1) 0%, transparent 50%);
-}
-
-.brand-logo {
-    position: absolute;
-    bottom: 60px;
-    right: 80px;
-    z-index: 10;
-}
-
-.pa-logo-text {
-    font-size: 48px;
-    font-weight: bold;
-    color: var(--pa-white);
-    letter-spacing: 4px;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-}
-
-.background-pattern {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: 
-        radial-gradient(circle at 20% 20%, rgba(255,255,255,0.05) 1px, transparent 1px),
-        radial-gradient(circle at 80% 80%, rgba(255,255,255,0.05) 1px, transparent 1px);
-    background-size: 100px 100px, 150px 150px;
-}
-
-.bottom-accent {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 8px;
-    background: var(--pa-white);
-}`;
-        }
-        
-        function generateSocialMediaHTML(asset) {
-            return `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${asset.name} - PA Media Social Template</title>
-    <link rel="stylesheet" href="${asset.name.toLowerCase().replace(/\s+/g, '-')}-social.css">
-</head>
-<body class="social-template">
-    <div class="social-container">
-        <div class="social-header">
-            <div class="pa-brand">PA MEDIA</div>
-        </div>
-        <div class="social-content">
-            <h1 class="social-title">Your Headline Here</h1>
-            <p class="social-text">Add your engaging content here. Keep it concise and impactful for social media.</p>
-            <div class="social-cta">Learn More</div>
-        </div>
-        <div class="social-footer">
-            <div class="social-tag">#PAMedia #Professional #Media</div>
-        </div>
-    </div>
-</body>
-</html>`;
-        }
-        
-        function generateSocialMediaCSS() {
-            return `/* PA Media Social Media Template */
-:root {
-    --pa-primary: #825FFF;
-    --pa-secondary: #3D3677;
-    --pa-white: #FFFFFF;
-    --pa-text: #000000;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body.social-template {
-    width: 1080px;
-    height: 1080px;
-    font-family: "Arial", sans-serif;
-    overflow: hidden;
-}
-
-.social-container {
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, var(--pa-primary) 0%, var(--pa-secondary) 100%);
-    display: flex;
-    flex-direction: column;
-    padding: 60px;
-    color: var(--pa-white);
-}
-
-.social-header {
-    margin-bottom: 40px;
-}
-
-.pa-brand {
-    font-size: 36px;
-    font-weight: bold;
-    letter-spacing: 3px;
-}
-
-.social-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-}
-
-.social-title {
-    font-size: 64px;
-    font-weight: bold;
-    line-height: 1.2;
-    margin-bottom: 30px;
-}
-
-.social-text {
-    font-size: 28px;
-    line-height: 1.4;
-    margin-bottom: 40px;
-    opacity: 0.9;
-}
-
-.social-cta {
-    background: var(--pa-white);
-    color: var(--pa-primary);
-    padding: 20px 40px;
-    border-radius: 50px;
-    font-size: 24px;
-    font-weight: bold;
-    display: inline-block;
-    margin: 0 auto;
-}
-
-.social-footer {
-    margin-top: 40px;
-    text-align: center;
-}
-
-.social-tag {
-    font-size: 20px;
-    opacity: 0.8;
-}`;
-        }
-        
-        function generateEmailSignatureHTML() {
-            return `<table style="border-collapse: collapse; font-family: Arial, sans-serif; font-size: 14px; line-height: 1.4;">
-  <tr>
-    <td style="padding: 10px 0; border-bottom: 3px solid #825FFF;">
-      <table style="border-collapse: collapse;">
-        <tr>
-          <td style="vertical-align: top; padding-right: 20px;">
-            <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #825FFF 0%, #3D3677 100%); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 12px; text-align: center;">PA<br>MEDIA</div>
-          </td>
-          <td style="vertical-align: top;">
-            <div style="font-size: 16px; font-weight: bold; color: #000000; margin-bottom: 5px;">Your Name</div>
-            <div style="font-size: 14px; color: #825FFF; margin-bottom: 5px;">Your Title</div>
-            <div style="font-size: 12px; color: #676767;">PA Media Group</div>
-          </td>
-        </tr>
-      </table>
-    </td>
-  </tr>
-  <tr>
-    <td style="padding: 10px 0;">
-      <div style="font-size: 12px; color: #676767;">
-        📧 your.email@pa.media | 📞 +44 (0)20 7963 7000<br>
-        🌐 pa.media | 📍 London, United Kingdom
-      </div>
-    </td>
-  </tr>
-  <tr>
-    <td style="padding: 5px 0; font-size: 10px; color: #999999;">
-      PA Media Group - Professional Media Solutions Since 1868
-    </td>
-  </tr>
-</table>`;
-        }
-        
-        function downloadPAPrintMaterials() {
-            const templates = new PAMediaTemplates();
-            const printMaterials = templates.templates.print;
-            
-            let packageContent = 'PA Media Print Materials\n';
-            packageContent += '='.repeat(30) + '\n\n';
-            
-            printMaterials.forEach(material => {
-                packageContent += `Material: ${material.name}\n`;
-                packageContent += `Description: ${material.description}\n`;
-                packageContent += `Print-Ready HTML:\n${material.html}\n\n`;
-                packageContent += `Print Styles:\n${material.css}\n\n`;
-                packageContent += '-'.repeat(30) + '\n\n';
-            });
-            
-            const link = document.createElement('a');
-            link.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(packageContent);
-            link.download = 'PA-Media-Print-Materials.txt';
-            link.click();
-        }
-        
-        function generateBrandGuidelinesDownload() {
-            const templates = new PAMediaTemplates();
-            
-            const guidelines = `PA Media Brand Guidelines
-===============================
-
-BRAND COLORS
-Primary: ${templates.brandColors.primary}
-Secondary: ${templates.brandColors.secondary}
-Accent: ${templates.brandColors.accent}
-Text: ${templates.brandColors.text}
-Background: ${templates.brandColors.background}
-
-TYPOGRAPHY
-Font Family: ${templates.typography.fontFamily}
-Available Weights: ${Object.entries(templates.typography.weights).map(([name, weight]) => `${name}: ${weight}`).join(', ')}
-
-USAGE GUIDELINES
-- Always maintain proper contrast ratios
-- Use primary color for main CTAs and brand elements
-- Secondary color for supporting elements and backgrounds
-- Ensure consistent spacing and typography hierarchy
-
-TEMPLATE APPLICATIONS
-The brand guidelines apply to all PA Media templates including:
-- Website templates
-- Presentation materials
-- Digital assets (Teams backgrounds, social media)
-- Print materials (business cards, letterhead)
-
-Generated by PA Media Design System
-`;
-
-            const link = document.createElement('a');
-            link.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(guidelines);
-            link.download = 'PA-Media-Brand-Guidelines.txt';
-            link.click();
-        }
-        
-        function generateCompletePASuite() {
-            const templates = new PAMediaTemplates();
-            
-            let completePackage = 'PA MEDIA COMPLETE TEMPLATE SUITE\n';
-            completePackage += '='.repeat(50) + '\n\n';
-            
-            // Add all template categories
-            Object.entries(templates.templates).forEach(([category, items]) => {
-                completePackage += `\n${category.toUpperCase()} TEMPLATES\n`;
-                completePackage += '-'.repeat(category.length + 10) + '\n\n';
-                
-                items.forEach(item => {
-                    completePackage += `Name: ${item.name}\n`;
-                    completePackage += `Description: ${item.description}\n`;
-                    completePackage += `HTML:\n${item.html}\n\n`;
-                    completePackage += `CSS:\n${item.css}\n\n`;
-                    completePackage += '~'.repeat(30) + '\n\n';
-                });
-            });
-            
-            const link = document.createElement('a');
-            link.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(completePackage);
-            link.download = 'PA-Media-Complete-Suite.txt';
-            link.click();
-        }
-        
-        function createPATemplatePreviewModal() {
-            const modal = document.createElement('div');
-            modal.style.cssText = `
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background: rgba(0,0,0,0.8);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                z-index: 10000;
-                padding: 2rem;
-            `;
-            
-            const content = document.createElement('div');
-            content.style.cssText = `
-                background: white;
-                border-radius: 12px;
-                padding: 2rem;
-                max-width: 900px;
-                max-height: 80vh;
-                overflow-y: auto;
-                position: relative;
-            `;
-            
-            const templates = new PAMediaTemplates();
-            
-            content.innerHTML = `
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
-                    <h2 style="color: #825FFF; margin: 0;">PA Media Template Preview</h2>
-                    <button onclick="this.closest('[style*=\"position: fixed\"]').remove()" 
-                            style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #666;">×</button>
-                </div>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
-                    ${Object.entries(templates.templates).map(([category, items]) => `
-                        <div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 1rem;">
-                            <h3 style="color: #825FFF; margin: 0 0 1rem 0; font-size: 1.1rem;">${category.charAt(0).toUpperCase() + category.slice(1)}</h3>
-                            ${items.slice(0, 3).map(item => `
-                                <div style="margin-bottom: 0.5rem; padding: 0.5rem; background: #f9fafb; border-radius: 4px;">
-                                    <div style="font-weight: 500; font-size: 0.9rem; color: #374151;">${item.name}</div>
-                                    <div style="font-size: 0.8rem; color: #6b7280; margin-top: 0.25rem;">${item.description}</div>
-                                </div>
-                            `).join('')}
-                            <div style="font-size: 0.8rem; color: #825FFF; margin-top: 0.5rem;">
-                                ${items.length} template${items.length !== 1 ? 's' : ''} available
-                            </div>
-                        </div>
-                    `).join('')}
-                </div>
-                
-                <div style="margin-top: 2rem; text-align: center;">
-                    <button onclick="downloadAllPATemplates(); this.closest('[style*=\"position: fixed\"]').remove();" 
-                            style="background: #825FFF; color: white; border: none; padding: 1rem 2rem; border-radius: 6px; font-weight: 500; cursor: pointer;">
-                        Download All Templates
-                    </button>
-                </div>
-            `;
-            
-            modal.appendChild(content);
-            document.body.appendChild(modal);
-        }
-        
+    <script>
+        // Notification functions for PA Media downloads
         function showDownloadSuccess(type) {
+            const typeNames = {
+                'website': 'Website Templates',
+                'presentation': 'Presentation Templates', 
+                'digital': 'Digital Assets',
+                'brand-guidelines': 'Brand Guidelines',
+                'complete-suite': 'Complete Template Suite'
+            };
+            
             const notification = document.createElement('div');
             notification.style.cssText = `
                 position: fixed;
                 top: 2rem;
                 right: 2rem;
                 background: #10b981;
-                color: white;
+                colour: white;
                 padding: 1rem 1.5rem;
                 border-radius: 8px;
-                z-index: 10001;
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
                 font-weight: 500;
                 box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                z-index: 1000;
             `;
-            
-            const typeNames = {
-                'website': 'Website Templates', 
-                'presentation': 'Presentation Assets',
-                'digital': 'Digital Assets',
-                'print': 'Print Materials',
-                'brand-guidelines': 'Brand Guidelines',
-                'complete-suite': 'Complete Template Suite'
-            };
             
             notification.textContent = `✅ ${typeNames[type] || 'Templates'} downloaded successfully!`;
             document.body.appendChild(notification);
@@ -2487,10 +2386,10 @@ Generated by PA Media Design System
                 top: 2rem;
                 right: 2rem;
                 background: #ef4444;
-                color: white;
+                colour: white;
                 padding: 1rem 1.5rem;
                 border-radius: 8px;
-                z-index: 10001;
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
                 font-weight: 500;
                 box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             `;
@@ -2502,6 +2401,55 @@ Generated by PA Media Design System
                 notification.remove();
             }, 4000);
         }
+
+        function openWalkthroughModal() {
+            document.getElementById('walkthroughModal').style.display = 'flex';
+        }
+
+        function closeWalkthroughModal() {
+            document.getElementById('walkthroughModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('walkthroughModal');
+            if (event.target === modal) {
+                closeWalkthroughModal();
+            }
+        }
     </script>
+
+    <!-- Walkthrough Modal -->
+    <div id="walkthroughModal" class="walkthrough-modal" style="display: none;">
+        <div class="modal-overlay" onclick="closeWalkthroughModal()"></div>
+        <div class="walkthrough-content">
+            <div class="walkthrough-header">
+                <h2>Homepage Design Generator - Quick Walkthrough</h2>
+                <button onclick="closeWalkthroughModal()" class="modal-close">&times;</button>
+            </div>
+            <div class="walkthrough-body">
+                <div class="walkthrough-step">
+                    <h3>1. Choose Your Design Style</h3>
+                    <p>Select from 13 professional design styles including Minimalist, Corporate, Tech Startup, E-commerce, and more. Each style comes with pre-configured layouts and styling.</p>
+                </div>
+                <div class="walkthrough-step">
+                    <h3>2. Customise Your Layout</h3>
+                    <p>Use the advanced layout controls to adjust density, width, borders, and shadows. Customize colours, typography, and content to match your brand.</p>
+                </div>
+                <div class="walkthrough-step">
+                    <h3>3. Generate & Export</h3>
+                    <p>Click "Generate Design" to see your homepage preview, then use "Quick Export" to download complete HTML files ready for deployment.</p>
+                </div>
+                <div class="walkthrough-step">
+                    <h3>4. Additional Features</h3>
+                    <ul>
+                        <li><strong>URL Import:</strong> Import existing website designs to modify</li>
+                        <li><strong>PA Media Templates:</strong> Access professional media brand templates</li>
+                        <li><strong>Claude Code Integration:</strong> Generate prompts for further development</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
