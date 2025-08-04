@@ -2533,6 +2533,49 @@ Contact</textarea>
         </div>
     </div>
 
+    <!-- Template Preview Area -->
+    <div id="preview-area" style="
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 50%;
+        height: 100vh;
+        background: white;
+        border-left: 1px solid #e5e7eb;
+        overflow-y: auto;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        z-index: 1000;
+        box-shadow: -4px 0 12px rgba(0,0,0,0.1);
+    ">
+        <div style="position: sticky; top: 0; background: white; padding: 1rem; border-bottom: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: center;">
+            <h3 style="margin: 0; color: #1f2937; font-size: 1.1rem;">Template Preview</h3>
+            <button onclick="togglePreview()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #6b7280;">×</button>
+        </div>
+        <div id="preview-content" style="padding: 0;">
+            <!-- Generated template content will appear here -->
+        </div>
+    </div>
+
+    <!-- Preview Toggle Button -->
+    <button id="preview-toggle" onclick="togglePreview()" style="
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: #3b82f6;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 25px;
+        cursor: pointer;
+        font-weight: 500;
+        z-index: 1001;
+        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        transition: all 0.3s ease;
+    ">
+        👁️ Preview
+    </button>
+
     <script src="assets/templates.js"></script>
     <script src="assets/components.js"></script>
     <script src="assets/design-tokens.js"></script>
@@ -4290,21 +4333,156 @@ Please create a complete, professional implementation following the ${data.style
             }
         }
 
+        // Initialize Design Generator
+        window.designGenerator = {
+            currentTemplate: 'hero',
+            currentStyle: 'minimalist',
+            
+            getFormData: function() {
+                return {
+                    template: this.currentTemplate,
+                    style: this.currentStyle,
+                    siteTitle: document.getElementById('siteTitle')?.value || 'Your Brand',
+                    fontFamily: document.getElementById('fontFamily')?.value || 'Inter',
+                    primaryColor: document.getElementById('primaryHex')?.value || '#3b82f6',
+                    secondaryColor: document.getElementById('secondaryHex')?.value || '#64748b',
+                    navLinks: ['Home', 'About', 'Services', 'Contact']
+                };
+            },
+            
+            getCurrentData: function() {
+                return this.getFormData();
+            },
+            
+            updatePreview: function() {
+                this.generateTemplate();
+            },
+            
+            switchTab: function(tabName) {
+                // Handle tab switching if needed
+            },
+            
+            generateTemplate: function() {
+                const data = this.getFormData();
+                const colors = {
+                    primary: data.primaryColor,
+                    secondary: data.secondaryColor,
+                    background: '#ffffff',
+                    surface: '#f8fafc',
+                    text: '#1f2937',
+                    border: '#e5e7eb'
+                };
+                
+                // Check if template exists in DesignTemplates
+                let templateFunction = null;
+                if (DesignTemplates.layouts && DesignTemplates.layouts[this.currentTemplate]) {
+                    templateFunction = DesignTemplates.layouts[this.currentTemplate];
+                } else if (DesignTemplates[this.currentTemplate]) {
+                    templateFunction = DesignTemplates[this.currentTemplate];
+                }
+                
+                if (templateFunction && templateFunction.generate) {
+                    const html = templateFunction.generate(data, this.currentStyle, colors);
+                    
+                    // Display in preview area if it exists
+                    const previewContent = document.getElementById('preview-content');
+                    if (previewContent) {
+                        previewContent.innerHTML = html;
+                    }
+                    
+                    // Show success message
+                    this.showMessage('Template generated successfully!', 'success');
+                } else {
+                    this.showMessage(`Template "${this.currentTemplate}" not found`, 'error');
+                }
+            },
+            
+            showMessage: function(message, type) {
+                // Simple message display
+                const existingMessage = document.querySelector('.template-message');
+                if (existingMessage) {
+                    existingMessage.remove();
+                }
+                
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `template-message ${type}`;
+                messageDiv.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    padding: 12px 20px;
+                    border-radius: 6px;
+                    z-index: 10000;
+                    font-weight: 500;
+                    ${type === 'success' ? 'background: #10b981; color: white;' : 'background: #ef4444; color: white;'}
+                `;
+                messageDiv.textContent = message;
+                document.body.appendChild(messageDiv);
+                
+                setTimeout(() => messageDiv.remove(), 3000);
+            }
+        };
+
+        // Preview toggle functionality
+        let previewVisible = false;
+        function togglePreview() {
+            const previewArea = document.getElementById('preview-area');
+            const toggleBtn = document.getElementById('preview-toggle');
+            
+            previewVisible = !previewVisible;
+            
+            if (previewVisible) {
+                previewArea.style.transform = 'translateX(0)';
+                toggleBtn.textContent = '✕ Close';
+                toggleBtn.style.right = 'calc(50% + 20px)';
+            } else {
+                previewArea.style.transform = 'translateX(100%)';
+                toggleBtn.textContent = '👁️ Preview';
+                toggleBtn.style.right = '20px';
+            }
+        }
+
         // Update prompt preview when page loads and form changes
         document.addEventListener('DOMContentLoaded', function() {
-            setTimeout(updateClaudePromptPreview, 1000); // Delay to ensure generator is loaded
+            // Initialize default template
+            window.designGenerator.generateTemplate();
+            
+            setTimeout(updateClaudePromptPreview, 1000);
             
             // Update prompt when form inputs change
             const formInputs = document.querySelectorAll('input, select, textarea');
             formInputs.forEach(input => {
-                input.addEventListener('input', updateClaudePromptPreview);
-                input.addEventListener('change', updateClaudePromptPreview);
+                input.addEventListener('input', function() {
+                    window.designGenerator.generateTemplate();
+                    updateClaudePromptPreview();
+                });
+                input.addEventListener('change', function() {
+                    window.designGenerator.generateTemplate();
+                    updateClaudePromptPreview();
+                });
             });
             
-            // Update when template options are clicked
+            // Handle template option clicks
             document.addEventListener('click', function(e) {
-                if (e.target.classList.contains('template-option')) {
-                    setTimeout(updateClaudePromptPreview, 100);
+                if (e.target.classList.contains('template-option') || e.target.closest('.template-option')) {
+                    const templateOption = e.target.classList.contains('template-option') ? 
+                        e.target : e.target.closest('.template-option');
+                    
+                    // Remove active class from all options
+                    document.querySelectorAll('.template-option').forEach(opt => {
+                        opt.classList.remove('active');
+                    });
+                    
+                    // Add active class to clicked option
+                    templateOption.classList.add('active');
+                    
+                    // Update current template
+                    const templateName = templateOption.dataset.template;
+                    if (templateName) {
+                        window.designGenerator.currentTemplate = templateName;
+                        window.designGenerator.generateTemplate();
+                        setTimeout(updateClaudePromptPreview, 100);
+                    }
                 }
             });
         });
