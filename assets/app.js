@@ -221,7 +221,12 @@ const ValidationUtils = {
             validated.navLinks = this.validateNavLinks(data.navLinks);
             
             // Validate template choices
-            const validTemplates = ['hero', 'centered', 'sidebar', 'grid', 'portfolio'];
+            const validTemplates = [
+                'hero', 'centered', 'sidebar', 'grid', 'split', 'masonry', 'fullscreen', 
+                'timeline', 'magazine', 'portfolio', 'landing', 'dashboard-pro', 'blog-modern', 
+                'cards', 'ecommerce-grid', 'pricing', 'testimonials', 'features', 'comparison', 
+                'stats', 'cta', 'gallery', 'contact', 'team', 'faq'
+            ];
             const validStyles = ['minimalist', 'dashboard', 'corporate', 'creative', 'tech-startup', 'e-commerce'];
             const validColorSchemes = ['blue', 'monochrome', 'green', 'purple', 'orange', 'dark'];
             const validFonts = ['sans', 'serif', 'mono', 'display'];
@@ -616,15 +621,17 @@ class DesignGenerator {
     switchTab(tabName) {
         this.currentTab = tabName;
         
-        // Update tab buttons
+        // Update tab buttons - exclude walkthrough button from regular tab switching
         document.querySelectorAll('.nav-tab').forEach(tab => {
-            tab.classList.toggle('active', tab.dataset.tab === tabName);
+            if (!tab.classList.contains('walkthrough')) {
+                tab.classList.toggle('active', tab.dataset.tab === tabName);
+            }
         });
         
         // Handle special tabs that don't have corresponding nav-tab buttons
         if (tabName === 'pa-media') {
             // Clear all nav-tab active states for PA Media since it doesn't have a nav-tab button
-            document.querySelectorAll('.nav-tab').forEach(tab => {
+            document.querySelectorAll('.nav-tab:not(.walkthrough)').forEach(tab => {
                 tab.classList.remove('active');
             });
         }
@@ -855,9 +862,16 @@ class DesignGenerator {
 
         const data = this.getFormData();
         let html = '';
+        
+        // Ensure navLinks is always an array for template generation
+        if (typeof data.navLinks === 'string') {
+            data.navLinks = data.navLinks.split('\n').filter(link => link.trim());
+        } else if (!Array.isArray(data.navLinks)) {
+            data.navLinks = ['Home', 'About', 'Services', 'Contact']; // Default fallback
+        }
 
         // Debug logging
-        console.log('Preview data:', { style: data.style, template: data.template, page: data.page });
+        console.log('Preview data:', { style: data.style, template: data.template, page: data.page, navLinks: data.navLinks });
 
         // Get colors based on current style and color scheme
         const styleColors = DesignTemplates.styles[data.style]?.colors || DesignTemplates.styles.minimalist.colors;
@@ -890,9 +904,18 @@ class DesignGenerator {
                 const template = DesignTemplates.layouts[data.template];
                 if (!template) {
                     console.error('Available templates:', Object.keys(DesignTemplates.layouts || {}));
-                    throw new TemplateError(`Layout template not found: ${data.template}`, data.template);
+                    console.warn(`Template '${data.template}' not found, falling back to 'hero' template`);
+                    
+                    // Fallback to hero template if the requested template doesn't exist
+                    const fallbackTemplate = DesignTemplates.layouts['hero'];
+                    if (fallbackTemplate) {
+                        html = fallbackTemplate.generate(data, data.style, colors);
+                    } else {
+                        throw new TemplateError(`Both requested template '${data.template}' and fallback template 'hero' not found`, data.template);
+                    }
+                } else {
+                    html = template.generate(data, data.style, colors);
                 }
-                html = template.generate(data, data.style, colors);
             }
 
             if (!html || html.trim() === '') {
