@@ -84,9 +84,22 @@ const DesignTemplates = {
             name: 'PA Media',
             description: 'Professional media brand',
             colors: {
-                primary: '#825FFF',
-                secondary: '#3D3677',
+                primary: 'rgb(130, 95, 255)',
+                secondary: 'rgb(61, 54, 119)',
                 accent: '#6C5CE7',
+                text: '#000000',
+                background: '#ffffff',
+                surface: '#f8f9fa',
+                border: '#e5e7eb'
+            }
+        },
+        patvmetadata: {
+            name: 'PA TV Metadata',
+            description: 'PA TV metadata branding',
+            colors: {
+                primary: 'rgb(130, 95, 255)',
+                secondary: 'rgb(61, 54, 119)',
+                accent: '#6C5CE7', 
                 text: '#000000',
                 background: '#ffffff',
                 surface: '#f8f9fa',

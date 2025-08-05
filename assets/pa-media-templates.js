@@ -2,14 +2,25 @@
 class PAMediaTemplates {
     constructor() {
         this.brandColors = {
-            primary: '#825FFF',       // Vibrant purple
-            secondary: '#3D3677',     // Deep navy purple
+            primary: 'rgb(130, 95, 255)',       // Official PA Media purple
+            secondary: 'rgb(61, 54, 119)',     // Official PA Media secondary
             accent: '#6C5CE7',        // Medium purple
             text: '#000000',          // Black
             textSecondary: '#676767', // Medium grey
             background: '#FFFFFF',    // White
             surface: '#F8F9FA',       // Light grey
-            gradient: 'linear-gradient(135deg, #825FFF 0%, #3D3677 100%)'
+            gradient: 'linear-gradient(135deg, rgb(130, 95, 255) 0%, rgb(61, 54, 119) 100%)'
+        };
+        
+        this.patvBrandColors = {
+            primary: 'rgb(130, 95, 255)',       // Official PA TV Metadata purple
+            secondary: 'rgb(61, 54, 119)',     // Official PA TV Metadata secondary
+            accent: '#6C5CE7',        // Medium purple
+            text: '#000000',          // Black
+            textSecondary: '#676767', // Medium grey
+            background: '#FFFFFF',    // White
+            surface: '#F8F9FA',       // Light grey
+            gradient: 'linear-gradient(135deg, rgb(130, 95, 255) 0%, rgb(61, 54, 119) 100%)'
         };
 
         this.typography = {
