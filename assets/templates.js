@@ -364,58 +364,6 @@ const DesignTemplates = {
             `
         },
 
-        masonry: {
-            name: 'Masonry',
-            generate: (data, style, colors) => `
-                <div style="font-family: ${DesignTemplates.fonts[data.fontFamily].family}; background: ${colors.background}; min-height: 100vh;">
-                    ${DesignTemplates.generateNavigation(data, colors)}
-                    <div style="padding: 2rem; max-width: 1200px; margin: 0 auto;">
-                        <header style="text-align: center; margin-bottom: 3rem;">
-                            <h1 style="font-size: clamp(2.5rem, 4vw, 3.5rem); font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 1rem;">${data.siteTitle}</h1>
-                            <p style="font-size: 1.2rem; color: ${colors.secondary}; max-width: 600px; margin: 0 auto;">${data.siteSubtitle}</p>
-                        </header>
-                        <div style="columns: 3; column-gap: 2rem; column-fill: balance;">
-                            <div style="background: ${colors.surface}; padding: 1.5rem; margin-bottom: 2rem; border-radius: 0.5rem; break-inside: avoid; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                                <h3 style="color: ${colors.primary}; margin-bottom: 1rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.semibold};">Featured Content</h3>
-                                <div style="color: ${colors.text}; line-height: 1.6;">${data.mainContent}</div>
-                            </div>
-                            ${data.navLinks.map((link, index) => `
-                                <div style="background: ${colors.surface}; padding: 1.5rem; margin-bottom: 2rem; border-radius: 0.5rem; break-inside: avoid; box-shadow: 0 2px 4px rgba(0,0,0,0.1); height: ${120 + (index % 3) * 60}px;">
-                                    <h4 style="color: ${colors.primary}; margin-bottom: 0.5rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.medium};">${link}</h4>
-                                    <p style="color: ${colors.text}; font-size: 0.9rem; line-height: 1.5;">Sample content for ${link.toLowerCase()} section with varying heights to create masonry effect.</p>
-                                </div>
-                            `).join('')}
-                        </div>
-                    </div>
-                </div>
-            `
-        },
-
-        fullscreen: {
-            name: 'Full-Screen',
-            generate: (data, style, colors) => `
-                <div style="font-family: ${DesignTemplates.fonts[data.fontFamily].family}; background: linear-gradient(135deg, ${colors.primary}, ${colors.secondary}); color: ${colors.background}; min-height: 100vh; display: flex; flex-direction: column;">
-                    <nav style="position: absolute; top: 0; left: 0; right: 0; z-index: 100; padding: 2rem;">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <div style="font-size: 1.5rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold};">${data.siteTitle}</div>
-                            <div style="display: flex; gap: 2rem;">
-                                ${data.navLinks.map(link => `<a href="#" style="color: rgba(255,255,255,0.9); text-decoration: none; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.medium}; transition: color 0.3s;">${link}</a>`).join('')}
-                            </div>
-                        </div>
-                    </nav>
-                    <main style="flex: 1; display: flex; align-items: center; justify-content: center; text-align: center; padding: 4rem 2rem;">
-                        <div style="max-width: 800px;">
-                            <h1 style="font-size: clamp(3rem, 6vw, 5rem); font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.light}; margin-bottom: 2rem; line-height: 1.1;">${data.siteSubtitle}</h1>
-                            <div style="font-size: 1.2rem; line-height: 1.7; opacity: 0.9; max-width: 600px; margin: 0 auto;">${data.mainContent}</div>
-                        </div>
-                    </main>
-                    <div style="text-align: center; padding: 2rem; opacity: 0.7;">
-                        <p style="margin: 0; font-size: 0.9rem;">Scroll to explore more</p>
-                    </div>
-                </div>
-            `
-        },
-
         timeline: {
             name: 'Timeline',
             generate: (data, style, colors) => `
@@ -544,10 +492,11 @@ const DesignTemplates = {
             `
         },
 
-        'dashboard-pro': {
-            name: 'Dashboard Pro',
+        dashboard: {
+            name: 'Dashboard',
             generate: (data, style, colors) => `
                 <div style="display: grid; grid-template-columns: 280px 1fr; grid-template-rows: 70px 1fr; height: 100vh; font-family: ${DesignTemplates.fonts[data.fontFamily].family}; background: ${colors.surface};">
+                    <div style="grid-column: 1 / -1; background: ${colors.primary}; color: ${colors.background}; padding: 4px 8px; font-size: 10px; font-weight: bold;">DASHBOARD TEMPLATE</div>
                     <header style="grid-column: 1 / -1; background: ${colors.background}; border-bottom: 1px solid ${colors.border}; display: flex; align-items: center; justify-content: space-between; padding: 0 2rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
                         <h1 style="font-size: 1.3rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin: 0;">${data.siteTitle}</h1>
                         <div style="display: flex; align-items: center; gap: 1.5rem;">
@@ -594,11 +543,11 @@ const DesignTemplates = {
             `
         },
 
-        'blog-modern': {
-            name: 'Blog Modern',
+        blog: {
+            name: 'Blog',
             generate: (data, style, colors) => `
                 <div style="font-family: ${DesignTemplates.fonts[data.fontFamily].family}; background: ${colors.background}; min-height: 100vh;">
-                    <div style="background: ${colors.primary}; color: ${colors.background}; padding: 4px 8px; font-size: 10px; font-weight: bold;">BLOG-MODERN TEMPLATE</div>
+                    <div style="background: ${colors.primary}; color: ${colors.background}; padding: 4px 8px; font-size: 10px; font-weight: bold;">BLOG TEMPLATE</div>
                     ${DesignTemplates.generateNavigation(data, colors)}
                     <div style="max-width: 1000px; margin: 0 auto; padding: 3rem 2rem;">
                         <header style="text-align: center; margin-bottom: 4rem; padding-bottom: 2rem; border-bottom: 1px solid ${colors.border};">
@@ -643,47 +592,11 @@ const DesignTemplates = {
             `
         },
 
-        cards: {
-            name: 'Card-Based',
-            generate: (data, style, colors) => `
-                <div style="font-family: ${DesignTemplates.fonts[data.fontFamily].family}; background: ${colors.surface}; min-height: 100vh;">
-                    ${DesignTemplates.generateNavigation(data, colors)}
-                    <div style="max-width: 1200px; margin: 0 auto; padding: 3rem 2rem;">
-                        <header style="text-align: center; margin-bottom: 4rem;">
-                            <h1 style="font-size: clamp(2.5rem, 4vw, 3.5rem); font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 1rem;">${data.siteTitle}</h1>
-                            <p style="font-size: 1.2rem; color: ${colors.secondary}; max-width: 600px; margin: 0 auto;">${data.siteSubtitle}</p>
-                        </header>
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
-                            ${data.navLinks.map((link, index) => `
-                                <div style="background: ${colors.background}; border-radius: 1rem; padding: 0; box-shadow: 0 4px 6px rgba(0,0,0,0.1); overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; cursor: pointer;">
-                                    <div style="height: 180px; background: linear-gradient(135deg, ${index % 3 === 0 ? colors.primary : index % 3 === 1 ? colors.accent : colors.secondary}, ${colors.secondary}); display: flex; align-items: center; justify-content: center; color: ${colors.background}; position: relative;">
-                                        <h3 style="font-size: 1.5rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.semibold}; text-align: center; z-index: 2;">${link}</h3>
-                                        <div style="position: absolute; top: 1rem; right: 1rem; width: 40px; height: 40px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: ${colors.background}; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold};">${index + 1}</div>
-                                    </div>
-                                    <div style="padding: 2rem;">
-                                        <h4 style="color: ${colors.primary}; font-size: 1.1rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.semibold}; margin-bottom: 1rem;">Explore ${link}</h4>
-                                        <p style="color: ${colors.text}; line-height: 1.6; margin-bottom: 1.5rem; font-size: 0.95rem;">Discover comprehensive information about ${link.toLowerCase()} with detailed guides and resources.</p>
-                                        <div style="display: flex; align-items: center; justify-content: space-between;">
-                                            <a href="#" style="color: ${colors.accent}; text-decoration: none; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.medium}; font-size: 0.9rem;">Learn more →</a>
-                                            <div style="color: ${colors.secondary}; font-size: 0.8rem;">Updated recently</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            `).join('')}
-                        </div>
-                        <div style="background: ${colors.background}; padding: 3rem; border-radius: 1rem; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                            <h2 style="color: ${colors.primary}; font-size: 1.8rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.semibold}; margin-bottom: 1.5rem;">About This Collection</h2>
-                            <div style="color: ${colors.text}; line-height: 1.6; font-size: 1.1rem; max-width: 700px; margin: 0 auto;">${data.mainContent}</div>
-                        </div>
-                    </div>
-                </div>
-            `
-        },
-
-        'ecommerce-grid': {
-            name: 'E-commerce Grid',
+        ecommerce: {
+            name: 'E-commerce',
             generate: (data, style, colors) => `
                 <div style="font-family: ${DesignTemplates.fonts[data.fontFamily].family}; background: ${colors.background}; min-height: 100vh;">
+                    <div style="background: ${colors.primary}; color: ${colors.background}; padding: 4px 8px; font-size: 10px; font-weight: bold;">ECOMMERCE TEMPLATE</div>
                     ${DesignTemplates.generateNavigation(data, colors)}
                     <div style="max-width: 1200px; margin: 0 auto; padding: 2rem;">
                         <header style="text-align: center; margin-bottom: 3rem; padding: 2rem 0;">
