@@ -901,11 +901,14 @@ class DesignGenerator {
                 html = pageTemplate.generate(data, data.style, colors);
             } else {
                 // Use regular layout template - check both layouts and root level templates
+                console.log(`🔍 Looking for template: '${data.template}'`);
                 let template = DesignTemplates.layouts[data.template];
+                console.log(`📁 Found in layouts:`, !!template);
                 
                 // If not found in layouts, check root level templates (components)
                 if (!template) {
                     template = DesignTemplates[data.template];
+                    console.log(`🏠 Found in root:`, !!template);
                 }
                 
                 if (!template) {
@@ -914,20 +917,12 @@ class DesignGenerator {
                     console.error('Available component templates:', Object.keys(DesignTemplates).filter(key => 
                         typeof DesignTemplates[key] === 'object' && 
                         DesignTemplates[key].generate && 
-                        !['layouts', 'styles', 'colorSchemes', 'fonts', 'dashboardLayouts', 'pageTemplates'].includes(key)
+                        !['layouts', 'styles', 'colorSchemes', 'fonts', 'dashboardLayouts', 'pageTemplates', 'generateNavigation'].includes(key)
                     ));
-                    console.warn(`Template '${data.template}' not found, falling back to 'hero' template`);
-                    
-                    // Fallback to hero template if the requested template doesn't exist
-                    const fallbackTemplate = DesignTemplates.layouts['hero'];
-                    if (fallbackTemplate) {
-                        html = fallbackTemplate.generate(data, data.style, colors);
-                    } else {
-                        throw new TemplateError(`Both requested template '${data.template}' and fallback template 'hero' not found`, data.template);
-                    }
-                } else {
-                    html = template.generate(data, data.style, colors);
+                    throw new TemplateError(`Template '${data.template}' not found. Check available templates above.`, data.template);
                 }
+                
+                html = template.generate(data, data.style, colors);
             }
 
             if (!html || html.trim() === '') {
