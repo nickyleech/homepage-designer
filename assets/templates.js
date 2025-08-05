@@ -514,6 +514,7 @@ const DesignTemplates = {
             name: 'Landing',
             generate: (data, style, colors) => `
                 <div style="font-family: ${DesignTemplates.fonts[data.fontFamily].family}; background: ${colors.background}; min-height: 100vh;">
+                    <div style="background: ${colors.primary}; color: ${colors.background}; padding: 4px 8px; font-size: 10px; font-weight: bold;">LANDING TEMPLATE</div>
                     ${DesignTemplates.generateNavigation(data, colors)}
                     <section style="text-align: center; padding: 5rem 2rem; background: linear-gradient(135deg, ${colors.surface}, ${colors.background});">
                         <div style="max-width: 800px; margin: 0 auto;">
@@ -597,6 +598,7 @@ const DesignTemplates = {
             name: 'Blog Modern',
             generate: (data, style, colors) => `
                 <div style="font-family: ${DesignTemplates.fonts[data.fontFamily].family}; background: ${colors.background}; min-height: 100vh;">
+                    <div style="background: ${colors.primary}; color: ${colors.background}; padding: 4px 8px; font-size: 10px; font-weight: bold;">BLOG-MODERN TEMPLATE</div>
                     ${DesignTemplates.generateNavigation(data, colors)}
                     <div style="max-width: 1000px; margin: 0 auto; padding: 3rem 2rem;">
                         <header style="text-align: center; margin-bottom: 4rem; padding-bottom: 2rem; border-bottom: 1px solid ${colors.border};">
