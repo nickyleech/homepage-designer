@@ -222,10 +222,10 @@ const ValidationUtils = {
             
             // Validate template choices
             const validTemplates = [
-                'hero', 'centered', 'sidebar', 'grid', 'split', 'masonry', 'fullscreen', 
-                'timeline', 'magazine', 'portfolio', 'landing', 'dashboard-pro', 'blog-modern', 
-                'cards', 'ecommerce-grid', 'pricing', 'testimonials', 'features', 'comparison', 
-                'stats', 'cta', 'gallery', 'contact', 'team', 'faq'
+                'hero', 'centered', 'sidebar', 'grid', 'split', 'timeline', 'magazine', 
+                'portfolio', 'landing', 'dashboard', 'blog', 'ecommerce', 'pricing', 
+                'testimonials', 'features', 'comparison', 'stats', 'cta', 'gallery', 
+                'contact', 'team', 'faq'
             ];
             const validStyles = ['minimalist', 'dashboard', 'corporate', 'creative', 'tech-startup', 'e-commerce'];
             const validColorSchemes = ['blue', 'monochrome', 'green', 'purple', 'orange', 'dark'];
