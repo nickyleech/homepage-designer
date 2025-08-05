@@ -534,7 +534,10 @@ class DesignGenerator {
 
         // Template selection
         this.domCache.templateOptions.forEach(option => {
-            option.addEventListener('click', (e) => this.selectTemplate(e.target.dataset.template), { signal: this.abortController.signal });
+            option.addEventListener('click', (e) => {
+                const templateOption = e.currentTarget;
+                this.selectTemplate(templateOption.dataset.template);
+            }, { signal: this.abortController.signal });
         });
 
         // Page selection
