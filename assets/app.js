@@ -901,14 +901,11 @@ class DesignGenerator {
                 html = pageTemplate.generate(data, data.style, colors);
             } else {
                 // Use regular layout template - check both layouts and root level templates
-                console.log(`🔍 Looking for template: '${data.template}'`);
                 let template = DesignTemplates.layouts[data.template];
-                console.log(`📁 Found in layouts:`, !!template);
                 
                 // If not found in layouts, check root level templates (components)
                 if (!template) {
                     template = DesignTemplates[data.template];
-                    console.log(`🏠 Found in root:`, !!template);
                 }
                 
                 if (!template) {

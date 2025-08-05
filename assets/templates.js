@@ -1070,12 +1070,3 @@ const DesignTemplates = {
         </nav>
     `
 };
-
-// Debug: Log available templates
-console.log('✅ DesignTemplates loaded');
-console.log('📁 Layout templates:', Object.keys(DesignTemplates.layouts));
-console.log('🏠 Component templates:', Object.keys(DesignTemplates).filter(key => 
-    typeof DesignTemplates[key] === 'object' && 
-    DesignTemplates[key].generate && 
-    !['layouts', 'styles', 'colorSchemes', 'fonts', 'dashboardLayouts', 'pageTemplates', 'generateNavigation'].includes(key)
-));
