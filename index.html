@@ -3946,6 +3946,8 @@ accessibility standards, and Vercel deployment configuration.`;
 
         function generateStyleGuide() {
             try {
+                console.log('Starting style guide generation...');
+                
                 // Get all form data
                 const selectedTemplate = document.querySelector('.template-option.active')?.dataset.template || 'hero';
                 const selectedStyle = document.querySelector('.style-option.active')?.dataset.style || 'minimalist';
@@ -3955,6 +3957,8 @@ accessibility standards, and Vercel deployment configuration.`;
                 const colourScheme = document.getElementById('colourScheme')?.value || 'blue';
                 const navLinksText = document.getElementById('navLinks')?.value || 'Home\nAbout\nServices\nContact';
                 const mainContent = document.getElementById('mainContent')?.value || 'Welcome to our website.';
+                
+                console.log('Form data collected:', { selectedTemplate, selectedStyle, siteTitle, fontFamily });
 
                 // Generate comprehensive style guide
                 const styleGuide = `# ${siteTitle} Style Guide
@@ -4058,15 +4062,18 @@ ${navLinksText.split('\n').map(link => `  { name: '${link.trim()}', href: '/${li
 `;
 
                 // Create and download the style guide
+                console.log('Creating style guide blob...');
                 const blob = new Blob([styleGuide], { type: 'text/markdown' });
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.href = url;
-                a.download = \`\${siteTitle.toLowerCase().replace(/\\s+/g, '-')}-style-guide.md\`;
+                a.download = `${siteTitle.toLowerCase().replace(/\s+/g, '-')}-style-guide.md`;
+                console.log('Download filename:', a.download);
                 document.body.appendChild(a);
                 a.click();
                 document.body.removeChild(a);
                 URL.revokeObjectURL(url);
+                console.log('Style guide download triggered');
 
                 // Show success message
                 const button = event.target;
