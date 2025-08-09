@@ -1956,16 +1956,16 @@ Contact</textarea>
                                 <div class="colour-input-group">
                                     <label for="customPrimary" class="colour-input-label">Primary Colour</label>
                                     <div class="colour-input-wrapper">
-                                        <input type="colour" id="customPrimary" value="#3b82f6" class="colour-picker" oninput="updateColourPreview('primary', this.value)">
-                                        <input type="text" id="primaryHex" value="#3b82f6" class="hex-input" oninput="updateColourFromHex('primary', this.value)" maxlength="7">
+                                        <input type="colour" id="customPrimary" value="#1d4ed8" class="colour-picker" oninput="updateColourPreview('primary', this.value)">
+                                        <input type="text" id="primaryHex" value="#1d4ed8" class="hex-input" oninput="updateColourFromHex('primary', this.value)" maxlength="7">
                                         <div class="contrast-indicator" id="primaryContrast"></div>
                                     </div>
                                 </div>
                                 <div class="colour-input-group">
                                     <label for="customSecondary" class="colour-input-label">Secondary Colour</label>
                                     <div class="colour-input-wrapper">
-                                        <input type="colour" id="customSecondary" value="#8b5cf6" class="colour-picker" oninput="updateColourPreview('secondary', this.value)">
-                                        <input type="text" id="secondaryHex" value="#8b5cf6" class="hex-input" oninput="updateColourFromHex('secondary', this.value)" maxlength="7">
+                                        <input type="colour" id="customSecondary" value="#7c3aed" class="colour-picker" oninput="updateColourPreview('secondary', this.value)">
+                                        <input type="text" id="secondaryHex" value="#7c3aed" class="hex-input" oninput="updateColourFromHex('secondary', this.value)" maxlength="7">
                                         <div class="contrast-indicator" id="secondaryContrast"></div>
                                     </div>
                                 </div>
@@ -2256,15 +2256,19 @@ Contact</textarea>
             if (contrastRatio >= 7) {
                 indicator.classList.add('good');
                 indicator.textContent = 'AAA';
-                indicator.title = `Contrast ratio: ${contrastRatio.toFixed(1)}:1 (Excellent)`;
+                indicator.title = `Contrast ratio: ${contrastRatio.toFixed(1)}:1 (Excellent - WCAG AAA)`;
             } else if (contrastRatio >= 4.5) {
-                indicator.classList.add('warning');
+                indicator.classList.add('good');
                 indicator.textContent = 'AA';
-                indicator.title = `Contrast ratio: ${contrastRatio.toFixed(1)}:1 (Good)`;
+                indicator.title = `Contrast ratio: ${contrastRatio.toFixed(1)}:1 (Good - WCAG AA)`;
+            } else if (contrastRatio >= 3) {
+                indicator.classList.add('warning');
+                indicator.textContent = 'OK';
+                indicator.title = `Contrast ratio: ${contrastRatio.toFixed(1)}:1 (Acceptable for large text)`;
             } else {
                 indicator.classList.add('poor');
-                indicator.textContent = 'FAIL';
-                indicator.title = `Contrast ratio: ${contrastRatio.toFixed(1)}:1 (Poor accessibility)`;
+                indicator.textContent = 'POOR';
+                indicator.title = `Contrast ratio: ${contrastRatio.toFixed(1)}:1 (Poor accessibility - consider darker colour)`;
             }
         }
 
@@ -2482,8 +2486,8 @@ Contact</textarea>
             updateHistoryDisplay();
             
             // Initialize contrast indicators
-            updateContrastIndicator('primary', '#3b82f6');
-            updateContrastIndicator('secondary', '#8b5cf6');
+            updateContrastIndicator('primary', '#1d4ed8');
+            updateContrastIndicator('secondary', '#7c3aed');
             
             // Enhanced logo upload handler
             document.getElementById('logoUpload').addEventListener('change', handleLogoUpload);
