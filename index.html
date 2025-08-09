@@ -2117,7 +2117,8 @@ Contact</textarea>
             <div class="button-group">
                 <button type="button" class="btn-secondary" onclick="resetForm()">Reset</button>
                 <button type="button" class="btn-secondary" onclick="generateStyleGuide()" style="background: #10b981; colour: white;">Generate Style Guide</button>
-                <button type="button" class="btn-primary" onclick="downloadHTML()">Quick Export</button>
+                <button type="button" class="btn-primary" onclick="downloadHTML()">Single Page Export</button>
+                <button type="button" class="btn-primary" onclick="downloadMultiPageSite()" style="background: #7c3aed;">Multi-Page Export</button>
             </div>
 
             <h2>Style Guide Preview</h2>
@@ -2135,7 +2136,17 @@ Contact</textarea>
                     <button class="device-btn" data-device="tablet">Tablet</button>
                     <button class="device-btn" data-device="mobile">Mobile</button>
                 </div>
-                <span style="font-size: 12px; colour: #6b7280;">Live Preview</span>
+                <div class="page-selector" style="margin-left: 1rem;">
+                    <select id="pageSelect" onchange="changePreviewPage()" style="padding: 0.25rem 0.5rem; border: 1px solid #d1d5db; border-radius: 4px; font-size: 12px; background: white;">
+                        <option value="home">Homepage</option>
+                        <option value="about">About</option>
+                        <option value="services">Services</option>
+                        <option value="portfolio">Portfolio</option>
+                        <option value="blog">Blog</option>
+                        <option value="contact">Contact</option>
+                    </select>
+                </div>
+                <span style="font-size: 12px; colour: #6b7280; margin-left: auto;">Multi-Page Preview</span>
             </div>
 
             <div class="preview desktop" id="preview">
@@ -4132,6 +4143,64 @@ ${navLinksText.split('\n').map(link => `  { name: '${link.trim()}', href: '/${li
                     setTimeout(updateStyleGuidePreview, 100);
                 }
             });
+        });
+        
+        // Multi-page preview functionality
+        window.currentPreviewPage = 'home';
+        
+        function changePreviewPage() {
+            const pageSelect = document.getElementById('pageSelect');
+            window.currentPreviewPage = pageSelect.value;
+            updateMultiPagePreview();
+        }
+        
+        function updateMultiPagePreview() {
+            if (!window.designGenerator || !window.designGenerator.updatePreview) return;
+            
+            // Store the original updatePreview function if we haven't already
+            if (!window.designGenerator.originalUpdatePreview) {
+                window.designGenerator.originalUpdatePreview = window.designGenerator.updatePreview;
+                
+                // Override updatePreview to use multi-page functionality
+                window.designGenerator.updatePreview = function() {
+                    const data = this.getCurrentData();
+                    const style = this.currentStyle || 'minimalist';
+                    
+                    // Generate multi-page site with current page
+                    if (DesignTemplates && DesignTemplates.generateMultiPageSite) {
+                        const html = DesignTemplates.generateMultiPageSite(data, style, window.currentPreviewPage || 'home');
+                        
+                        // Update preview with multi-page content
+                        const previewFrame = document.getElementById('previewFrame');
+                        if (previewFrame) {
+                            previewFrame.innerHTML = `
+                                <iframe 
+                                    srcdoc="${html.replace(/"/g, '&quot;')}" 
+                                    style="width: 100%; height: 100%; border: none; background: white;">
+                                </iframe>
+                            `;
+                        }
+                    } else {
+                        // Fallback to original function
+                        this.originalUpdatePreview();
+                    }
+                };
+            }
+            
+            // Trigger the updated preview
+            window.designGenerator.updatePreview();
+        }
+        
+        // Initialize multi-page preview when the design generator is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            // Wait for design generator to be initialized
+            const checkGeneratorReady = setInterval(() => {
+                if (window.designGenerator && window.designGenerator.updatePreview) {
+                    clearInterval(checkGeneratorReady);
+                    // Initialize multi-page functionality
+                    setTimeout(updateMultiPagePreview, 1000);
+                }
+            }, 100);
         });
     </script>
 

@@ -1081,5 +1081,647 @@ const DesignTemplates = {
                 </ul>
             </div>
         </nav>
-    `
+    `,
+
+    // Multi-page template system
+    pages: {
+        about: {
+            name: 'About',
+            description: 'Company and team information',
+            generateContent: (data, colors) => `
+                <section style="padding: 4rem 0; background: ${colors.background};">
+                    <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+                        <div style="text-align: center; margin-bottom: 3rem;">
+                            <h1 style="font-size: 3rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 1rem;">About ${data.siteTitle}</h1>
+                            <p style="font-size: 1.25rem; color: ${colors.secondary}; max-width: 600px; margin: 0 auto;">Learn more about our story, mission, and the team behind our success.</p>
+                        </div>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; margin-bottom: 4rem;">
+                            <div>
+                                <h2 style="font-size: 2rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 1.5rem;">Our Story</h2>
+                                <p style="color: ${colors.text}; line-height: 1.6; margin-bottom: 1rem;">Founded with a vision to make a difference, we've been dedicated to providing exceptional solutions that meet our clients' evolving needs.</p>
+                                <p style="color: ${colors.text}; line-height: 1.6; margin-bottom: 1rem;">Our journey began with a simple idea: to create products and services that truly matter. Today, we continue to innovate and push boundaries.</p>
+                                <p style="color: ${colors.text}; line-height: 1.6;">We believe in building lasting relationships with our clients, partners, and community through transparency, quality, and exceptional service.</p>
+                            </div>
+                            <div style="background: ${colors.surface}; padding: 2rem; border-radius: 12px; border: 1px solid ${colors.border};">
+                                <h3 style="font-size: 1.5rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 1rem;">Our Mission</h3>
+                                <p style="color: ${colors.text}; line-height: 1.6; margin-bottom: 1.5rem;">To empower businesses and individuals with innovative solutions that drive growth and success in an ever-changing world.</p>
+                                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;">
+                                    <div style="text-align: center; padding: 1rem;">
+                                        <div style="font-size: 2rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.accent};">500+</div>
+                                        <div style="color: ${colors.secondary}; font-size: 0.9rem;">Happy Clients</div>
+                                    </div>
+                                    <div style="text-align: center; padding: 1rem;">
+                                        <div style="font-size: 2rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.accent};">5+</div>
+                                        <div style="color: ${colors.secondary}; font-size: 0.9rem;">Years Experience</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="text-align: center;">
+                            <h2 style="font-size: 2rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 3rem;">Our Values</h2>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                                <div style="background: ${colors.surface}; padding: 2rem; border-radius: 12px; border: 1px solid ${colors.border};">
+                                    <div style="width: 60px; height: 60px; background: ${colors.accent}; border-radius: 50%; margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center;">
+                                        <svg width="30" height="30" fill="white" viewBox="0 0 24 24"><path d="M12 2L13.09 8.26L20 9L13.09 9.74L12 16L10.91 9.74L4 9L10.91 8.26L12 2Z"/></svg>
+                                    </div>
+                                    <h3 style="font-size: 1.25rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 1rem;">Innovation</h3>
+                                    <p style="color: ${colors.text}; line-height: 1.6;">We constantly push boundaries and embrace new technologies to deliver cutting-edge solutions.</p>
+                                </div>
+                                <div style="background: ${colors.surface}; padding: 2rem; border-radius: 12px; border: 1px solid ${colors.border};">
+                                    <div style="width: 60px; height: 60px; background: ${colors.accent}; border-radius: 50%; margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center;">
+                                        <svg width="30" height="30" fill="white" viewBox="0 0 24 24"><path d="M16 4C18.2091 4 20 5.79086 20 8V16C20 18.2091 18.2091 20 16 20H8C5.79086 20 4 18.2091 4 16V8C4 5.79086 5.79086 4 8 4H16ZM8.5 8.5C8.22386 8.5 8 8.72386 8 9V15C8 15.2761 8.22386 15.5 8.5 15.5C8.77614 15.5 9 15.2761 9 15V9C9 8.72386 8.77614 8.5 8.5 8.5ZM12 8.5C11.7239 8.5 11.5 8.72386 11.5 9V15C11.5 15.2761 11.7239 15.5 11.5 15.5C11.7761 15.5 12 15.2761 12 15V9C12 8.72386 11.7761 8.5 12 8.5ZM15.5 8.5C15.2239 8.5 15 8.72386 15 9V15C15 15.2761 15.2239 15.5 15.5 15.5C15.7761 15.5 16 15.2761 16 15V9C16 8.72386 15.7761 8.5 15.5 8.5Z"/></svg>
+                                    </div>
+                                    <h3 style="font-size: 1.25rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 1rem;">Quality</h3>
+                                    <p style="color: ${colors.text}; line-height: 1.6;">Every project receives our full attention to detail and commitment to excellence.</p>
+                                </div>
+                                <div style="background: ${colors.surface}; padding: 2rem; border-radius: 12px; border: 1px solid ${colors.border};">
+                                    <div style="width: 60px; height: 60px; background: ${colors.accent}; border-radius: 50%; margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center;">
+                                        <svg width="30" height="30" fill="white" viewBox="0 0 24 24"><path d="M12 1L15.09 8.26L23 9L17 14.74L18.18 22.5L12 19.77L5.82 22.5L7 14.74L1 9L8.91 8.26L12 1Z"/></svg>
+                                    </div>
+                                    <h3 style="font-size: 1.25rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 1rem;">Trust</h3>
+                                    <p style="color: ${colors.text}; line-height: 1.6;">Building long-term relationships through transparency, reliability, and exceptional service.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            `
+        },
+
+        services: {
+            name: 'Services',
+            description: 'Service offerings and capabilities',
+            generateContent: (data, colors) => `
+                <section style="padding: 4rem 0; background: ${colors.background};">
+                    <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+                        <div style="text-align: center; margin-bottom: 4rem;">
+                            <h1 style="font-size: 3rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 1rem;">Our Services</h1>
+                            <p style="font-size: 1.25rem; color: ${colors.secondary}; max-width: 600px; margin: 0 auto;">Comprehensive solutions designed to help your business grow and succeed in today's competitive landscape.</p>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; margin-bottom: 4rem;">
+                            <div style="background: ${colors.surface}; padding: 2rem; border-radius: 12px; border: 1px solid ${colors.border}; position: relative; overflow: hidden;">
+                                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: ${colors.accent};"></div>
+                                <div style="width: 60px; height: 60px; background: ${colors.accent}; border-radius: 12px; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: center;">
+                                    <svg width="30" height="30" fill="white" viewBox="0 0 24 24"><path d="M3 13H11V3H3V13ZM3 21H11V15H3V21ZM13 21H21V11H13V21ZM13 3V9H21V3H13Z"/></svg>
+                                </div>
+                                <h3 style="font-size: 1.5rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 1rem;">Consulting</h3>
+                                <p style="color: ${colors.text}; line-height: 1.6; margin-bottom: 1.5rem;">Strategic guidance and expert advice to help you navigate challenges and identify opportunities for growth.</p>
+                                <ul style="color: ${colors.text}; line-height: 1.6; margin: 0; padding-left: 1.5rem;">
+                                    <li>Business strategy development</li>
+                                    <li>Market analysis and research</li>
+                                    <li>Process optimisation</li>
+                                    <li>Risk assessment and mitigation</li>
+                                </ul>
+                            </div>
+
+                            <div style="background: ${colors.surface}; padding: 2rem; border-radius: 12px; border: 1px solid ${colors.border}; position: relative; overflow: hidden;">
+                                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: ${colors.accent};"></div>
+                                <div style="width: 60px; height: 60px; background: ${colors.accent}; border-radius: 12px; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: center;">
+                                    <svg width="30" height="30" fill="white" viewBox="0 0 24 24"><path d="M14.2 6L15.8 3.5L19.3 5.1L17.7 7.6L19.3 10.1L15.8 11.7L14.2 9.2L12.6 11.7L9.1 10.1L10.7 7.6L9.1 5.1L12.6 3.5L14.2 6ZM11 14V22H13V16H15V22H17V14H11ZM7 14V16H3V14H7ZM7 18V20H3V18H7Z"/></svg>
+                                </div>
+                                <h3 style="font-size: 1.5rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 1rem;">Development</h3>
+                                <p style="color: ${colors.text}; line-height: 1.6; margin-bottom: 1.5rem;">Custom software solutions built to your exact specifications using the latest technologies and best practices.</p>
+                                <ul style="color: ${colors.text}; line-height: 1.6; margin: 0; padding-left: 1.5rem;">
+                                    <li>Web application development</li>
+                                    <li>Mobile app development</li>
+                                    <li>API design and integration</li>
+                                    <li>Database design and optimisation</li>
+                                </ul>
+                            </div>
+
+                            <div style="background: ${colors.surface}; padding: 2rem; border-radius: 12px; border: 1px solid ${colors.border}; position: relative; overflow: hidden;">
+                                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: ${colors.accent};"></div>
+                                <div style="width: 60px; height: 60px; background: ${colors.accent}; border-radius: 12px; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: center;">
+                                    <svg width="30" height="30" fill="white" viewBox="0 0 24 24"><path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 6.5V7.5C15 8.1 14.6 8.5 14 8.5S13 8.1 13 7.5V6.5L9 7V9C9 10.1 9.9 11 11 11V12.5H10V15H14V12.5H13V11C14.1 11 15 10.1 15 9ZM7.5 12C7.8 12 8 12.2 8 12.5S7.8 13 7.5 13 7 12.8 7 12.5 7.2 12 7.5 12ZM16.5 12C16.8 12 17 12.2 17 12.5S16.8 13 16.5 13 16 12.8 16 12.5 16.2 12 16.5 12Z"/></svg>
+                                </div>
+                                <h3 style="font-size: 1.5rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 1rem;">Support</h3>
+                                <p style="color: ${colors.text}; line-height: 1.6; margin-bottom: 1.5rem;">Ongoing maintenance and support to ensure your systems run smoothly and your business continues to thrive.</p>
+                                <ul style="color: ${colors.text}; line-height: 1.6; margin: 0; padding-left: 1.5rem;">
+                                    <li>24/7 technical support</li>
+                                    <li>System monitoring and maintenance</li>
+                                    <li>Regular updates and security patches</li>
+                                    <li>Training and documentation</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div style="background: ${colors.surface}; padding: 3rem; border-radius: 12px; border: 1px solid ${colors.border}; text-align: center;">
+                            <h2 style="font-size: 2rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 1rem;">Ready to Get Started?</h2>
+                            <p style="color: ${colors.text}; line-height: 1.6; margin-bottom: 2rem; max-width: 500px; margin-left: auto; margin-right: auto;">Let's discuss your project and how we can help bring your vision to life with our expert solutions.</p>
+                            <a href="#contact" style="background: ${colors.accent}; color: white; padding: 0.75rem 2rem; border-radius: 6px; text-decoration: none; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.medium}; display: inline-block; transition: all 0.3s;">Contact Us Today</a>
+                        </div>
+                    </div>
+                </section>
+            `
+        },
+
+        portfolio: {
+            name: 'Portfolio',
+            description: 'Project showcase and case studies',
+            generateContent: (data, colors) => `
+                <section style="padding: 4rem 0; background: ${colors.background};">
+                    <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+                        <div style="text-align: center; margin-bottom: 4rem;">
+                            <h1 style="font-size: 3rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 1rem;">Our Portfolio</h1>
+                            <p style="font-size: 1.25rem; color: ${colors.secondary}; max-width: 600px; margin: 0 auto;">Discover some of our recent projects and see how we've helped businesses achieve their goals.</p>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; margin-bottom: 4rem;">
+                            <div style="background: ${colors.surface}; border-radius: 12px; overflow: hidden; border: 1px solid ${colors.border};">
+                                <div style="height: 250px; background: linear-gradient(135deg, ${colors.accent}, ${colors.primary}); position: relative;">
+                                    <div style="position: absolute; bottom: 1rem; left: 1rem; background: rgba(255,255,255,0.9); padding: 0.5rem 1rem; border-radius: 6px;">
+                                        <span style="color: ${colors.primary}; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.medium}; font-size: 0.9rem;">Web Application</span>
+                                    </div>
+                                </div>
+                                <div style="padding: 2rem;">
+                                    <h3 style="font-size: 1.5rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 1rem;">E-commerce Platform</h3>
+                                    <p style="color: ${colors.text}; line-height: 1.6; margin-bottom: 1.5rem;">A comprehensive online store solution with advanced inventory management, payment processing, and customer analytics.</p>
+                                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem;">
+                                        <span style="background: ${colors.border}; color: ${colors.text}; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.8rem;">React</span>
+                                        <span style="background: ${colors.border}; color: ${colors.text}; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.8rem;">Node.js</span>
+                                        <span style="background: ${colors.border}; color: ${colors.text}; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.8rem;">PostgreSQL</span>
+                                    </div>
+                                    <a href="#" style="color: ${colors.accent}; text-decoration: none; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.medium};">View Case Study →</a>
+                                </div>
+                            </div>
+
+                            <div style="background: ${colors.surface}; border-radius: 12px; overflow: hidden; border: 1px solid ${colors.border};">
+                                <div style="height: 250px; background: linear-gradient(135deg, ${colors.secondary}, ${colors.accent}); position: relative;">
+                                    <div style="position: absolute; bottom: 1rem; left: 1rem; background: rgba(255,255,255,0.9); padding: 0.5rem 1rem; border-radius: 6px;">
+                                        <span style="color: ${colors.primary}; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.medium}; font-size: 0.9rem;">Mobile App</span>
+                                    </div>
+                                </div>
+                                <div style="padding: 2rem;">
+                                    <h3 style="font-size: 1.5rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 1rem;">Fitness Tracking App</h3>
+                                    <p style="color: ${colors.text}; line-height: 1.6; margin-bottom: 1.5rem;">A comprehensive fitness application with workout planning, progress tracking, and social features for motivation.</p>
+                                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem;">
+                                        <span style="background: ${colors.border}; color: ${colors.text}; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.8rem;">React Native</span>
+                                        <span style="background: ${colors.border}; color: ${colors.text}; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.8rem;">Firebase</span>
+                                        <span style="background: ${colors.border}; color: ${colors.text}; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.8rem;">Redux</span>
+                                    </div>
+                                    <a href="#" style="color: ${colors.accent}; text-decoration: none; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.medium};">View Case Study →</a>
+                                </div>
+                            </div>
+
+                            <div style="background: ${colors.surface}; border-radius: 12px; overflow: hidden; border: 1px solid ${colors.border};">
+                                <div style="height: 250px; background: linear-gradient(135deg, ${colors.primary}, ${colors.secondary}); position: relative;">
+                                    <div style="position: absolute; bottom: 1rem; left: 1rem; background: rgba(255,255,255,0.9); padding: 0.5rem 1rem; border-radius: 6px;">
+                                        <span style="color: ${colors.primary}; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.medium}; font-size: 0.9rem;">Dashboard</span>
+                                    </div>
+                                </div>
+                                <div style="padding: 2rem;">
+                                    <h3 style="font-size: 1.5rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 1rem;">Analytics Dashboard</h3>
+                                    <p style="color: ${colors.text}; line-height: 1.6; margin-bottom: 1.5rem;">A comprehensive analytics platform with real-time data visualisation, custom reporting, and team collaboration features.</p>
+                                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem;">
+                                        <span style="background: ${colors.border}; color: ${colors.text}; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.8rem;">Vue.js</span>
+                                        <span style="background: ${colors.border}; color: ${colors.text}; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.8rem;">Python</span>
+                                        <span style="background: ${colors.border}; color: ${colors.text}; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.8rem;">MongoDB</span>
+                                    </div>
+                                    <a href="#" style="color: ${colors.accent}; text-decoration: none; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.medium};">View Case Study →</a>
+                                </div>
+                            </div>
+
+                            <div style="background: ${colors.surface}; border-radius: 12px; overflow: hidden; border: 1px solid ${colors.border};">
+                                <div style="height: 250px; background: linear-gradient(135deg, ${colors.accent}, ${colors.secondary}); position: relative;">
+                                    <div style="position: absolute; bottom: 1rem; left: 1rem; background: rgba(255,255,255,0.9); padding: 0.5rem 1rem; border-radius: 6px;">
+                                        <span style="color: ${colors.primary}; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.medium}; font-size: 0.9rem;">Website</span>
+                                    </div>
+                                </div>
+                                <div style="padding: 2rem;">
+                                    <h3 style="font-size: 1.5rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 1rem;">Corporate Website</h3>
+                                    <p style="color: ${colors.text}; line-height: 1.6; margin-bottom: 1.5rem;">A professional corporate website with content management system, multi-language support, and SEO optimisation.</p>
+                                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem;">
+                                        <span style="background: ${colors.border}; color: ${colors.text}; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.8rem;">Next.js</span>
+                                        <span style="background: ${colors.border}; color: ${colors.text}; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.8rem;">Strapi</span>
+                                        <span style="background: ${colors.border}; color: ${colors.text}; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.8rem;">Tailwind</span>
+                                    </div>
+                                    <a href="#" style="color: ${colors.accent}; text-decoration: none; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.medium};">View Case Study →</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="text-align: center;">
+                            <h2 style="font-size: 2rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 2rem;">Let's Build Something Amazing Together</h2>
+                            <p style="color: ${colors.text}; line-height: 1.6; margin-bottom: 2rem; max-width: 500px; margin-left: auto; margin-right: auto;">Ready to start your next project? We'd love to hear about your ideas and discuss how we can bring them to life.</p>
+                            <a href="#contact" style="background: ${colors.accent}; color: white; padding: 1rem 2rem; border-radius: 6px; text-decoration: none; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.medium}; margin-right: 1rem; display: inline-block; transition: all 0.3s;">Start a Project</a>
+                            <a href="#services" style="border: 2px solid ${colors.accent}; color: ${colors.accent}; padding: 0.875rem 2rem; border-radius: 6px; text-decoration: none; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.medium}; display: inline-block; transition: all 0.3s;">View Services</a>
+                        </div>
+                    </div>
+                </section>
+            `
+        },
+
+        blog: {
+            name: 'Blog',
+            description: 'Articles and insights',
+            generateContent: (data, colors) => `
+                <section style="padding: 4rem 0; background: ${colors.background};">
+                    <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+                        <div style="text-align: center; margin-bottom: 4rem;">
+                            <h1 style="font-size: 3rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 1rem;">Our Blog</h1>
+                            <p style="font-size: 1.25rem; color: ${colors.secondary}; max-width: 600px; margin: 0 auto;">Stay updated with the latest insights, tutorials, and industry trends from our team of experts.</p>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 4rem; margin-bottom: 4rem;">
+                            <div>
+                                <article style="background: ${colors.surface}; border-radius: 12px; overflow: hidden; border: 1px solid ${colors.border}; margin-bottom: 2rem;">
+                                    <div style="height: 300px; background: linear-gradient(135deg, ${colors.accent}, ${colors.primary}); position: relative;">
+                                        <div style="position: absolute; top: 1rem; left: 1rem;">
+                                            <span style="background: rgba(255,255,255,0.9); color: ${colors.primary}; padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.9rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.medium};">Featured</span>
+                                        </div>
+                                    </div>
+                                    <div style="padding: 2rem;">
+                                        <div style="display: flex; align-items: center; margin-bottom: 1rem; gap: 1rem;">
+                                            <span style="color: ${colors.secondary}; font-size: 0.9rem;">March 15, 2024</span>
+                                            <span style="color: ${colors.secondary};">•</span>
+                                            <span style="background: ${colors.border}; color: ${colors.text}; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.8rem;">Technology</span>
+                                        </div>
+                                        <h2 style="font-size: 1.5rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 1rem;">The Future of Web Development: Trends to Watch in 2024</h2>
+                                        <p style="color: ${colors.text}; line-height: 1.6; margin-bottom: 1.5rem;">Explore the latest trends shaping the web development landscape, from AI integration to progressive web apps and the evolution of frontend frameworks.</p>
+                                        <a href="#" style="color: ${colors.accent}; text-decoration: none; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.medium};">Read More →</a>
+                                    </div>
+                                </article>
+
+                                <div style="display: grid; gap: 2rem;">
+                                    <article style="background: ${colors.surface}; border-radius: 12px; overflow: hidden; border: 1px solid ${colors.border}; display: grid; grid-template-columns: 200px 1fr; gap: 0;">
+                                        <div style="height: 150px; background: linear-gradient(135deg, ${colors.secondary}, ${colors.accent});"></div>
+                                        <div style="padding: 1.5rem;">
+                                            <div style="display: flex; align-items: center; margin-bottom: 0.75rem; gap: 1rem;">
+                                                <span style="color: ${colors.secondary}; font-size: 0.9rem;">March 12, 2024</span>
+                                                <span style="background: ${colors.border}; color: ${colors.text}; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.8rem;">Design</span>
+                                            </div>
+                                            <h3 style="font-size: 1.25rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 0.75rem;">Designing for Accessibility: A Complete Guide</h3>
+                                            <p style="color: ${colors.text}; line-height: 1.6; margin-bottom: 1rem;">Learn how to create inclusive designs that work for everyone, including best practices for colour, typography, and interactive elements.</p>
+                                            <a href="#" style="color: ${colors.accent}; text-decoration: none; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.medium};">Read More →</a>
+                                        </div>
+                                    </article>
+
+                                    <article style="background: ${colors.surface}; border-radius: 12px; overflow: hidden; border: 1px solid ${colors.border}; display: grid; grid-template-columns: 200px 1fr; gap: 0;">
+                                        <div style="height: 150px; background: linear-gradient(135deg, ${colors.primary}, ${colors.secondary});"></div>
+                                        <div style="padding: 1.5rem;">
+                                            <div style="display: flex; align-items: center; margin-bottom: 0.75rem; gap: 1rem;">
+                                                <span style="color: ${colors.secondary}; font-size: 0.9rem;">March 10, 2024</span>
+                                                <span style="background: ${colors.border}; color: ${colors.text}; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.8rem;">Business</span>
+                                            </div>
+                                            <h3 style="font-size: 1.25rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 0.75rem;">Digital Transformation: A Strategic Approach</h3>
+                                            <p style="color: ${colors.text}; line-height: 1.6; margin-bottom: 1rem;">Discover how businesses can successfully navigate digital transformation with the right strategy, tools, and mindset.</p>
+                                            <a href="#" style="color: ${colors.accent}; text-decoration: none; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.medium};">Read More →</a>
+                                        </div>
+                                    </article>
+
+                                    <article style="background: ${colors.surface}; border-radius: 12px; overflow: hidden; border: 1px solid ${colors.border}; display: grid; grid-template-columns: 200px 1fr; gap: 0;">
+                                        <div style="height: 150px; background: linear-gradient(135deg, ${colors.accent}, ${colors.primary});"></div>
+                                        <div style="padding: 1.5rem;">
+                                            <div style="display: flex; align-items: center; margin-bottom: 0.75rem; gap: 1rem;">
+                                                <span style="color: ${colors.secondary}; font-size: 0.9rem;">March 8, 2024</span>
+                                                <span style="background: ${colors.border}; color: ${colors.text}; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.8rem;">Tutorial</span>
+                                            </div>
+                                            <h3 style="font-size: 1.25rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 0.75rem;">Building Scalable APIs with Node.js</h3>
+                                            <p style="color: ${colors.text}; line-height: 1.6; margin-bottom: 1rem;">A comprehensive guide to creating robust, scalable APIs using Node.js, Express, and modern development practices.</p>
+                                            <a href="#" style="color: ${colors.accent}; text-decoration: none; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.medium};">Read More →</a>
+                                        </div>
+                                    </article>
+                                </div>
+                            </div>
+
+                            <aside>
+                                <div style="background: ${colors.surface}; padding: 2rem; border-radius: 12px; border: 1px solid ${colors.border}; margin-bottom: 2rem;">
+                                    <h3 style="font-size: 1.25rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 1.5rem;">Popular Posts</h3>
+                                    <div style="space-y: 1rem;">
+                                        <article style="margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid ${colors.border};">
+                                            <h4 style="font-size: 1rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.medium}; color: ${colors.primary}; margin-bottom: 0.5rem;">5 Essential Tools for Modern Developers</h4>
+                                            <p style="color: ${colors.secondary}; font-size: 0.9rem;">March 5, 2024</p>
+                                        </article>
+                                        <article style="margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid ${colors.border};">
+                                            <h4 style="font-size: 1rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.medium}; color: ${colors.primary}; margin-bottom: 0.5rem;">CSS Grid vs Flexbox: When to Use Which</h4>
+                                            <p style="color: ${colors.secondary}; font-size: 0.9rem;">March 2, 2024</p>
+                                        </article>
+                                        <article>
+                                            <h4 style="font-size: 1rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.medium}; color: ${colors.primary}; margin-bottom: 0.5rem;">The Complete Guide to React Hooks</h4>
+                                            <p style="color: ${colors.secondary}; font-size: 0.9rem;">February 28, 2024</p>
+                                        </article>
+                                    </div>
+                                </div>
+
+                                <div style="background: ${colors.surface}; padding: 2rem; border-radius: 12px; border: 1px solid ${colors.border};">
+                                    <h3 style="font-size: 1.25rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 1rem;">Newsletter</h3>
+                                    <p style="color: ${colors.text}; line-height: 1.6; margin-bottom: 1.5rem;">Subscribe to our newsletter for the latest updates and insights.</p>
+                                    <div style="margin-bottom: 1rem;">
+                                        <input type="email" placeholder="Enter your email" style="width: 100%; padding: 0.75rem; border: 1px solid ${colors.border}; border-radius: 6px; font-size: 1rem; margin-bottom: 1rem;">
+                                        <button style="width: 100%; background: ${colors.accent}; color: white; padding: 0.75rem; border: none; border-radius: 6px; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.medium}; cursor: pointer;">Subscribe</button>
+                                    </div>
+                                </div>
+                            </aside>
+                        </div>
+                    </div>
+                </section>
+            `
+        },
+
+        contact: {
+            name: 'Contact',
+            description: 'Contact information and forms',
+            generateContent: (data, colors) => `
+                <section style="padding: 4rem 0; background: ${colors.background};">
+                    <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+                        <div style="text-align: center; margin-bottom: 4rem;">
+                            <h1 style="font-size: 3rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 1rem;">Contact Us</h1>
+                            <p style="font-size: 1.25rem; color: ${colors.secondary}; max-width: 600px; margin: 0 auto;">Get in touch with us today. We'd love to hear about your project and discuss how we can help.</p>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-bottom: 4rem;">
+                            <div>
+                                <h2 style="font-size: 2rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 2rem;">Send us a Message</h2>
+                                
+                                <form style="space-y: 1.5rem;">
+                                    <div style="margin-bottom: 1.5rem;">
+                                        <label style="display: block; color: ${colors.text}; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.medium}; margin-bottom: 0.5rem;">Full Name</label>
+                                        <input type="text" style="width: 100%; padding: 0.75rem; border: 1px solid ${colors.border}; border-radius: 6px; font-size: 1rem; background: ${colors.background};">
+                                    </div>
+                                    
+                                    <div style="margin-bottom: 1.5rem;">
+                                        <label style="display: block; color: ${colors.text}; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.medium}; margin-bottom: 0.5rem;">Email Address</label>
+                                        <input type="email" style="width: 100%; padding: 0.75rem; border: 1px solid ${colors.border}; border-radius: 6px; font-size: 1rem; background: ${colors.background};">
+                                    </div>
+                                    
+                                    <div style="margin-bottom: 1.5rem;">
+                                        <label style="display: block; color: ${colors.text}; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.medium}; margin-bottom: 0.5rem;">Subject</label>
+                                        <input type="text" style="width: 100%; padding: 0.75rem; border: 1px solid ${colors.border}; border-radius: 6px; font-size: 1rem; background: ${colors.background};">
+                                    </div>
+                                    
+                                    <div style="margin-bottom: 2rem;">
+                                        <label style="display: block; color: ${colors.text}; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.medium}; margin-bottom: 0.5rem;">Message</label>
+                                        <textarea rows="6" style="width: 100%; padding: 0.75rem; border: 1px solid ${colors.border}; border-radius: 6px; font-size: 1rem; background: ${colors.background}; resize: vertical;"></textarea>
+                                    </div>
+                                    
+                                    <button type="submit" style="background: ${colors.accent}; color: white; padding: 1rem 2rem; border: none; border-radius: 6px; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.medium}; cursor: pointer; font-size: 1rem; transition: all 0.3s;">Send Message</button>
+                                </form>
+                            </div>
+
+                            <div>
+                                <h2 style="font-size: 2rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 2rem;">Get in Touch</h2>
+                                
+                                <div style="space-y: 2rem;">
+                                    <div style="display: flex; align-items: start; gap: 1rem; margin-bottom: 2rem;">
+                                        <div style="width: 50px; height: 50px; background: ${colors.accent}; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                            <svg width="24" height="24" fill="white" viewBox="0 0 24 24">
+                                                <path d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22S19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9S10.62 6.5 12 6.5S14.5 7.62 14.5 9S13.38 11.5 12 11.5Z"/>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <h3 style="font-size: 1.25rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 0.5rem;">Office Address</h3>
+                                            <p style="color: ${colors.text}; line-height: 1.6;">123 Business Street<br>London, SW1A 1AA<br>United Kingdom</p>
+                                        </div>
+                                    </div>
+
+                                    <div style="display: flex; align-items: start; gap: 1rem; margin-bottom: 2rem;">
+                                        <div style="width: 50px; height: 50px; background: ${colors.accent}; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                            <svg width="24" height="24" fill="white" viewBox="0 0 24 24">
+                                                <path d="M6.62 10.79C8.06 13.62 10.38 15.94 13.21 17.38L15.41 15.18C15.69 14.9 16.08 14.82 16.43 14.93C17.55 15.3 18.75 15.5 20 15.5C20.55 15.5 21 15.95 21 16.5V20C21 20.55 20.55 21 20 21C10.61 21 3 13.39 3 4C3 3.45 3.45 3 4 3H7.5C8.05 3 8.5 3.45 8.5 4C8.5 5.25 8.7 6.45 9.07 7.57C9.18 7.92 9.1 8.31 8.82 8.59L6.62 10.79Z"/>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <h3 style="font-size: 1.25rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 0.5rem;">Phone</h3>
+                                            <p style="color: ${colors.text}; line-height: 1.6;">+44 20 7123 4567<br>+44 20 7123 4568</p>
+                                        </div>
+                                    </div>
+
+                                    <div style="display: flex; align-items: start; gap: 1rem; margin-bottom: 2rem;">
+                                        <div style="width: 50px; height: 50px; background: ${colors.accent}; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                            <svg width="24" height="24" fill="white" viewBox="0 0 24 24">
+                                                <path d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13L4 8V6L12 11L20 6V8Z"/>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <h3 style="font-size: 1.25rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 0.5rem;">Email</h3>
+                                            <p style="color: ${colors.text}; line-height: 1.6;">hello@${data.siteTitle.toLowerCase().replace(/\s+/g, '')}.com<br>support@${data.siteTitle.toLowerCase().replace(/\s+/g, '')}.com</p>
+                                        </div>
+                                    </div>
+
+                                    <div style="display: flex; align-items: start; gap: 1rem;">
+                                        <div style="width: 50px; height: 50px; background: ${colors.accent}; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                            <svg width="24" height="24" fill="white" viewBox="0 0 24 24">
+                                                <path d="M12 2C6.48 2 2 6.48 2 12S6.48 22 12 22 22 17.52 22 12 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12S7.59 4 12 4 20 7.59 20 12 16.41 20 12 20ZM12.5 7H11V13L16.25 16.15L17 14.92L12.5 12.25V7Z"/>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <h3 style="font-size: 1.25rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 0.5rem;">Business Hours</h3>
+                                            <p style="color: ${colors.text}; line-height: 1.6;">Monday - Friday: 9:00 AM - 6:00 PM<br>Saturday - Sunday: Closed</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="margin-top: 3rem; padding: 2rem; background: ${colors.surface}; border-radius: 12px; border: 1px solid ${colors.border};">
+                                    <h3 style="font-size: 1.25rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 1rem;">Follow Us</h3>
+                                    <div style="display: flex; gap: 1rem;">
+                                        <a href="#" style="width: 40px; height: 40px; background: ${colors.accent}; border-radius: 8px; display: flex; align-items: center; justify-content: center; text-decoration: none;">
+                                            <svg width="20" height="20" fill="white" viewBox="0 0 24 24"><path d="M24 4.557C23.117 4.949 22.168 5.213 21.172 5.332C22.189 4.723 22.97 3.758 23.337 2.608C22.386 3.172 21.332 3.582 20.21 3.803C19.313 2.846 18.032 2.248 16.616 2.248C13.437 2.248 11.101 5.214 11.819 8.293C7.728 8.088 4.1 6.128 1.671 3.149C0.381 5.362 1.002 8.257 3.194 9.723C2.388 9.697 1.628 9.476 0.965 9.107C0.911 11.388 2.546 13.522 4.914 13.997C4.221 14.185 3.462 14.229 2.69 14.081C3.316 16.037 5.134 17.46 7.29 17.5C5.22 19.123 2.612 19.848 0 19.54C2.179 20.937 4.768 21.752 7.548 21.752C16.69 21.752 21.855 14.031 21.543 7.106C22.505 6.411 23.34 5.544 24 4.557Z"/></svg>
+                                        </a>
+                                        <a href="#" style="width: 40px; height: 40px; background: ${colors.accent}; border-radius: 8px; display: flex; align-items: center; justify-content: center; text-decoration: none;">
+                                            <svg width="20" height="20" fill="white" viewBox="0 0 24 24"><path d="M22.46 6C21.69 6.35 20.86 6.58 20 6.69C20.88 6.16 21.56 5.32 21.88 4.31C21.05 4.81 20.13 5.16 19.16 5.36C18.37 4.5 17.26 4 16 4C13.65 4 11.73 5.92 11.73 8.29C11.73 8.63 11.77 8.96 11.84 9.27C8.28 9.09 5.11 7.38 3 4.79C2.63 5.42 2.42 6.16 2.42 6.94C2.42 8.43 3.17 9.75 4.33 10.5C3.62 10.5 2.96 10.3 2.38 10C2.38 10 2.38 10 2.38 10.03C2.38 12.11 3.86 13.85 5.82 14.24C5.46 14.34 5.08 14.39 4.69 14.39C4.42 14.39 4.15 14.36 3.89 14.31C4.43 16 6 17.26 7.89 17.29C6.43 18.45 4.58 19.13 2.56 19.13C2.22 19.13 1.88 19.11 1.54 19.07C3.44 20.29 5.7 21 8.12 21C16 21 20.33 14.46 20.33 8.79C20.33 8.6 20.33 8.42 20.32 8.23C21.16 7.63 21.88 6.87 22.46 6Z"/></svg>
+                                        </a>
+                                        <a href="#" style="width: 40px; height: 40px; background: ${colors.accent}; border-radius: 8px; display: flex; align-items: center; justify-content: center; text-decoration: none;">
+                                            <svg width="20" height="20" fill="white" viewBox="0 0 24 24"><path d="M20.447 20.452H16.893V14.883C16.893 13.555 16.866 11.846 15.041 11.846C13.188 11.846 12.905 13.291 12.905 14.785V20.452H9.351V9H12.765V10.561H12.811C13.288 9.661 14.448 8.711 16.181 8.711C19.782 8.711 20.448 11.081 20.448 14.166V20.452H20.447ZM5.337 7.433C4.193 7.433 3.274 6.507 3.274 5.368C3.274 4.23 4.194 3.305 5.337 3.305C6.477 3.305 7.401 4.23 7.401 5.368C7.401 6.507 6.476 7.433 5.337 7.433ZM7.119 20.452H3.555V9H7.119V20.452ZM22.225 0H1.771C0.792 0 0 0.774 0 1.729V22.271C0 23.227 0.792 24 1.771 24H22.222C23.2 24 24 23.227 24 22.271V1.729C24 0.774 23.2 0 22.222 0H22.225Z"/></svg>
+                                        </a>
+                                        <a href="#" style="width: 40px; height: 40px; background: ${colors.accent}; border-radius: 8px; display: flex; align-items: center; justify-content: center; text-decoration: none;">
+                                            <svg width="20" height="20" fill="white" viewBox="0 0 24 24"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987C.029 17.396 3.904 21.989 9.028 22.852V14.842H6.506V11.987H9.028V9.348C9.028 6.852 10.577 5.42 12.841 5.42C13.915 5.42 15.042 5.611 15.042 5.611V8.048H13.804C12.582 8.048 12.017 8.767 12.017 9.507V11.987H14.931L14.311 14.842H12.017V22.852C17.141 21.989 21.017 17.396 21.017 11.987C21.017 5.367 15.637.001 12.017.001Z"/></svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            `
+        }
+    },
+
+    // Enhanced navigation generator with mobile support
+    generateNavigation: (data, colors, currentPage = 'home') => `
+        <nav style="background: ${colors.background}; border-bottom: 1px solid ${colors.border}; position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+            <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; height: 4rem;">
+                    <!-- Logo/Brand -->
+                    <div style="font-size: 1.5rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary};">
+                        ${data.siteTitle}
+                    </div>
+                    
+                    <!-- Desktop Navigation -->
+                    <div class="desktop-nav" style="display: flex; align-items: center;">
+                        <ul style="display: flex; list-style: none; gap: 2rem; margin: 0; padding: 0; align-items: center;">
+                            ${data.navLinks.map(link => {
+                                const linkId = link.toLowerCase().replace(/\s+/g, '-');
+                                const isActive = currentPage === linkId || (currentPage === 'home' && link === 'Home');
+                                return `<li>
+                                    <a href="#${linkId}" 
+                                       onclick="showPage('${linkId}')" 
+                                       style="color: ${isActive ? colors.accent : colors.text}; 
+                                              text-decoration: none; 
+                                              font-weight: ${isActive ? DesignTemplates.fonts[data.fontFamily].weights.bold : DesignTemplates.fonts[data.fontFamily].weights.medium}; 
+                                              transition: color 0.3s; 
+                                              padding: 0.5rem 0; 
+                                              border-bottom: ${isActive ? `2px solid ${colors.accent}` : '2px solid transparent'};">
+                                        ${link}
+                                    </a>
+                                </li>`;
+                            }).join('')}
+                        </ul>
+                    </div>
+                    
+                    <!-- Mobile Menu Button -->
+                    <button class="mobile-menu-btn" 
+                            onclick="toggleMobileMenu()"
+                            style="display: none; background: none; border: none; cursor: pointer; padding: 0.5rem;">
+                        <svg width="24" height="24" fill="${colors.text}" viewBox="0 0 24 24">
+                            <path d="M3 18H21V16H3V18ZM3 13H21V11H3V13ZM3 6V8H21V6H3Z"/>
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- Mobile Navigation -->
+                <div class="mobile-nav" 
+                     style="display: none; background: ${colors.surface}; border-top: 1px solid ${colors.border}; margin: 0 -2rem;">
+                    <ul style="list-style: none; margin: 0; padding: 1rem 0;">
+                        ${data.navLinks.map(link => {
+                            const linkId = link.toLowerCase().replace(/\s+/g, '-');
+                            const isActive = currentPage === linkId || (currentPage === 'home' && link === 'Home');
+                            return `<li>
+                                <a href="#${linkId}" 
+                                   onclick="showPage('${linkId}'); toggleMobileMenu();" 
+                                   style="display: block; 
+                                          color: ${isActive ? colors.accent : colors.text}; 
+                                          text-decoration: none; 
+                                          font-weight: ${isActive ? DesignTemplates.fonts[data.fontFamily].weights.bold : DesignTemplates.fonts[data.fontFamily].weights.medium}; 
+                                          padding: 0.75rem 2rem; 
+                                          transition: background-color 0.3s; 
+                                          background: ${isActive ? `${colors.accent}15` : 'transparent'};">
+                                    ${link}
+                                </a>
+                            </li>`;
+                        }).join('')}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        
+        <style>
+            @media (max-width: 768px) {
+                .desktop-nav { display: none !important; }
+                .mobile-menu-btn { display: block !important; }
+            }
+            
+            .mobile-nav.show {
+                display: block !important;
+            }
+        </style>
+    `,
+
+    // Generate complete multi-page website
+    generateMultiPageSite: (data, style, currentPage = 'home') => {
+        const colors = DesignTemplates.styles[style].colors;
+        const navigation = DesignTemplates.generateNavigation(data, colors, currentPage);
+        
+        // Get the current page content
+        let mainContent = '';
+        
+        if (currentPage === 'home' || currentPage === 'homepage') {
+            // Use the existing homepage template
+            const template = data.template || 'hero';
+            mainContent = DesignTemplates.templates[template] || DesignTemplates.templates.hero;
+        } else if (DesignTemplates.pages[currentPage]) {
+            mainContent = DesignTemplates.pages[currentPage].generateContent(data, colors);
+        } else {
+            // Default to homepage if page not found
+            mainContent = DesignTemplates.templates.hero;
+        }
+        
+        // Generate footer
+        const footer = `
+            <footer style="background: ${colors.surface}; border-top: 1px solid ${colors.border}; padding: 3rem 0;">
+                <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+                        <div>
+                            <h3 style="font-size: 1.25rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 1rem;">${data.siteTitle}</h3>
+                            <p style="color: ${colors.text}; line-height: 1.6; margin-bottom: 1rem;">Building exceptional digital experiences that help businesses grow and succeed in today's competitive landscape.</p>
+                            <div style="display: flex; gap: 1rem;">
+                                <a href="#" style="color: ${colors.secondary}; transition: color 0.3s;">
+                                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557C23.117 4.949 22.168 5.213 21.172 5.332C22.189 4.723 22.97 3.758 23.337 2.608C22.386 3.172 21.332 3.582 20.21 3.803C19.313 2.846 18.032 2.248 16.616 2.248C13.437 2.248 11.101 5.214 11.819 8.293C7.728 8.088 4.1 6.128 1.671 3.149C0.381 5.362 1.002 8.257 3.194 9.723C2.388 9.697 1.628 9.476 0.965 9.107C0.911 11.388 2.546 13.522 4.914 13.997C4.221 14.185 3.462 14.229 2.69 14.081C3.316 16.037 5.134 17.46 7.29 17.5C5.22 19.123 2.612 19.848 0 19.54C2.179 20.937 4.768 21.752 7.548 21.752C16.69 21.752 21.855 14.031 21.543 7.106C22.505 6.411 23.34 5.544 24 4.557Z"/></svg>
+                                </a>
+                                <a href="#" style="color: ${colors.secondary}; transition: color 0.3s;">
+                                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452H16.893V14.883C16.893 13.555 16.866 11.846 15.041 11.846C13.188 11.846 12.905 13.291 12.905 14.785V20.452H9.351V9H12.765V10.561H12.811C13.288 9.661 14.448 8.711 16.181 8.711C19.782 8.711 20.448 11.081 20.448 14.166V20.452H20.447ZM5.337 7.433C4.193 7.433 3.274 6.507 3.274 5.368C3.274 4.23 4.194 3.305 5.337 3.305C6.477 3.305 7.401 4.23 7.401 5.368C7.401 6.507 6.476 7.433 5.337 7.433ZM7.119 20.452H3.555V9H7.119V20.452ZM22.225 0H1.771C0.792 0 0 0.774 0 1.729V22.271C0 23.227 0.792 24 1.771 24H22.222C23.2 24 24 23.227 24 22.271V1.729C24 0.774 23.2 0 22.222 0H22.225Z"/></svg>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4 style="font-size: 1.1rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 1rem;">Quick Links</h4>
+                            <ul style="list-style: none; margin: 0; padding: 0;">
+                                ${data.navLinks.map(link => {
+                                    const linkId = link.toLowerCase().replace(/\s+/g, '-');
+                                    return `<li style="margin-bottom: 0.5rem;">
+                                        <a href="#${linkId}" onclick="showPage('${linkId}')" style="color: ${colors.text}; text-decoration: none; transition: color 0.3s;">${link}</a>
+                                    </li>`;
+                                }).join('')}
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 style="font-size: 1.1rem; font-weight: ${DesignTemplates.fonts[data.fontFamily].weights.bold}; color: ${colors.primary}; margin-bottom: 1rem;">Contact Info</h4>
+                            <div style="color: ${colors.text}; line-height: 1.6;">
+                                <p style="margin-bottom: 0.5rem;">123 Business Street</p>
+                                <p style="margin-bottom: 0.5rem;">London, SW1A 1AA</p>
+                                <p style="margin-bottom: 0.5rem;">+44 20 7123 4567</p>
+                                <p>hello@${data.siteTitle.toLowerCase().replace(/\s+/g, '')}.com</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="border-top: 1px solid ${colors.border}; padding-top: 2rem; text-align: center;">
+                        <p style="color: ${colors.secondary}; margin: 0;">&copy; ${new Date().getFullYear()} ${data.siteTitle}. All rights reserved.</p>
+                    </div>
+                </div>
+            </footer>
+        `;
+        
+        return `
+            ${navigation}
+            <main>
+                ${mainContent}
+            </main>
+            ${footer}
+            
+            <script>
+                // Page navigation functionality
+                function showPage(pageId) {
+                    // Update the current page and regenerate
+                    window.currentPage = pageId;
+                    updatePage();
+                }
+                
+                function toggleMobileMenu() {
+                    const mobileNav = document.querySelector('.mobile-nav');
+                    mobileNav.classList.toggle('show');
+                }
+                
+                // Close mobile menu when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!e.target.closest('nav') && document.querySelector('.mobile-nav.show')) {
+                        toggleMobileMenu();
+                    }
+                });
+                
+                // Handle responsive navigation
+                function handleResize() {
+                    if (window.innerWidth > 768) {
+                        document.querySelector('.mobile-nav').classList.remove('show');
+                    }
+                }
+                
+                window.addEventListener('resize', handleResize);
+            </script>
+        `;
+    }
 };

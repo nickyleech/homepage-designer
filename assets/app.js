@@ -1129,6 +1129,90 @@ function downloadHTML() {
     URL.revokeObjectURL(url);
 }
 
+function downloadMultiPageSite() {
+    try {
+        const generator = window.designGenerator;
+        const data = generator.getFormData();
+        const style = data.style || 'minimalist';
+        
+        // Generate multi-page export package
+        if (!ExportPipeline.generateMultiPageExport) {
+            alert('Multi-page export is not available. Please check that all required files are loaded.');
+            return;
+        }
+        
+        const exportPackage = ExportPipeline.generateMultiPageExport('html', data, style, { optimized: true });
+        
+        if (!exportPackage.files || exportPackage.files.length === 0) {
+            alert('Failed to generate multi-page export. Please try again.');
+            return;
+        }
+        
+        // Create a ZIP file with all the pages
+        if (typeof JSZip !== 'undefined') {
+            // Use JSZip if available
+            const zip = new JSZip();
+            
+            exportPackage.files.forEach(file => {
+                zip.file(file.filename, file.content);
+            });
+            
+            zip.generateAsync({ type: 'blob' }).then(function(content) {
+                const url = URL.createObjectURL(content);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `${data.siteTitle.toLowerCase().replace(/\s+/g, '-')}-multipage-${style}.zip`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                alert(`Multi-page website exported successfully!\n\nIncluded files:\n${exportPackage.files.map(f => f.filename).join('\n')}`);
+            }).catch(function(error) {
+                console.error('ZIP generation failed:', error);
+                fallbackMultiPageDownload(exportPackage, data, style);
+            });
+        } else {
+            // Fallback to individual file downloads
+            fallbackMultiPageDownload(exportPackage, data, style);
+        }
+    } catch (error) {
+        console.error('Multi-page export failed:', error);
+        alert('Multi-page export failed. Please try again or use single page export.');
+    }
+}
+
+function fallbackMultiPageDownload(exportPackage, data, style) {
+    // Download files individually if ZIP is not available
+    const proceed = confirm(`ZIP library not available. Would you like to download ${exportPackage.files.length} individual files instead?\n\nFiles: ${exportPackage.files.map(f => f.filename).join(', ')}`);
+    
+    if (!proceed) return;
+    
+    let downloadDelay = 0;
+    exportPackage.files.forEach(file => {
+        setTimeout(() => {
+            const blob = new Blob([file.content], { 
+                type: file.filename.endsWith('.html') ? 'text/html' : 
+                      file.filename.endsWith('.css') ? 'text/css' : 
+                      file.filename.endsWith('.md') ? 'text/markdown' : 'text/plain'
+            });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = file.filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }, downloadDelay);
+        downloadDelay += 1000; // 1 second delay between downloads
+    });
+    
+    setTimeout(() => {
+        alert('Multi-page website files downloaded successfully!\n\nUpload all files to your web server to deploy the complete website.');
+    }, downloadDelay + 500);
+}
+
 function exportDesign() {
     const format = document.getElementById('exportFormat').value;
     const framework = document.getElementById('cssFramework').value;
