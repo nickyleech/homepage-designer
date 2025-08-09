@@ -17,6 +17,33 @@
             min-height: 100vh;
         }
 
+        /* Beautiful SVG Icon System */
+        .icon {
+            display: inline-block;
+            width: 1.2em;
+            height: 1.2em;
+            vertical-align: -0.125em;
+            fill: currentColor;
+            margin-right: 0.25em;
+        }
+
+        .icon-lg {
+            width: 1.5em;
+            height: 1.5em;
+        }
+
+        .icon-sm {
+            width: 1em;
+            height: 1em;
+        }
+
+        /* Icon container for buttons */
+        .icon-text {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
         .header {
             background: white;
             border-bottom: 1px solid #e1e5e9;
@@ -59,7 +86,7 @@
         .logo {
             font-size: 24px;
             font-weight: 700;
-            color: #1f2937;
+            colour: #1f2937;
         }
 
         .nav-tabs {
@@ -80,7 +107,7 @@
             cursor: pointer;
             font-size: 14px;
             font-weight: 500;
-            color: #6b7280;
+            colour: #6b7280;
             transition: all 0.2s;
             white-space: nowrap;
             display: flex;
@@ -96,13 +123,13 @@
 
         .nav-tab.active {
             background: white;
-            color: #1f2937;
+            colour: #1f2937;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
 
         .nav-tab:hover:not(.active) {
             background: rgba(255,255,255,0.6);
-            color: #374151;
+            colour: #374151;
         }
 
 
@@ -162,8 +189,8 @@
 
         .device-btn.active {
             background: #3b82f6;
-            color: white;
-            border-color: #3b82f6;
+            colour: white;
+            border-colour: #3b82f6;
         }
 
         .preview {
@@ -219,14 +246,14 @@
         h1 {
             font-size: 28px;
             font-weight: 700;
-            color: #1f2937;
+            colour: #1f2937;
             margin-bottom: 8px;
         }
 
         h2 {
             font-size: 18px;
             font-weight: 600;
-            color: #374151;
+            colour: #374151;
             margin-bottom: 16px;
             margin-top: 24px;
         }
@@ -243,7 +270,7 @@
             display: block;
             font-size: 14px;
             font-weight: 500;
-            color: #374151;
+            colour: #374151;
             margin-bottom: 6px;
         }
 
@@ -258,18 +285,18 @@
 
         input:focus, select:focus, textarea:focus {
             outline: none;
-            border-color: #3b82f6;
+            border-colour: #3b82f6;
             box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
         }
         
         /* Validation error styles */
         input.validation-error, select.validation-error, textarea.validation-error {
-            border-color: #ef4444;
+            border-colour: #ef4444;
             box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.1);
         }
         
         .validation-error-message {
-            color: #ef4444;
+            colour: #ef4444;
             font-size: 0.75rem;
             margin-top: 0.25rem;
             display: block;
@@ -298,154 +325,154 @@
         }
 
         .style-option:hover {
-            border-color: #3b82f6;
+            border-colour: #3b82f6;
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
         }
 
         .style-option.active {
-            border-color: #3b82f6;
+            border-colour: #3b82f6;
             background: #eff6ff;
         }
 
         .style-name {
             font-size: 13px;
             font-weight: 600;
-            color: #1f2937;
+            colour: #1f2937;
             margin-bottom: 4px;
         }
 
         .style-desc {
             font-size: 11px;
-            color: #6b7280;
+            colour: #6b7280;
             line-height: 1.3;
         }
 
         /* Professional Style-Specific Styling */
         .style-option[data-style="minimalist"] {
             background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
-            border-color: #e2e8f0;
+            border-colour: #e2e8f0;
         }
 
         .style-option[data-style="dashboard"] {
             background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-            border-color: #475569;
+            border-colour: #475569;
         }
         .style-option[data-style="dashboard"] .style-name {
-            color: #f1f5f9;
+            colour: #f1f5f9;
         }
         .style-option[data-style="dashboard"] .style-desc {
-            color: #cbd5e1;
+            colour: #cbd5e1;
         }
 
         .style-option[data-style="corporate"] {
             background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
-            border-color: #2563eb;
+            border-colour: #2563eb;
         }
         .style-option[data-style="corporate"] .style-name {
-            color: #ffffff;
+            colour: #ffffff;
         }
         .style-option[data-style="corporate"] .style-desc {
-            color: #dbeafe;
+            colour: #dbeafe;
         }
 
         .style-option[data-style="creative"] {
             background: linear-gradient(135deg, #7c3aed 0%, #ec4899 100%);
-            border-color: #a855f7;
+            border-colour: #a855f7;
         }
         .style-option[data-style="creative"] .style-name {
-            color: #ffffff;
+            colour: #ffffff;
         }
         .style-option[data-style="creative"] .style-desc {
-            color: #f3e8ff;
+            colour: #f3e8ff;
         }
 
         .style-option[data-style="tech"] {
             background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-            border-color: #7c3aed;
+            border-colour: #7c3aed;
         }
         .style-option[data-style="tech"] .style-name {
-            color: #ffffff;
+            colour: #ffffff;
         }
         .style-option[data-style="tech"] .style-desc {
-            color: #e0e7ff;
+            colour: #e0e7ff;
         }
 
         .style-option[data-style="ecommerce"] {
             background: linear-gradient(135deg, #059669 0%, #10b981 100%);
-            border-color: #047857;
+            border-colour: #047857;
         }
         .style-option[data-style="ecommerce"] .style-name {
-            color: #ffffff;
+            colour: #ffffff;
         }
         .style-option[data-style="ecommerce"] .style-desc {
-            color: #d1fae5;
+            colour: #d1fae5;
         }
 
         .style-option[data-style="blog"] {
             background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
-            border-color: #4b5563;
+            border-colour: #4b5563;
         }
         .style-option[data-style="blog"] .style-name {
-            color: #ffffff;
+            colour: #ffffff;
         }
         .style-option[data-style="blog"] .style-desc {
-            color: #d1d5db;
+            colour: #d1d5db;
         }
 
         .style-option[data-style="restaurant"] {
             background: linear-gradient(135deg, #dc2626 0%, #ea580c 100%);
-            border-color: #c2410c;
+            border-colour: #c2410c;
         }
         .style-option[data-style="restaurant"] .style-name {
-            color: #ffffff;
+            colour: #ffffff;
         }
         .style-option[data-style="restaurant"] .style-desc {
-            color: #fed7aa;
+            colour: #fed7aa;
         }
 
         .style-option[data-style="photography"] {
             background: linear-gradient(135deg, #1c1917 0%, #292524 100%);
-            border-color: #d97706;
+            border-colour: #d97706;
         }
         .style-option[data-style="photography"] .style-name {
-            color: #fbbf24;
+            colour: #fbbf24;
         }
         .style-option[data-style="photography"] .style-desc {
-            color: #fde68a;
+            colour: #fde68a;
         }
 
         .style-option[data-style="realestate"] {
             background: linear-gradient(135deg, #92400e 0%, #d97706 100%);
-            border-color: #b45309;
+            border-colour: #b45309;
         }
         .style-option[data-style="realestate"] .style-name {
-            color: #ffffff;
+            colour: #ffffff;
         }
         .style-option[data-style="realestate"] .style-desc {
-            color: #fef3c7;
+            colour: #fef3c7;
         }
 
         .style-option[data-style="healthcare"] {
             background: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%);
-            border-color: #0e7490;
+            border-colour: #0e7490;
         }
         .style-option[data-style="healthcare"] .style-name {
-            color: #ffffff;
+            colour: #ffffff;
         }
         .style-option[data-style="healthcare"] .style-desc {
-            color: #cffafe;
+            colour: #cffafe;
         }
 
         .style-option[data-style="education"] {
             background: linear-gradient(135deg, #065f46 0%, #059669 100%);
-            border-color: #047857;
+            border-colour: #047857;
         }
         .style-option[data-style="education"] .style-name {
-            color: #ffffff;
+            colour: #ffffff;
         }
         .style-option[data-style="education"] .style-desc {
-            color: #d1fae5;
+            colour: #d1fae5;
         }
 
         .template-grid {
@@ -467,11 +494,11 @@
         }
 
         .template-option:hover {
-            border-color: #3b82f6;
+            border-colour: #3b82f6;
         }
 
         .template-option.active {
-            border-color: #3b82f6;
+            border-colour: #3b82f6;
             background: #eff6ff;
         }
 
@@ -487,13 +514,13 @@
             margin: 0 0 8px 0;
             font-size: 18px;
             font-weight: 600;
-            color: #1f2937;
+            colour: #1f2937;
         }
 
         .template-category-desc {
             margin: 0 0 16px 0;
             font-size: 14px;
-            color: #6b7280;
+            colour: #6b7280;
             line-height: 1.4;
         }
 
@@ -514,7 +541,7 @@
         }
 
         .template-option:hover {
-            border-color: #3b82f6;
+            border-colour: #3b82f6;
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
         }
@@ -527,13 +554,13 @@
 
         .template-name {
             font-weight: 600;
-            color: #1f2937;
+            colour: #1f2937;
             margin-bottom: 4px;
         }
 
         .template-desc {
             font-size: 10px;
-            color: #6b7280;
+            colour: #6b7280;
             line-height: 1.3;
         }
 
@@ -557,8 +584,8 @@
 
         .page-btn.active {
             background: #3b82f6;
-            color: white;
-            border-color: #3b82f6;
+            colour: white;
+            border-colour: #3b82f6;
         }
 
         .button-group {
@@ -580,7 +607,7 @@
 
         .btn-primary {
             background: #3b82f6;
-            color: white;
+            colour: white;
         }
 
         .btn-primary:hover {
@@ -589,7 +616,7 @@
 
         .btn-secondary {
             background: #f3f4f6;
-            color: #374151;
+            colour: #374151;
             border: 1px solid #d1d5db;
         }
 
@@ -621,7 +648,7 @@
             gap: 0.5rem;
             font-size: 1rem;
             font-weight: 600;
-            color: #374151;
+            colour: #374151;
             margin-bottom: 1rem;
             padding: 0.5rem 0;
             border-bottom: 1px solid #e5e7eb;
@@ -644,7 +671,7 @@
         }
 
         .component-card:hover {
-            border-color: #3b82f6;
+            border-colour: #3b82f6;
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
         }
@@ -666,7 +693,7 @@
 
         .component-desc {
             font-size: 0.75rem;
-            color: #6b7280;
+            colour: #6b7280;
             line-height: 1.3;
         }
 
@@ -678,16 +705,16 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #6b7280;
+            colour: #6b7280;
             font-size: 0.9rem;
             margin-bottom: 1rem;
             transition: all 0.3s;
         }
 
         .drop-zone.drag-over {
-            border-color: #3b82f6;
+            border-colour: #3b82f6;
             background: #eff6ff;
-            color: #3b82f6;
+            colour: #3b82f6;
         }
 
         .component-editor {
@@ -714,14 +741,14 @@
 
         .editor-title {
             font-weight: 600;
-            color: #374151;
+            colour: #374151;
         }
 
         .editor-close {
             background: none;
             border: none;
             font-size: 1.5rem;
-            color: #6b7280;
+            colour: #6b7280;
             cursor: pointer;
             padding: 0;
             width: 24px;
@@ -739,7 +766,7 @@
             display: block;
             font-size: 0.875rem;
             font-weight: 500;
-            color: #374151;
+            colour: #374151;
             margin-bottom: 0.25rem;
         }
 
@@ -754,16 +781,16 @@
 
         .canvas-component {
             border: 2px solid transparent;
-            transition: border-color 0.2s;
+            transition: border-colour 0.2s;
             position: relative;
         }
 
         .canvas-component:hover {
-            border-color: #3b82f6;
+            border-colour: #3b82f6;
         }
 
         .canvas-component.selected {
-            border-color: #3b82f6;
+            border-colour: #3b82f6;
             background: rgba(59, 130, 246, 0.05);
         }
 
@@ -785,7 +812,7 @@
         .toolbar-btn {
             background: none;
             border: none;
-            color: white;
+            colour: white;
             font-size: 0.75rem;
             padding: 0.25rem;
             cursor: pointer;
@@ -857,7 +884,7 @@
             transition: all 0.2s ease;
             font-size: 13px;
             font-weight: 500;
-            color: #6b7280;
+            colour: #6b7280;
         }
         
         .theme-option .theme-icon {
@@ -866,12 +893,12 @@
         
         .theme-toggle input[type="radio"]:checked + .theme-option {
             background: white;
-            color: #1f2937;
+            colour: #1f2937;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
         
         /* Brand Colour Tools */
-        .brand-color-tools {
+        .brand-colour-tools {
             margin-top: 8px;
         }
         
@@ -885,7 +912,7 @@
             margin: 0 0 12px 0; 
             font-size: 14px; 
             font-weight: 600; 
-            color: #374151;
+            colour: #374151;
         }
         
         .colour-input-group {
@@ -897,7 +924,7 @@
             margin-bottom: 6px; 
             font-size: 13px; 
             font-weight: 500; 
-            color: #6b7280;
+            colour: #6b7280;
         }
         
         .colour-picker {
@@ -933,7 +960,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            transition: background-color 0.2s;
+            transition: background-colour 0.2s;
             position: relative;
         }
         
@@ -951,7 +978,7 @@
         .toggle-icon {
             font-size: 12px;
             transition: transform 0.2s;
-            color: #6b7280;
+            colour: #6b7280;
         }
         
         .section-header.collapsed .toggle-icon {
@@ -963,7 +990,7 @@
             bottom: -28px;
             left: 16px;
             background: #1f2937;
-            color: white;
+            colour: white;
             padding: 4px 8px;
             border-radius: 4px;
             font-size: 11px;
@@ -1004,16 +1031,16 @@
             border: 2px solid #d1d5db;
             border-radius: 6px;
             cursor: pointer;
-            transition: border-color 0.2s, box-shadow 0.2s;
+            transition: border-colour 0.2s, box-shadow 0.2s;
         }
         
         .colour-picker:hover {
-            border-color: #9ca3af;
+            border-colour: #9ca3af;
         }
         
         .colour-picker:focus {
             outline: none;
-            border-color: #3b82f6;
+            border-colour: #3b82f6;
             box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
         }
         
@@ -1026,12 +1053,12 @@
             font-family: 'Monaco', 'Consolas', monospace;
             font-size: 14px;
             text-transform: uppercase;
-            transition: border-color 0.2s;
+            transition: border-colour 0.2s;
         }
         
         .hex-input:focus {
             outline: none;
-            border-color: #3b82f6;
+            border-colour: #3b82f6;
         }
         
         .contrast-indicator {
@@ -1050,20 +1077,20 @@
         
         .contrast-indicator.good {
             background: #10b981;
-            color: white;
-            border-color: #059669;
+            colour: white;
+            border-colour: #059669;
         }
         
         .contrast-indicator.warning {
             background: #f59e0b;
-            color: white;
-            border-color: #d97706;
+            colour: white;
+            border-colour: #d97706;
         }
         
         .contrast-indicator.poor {
             background: #ef4444;
-            color: white;
-            border-color: #dc2626;
+            colour: white;
+            border-colour: #dc2626;
         }
         
         /* Colour Tools */
@@ -1081,14 +1108,14 @@
             border: 1px solid #d1d5db;
             border-radius: 4px;
             background: white;
-            color: #374151;
+            colour: #374151;
             cursor: pointer;
             transition: all 0.2s;
         }
         
         .btn-small:hover {
             background: #f9fafb;
-            border-color: #9ca3af;
+            border-colour: #9ca3af;
         }
         
         /* Presets Grid */
@@ -1111,7 +1138,7 @@
         }
         
         .preset-item:hover {
-            border-color: #3b82f6;
+            border-colour: #3b82f6;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
         
@@ -1131,7 +1158,7 @@
         .preset-name {
             font-size: 11px;
             font-weight: 500;
-            color: #6b7280;
+            colour: #6b7280;
             text-align: center;
         }
         
@@ -1169,7 +1196,7 @@
             align-items: center;
             justify-content: center;
             font-size: 8px;
-            color: white;
+            colour: white;
         }
         
         /* Messages */
@@ -1183,13 +1210,13 @@
         
         .colour-message.success {
             background: #d1fae5;
-            color: #065f46;
+            colour: #065f46;
             border: 1px solid #a7f3d0;
         }
         
         .colour-message.error {
             background: #fee2e2;
-            color: #991b1b;
+            colour: #991b1b;
             border: 1px solid #fca5a5;
         }
         
@@ -1215,324 +1242,8 @@
             margin: 12px 0;
         }
         
-        /* Kanban Board Styles */
-        .kanban-board {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-            margin: 24px 0;
-            min-height: 600px;
-        }
-        
-        .kanban-column {
-            background: #f8f9fa;
-            border: 1px solid #e9ecef;
-            border-radius: 8px;
-            padding: 16px;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .kanban-column-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-            padding-bottom: 12px;
-            border-bottom: 2px solid #e9ecef;
-        }
-        
-        .kanban-column-header h3 {
-            margin: 0;
-            font-size: 16px;
-            font-weight: 600;
-            color: #374151;
-        }
-        
-        .task-count {
-            background: #6b7280;
-            color: white;
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-size: 12px;
-            font-weight: 500;
-            min-width: 20px;
-            text-align: center;
-        }
-        
-        .kanban-tasks {
-            flex: 1;
-            min-height: 400px;
-            margin-bottom: 12px;
-        }
-        
-        .kanban-task {
-            background: white;
-            border: 1px solid #e5e7eb;
-            border-radius: 6px;
-            padding: 12px;
-            margin-bottom: 8px;
-            cursor: move;
-            transition: all 0.2s;
-            position: relative;
-        }
-        
-        .kanban-task:hover {
-            border-color: #3b82f6;
-            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.15);
-            transform: translateY(-1px);
-        }
-        
-        .kanban-task.dragging {
-            opacity: 0.5;
-            transform: rotate(5deg);
-        }
-        
-        .task-title {
-            font-weight: 600;
-            font-size: 14px;
-            color: #374151;
-            margin-bottom: 6px;
-            line-height: 1.3;
-        }
-        
-        .task-description {
-            font-size: 12px;
-            color: #6b7280;
-            margin-bottom: 8px;
-            line-height: 1.4;
-        }
-        
-        .task-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 11px;
-            color: #9ca3af;
-        }
-        
-        .task-project {
-            background: #ddd6fe;
-            color: #5b21b6;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-weight: 500;
-        }
-        
-        .task-priority {
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-weight: 500;
-        }
-        
-        .task-priority.high {
-            background: #fee2e2;
-            color: #dc2626;
-        }
-        
-        .task-priority.medium {
-            background: #fef3c7;
-            color: #d97706;
-        }
-        
-        .task-priority.low {
-            background: #d1fae5;
-            color: #059669;
-        }
-        
-        .task-actions {
-            position: absolute;
-            top: 6px;
-            right: 6px;
-            opacity: 0;
-            transition: opacity 0.2s;
-            display: flex;
-            gap: 4px;
-        }
-        
-        .kanban-task:hover .task-actions {
-            opacity: 1;
-        }
-        
-        .task-action-btn {
-            width: 20px;
-            height: 20px;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
-            font-size: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s;
-        }
-        
-        .edit-btn {
-            background: #dbeafe;
-            color: #1d4ed8;
-        }
-        
-        .edit-btn:hover {
-            background: #bfdbfe;
-        }
-        
-        .delete-btn {
-            background: #fee2e2;
-            color: #dc2626;
-        }
-        
-        .delete-btn:hover {
-            background: #fecaca;
-        }
-        
-        .add-task-btn {
-            width: 100%;
-            padding: 8px;
-            border: 2px dashed #d1d5db;
-            border-radius: 6px;
-            background: transparent;
-            color: #6b7280;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        
-        .add-task-btn:hover {
-            border-color: #3b82f6;
-            color: #3b82f6;
-            background: #f0f9ff;
-        }
-        
-        .kanban-column[data-status="backlog"] .task-count {
-            background: #6b7280;
-        }
-        
-        .kanban-column[data-status="design"] .task-count {
-            background: #3b82f6;
-        }
-        
-        .kanban-column[data-status="review"] .task-count {
-            background: #f59e0b;
-        }
-        
-        .kanban-column[data-status="done"] .task-count {
-            background: #10b981;
-        }
-        
-        .kanban-column.drag-over {
-            background: #f0f9ff;
-            border-color: #3b82f6;
-        }
-        
-        /* Stats Cards */
-        .stat-card {
-            background: white;
-            border: 1px solid #e5e7eb;
-            border-radius: 8px;
-            padding: 20px;
-            text-align: center;
-        }
-        
-        .stat-number {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #3b82f6;
-            margin-bottom: 8px;
-        }
-        
-        .stat-label {
-            color: #6b7280;
-            font-size: 14px;
-            font-weight: 500;
-        }
-        
-        /* Task Modal */
-        .task-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-        }
-        
-        .task-modal-content {
-            background: white;
-            border-radius: 8px;
-            padding: 24px;
-            width: 90%;
-            max-width: 500px;
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-        
-        .task-modal h3 {
-            margin: 0 0 16px 0;
-            color: #374151;
-        }
-        
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 16px;
-        }
-        
-        .form-field {
-            margin-bottom: 16px;
-        }
-        
-        .form-field label {
-            display: block;
-            margin-bottom: 6px;
-            font-weight: 500;
-            color: #374151;
-            font-size: 14px;
-        }
-        
-        .form-field input,
-        .form-field select,
-        .form-field textarea {
-            width: 100%;
-            padding: 8px 12px;
-            border: 1px solid #d1d5db;
-            border-radius: 4px;
-            font-size: 14px;
-            box-sizing: border-box;
-        }
-        
-        .form-field textarea {
-            min-height: 80px;
-            resize: vertical;
-        }
-        
-        .modal-actions {
-            display: flex;
-            gap: 12px;
-            justify-content: flex-end;
-            margin-top: 24px;
-        }
         
         @media (max-width: 768px) {
-            .kanban-board {
-                grid-template-columns: 1fr;
-                gap: 12px;
-            }
-            
-            .kanban-controls {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            
-            .kanban-controls button,
-            .kanban-controls select {
-                width: 100%;
-            }
-            
             .form-row {
                 grid-template-columns: 1fr;
             }
@@ -1545,7 +1256,7 @@
             flex-wrap: wrap;
         }
         
-        .color-swatch {
+        .colour-swatch {
             width: 32px;
             height: 32px;
             border-radius: 6px;
@@ -1555,22 +1266,22 @@
             transition: transform 0.2s ease;
         }
         
-        .color-swatch:hover {
+        .colour-swatch:hover {
             transform: scale(1.1);
         }
         
-        .color-swatch.selected {
-            border-color: #3b82f6;
+        .colour-swatch.selected {
+            border-colour: #3b82f6;
             box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
         }
         
-        .color-swatch .color-info {
+        .colour-swatch .colour-info {
             position: absolute;
             bottom: -24px;
             left: 50%;
             transform: translateX(-50%);
             font-size: 10px;
-            color: #6b7280;
+            colour: #6b7280;
             white-space: nowrap;
         }
 
@@ -1591,7 +1302,7 @@
         }
 
         .template-card:hover {
-            border-color: #3b82f6;
+            border-colour: #3b82f6;
             box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
             transform: translateY(-2px);
         }
@@ -1619,14 +1330,14 @@
 
         .template-title {
             font-weight: 600;
-            color: #1f2937;
+            colour: #1f2937;
             margin-bottom: 0.25rem;
             font-size: 14px;
         }
 
         .template-meta {
             font-size: 12px;
-            color: #6b7280;
+            colour: #6b7280;
             margin-bottom: 0.5rem;
         }
 
@@ -1638,7 +1349,7 @@
 
         .template-tag {
             background: #eff6ff;
-            color: #1e40af;
+            colour: #1e40af;
             padding: 2px 6px;
             border-radius: 4px;
             font-size: 10px;
@@ -1714,7 +1425,7 @@
 
         .walkthrough-header h2 {
             margin: 0;
-            color: #1f2937;
+            colour: #1f2937;
             font-size: 1.25rem;
             font-weight: 600;
         }
@@ -1723,7 +1434,7 @@
             background: none;
             border: none;
             font-size: 1.5rem;
-            color: #6b7280;
+            colour: #6b7280;
             cursor: pointer;
             padding: 0;
             width: 2rem;
@@ -1732,12 +1443,12 @@
             align-items: center;
             justify-content: center;
             border-radius: 4px;
-            transition: background-color 0.2s;
+            transition: background-colour 0.2s;
         }
 
         .modal-close:hover {
             background: #f3f4f6;
-            color: #374151;
+            colour: #374151;
         }
 
         .walkthrough-body {
@@ -1753,20 +1464,20 @@
         }
 
         .walkthrough-step h3 {
-            color: #1f2937;
+            colour: #1f2937;
             font-size: 1.1rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
         }
 
         .walkthrough-step p {
-            color: #4b5563;
+            colour: #4b5563;
             line-height: 1.6;
             margin-bottom: 0.5rem;
         }
 
         .walkthrough-step ul {
-            color: #4b5563;
+            colour: #4b5563;
             line-height: 1.6;
             margin-left: 1rem;
         }
@@ -1785,7 +1496,7 @@
 
         .modal-header h3 {
             margin: 0;
-            color: #1f2937;
+            colour: #1f2937;
             font-size: 1.25rem;
         }
 
@@ -1793,7 +1504,7 @@
             background: none;
             border: none;
             font-size: 1.5rem;
-            color: #6b7280;
+            colour: #6b7280;
             cursor: pointer;
             padding: 0;
             width: 32px;
@@ -1823,6 +1534,117 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 </head>
 <body>
+    <!-- Beautiful SVG Icon Library -->
+    <svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <!-- Palette Icon -->
+            <symbol id="icon-palette" viewBox="0 0 24 24">
+                <path d="M12 2C6.49 2 2 6.49 2 12s4.49 10 10 10c1.38 0 2.5-1.12 2.5-2.5 0-.61-.23-1.21-.64-1.67-.08-.09-.13-.21-.13-.33 0-.28.22-.5.5-.5H16c3.31 0 6-2.69 6-6 0-5.51-4.49-10-10-10zM7.5 9C8.33 9 9 8.33 9 7.5S8.33 6 7.5 6 6 6.67 6 7.5 6.67 9 7.5 9zm2.5 4c-.83 0-1.5-.67-1.5-1.5S9.17 10 10 10s1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm2.5-6c-.83 0-1.5-.67-1.5-1.5S11.67 5 12.5 5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm2.5 4c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+            </symbol>
+            
+            <!-- Device Mobile Icon -->
+            <symbol id="icon-device-mobile" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a1 1 0 001-1V4a1 1 0 00-1-1H8a1 1 0 00-1 1v16a1 1 0 001 1z"/>
+            </symbol>
+            
+            <!-- Rocket Icon -->
+            <symbol id="icon-rocket" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+            </symbol>
+            
+            <!-- Lightning Bolt Icon -->
+            <symbol id="icon-lightning-bolt" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </symbol>
+            
+            <!-- Lightbulb Icon -->
+            <symbol id="icon-lightbulb" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+            </symbol>
+            
+            <!-- Document Text Icon -->
+            <symbol id="icon-document-text" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </symbol>
+            
+            <!-- Cog Icon -->
+            <symbol id="icon-cog" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </symbol>
+            
+            <!-- Eye Icon -->
+            <symbol id="icon-eye" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+            </symbol>
+            
+            <!-- Check Circle Icon -->
+            <symbol id="icon-check-circle" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </symbol>
+            
+            <!-- Sparkles Icon -->
+            <symbol id="icon-sparkles" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+            </symbol>
+            
+            <!-- Book Open Icon -->
+            <symbol id="icon-book-open" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+            </symbol>
+            
+            <!-- Exclamation Triangle Icon -->
+            <symbol id="icon-exclamation-triangle" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4.5c-.77-.833-2.694-.833-3.464 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+            </symbol>
+            
+            <!-- Pencil Icon -->
+            <symbol id="icon-pencil" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+            </symbol>
+            
+            <!-- Clipboard Icon -->
+            <symbol id="icon-clipboard" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+            </symbol>
+            
+            <!-- Trash Icon -->
+            <symbol id="icon-trash" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+            </symbol>
+            
+            <!-- Folder Icon -->
+            <symbol id="icon-folder" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/>
+            </symbol>
+            
+            <!-- Wrench Icon -->
+            <symbol id="icon-wrench" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a1 1 0 01-1-1V9a1 1 0 011-1h1a2 2 0 100-4H4a1 1 0 01-1-1V4a1 1 0 011-1h3a1 1 0 011 1v1z"/>
+            </symbol>
+            
+            <!-- Star Icon -->
+            <symbol id="icon-star" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
+            </symbol>
+
+            <!-- Phone Icon -->
+            <symbol id="icon-phone" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+            </symbol>
+
+            <!-- Mail Icon -->
+            <symbol id="icon-mail" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </symbol>
+
+            <!-- Globe Icon -->
+            <symbol id="icon-globe" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
+            </symbol>
+        </defs>
+    </svg>
 
     <header class="header">
         <div class="header-content">
@@ -1843,9 +1665,6 @@
                 <button class="nav-tab" data-tab="pa-tv-metadata">
                     PA TV Metadata
                 </button>
-                <button class="nav-tab" data-tab="kanban">
-                    Project Kanban
-                </button>
             </nav>
         </div>
     </header>
@@ -1855,14 +1674,14 @@
             <!-- Design Tab -->
             <div class="tab-content active" data-tab="design">
                 <h1>Design Studio</h1>
-                <p style="color: #6b7280; margin-bottom: 24px; font-size: 14px;">Create professional designs with advanced customisation</p>
+                <p style="colour: #6b7280; margin-bottom: 24px; font-size: 14px;">Create professional designs with advanced customisation</p>
 
 
                 <!-- Hidden design style - always use minimalist clean style -->
                 <input type="hidden" id="designStyle" value="minimalist">
                 
                 <h2>Design Templates</h2>
-                <p style="color: #6b7280; margin-bottom: 24px; font-size: 14px;">Choose from professionally designed layouts and components</p>
+                <p style="colour: #6b7280; margin-bottom: 24px; font-size: 14px;">Choose from professionally designed layouts and components</p>
 
                 <!-- Page Layouts -->
                 <div class="template-category">
@@ -2078,15 +1897,15 @@ Contact</textarea>
 
                 <h2>Styling</h2>
                 <div class="form-group">
-                    <label for="colorScheme">Colour Scheme</label>
-                    <select id="colorScheme">
+                    <label for="colourScheme">Colour Scheme</label>
+                    <select id="colourScheme">
                         <option value="blue">Blue</option>
                         <option value="monochrome">Grey</option>
                         <option value="green">Green</option>
                         <option value="purple">Purple</option>
                         <option value="orange">Orange</option>
                         <option value="dark">Dark</option>
-                        <option value="colorblind">Colourblind Friendly</option>
+                        <option value="colourblind">Colourblind Friendly</option>
                     </select>
                 </div>
 
@@ -2103,7 +1922,7 @@ Contact</textarea>
 
                 <div class="form-group">
                     <label for="brandColorExtractor">Brand Colours</label>
-                    <div class="brand-color-tools">
+                    <div class="brand-colour-tools">
                         
                         <!-- Logo Extraction Section -->
                         <div class="colour-section">
@@ -2120,13 +1939,13 @@ Contact</textarea>
                                     <img id="logoImage" style="max-width: 100%; max-height: 80px; border-radius: 6px; border: 1px solid #d1d5db;">
                                 </div>
                                 <div id="extractedColors" class="extracted-colours-container">
-                                    <div class="extraction-info" id="extractionInfo" style="display: none; margin-bottom: 12px; font-size: 12px; color: #6b7280;"></div>
-                                    <div class="extracted-palette" id="colorPalette"></div>
+                                    <div class="extraction-info" id="extractionInfo" style="display: none; margin-bottom: 12px; font-size: 12px; colour: #6b7280;"></div>
+                                    <div class="extracted-palette" id="colourPalette"></div>
                                     <button class="btn-primary" onclick="applyExtractedColors()" style="width: 100%; margin-top: 12px; height: 40px; font-weight: 500; display: none;" id="applyExtractedBtn">
                                         Apply Selected Colours
                                     </button>
                                 </div>
-                                <div id="logoLoadingState" style="display: none; text-align: center; padding: 20px; color: #6b7280;">
+                                <div id="logoLoadingState" style="display: none; text-align: center; padding: 20px; colour: #6b7280;">
                                     <div class="loading-spinner"></div>
                                     <div style="margin-top: 8px;">Extracting colours...</div>
                                 </div>
@@ -2143,7 +1962,7 @@ Contact</textarea>
                                 <div class="colour-input-group">
                                     <label for="customPrimary" class="colour-input-label">Primary Colour</label>
                                     <div class="colour-input-wrapper">
-                                        <input type="color" id="customPrimary" value="#3b82f6" class="colour-picker" oninput="updateColourPreview('primary', this.value)">
+                                        <input type="colour" id="customPrimary" value="#3b82f6" class="colour-picker" oninput="updateColourPreview('primary', this.value)">
                                         <input type="text" id="primaryHex" value="#3b82f6" class="hex-input" oninput="updateColourFromHex('primary', this.value)" maxlength="7">
                                         <div class="contrast-indicator" id="primaryContrast"></div>
                                     </div>
@@ -2151,7 +1970,7 @@ Contact</textarea>
                                 <div class="colour-input-group">
                                     <label for="customSecondary" class="colour-input-label">Secondary Colour</label>
                                     <div class="colour-input-wrapper">
-                                        <input type="color" id="customSecondary" value="#8b5cf6" class="colour-picker" oninput="updateColourPreview('secondary', this.value)">
+                                        <input type="colour" id="customSecondary" value="#8b5cf6" class="colour-picker" oninput="updateColourPreview('secondary', this.value)">
                                         <input type="text" id="secondaryHex" value="#8b5cf6" class="hex-input" oninput="updateColourFromHex('secondary', this.value)" maxlength="7">
                                         <div class="contrast-indicator" id="secondaryContrast"></div>
                                     </div>
@@ -2176,7 +1995,7 @@ Contact</textarea>
                                 </div>
                                 <div class="section-divider"></div>
                                 <div class="colour-history" id="colourHistory">
-                                    <h5 style="font-size: 12px; color: #6b7280; margin-bottom: 8px;">Recent Colours</h5>
+                                    <h5 style="font-size: 12px; colour: #6b7280; margin-bottom: 8px;">Recent Colours</h5>
                                     <div class="history-swatches" id="historySwatches"></div>
                                 </div>
                             </div>
@@ -2192,7 +2011,7 @@ Contact</textarea>
             <!-- URL Import Tab -->
             <div class="tab-content" data-tab="url-import">
                 <h1>URL Import & Analysis</h1>
-                <p style="color: #6b7280; margin-bottom: 24px; font-size: 14px;">Import and analyse existing websites for design inspiration</p>
+                <p style="colour: #6b7280; margin-bottom: 24px; font-size: 14px;">Import and analyse existing websites for design inspiration</p>
 
                 <h2>Website URL</h2>
                 <div class="form-group">
@@ -2203,7 +2022,7 @@ Contact</textarea>
                     </button>
                 </div>
 
-                <div id="urlAnalysisLoading" style="display: none; text-align: center; padding: 2rem; color: #6b7280;">
+                <div id="urlAnalysisLoading" style="display: none; text-align: center; padding: 2rem; colour: #6b7280;">
                     <div style="font-size: 2rem; margin-bottom: 1rem;">⏳</div>
                     <div>Analyzing website...</div>
                     <div style="font-size: 0.875rem; margin-top: 0.5rem;">This may take a few seconds</div>
@@ -2222,7 +2041,7 @@ Contact</textarea>
                     <div class="form-group">
                         <label>Colour Palette</label>
                         <div id="extractedColorPalette" style="display: flex; gap: 8px; margin-bottom: 1rem; flex-wrap: wrap;">
-                            <!-- Extracted colors will appear here -->
+                            <!-- Extracted colours will appear here -->
                         </div>
                     </div>
 
@@ -2242,10 +2061,20 @@ Contact</textarea>
 
                     <div class="button-group" style="margin-top: 1.5rem;">
                         <button class="btn-secondary" onclick="showComparison()" style="flex: 1;">
-                            👀 Preview Comparison
+                            <span class="icon-text">
+                                <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <use href="#icon-eye"></use>
+                                </svg>
+                                Preview Comparison
+                            </span>
                         </button>
                         <button class="btn-primary" onclick="applyAnalysisResults()" style="flex: 1;">
-                            ✨ Apply to Design
+                            <span class="icon-text">
+                                <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <use href="#icon-sparkles"></use>
+                                </svg>
+                                Apply to Design
+                            </span>
                         </button>
                     </div>
                 </div>
@@ -2254,14 +2083,14 @@ Contact</textarea>
                     <h2>Before vs After Comparison</h2>
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
                         <div>
-                            <h3 style="font-size: 1rem; margin-bottom: 0.5rem; color: #374151;">Original Website</h3>
-                            <div id="originalPreview" style="border: 1px solid #d1d5db; border-radius: 8px; padding: 1rem; background: #f9fafb; min-height: 200px; font-size: 0.875rem; color: #6b7280;">
+                            <h3 style="font-size: 1rem; margin-bottom: 0.5rem; colour: #374151;">Original Website</h3>
+                            <div id="originalPreview" style="border: 1px solid #d1d5db; border-radius: 8px; padding: 1rem; background: #f9fafb; min-height: 200px; font-size: 0.875rem; colour: #6b7280;">
                                 Original website preview will appear here
                             </div>
                         </div>
                         <div>
-                            <h3 style="font-size: 1rem; margin-bottom: 0.5rem; color: #374151;">New Design</h3>
-                            <div id="newDesignPreview" style="border: 1px solid #d1d5db; border-radius: 8px; padding: 1rem; background: #f9fafb; min-height: 200px; font-size: 0.875rem; color: #6b7280;">
+                            <h3 style="font-size: 1rem; margin-bottom: 0.5rem; colour: #374151;">New Design</h3>
+                            <div id="newDesignPreview" style="border: 1px solid #d1d5db; border-radius: 8px; padding: 1rem; background: #f9fafb; min-height: 200px; font-size: 0.875rem; colour: #6b7280;">
                                 New design preview will appear here
                             </div>
                         </div>
@@ -2269,10 +2098,15 @@ Contact</textarea>
                 </div>
 
                 <div style="background: #fef3c7; border: 1px solid #fbbf24; border-radius: 8px; padding: 1rem; margin-top: 1.5rem;">
-                    <h3 style="color: #92400e; margin-bottom: 0.5rem; font-size: 1rem;">💡 How it works</h3>
-                    <ul style="color: #92400e; font-size: 0.875rem; margin: 0; padding-left: 1.5rem;">
-                        <li>Enter any website URL to analyze its design and content</li>
-                        <li>Extract colors, fonts, layout patterns, and content structure</li>
+                    <h3 style="colour: #92400e; margin-bottom: 0.5rem; font-size: 1rem;">
+                        <svg class="icon icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="vertical-align: -0.1em;">
+                            <use href="#icon-lightbulb"></use>
+                        </svg>
+                        How it works
+                    </h3>
+                    <ul style="colour: #92400e; font-size: 0.875rem; margin: 0; padding-left: 1.5rem;">
+                        <li>Enter any website URL to analyse its design and content</li>
+                        <li>Extract colours, fonts, layout patterns, and content structure</li>
                         <li>Get AI-powered design style recommendations</li>
                         <li>Apply extracted elements to your new design</li>
                         <li>Preview before/after comparison of improvements</li>
@@ -2286,143 +2120,170 @@ Contact</textarea>
 
             <!-- PA Media Tab -->
             <div class="tab-content" data-tab="pa-media">
-                <h1>PA Media Brand Templates</h1>
-                <p style="color: #6b7280; margin-bottom: 24px; font-size: 14px;">Professional branded templates and design assets for PA Media Group</p>
+                <h1>PA TV Metadata Logo Assets</h1>
+                <p style="colour: #6b7280; margin-bottom: 24px; font-size: 14px;">Professional PA TV Metadata logo assets in multiple formats and orientations</p>
 
-                <div style="background: linear-gradient(135deg, #825FFF 0%, #3D3677 100%); color: white; padding: 2rem; border-radius: 12px; margin-bottom: 2rem;">
-                    <h2 style="color: white; margin-bottom: 1rem; font-size: 1.5rem;">PA Media Design System</h2>
-                    <p style="color: #e0d4ff; margin-bottom: 1.5rem;">Complete branded template suite designed specifically for PA Media Group's professional requirements.</p>
+                <div style="background: linear-gradient(135deg, #825FFF 0%, #3D3677 100%); colour: white; padding: 2rem; border-radius: 12px; margin-bottom: 2rem;">
+                    <h2 style="colour: white; margin-bottom: 1rem; font-size: 1.5rem;">PA TV Metadata Brand Assets</h2>
+                    <p style="colour: #e0d4ff; margin-bottom: 1.5rem;">Professional PA TV Metadata logo assets available in multiple formats and orientations for all your branding needs.</p>
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1.5rem;">
                         <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
-                            <h4 style="color: white; margin-bottom: 0.5rem;">Brand Colours</h4>
-                            <p style="color: #e0d4ff; font-size: 0.9rem;">#825FFF Primary<br>#3D3677 Secondary</p>
+                            <h4 style="colour: white; margin-bottom: 0.5rem;">Format Options</h4>
+                            <p style="colour: #e0d4ff; font-size: 0.9rem;">PNG & SVG<br>High Resolution</p>
                         </div>
                         <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
-                            <h4 style="color: white; margin-bottom: 0.5rem;">Typography</h4>
-                            <p style="color: #e0d4ff; font-size: 0.9rem;">Professional Sans-Serif<br>Clean & Modern</p>
+                            <h4 style="colour: white; margin-bottom: 0.5rem;">Orientations</h4>
+                            <p style="colour: #e0d4ff; font-size: 0.9rem;">Adjacent & Stacked<br>Multiple Layouts</p>
                         </div>
                         <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
-                            <h4 style="color: white; margin-bottom: 0.5rem;">Templates</h4>
-                            <p style="color: #e0d4ff; font-size: 0.9rem;">15+ Professional<br>Ready-to-use Assets</p>
+                            <h4 style="colour: white; margin-bottom: 0.5rem;">Color Variants</h4>
+                            <p style="colour: #e0d4ff; font-size: 0.9rem;">Black & White<br>Professional Options</p>
                         </div>
                     </div>
                 </div>
 
-                <h2>Template Categories</h2>
+                <h2>Logo Asset Categories</h2>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
                     
                     <div style="border: 1px solid #e5e7eb; border-radius: 12px; padding: 1.5rem; background: white;">
-                        <h3 style="color: #825FFF; margin-bottom: 1rem;">Website Templates</h3>
-                        <p style="color: #6b7280; margin-bottom: 1rem; font-size: 0.9rem;">Professional website designs with PA Media branding</p>
-                        <ul style="color: #4b5563; font-size: 0.9rem; margin-bottom: 1.5rem; padding-left: 1.2rem;">
-                            <li>Corporate Homepage</li>
-                            <li>News Portal Layout</li>
-                            <li>Service Pages</li>
-                            <li>Contact Templates</li>
+                        <h3 style="colour: #825FFF; margin-bottom: 1rem;">Adjacent Layout Logos</h3>
+                        <p style="colour: #6b7280; margin-bottom: 1rem; font-size: 0.9rem;">Horizontal logo layouts for wide spaces and header applications</p>
+                        <div style="display: flex; gap: 1rem; margin-bottom: 1rem; align-items: center; justify-content: center; background: #f8f9fa; padding: 1rem; border-radius: 8px;">
+                            <img src="PA TV Metadata Logos/Adjacent/PNG/PA TV Metadata_Black Adjacent.png" alt="PA TV Metadata Black Adjacent" style="height: 40px; object-fit: contain;">
+                            <img src="PA TV Metadata Logos/Adjacent/PNG/PA-TV-Metadata_White-Adjacent.png" alt="PA TV Metadata White Adjacent" style="height: 40px; object-fit: contain; background: #333; padding: 8px; border-radius: 4px;">
+                        </div>
+                        <ul style="colour: #4b5563; font-size: 0.9rem; margin-bottom: 1.5rem; padding-left: 1.2rem;">
+                            <li>Black on transparent (PNG)</li>
+                            <li>White on transparent (PNG)</li>
+                            <li>Vector formats (SVG)</li>
+                            <li>Print-ready quality</li>
                         </ul>
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
-                            <button onclick="previewPATemplate('website')" style="background: #e5e7eb; color: #374151; border: none; padding: 0.75rem 1rem; border-radius: 6px; font-size: 0.9rem; font-weight: 500; cursor: pointer;">Preview</button>
-                            <button onclick="downloadPATemplate('website')" style="background: #825FFF; color: white; border: none; padding: 0.75rem 1rem; border-radius: 6px; font-size: 0.9rem; font-weight: 500; cursor: pointer;">Download</button>
+                            <button onclick="downloadPATVLogo('adjacent-png')" style="background: #e5e7eb; colour: #374151; border: none; padding: 0.75rem 1rem; border-radius: 6px; font-size: 0.9rem; font-weight: 500; cursor: pointer;">PNG Pack</button>
+                            <button onclick="downloadPATVLogo('adjacent-svg')" style="background: #825FFF; colour: white; border: none; padding: 0.75rem 1rem; border-radius: 6px; font-size: 0.9rem; font-weight: 500; cursor: pointer;">SVG Pack</button>
                         </div>
                     </div>
 
                     <div style="border: 1px solid #e5e7eb; border-radius: 12px; padding: 1.5rem; background: white;">
-                        <h3 style="color: #825FFF; margin-bottom: 1rem;">Presentation Assets</h3>
-                        <p style="color: #6b7280; margin-bottom: 1rem; font-size: 0.9rem;">Professional PowerPoint and presentation materials</p>
-                        <ul style="color: #4b5563; font-size: 0.9rem; margin-bottom: 1.5rem; padding-left: 1.2rem;">
-                            <li>Master Slide Templates</li>
-                            <li>Corporate Presentations</li>
-                            <li>Chart & Graph Templates</li>
-                            <li>Brand Guidelines Deck</li>
+                        <h3 style="colour: #825FFF; margin-bottom: 1rem;">Stacked Layout Logos</h3>
+                        <p style="colour: #6b7280; margin-bottom: 1rem; font-size: 0.9rem;">Vertical logo layouts for square spaces and social media</p>
+                        <div style="display: flex; gap: 1rem; margin-bottom: 1rem; align-items: center; justify-content: center; background: #f8f9fa; padding: 1rem; border-radius: 8px;">
+                            <img src="PA TV Metadata Logos/Stacked/PNG/PA TV Metadata_Black Stacked.png" alt="PA TV Metadata Black Stacked" style="height: 60px; object-fit: contain;">
+                            <img src="PA TV Metadata Logos/Stacked/PNG/PA TV Metadata_Stacked_White.png" alt="PA TV Metadata White Stacked" style="height: 60px; object-fit: contain; background: #333; padding: 8px; border-radius: 4px;">
+                        </div>
+                        <ul style="colour: #4b5563; font-size: 0.9rem; margin-bottom: 1.5rem; padding-left: 1.2rem;">
+                            <li>Black on transparent (PNG)</li>
+                            <li>White on transparent (PNG)</li>
+                            <li>Vector formats (SVG)</li>
+                            <li>Social media ready</li>
                         </ul>
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
-                            <button onclick="previewPATemplate('presentation')" style="background: #e5e7eb; color: #374151; border: none; padding: 0.75rem 1rem; border-radius: 6px; font-size: 0.9rem; font-weight: 500; cursor: pointer;">Preview</button>
-                            <button onclick="downloadPATemplate('presentation')" style="background: #825FFF; color: white; border: none; padding: 0.75rem 1rem; border-radius: 6px; font-size: 0.9rem; font-weight: 500; cursor: pointer;">Download</button>
+                            <button onclick="downloadPATVLogo('stacked-png')" style="background: #e5e7eb; colour: #374151; border: none; padding: 0.75rem 1rem; border-radius: 6px; font-size: 0.9rem; font-weight: 500; cursor: pointer;">PNG Pack</button>
+                            <button onclick="downloadPATVLogo('stacked-svg')" style="background: #825FFF; colour: white; border: none; padding: 0.75rem 1rem; border-radius: 6px; font-size: 0.9rem; font-weight: 500; cursor: pointer;">SVG Pack</button>
                         </div>
                     </div>
 
                     <div style="border: 1px solid #e5e7eb; border-radius: 12px; padding: 1.5rem; background: white;">
-                        <h3 style="color: #825FFF; margin-bottom: 1rem;">Digital Assets</h3>
-                        <p style="color: #6b7280; margin-bottom: 1rem; font-size: 0.9rem;">Teams backgrounds and digital brand materials</p>
-                        <ul style="color: #4b5563; font-size: 0.9rem; margin-bottom: 1.5rem; padding-left: 1.2rem;">
-                            <li>Teams Meeting Backgrounds</li>
-                            <li>Social Media Templates</li>
-                            <li>Email Signatures</li>
-                            <li>Digital Letterheads</li>
+                        <h3 style="colour: #825FFF; margin-bottom: 1rem;">PNG Logo Assets</h3>
+                        <p style="colour: #6b7280; margin-bottom: 1rem; font-size: 0.9rem;">High-resolution raster logos for digital and print applications</p>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                            <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; text-align: center;">
+                                <img src="PA TV Metadata Logos/Adjacent/PNG/PA TV Metadata_Black Adjacent.png" alt="Black Adjacent" style="height: 30px; object-fit: contain; margin-bottom: 0.5rem;">
+                                <p style="font-size: 0.8rem; colour: #6b7280;">Black Adjacent</p>
+                            </div>
+                            <div style="background: #333; padding: 1rem; border-radius: 8px; text-align: center;">
+                                <img src="PA TV Metadata Logos/Stacked/PNG/PA TV Metadata_Stacked_White.png" alt="White Stacked" style="height: 40px; object-fit: contain; margin-bottom: 0.5rem;">
+                                <p style="font-size: 0.8rem; colour: #e5e7eb;">White Stacked</p>
+                            </div>
+                        </div>
+                        <ul style="colour: #4b5563; font-size: 0.9rem; margin-bottom: 1.5rem; padding-left: 1.2rem;">
+                            <li>300 DPI print quality</li>
+                            <li>Transparent backgrounds</li>
+                            <li>Web-optimised sizes</li>
+                            <li>Both orientations included</li>
                         </ul>
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
-                            <button onclick="previewPATemplate('digital')" style="background: #e5e7eb; color: #374151; border: none; padding: 0.75rem 1rem; border-radius: 6px; font-size: 0.9rem; font-weight: 500; cursor: pointer;">Preview</button>
-                            <button onclick="downloadPATemplate('digital')" style="background: #825FFF; color: white; border: none; padding: 0.75rem 1rem; border-radius: 6px; font-size: 0.9rem; font-weight: 500; cursor: pointer;">Download</button>
+                            <button onclick="downloadPATVLogo('all-png')" style="background: #e5e7eb; colour: #374151; border: none; padding: 0.75rem 1rem; border-radius: 6px; font-size: 0.9rem; font-weight: 500; cursor: pointer;">All PNG</button>
+                            <button onclick="downloadPATVLogo('png-pack')" style="background: #825FFF; colour: white; border: none; padding: 0.75rem 1rem; border-radius: 6px; font-size: 0.9rem; font-weight: 500; cursor: pointer;">Download ZIP</button>
                         </div>
                     </div>
 
                     <div style="border: 1px solid #e5e7eb; border-radius: 12px; padding: 1.5rem; background: white;">
-                        <h3 style="color: #825FFF; margin-bottom: 1rem;">Print Materials</h3>
-                        <p style="color: #6b7280; margin-bottom: 1rem; font-size: 0.9rem;">Professional print-ready templates and stationery</p>
-                        <ul style="color: #4b5563; font-size: 0.9rem; margin-bottom: 1.5rem; padding-left: 1.2rem;">
-                            <li>Business Card Templates</li>
-                            <li>Letterhead Designs</li>
-                            <li>Brochure Layouts</li>
-                            <li>Report Templates</li>
+                        <h3 style="colour: #825FFF; margin-bottom: 1rem;">SVG Vector Logos</h3>
+                        <p style="colour: #6b7280; margin-bottom: 1rem; font-size: 0.9rem;">Scalable vector graphics for professional applications</p>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                            <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; text-align: center;">
+                                <img src="PA TV Metadata Logos/Adjacent/SVG/PA TV Metadata_Black Adjacent.svg" alt="Black Adjacent SVG" style="height: 30px; object-fit: contain; margin-bottom: 0.5rem;">
+                                <p style="font-size: 0.8rem; colour: #6b7280;">Black Adjacent</p>
+                            </div>
+                            <div style="background: #333; padding: 1rem; border-radius: 8px; text-align: center;">
+                                <img src="PA TV Metadata Logos/Stacked/SVG/PA TV Metadata_Black Stacked.svg" alt="Black Stacked SVG" style="height: 40px; object-fit: contain; margin-bottom: 0.5rem; filter: invert(1);">
+                                <p style="font-size: 0.8rem; colour: #e5e7eb;">White Stacked</p>
+                            </div>
+                        </div>
+                        <ul style="colour: #4b5563; font-size: 0.9rem; margin-bottom: 1.5rem; padding-left: 1.2rem;">
+                            <li>Infinitely scalable</li>
+                            <li>Perfect for web use</li>
+                            <li>Small file sizes</li>
+                            <li>Professional quality</li>
                         </ul>
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
-                            <button onclick="previewPATemplate('print')" style="background: #e5e7eb; color: #374151; border: none; padding: 0.75rem 1rem; border-radius: 6px; font-size: 0.9rem; font-weight: 500; cursor: pointer;">Preview</button>
-                            <button onclick="downloadPATemplate('print')" style="background: #825FFF; color: white; border: none; padding: 0.75rem 1rem; border-radius: 6px; font-size: 0.9rem; font-weight: 500; cursor: pointer;">Download</button>
+                            <button onclick="downloadPATVLogo('all-svg')" style="background: #e5e7eb; colour: #374151; border: none; padding: 0.75rem 1rem; border-radius: 6px; font-size: 0.9rem; font-weight: 500; cursor: pointer;">All SVG</button>
+                            <button onclick="downloadPATVLogo('svg-pack')" style="background: #825FFF; colour: white; border: none; padding: 0.75rem 1rem; border-radius: 6px; font-size: 0.9rem; font-weight: 500; cursor: pointer;">Download ZIP</button>
                         </div>
                     </div>
                 </div>
 
-                <h2>Brand Guidelines</h2>
+                <h2>Usage Guidelines</h2>
                 <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 2rem; margin-bottom: 2rem;">
-                    <h3 style="color: #374151; margin-bottom: 1rem;">PA Media Brand Standards</h3>
+                    <h3 style="colour: #374151; margin-bottom: 1rem;">PA TV Metadata Logo Usage</h3>
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
                         <div>
-                            <h4 style="color: #825FFF; margin-bottom: 0.5rem;">Colour Palette</h4>
+                            <h4 style="colour: #825FFF; margin-bottom: 0.5rem;">Logo Formats</h4>
                             <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
-                                <div style="width: 40px; height: 40px; background: #825FFF; border-radius: 6px; border: 2px solid #e5e7eb;"></div>
-                                <div style="width: 40px; height: 40px; background: #3D3677; border-radius: 6px; border: 2px solid #e5e7eb;"></div>
-                                <div style="width: 40px; height: 40px; background: #ffffff; border-radius: 6px; border: 2px solid #e5e7eb;"></div>
+                                <div style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 6px; border: 2px solid #e5e7eb; display: flex; align-items: center; justify-content: center; font-weight: bold; colour: #374151; font-size: 10px;">PNG</div>
+                                <div style="width: 40px; height: 40px; background: #dbeafe; border-radius: 6px; border: 2px solid #e5e7eb; display: flex; align-items: center; justify-content: center; font-weight: bold; colour: #1e40af; font-size: 10px;">SVG</div>
                             </div>
-                            <p style="color: #6b7280; font-size: 0.9rem;">Primary: #825FFF<br>Secondary: #3D3677<br>Neutral: #FFFFFF</p>
+                            <p style="colour: #6b7280; font-size: 0.9rem;">PNG for raster<br>SVG for vector<br>Both included</p>
                         </div>
                         <div>
-                            <h4 style="color: #825FFF; margin-bottom: 0.5rem;">Typography Guidelines</h4>
-                            <p style="color: #6b7280; font-size: 0.9rem; margin-bottom: 1rem;">Professional sans-serif typography with clear hierarchy and excellent readability for all applications.</p>
+                            <h4 style="colour: #825FFF; margin-bottom: 0.5rem;">Logo Orientations</h4>
+                            <p style="colour: #6b7280; font-size: 0.9rem; margin-bottom: 1rem;">Adjacent layout for headers and wide spaces. Stacked layout for social media and square formats.</p>
                         </div>
                         <div>
-                            <h4 style="color: #825FFF; margin-bottom: 0.5rem;">Logo Usage</h4>
-                            <p style="color: #6b7280; font-size: 0.9rem; margin-bottom: 1rem;">Consistent logo application across all materials with proper spacing and color variants.</p>
+                            <h4 style="colour: #825FFF; margin-bottom: 0.5rem;">Color Usage</h4>
+                            <p style="colour: #6b7280; font-size: 0.9rem; margin-bottom: 1rem;">Use black logos on light backgrounds, white logos on dark backgrounds. Maintain proper contrast ratios.</p>
                         </div>
                     </div>
-                    <button onclick="downloadBrandGuidelines()" style="background: #374151; color: white; border: none; padding: 1rem 2rem; border-radius: 6px; font-weight: 500; cursor: pointer; margin-top: 1.5rem;">Download Complete Brand Guidelines</button>
+                    <button onclick="downloadPATVLogoGuidelines()" style="background: #374151; colour: white; border: none; padding: 1rem 2rem; border-radius: 6px; font-weight: 500; cursor: pointer; margin-top: 1.5rem;">Download Logo Usage Guidelines</button>
                 </div>
 
                 <div style="display: flex; gap: 1rem; margin-top: 2rem;">
-                    <button onclick="downloadAllPATemplates()" style="background: #825FFF; color: white; border: none; padding: 1rem 2rem; border-radius: 6px; font-weight: 500; cursor: pointer; flex: 1;">Download Complete Template Suite</button>
-                    <button onclick="previewPATemplates()" style="background: #f3f4f6; color: #374151; border: 1px solid #d1d5db; padding: 1rem 2rem; border-radius: 6px; font-weight: 500; cursor: pointer; flex: 1;">Preview All Templates</button>
+                    <button onclick="downloadAllPATVLogos()" style="background: #825FFF; colour: white; border: none; padding: 1rem 2rem; border-radius: 6px; font-weight: 500; cursor: pointer; flex: 1;">Download All Logo Assets</button>
+                    <button onclick="previewPATVLogos()" style="background: #f3f4f6; colour: #374151; border: 1px solid #d1d5db; padding: 1rem 2rem; border-radius: 6px; font-weight: 500; cursor: pointer; flex: 1;">Preview All Logos</button>
                 </div>
             </div>
 
             <!-- PA TV Metadata Tab -->
             <div class="tab-content" data-tab="pa-tv-metadata">
                 <h1>PA TV Metadata Brand Templates</h1>
-                <p style="color: #6b7280; margin-bottom: 24px; font-size: 14px;">Professional branded templates and design assets for PA TV Metadata</p>
+                <p style="colour: #6b7280; margin-bottom: 24px; font-size: 14px;">Professional branded templates and design assets for PA TV Metadata</p>
 
-                <div style="background: linear-gradient(135deg, rgb(130, 95, 255) 0%, rgb(61, 54, 119) 100%); color: white; padding: 2rem; border-radius: 12px; margin-bottom: 2rem;">
-                    <h2 style="color: white; margin-bottom: 1rem; font-size: 1.5rem;">PA TV Metadata Design System</h2>
-                    <p style="color: #e0d4ff; margin-bottom: 1.5rem;">Specialized template suite designed for PA TV Metadata's broadcast and metadata requirements.</p>
+                <div style="background: linear-gradient(135deg, rgb(130, 95, 255) 0%, rgb(61, 54, 119) 100%); colour: white; padding: 2rem; border-radius: 12px; margin-bottom: 2rem;">
+                    <h2 style="colour: white; margin-bottom: 1rem; font-size: 1.5rem;">PA TV Metadata Design System</h2>
+                    <p style="colour: #e0d4ff; margin-bottom: 1.5rem;">Specialized template suite designed for PA TV Metadata's broadcast and metadata requirements.</p>
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1.5rem;">
                         <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
-                            <h4 style="color: white; margin-bottom: 0.5rem;">Brand Colours</h4>
-                            <p style="color: #e0d4ff; font-size: 0.9rem;">rgb(130, 95, 255) Primary<br>rgb(61, 54, 119) Secondary</p>
+                            <h4 style="colour: white; margin-bottom: 0.5rem;">Brand Colours</h4>
+                            <p style="colour: #e0d4ff; font-size: 0.9rem;">rgb(130, 95, 255) Primary<br>rgb(61, 54, 119) Secondary</p>
                         </div>
                         <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
-                            <h4 style="color: white; margin-bottom: 0.5rem;">Typography</h4>
-                            <p style="color: #e0d4ff; font-size: 0.9rem;">Greycliff CF Font<br>Broadcast Ready</p>
+                            <h4 style="colour: white; margin-bottom: 0.5rem;">Typography</h4>
+                            <p style="colour: #e0d4ff; font-size: 0.9rem;">Greycliff CF Font<br>Broadcast Ready</p>
                         </div>
                         <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px;">
-                            <h4 style="color: white; margin-bottom: 0.5rem;">Templates</h4>
-                            <p style="color: #e0d4ff; font-size: 0.9rem;">15+ Metadata<br>Specialized Assets</p>
+                            <h4 style="colour: white; margin-bottom: 0.5rem;">Templates</h4>
+                            <p style="colour: #e0d4ff; font-size: 0.9rem;">15+ Metadata<br>Specialized Assets</p>
                         </div>
                     </div>
                 </div>
@@ -2432,177 +2293,89 @@ Contact</textarea>
                     <div class="template-category" style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 1.5rem; background: white;">
                         <div style="display: flex; align-items: center; margin-bottom: 1rem;">
                             <div style="width: 40px; height: 40px; background: rgb(130, 95, 255); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
-                                <span style="color: white; font-size: 1.2rem;">📺</span>
+                                <span style="colour: white; font-size: 1.2rem;">📺</span>
                             </div>
-                            <h3 style="color: #374151; margin: 0;">TV Metadata Templates</h3>
+                            <h3 style="colour: #374151; margin: 0;">TV Metadata Templates</h3>
                         </div>
-                        <p style="color: #6b7280; margin-bottom: 1rem; font-size: 0.9rem;">Broadcast metadata displays and TV schedule interfaces</p>
+                        <p style="colour: #6b7280; margin-bottom: 1rem; font-size: 0.9rem;">Broadcast metadata displays and TV schedule interfaces</p>
                         <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                            <span style="background: #f3f4f6; color: #6b7280; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">Schedule Views</span>
-                            <span style="background: #f3f4f6; color: #6b7280; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">Metadata Cards</span>
-                            <span style="background: #f3f4f6; color: #6b7280; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">Program Info</span>
+                            <span style="background: #f3f4f6; colour: #6b7280; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">Schedule Views</span>
+                            <span style="background: #f3f4f6; colour: #6b7280; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">Metadata Cards</span>
+                            <span style="background: #f3f4f6; colour: #6b7280; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">Program Info</span>
                         </div>
                     </div>
 
                     <div class="template-category" style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 1.5rem; background: white;">
                         <div style="display: flex; align-items: center; margin-bottom: 1rem;">
                             <div style="width: 40px; height: 40px; background: rgb(130, 95, 255); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
-                                <span style="color: white; font-size: 1.2rem;">📊</span>
+                                <span style="colour: white; font-size: 1.2rem;">📊</span>
                             </div>
-                            <h3 style="color: #374151; margin: 0;">Analytics Dashboards</h3>
+                            <h3 style="colour: #374151; margin: 0;">Analytics Dashboards</h3>
                         </div>
-                        <p style="color: #6b7280; margin-bottom: 1rem; font-size: 0.9rem;">TV viewership metrics and broadcast analytics interfaces</p>
+                        <p style="colour: #6b7280; margin-bottom: 1rem; font-size: 0.9rem;">TV viewership metrics and broadcast analytics interfaces</p>
                         <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                            <span style="background: #f3f4f6; color: #6b7280; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">Viewership Data</span>
-                            <span style="background: #f3f4f6; color: #6b7280; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">Performance Charts</span>
+                            <span style="background: #f3f4f6; colour: #6b7280; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">Viewership Data</span>
+                            <span style="background: #f3f4f6; colour: #6b7280; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">Performance Charts</span>
                         </div>
                     </div>
 
                     <div class="template-category" style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 1.5rem; background: white;">
                         <div style="display: flex; align-items: center; margin-bottom: 1rem;">
                             <div style="width: 40px; height: 40px; background: rgb(130, 95, 255); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
-                                <span style="color: white; font-size: 1.2rem;">🎬</span>
+                                <span style="colour: white; font-size: 1.2rem;">🎬</span>
                             </div>
-                            <h3 style="color: #374151; margin: 0;">Content Management</h3>
+                            <h3 style="colour: #374151; margin: 0;">Content Management</h3>
                         </div>
-                        <p style="color: #6b7280; margin-bottom: 1rem; font-size: 0.9rem;">Content libraries and media asset management interfaces</p>
+                        <p style="colour: #6b7280; margin-bottom: 1rem; font-size: 0.9rem;">Content libraries and media asset management interfaces</p>
                         <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                            <span style="background: #f3f4f6; color: #6b7280; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">Media Libraries</span>
-                            <span style="background: #f3f4f6; color: #6b7280; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">Asset Tags</span>
+                            <span style="background: #f3f4f6; colour: #6b7280; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">Media Libraries</span>
+                            <span style="background: #f3f4f6; colour: #6b7280; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">Asset Tags</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Brand Standards -->
                 <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem;">
-                    <h3 style="color: #374151; margin-bottom: 1rem;">PA TV Metadata Brand Standards</h3>
+                    <h3 style="colour: #374151; margin-bottom: 1rem;">PA TV Metadata Brand Standards</h3>
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
                         <div>
-                            <h4 style="color: #6b7280; font-size: 0.9rem; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;">Primary Colour</h4>
+                            <h4 style="colour: #6b7280; font-size: 0.9rem; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;">Primary Colour</h4>
                             <div style="display: flex; align-items: center; gap: 0.5rem;">
                                 <div style="width: 20px; height: 20px; background: rgb(130, 95, 255); border-radius: 4px; border: 1px solid #e5e7eb;"></div>
                                 <span style="font-family: monospace; font-size: 0.9rem;">rgb(130, 95, 255)</span>
                             </div>
                         </div>
                         <div>
-                            <h4 style="color: #6b7280; font-size: 0.9rem; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;">Secondary Colour</h4>
+                            <h4 style="colour: #6b7280; font-size: 0.9rem; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;">Secondary Colour</h4>
                             <div style="display: flex; align-items: center; gap: 0.5rem;">
                                 <div style="width: 20px; height: 20px; background: rgb(61, 54, 119); border-radius: 4px; border: 1px solid #e5e7eb;"></div>
                                 <span style="font-family: monospace; font-size: 0.9rem;">rgb(61, 54, 119)</span>
                             </div>
                         </div>
                         <div>
-                            <h4 style="color: #6b7280; font-size: 0.9rem; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;">Typography</h4>
-                            <p style="color: #6b7280; font-size: 0.9rem; margin-bottom: 1rem;">Greycliff CF font family for consistent broadcast-ready typography.</p>
+                            <h4 style="colour: #6b7280; font-size: 0.9rem; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;">Typography</h4>
+                            <p style="colour: #6b7280; font-size: 0.9rem; margin-bottom: 1rem;">Greycliff CF font family for consistent broadcast-ready typography.</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Download Actions -->
                 <div style="display: flex; gap: 1rem; margin-top: 2rem;">
-                    <button onclick="downloadAllPATVTemplates()" style="background: rgb(130, 95, 255); color: white; border: none; padding: 1rem 2rem; border-radius: 6px; font-weight: 500; cursor: pointer; flex: 1;">Download PA TV Metadata Suite</button>
-                    <button onclick="previewPATVTemplates()" style="background: #f3f4f6; color: #374151; border: 1px solid #d1d5db; padding: 1rem 2rem; border-radius: 6px; font-weight: 500; cursor: pointer; flex: 1;">Preview All Templates</button>
+                    <button onclick="downloadAllPATVTemplates()" style="background: rgb(130, 95, 255); colour: white; border: none; padding: 1rem 2rem; border-radius: 6px; font-weight: 500; cursor: pointer; flex: 1;">Download PA TV Metadata Suite</button>
+                    <button onclick="previewPATVTemplates()" style="background: #f3f4f6; colour: #374151; border: 1px solid #d1d5db; padding: 1rem 2rem; border-radius: 6px; font-weight: 500; cursor: pointer; flex: 1;">Preview All Templates</button>
                 </div>
             </div>
 
-            <!-- Kanban Tab -->
-            <div class="tab-content" data-tab="kanban">
-                <h1>Project Kanban Board</h1>
-                <p style="color: #6b7280; margin-bottom: 24px; font-size: 14px;">Organize and track your design projects with visual task management</p>
-
-                <!-- Kanban Controls -->
-                <div class="kanban-controls" style="margin-bottom: 24px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
-                    <button class="btn-primary" onclick="createNewProject()" style="font-size: 14px; padding: 8px 16px;">
-                        + New Project
-                    </button>
-                    <button class="btn-secondary" onclick="createNewTask()" style="font-size: 14px; padding: 8px 16px;">
-                        + Add Task
-                    </button>
-                    <select id="projectFilter" onchange="filterByProject()" style="padding: 8px 12px; border: 1px solid #d1d5db; border-radius: 4px; font-size: 14px;">
-                        <option value="">All Projects</option>
-                    </select>
-                    <button class="btn-secondary" onclick="exportKanbanData()" style="font-size: 14px; padding: 8px 16px;">
-                        Export Data
-                    </button>
-                </div>
-
-                <!-- Kanban Board -->
-                <div class="kanban-board" id="kanbanBoard">
-                    <div class="kanban-column" data-status="backlog">
-                        <div class="kanban-column-header">
-                            <h3>📝 Backlog</h3>
-                            <span class="task-count" id="backlog-count">0</span>
-                        </div>
-                        <div class="kanban-tasks" id="backlog-tasks" ondrop="dropTask(event)" ondragover="allowDrop(event)">
-                            <!-- Tasks will be added here -->
-                        </div>
-                        <button class="add-task-btn" onclick="addTaskToColumn('backlog')">+ Add Task</button>
-                    </div>
-
-                    <div class="kanban-column" data-status="design">
-                        <div class="kanban-column-header">
-                            <h3>🎨 In Design</h3>
-                            <span class="task-count" id="design-count">0</span>
-                        </div>
-                        <div class="kanban-tasks" id="design-tasks" ondrop="dropTask(event)" ondragover="allowDrop(event)">
-                            <!-- Tasks will be added here -->
-                        </div>
-                        <button class="add-task-btn" onclick="addTaskToColumn('design')">+ Add Task</button>
-                    </div>
-
-                    <div class="kanban-column" data-status="review">
-                        <div class="kanban-column-header">
-                            <h3>👀 Review</h3>
-                            <span class="task-count" id="review-count">0</span>
-                        </div>
-                        <div class="kanban-tasks" id="review-tasks" ondrop="dropTask(event)" ondragover="allowDrop(event)">
-                            <!-- Tasks will be added here -->
-                        </div>
-                        <button class="add-task-btn" onclick="addTaskToColumn('review')">+ Add Task</button>
-                    </div>
-
-                    <div class="kanban-column" data-status="done">
-                        <div class="kanban-column-header">
-                            <h3>✅ Done</h3>
-                            <span class="task-count" id="done-count">0</span>
-                        </div>
-                        <div class="kanban-tasks" id="done-tasks" ondrop="dropTask(event)" ondragover="allowDrop(event)">
-                            <!-- Tasks will be added here -->
-                        </div>
-                        <button class="add-task-btn" onclick="addTaskToColumn('done')">+ Add Task</button>
-                    </div>
-                </div>
-
-                <!-- Project Stats -->
-                <div class="project-stats" style="margin-top: 32px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
-                    <div class="stat-card">
-                        <div class="stat-number" id="totalTasks">0</div>
-                        <div class="stat-label">Total Tasks</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number" id="completedTasks">0</div>
-                        <div class="stat-label">Completed</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number" id="activeTasks">0</div>
-                        <div class="stat-label">In Progress</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number" id="completionRate">0%</div>
-                        <div class="stat-label">Completion Rate</div>
-                    </div>
-                </div>
-            </div>
 
             <div class="button-group">
                 <button type="button" class="btn-secondary" onclick="resetForm()">Reset</button>
-                <button type="button" class="btn-secondary" onclick="generateClaudeCodePrompt()" style="background: #10b981; color: white;">Copy Claude Prompt</button>
+                <button type="button" class="btn-secondary" onclick="generateClaudeCodePrompt()" style="background: #10b981; colour: white;">Copy Claude Prompt</button>
                 <button type="button" class="btn-primary" onclick="downloadHTML()">Quick Export</button>
             </div>
 
             <h2>Claude Code Prompt Preview</h2>
             <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1.5rem; margin-bottom: 2rem;">
-                <div id="claudePromptPreview" style="font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace; font-size: 0.9rem; line-height: 1.5; color: #374151; white-space: pre-wrap; max-height: 300px; overflow-y: auto;">
+                <div id="claudePromptPreview" style="font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace; font-size: 0.9rem; line-height: 1.5; colour: #374151; white-space: pre-wrap; max-height: 300px; overflow-y: auto;">
                     <!-- Claude prompt preview will appear here -->
                 </div>
             </div>
@@ -2615,7 +2388,7 @@ Contact</textarea>
                     <button class="device-btn" data-device="tablet">Tablet</button>
                     <button class="device-btn" data-device="mobile">Mobile</button>
                 </div>
-                <span style="font-size: 12px; color: #6b7280;">Live Preview</span>
+                <span style="font-size: 12px; colour: #6b7280;">Live Preview</span>
             </div>
 
             <div class="preview desktop" id="preview">
@@ -2625,7 +2398,7 @@ Contact</textarea>
                         <div class="preview-dot"></div>
                         <div class="preview-dot"></div>
                     </div>
-                    <span style="font-size: 12px; color: #6b7280; margin-left: 8px;">Preview</span>
+                    <span style="font-size: 12px; colour: #6b7280; margin-left: 8px;">Preview</span>
                 </div>
                 <div class="preview-frame" id="previewFrame">
                     <!-- Generated preview will appear here -->
@@ -2650,7 +2423,7 @@ Contact</textarea>
     <script src="assets/accessibility.js"></script>
     <script src="assets/animations.js"></script>
     <script src="assets/content-extractor.js"></script>
-    <script src="assets/style-analyzer.js"></script>
+    <script src="assets/style-analyser.js"></script>
     <script src="assets/url-processor.js"></script>
     <script src="assets/claude-integration.js"></script>
     <script src="assets/pa-media-templates.js"></script>
@@ -2721,8 +2494,8 @@ Contact</textarea>
 
         function updateColourFromHex(type, hexValue) {
             if (hexValue.match(/^#[0-9A-F]{6}$/i)) {
-                const colorInput = document.getElementById(type === 'primary' ? 'customPrimary' : 'customSecondary');
-                colorInput.value = hexValue;
+                const colourInput = document.getElementById(type === 'primary' ? 'customPrimary' : 'customSecondary');
+                colourInput.value = hexValue;
                 updateColourPreview(type, hexValue);
             }
         }
@@ -2748,9 +2521,9 @@ Contact</textarea>
             }
         }
 
-        function getContrastRatio(color1, color2) {
-            const l1 = getLuminance(color1);
-            const l2 = getLuminance(color2);
+        function getContrastRatio(colour1, colour2) {
+            const l1 = getLuminance(colour1);
+            const l2 = getLuminance(colour2);
             const lighter = Math.max(l1, l2);
             const darker = Math.min(l1, l2);
             return (lighter + 0.05) / (darker + 0.05);
@@ -2949,8 +2722,8 @@ Contact</textarea>
                 
                 presetEl.innerHTML = `
                     <div class="preset-colours">
-                        <div class="preset-swatch" style="background-color: ${preset.primary}"></div>
-                        <div class="preset-swatch" style="background-color: ${preset.secondary}"></div>
+                        <div class="preset-swatch" style="background-colour: ${preset.primary}"></div>
+                        <div class="preset-swatch" style="background-colour: ${preset.secondary}"></div>
                     </div>
                     <div class="preset-name">${preset.name}</div>
                 `;
@@ -3032,7 +2805,7 @@ Contact</textarea>
         }
 
         function displayExtractedColours(colours) {
-            const palette = document.getElementById('colorPalette');
+            const palette = document.getElementById('colourPalette');
             const info = document.getElementById('extractionInfo');
             const container = document.getElementById('extractedColors');
             const applyBtn = document.getElementById('applyExtractedBtn');
@@ -3041,7 +2814,7 @@ Contact</textarea>
             
             colours.forEach(({ colour, count }, index) => {
                 const swatch = document.createElement('div');
-                swatch.className = 'color-swatch extracted-swatch';
+                swatch.className = 'colour-swatch extracted-swatch';
                 swatch.style.backgroundColor = colour;
                 swatch.title = `${colour} (${count} pixels)`;
                 swatch.dataset.colour = colour;
@@ -3099,318 +2872,8 @@ Contact</textarea>
         // Initialize when DOM is loaded
         document.addEventListener('DOMContentLoaded', function() {
             initializeColourSystem();
-            initializeKanban();
         });
 
-        // Kanban System Variables
-        let kanbanTasks = JSON.parse(localStorage.getItem('kanbanTasks') || '[]');
-        let kanbanProjects = JSON.parse(localStorage.getItem('kanbanProjects') || '["Website Redesign", "Mobile App", "Brand Guidelines"]');
-        let currentEditTask = null;
-
-        // Kanban Functions
-        function initializeKanban() {
-            updateProjectFilter();
-            renderKanbanBoard();
-            updateStats();
-            
-            // Add some sample tasks if none exist
-            if (kanbanTasks.length === 0) {
-                kanbanTasks = [
-                    {
-                        id: generateId(),
-                        title: 'Design homepage hero section',
-                        description: 'Create compelling hero section with call-to-action',
-                        project: 'Website Redesign',
-                        priority: 'high',
-                        status: 'backlog',
-                        createdAt: new Date().toISOString()
-                    },
-                    {
-                        id: generateId(),
-                        title: 'Choose colour palette',
-                        description: 'Research and select brand colours',
-                        project: 'Brand Guidelines',
-                        priority: 'medium',
-                        status: 'design',
-                        createdAt: new Date().toISOString()
-                    },
-                    {
-                        id: generateId(),
-                        title: 'Mobile responsiveness testing',
-                        description: 'Test design across different devices',
-                        project: 'Mobile App',
-                        priority: 'high',
-                        status: 'review',
-                        createdAt: new Date().toISOString()
-                    }
-                ];
-                saveKanbanData();
-                renderKanbanBoard();
-                updateStats();
-            }
-        }
-
-        function generateId() {
-            return Date.now().toString(36) + Math.random().toString(36).substr(2);
-        }
-
-        function createNewProject() {
-            const projectName = prompt('Enter project name:');
-            if (projectName && !kanbanProjects.includes(projectName)) {
-                kanbanProjects.push(projectName);
-                localStorage.setItem('kanbanProjects', JSON.stringify(kanbanProjects));
-                updateProjectFilter();
-            }
-        }
-
-        function createNewTask() {
-            showTaskModal();
-        }
-
-        function addTaskToColumn(status) {
-            showTaskModal(null, status);
-        }
-
-        function showTaskModal(task = null, defaultStatus = 'backlog') {
-            const isEdit = task !== null;
-            currentEditTask = task;
-            
-            const modal = document.createElement('div');
-            modal.className = 'task-modal';
-            modal.innerHTML = `
-                <div class="task-modal-content">
-                    <h3>${isEdit ? 'Edit Task' : 'New Task'}</h3>
-                    <form onsubmit="saveTask(event)">
-                        <div class="form-field">
-                            <label for="taskTitle">Title *</label>
-                            <input type="text" id="taskTitle" value="${task ? task.title : ''}" required>
-                        </div>
-                        <div class="form-field">
-                            <label for="taskDescription">Description</label>
-                            <textarea id="taskDescription">${task ? task.description : ''}</textarea>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-field">
-                                <label for="taskProject">Project</label>
-                                <select id="taskProject">
-                                    ${kanbanProjects.map(project => 
-                                        `<option value="${project}" ${task && task.project === project ? 'selected' : ''}>${project}</option>`
-                                    ).join('')}
-                                </select>
-                            </div>
-                            <div class="form-field">
-                                <label for="taskPriority">Priority</label>
-                                <select id="taskPriority">
-                                    <option value="low" ${task && task.priority === 'low' ? 'selected' : ''}>Low</option>
-                                    <option value="medium" ${task && task.priority === 'medium' ? 'selected' : ''}>Medium</option>
-                                    <option value="high" ${task && task.priority === 'high' ? 'selected' : ''}>High</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-field">
-                            <label for="taskStatus">Status</label>
-                            <select id="taskStatus">
-                                <option value="backlog" ${(task ? task.status : defaultStatus) === 'backlog' ? 'selected' : ''}>Backlog</option>
-                                <option value="design" ${(task ? task.status : defaultStatus) === 'design' ? 'selected' : ''}>In Design</option>
-                                <option value="review" ${(task ? task.status : defaultStatus) === 'review' ? 'selected' : ''}>Review</option>
-                                <option value="done" ${(task ? task.status : defaultStatus) === 'done' ? 'selected' : ''}>Done</option>
-                            </select>
-                        </div>
-                        <div class="modal-actions">
-                            <button type="button" class="btn-secondary" onclick="closeTaskModal()">Cancel</button>
-                            <button type="submit" class="btn-primary">${isEdit ? 'Update' : 'Create'} Task</button>
-                        </div>
-                    </form>
-                </div>
-            `;
-            
-            modal.onclick = (e) => {
-                if (e.target === modal) closeTaskModal();
-            };
-            
-            document.body.appendChild(modal);
-        }
-
-        function saveTask(event) {
-            event.preventDefault();
-            
-            const title = document.getElementById('taskTitle').value;
-            const description = document.getElementById('taskDescription').value;
-            const project = document.getElementById('taskProject').value;
-            const priority = document.getElementById('taskPriority').value;
-            const status = document.getElementById('taskStatus').value;
-            
-            if (currentEditTask) {
-                // Update existing task
-                const taskIndex = kanbanTasks.findIndex(t => t.id === currentEditTask.id);
-                if (taskIndex !== -1) {
-                    kanbanTasks[taskIndex] = {
-                        ...kanbanTasks[taskIndex],
-                        title,
-                        description,
-                        project,
-                        priority,
-                        status,
-                        updatedAt: new Date().toISOString()
-                    };
-                }
-            } else {
-                // Create new task
-                kanbanTasks.push({
-                    id: generateId(),
-                    title,
-                    description,
-                    project,
-                    priority,
-                    status,
-                    createdAt: new Date().toISOString()
-                });
-            }
-            
-            saveKanbanData();
-            renderKanbanBoard();
-            updateStats();
-            closeTaskModal();
-        }
-
-        function closeTaskModal() {
-            const modal = document.querySelector('.task-modal');
-            if (modal) {
-                modal.remove();
-            }
-            currentEditTask = null;
-        }
-
-        function deleteTask(taskId) {
-            if (confirm('Are you sure you want to delete this task?')) {
-                kanbanTasks = kanbanTasks.filter(task => task.id !== taskId);
-                saveKanbanData();
-                renderKanbanBoard();
-                updateStats();
-            }
-        }
-
-        function editTask(taskId) {
-            const task = kanbanTasks.find(t => t.id === taskId);
-            if (task) {
-                showTaskModal(task);
-            }
-        }
-
-        function renderKanbanBoard() {
-            const columns = ['backlog', 'design', 'review', 'done'];
-            const filter = document.getElementById('projectFilter')?.value || '';
-            
-            columns.forEach(status => {
-                const container = document.getElementById(`${status}-tasks`);
-                const countEl = document.getElementById(`${status}-count`);
-                
-                if (!container || !countEl) return;
-                
-                const filteredTasks = kanbanTasks.filter(task => {
-                    return task.status === status && (filter === '' || task.project === filter);
-                });
-                
-                countEl.textContent = filteredTasks.length;
-                
-                container.innerHTML = filteredTasks.map(task => `
-                    <div class="kanban-task" draggable="true" data-task-id="${task.id}" 
-                         ondragstart="dragStart(event)" ondragend="dragEnd(event)">
-                        <div class="task-actions">
-                            <button class="task-action-btn edit-btn" onclick="editTask('${task.id}')" title="Edit">✏</button>
-                            <button class="task-action-btn delete-btn" onclick="deleteTask('${task.id}')" title="Delete">✕</button>
-                        </div>
-                        <div class="task-title">${task.title}</div>
-                        <div class="task-description">${task.description}</div>
-                        <div class="task-meta">
-                            <span class="task-project">${task.project}</span>
-                            <span class="task-priority ${task.priority}">${task.priority.toUpperCase()}</span>
-                        </div>
-                    </div>
-                `).join('');
-            });
-        }
-
-        function updateProjectFilter() {
-            const select = document.getElementById('projectFilter');
-            if (!select) return;
-            
-            select.innerHTML = '<option value="">All Projects</option>' + 
-                kanbanProjects.map(project => `<option value="${project}">${project}</option>`).join('');
-        }
-
-        function filterByProject() {
-            renderKanbanBoard();
-        }
-
-        function updateStats() {
-            const total = kanbanTasks.length;
-            const completed = kanbanTasks.filter(task => task.status === 'done').length;
-            const active = kanbanTasks.filter(task => task.status === 'design' || task.status === 'review').length;
-            const completionRate = total > 0 ? Math.round((completed / total) * 100) : 0;
-            
-            document.getElementById('totalTasks').textContent = total;
-            document.getElementById('completedTasks').textContent = completed;
-            document.getElementById('activeTasks').textContent = active;
-            document.getElementById('completionRate').textContent = completionRate + '%';
-        }
-
-        function saveKanbanData() {
-            localStorage.setItem('kanbanTasks', JSON.stringify(kanbanTasks));
-        }
-
-        function exportKanbanData() {
-            const data = {
-                tasks: kanbanTasks,
-                projects: kanbanProjects,
-                exportDate: new Date().toISOString()
-            };
-            
-            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `kanban-export-${new Date().toISOString().split('T')[0]}.json`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-        }
-
-        // Drag and Drop Functions
-        function allowDrop(event) {
-            event.preventDefault();
-            event.currentTarget.closest('.kanban-column').classList.add('drag-over');
-        }
-
-        function dragStart(event) {
-            event.dataTransfer.setData('text/plain', event.target.dataset.taskId);
-            event.target.classList.add('dragging');
-        }
-
-        function dragEnd(event) {
-            event.target.classList.remove('dragging');
-            document.querySelectorAll('.kanban-column').forEach(col => {
-                col.classList.remove('drag-over');
-            });
-        }
-
-        function dropTask(event) {
-            event.preventDefault();
-            const taskId = event.dataTransfer.getData('text/plain');
-            const newStatus = event.currentTarget.closest('.kanban-column').dataset.status;
-            
-            const task = kanbanTasks.find(t => t.id === taskId);
-            if (task && task.status !== newStatus) {
-                task.status = newStatus;
-                task.updatedAt = new Date().toISOString();
-                saveKanbanData();
-                renderKanbanBoard();
-                updateStats();
-            }
-            
-            event.currentTarget.closest('.kanban-column').classList.remove('drag-over');
-        }
         
         // PA Media Template Functions - Integrated with PA Media Templates System
         function downloadPATemplate(type) {
@@ -3448,11 +2911,11 @@ Contact</textarea>
                     URL.revokeObjectURL(url);
                     
                     // Show success message
-                    button.textContent = '✅ Downloaded!';
+                    button.innerHTML = '<svg class="icon icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24"><use href="#icon-check-circle"></use></svg> Downloaded!';
                     button.style.background = '#059669';
                 } catch (error) {
                     console.error('Download failed:', error);
-                    button.textContent = '❌ Error';
+                    button.innerHTML = '<svg class="icon icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24"><use href="#icon-exclamation-triangle"></use></svg> Error';
                     button.style.background = '#dc2626';
                 } finally {
                     // Restore button after 2 seconds
@@ -3488,14 +2951,14 @@ Contact</textarea>
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
-            color: var(--pa-text);
+            colour: var(--pa-text);
         }
         
         .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
         
         header {
             background: linear-gradient(135deg, var(--pa-primary) 0%, var(--pa-secondary) 100%);
-            color: var(--pa-white);
+            colour: var(--pa-white);
             padding: 2rem 0;
         }
         
@@ -3508,7 +2971,7 @@ Contact</textarea>
         .logo {
             font-size: 2rem;
             font-weight: bold;
-            color: var(--pa-white);
+            colour: var(--pa-white);
         }
         
         nav ul {
@@ -3518,7 +2981,7 @@ Contact</textarea>
         }
         
         nav a {
-            color: var(--pa-white);
+            colour: var(--pa-white);
             text-decoration: none;
             font-weight: 500;
             transition: opacity 0.3s;
@@ -3535,18 +2998,18 @@ Contact</textarea>
         .hero h1 {
             font-size: 3rem;
             margin-bottom: 1rem;
-            color: var(--pa-primary);
+            colour: var(--pa-primary);
         }
         
         .hero p {
             font-size: 1.25rem;
             margin-bottom: 2rem;
-            color: var(--pa-secondary);
+            colour: var(--pa-secondary);
         }
         
         .btn {
             background: var(--pa-primary);
-            color: var(--pa-white);
+            colour: var(--pa-white);
             padding: 1rem 2rem;
             border: none;
             border-radius: 8px;
@@ -3581,13 +3044,13 @@ Contact</textarea>
         }
         
         .feature h3 {
-            color: var(--pa-primary);
+            colour: var(--pa-primary);
             margin-bottom: 1rem;
         }
         
         footer {
             background: var(--pa-secondary);
-            color: var(--pa-white);
+            colour: var(--pa-white);
             padding: 2rem 0;
             text-align: center;
         }
@@ -3624,7 +3087,7 @@ Contact</textarea>
     
     <section class="features">
         <div class="container">
-            <h2 style="text-align: center; margin-bottom: 1rem; color: var(--pa-primary);">Our Services</h2>
+            <h2 style="text-align: center; margin-bottom: 1rem; colour: var(--pa-primary);">Our Services</h2>
             <div class="features-grid">
                 <div class="feature">
                     <h3>Content Creation</h3>
@@ -3686,7 +3149,7 @@ Contact</textarea>
         
         .slide-header {
             background: linear-gradient(135deg, var(--pa-primary) 0%, var(--pa-secondary) 100%);
-            color: var(--pa-white);
+            colour: var(--pa-white);
             padding: 3rem;
             text-align: center;
         }
@@ -3719,17 +3182,17 @@ Contact</textarea>
         
         .slide-footer {
             background: var(--pa-secondary);
-            color: var(--pa-white);
+            colour: var(--pa-white);
             padding: 2rem;
             text-align: center;
         }
         
-        h1, h2, h3 { color: var(--pa-primary); }
+        h1, h2, h3 { colour: var(--pa-primary); }
         
         .logo {
             font-size: 2rem;
             font-weight: bold;
-            color: var(--pa-primary);
+            colour: var(--pa-primary);
         }
     </style>
 </head>
@@ -3838,7 +3301,7 @@ Contact</textarea>
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
+            colour: white;
             font-size: 2rem;
             font-weight: bold;
             margin-bottom: 1rem;
@@ -3853,13 +3316,13 @@ Contact</textarea>
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            color: white;
+            colour: white;
             text-align: center;
             margin-bottom: 1rem;
         }
         
-        h1 { color: var(--pa-primary); text-align: center; }
-        h2 { color: var(--pa-primary); }
+        h1 { colour: var(--pa-primary); text-align: center; }
+        h2 { colour: var(--pa-primary); }
     </style>
 </head>
 <body>
@@ -3879,7 +3342,7 @@ Contact</textarea>
             <div class="teams-bg" style="background: var(--pa-secondary);">Professional</div>
             <p><strong>Dimensions:</strong> 1920x1080 (16:9)</p>
             <p><strong>Format:</strong> Use as virtual background in Microsoft Teams</p>
-            <p><strong>Description:</strong> Solid color background with professional styling</p>
+            <p><strong>Description:</strong> Solid colour background with professional styling</p>
         </div>
         
         <div class="asset">
@@ -3896,13 +3359,13 @@ Contact</textarea>
         <div class="asset">
             <h2>Email Signature</h2>
             <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; font-size: 0.9rem;">
-                <div style="color: var(--pa-primary); font-weight: bold; margin-bottom: 0.5rem;">John Smith</div>
-                <div style="color: var(--pa-secondary);">Senior Manager</div>
-                <div style="color: var(--pa-primary); font-weight: bold; margin-top: 0.5rem;">PA Media Group</div>
-                <div style="font-size: 0.8rem; color: #666; margin-top: 0.5rem;">
-                    📧 john.smith@pamedia.com<br>
-                    📱 +44 123 456 7890<br>
-                    🌐 www.pamedia.com
+                <div style="colour: var(--pa-primary); font-weight: bold; margin-bottom: 0.5rem;">John Smith</div>
+                <div style="colour: var(--pa-secondary);">Senior Manager</div>
+                <div style="colour: var(--pa-primary); font-weight: bold; margin-top: 0.5rem;">PA Media Group</div>
+                <div style="font-size: 0.8rem; colour: #666; margin-top: 0.5rem;">
+                    <svg class="icon icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24"><use href="#icon-mail"></use></svg> john.smith@pamedia.com<br>
+                    <svg class="icon icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24"><use href="#icon-phone"></use></svg> +44 123 456 7890<br>
+                    <svg class="icon icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24"><use href="#icon-globe"></use></svg> www.pamedia.com
                 </div>
             </div>
             <p><strong>Format:</strong> HTML email signature template</p>
@@ -3945,7 +3408,7 @@ Contact</textarea>
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
-            color: var(--pa-text);
+            colour: var(--pa-text);
             background: var(--pa-light);
         }
         
@@ -3953,7 +3416,7 @@ Contact</textarea>
         
         .header {
             background: linear-gradient(135deg, var(--pa-primary) 0%, var(--pa-secondary) 100%);
-            color: var(--pa-white);
+            colour: var(--pa-white);
             padding: 4rem 2rem;
             text-align: center;
             margin-bottom: 3rem;
@@ -3967,31 +3430,31 @@ Contact</textarea>
             box-shadow: 0 4px 16px rgba(0,0,0,0.1);
         }
         
-        .color-palette {
+        .colour-palette {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 2rem;
             margin: 2rem 0;
         }
         
-        .color-swatch {
+        .colour-swatch {
             text-align: center;
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
         
-        .color-display {
+        .colour-display {
             height: 120px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
+            colour: white;
             font-weight: bold;
             font-size: 1.2rem;
         }
         
-        .color-info {
+        .colour-info {
             padding: 1rem;
             background: var(--pa-white);
         }
@@ -4014,7 +3477,7 @@ Contact</textarea>
             border-radius: 8px;
         }
         
-        h1, h2, h3 { color: var(--pa-primary); margin-bottom: 1rem; }
+        h1, h2, h3 { colour: var(--pa-primary); margin-bottom: 1rem; }
         h1 { font-size: 3rem; }
         h2 { font-size: 2rem; }
         h3 { font-size: 1.5rem; }
@@ -4029,30 +3492,30 @@ Contact</textarea>
     <div class="container">
         <div class="section">
             <h2>Brand Colours</h2>
-            <p>Our color palette reflects professionalism, innovation, and trust.</p>
-            <div class="color-palette">
-                <div class="color-swatch">
-                    <div class="color-display" style="background: var(--pa-primary);">Primary</div>
-                    <div class="color-info">
+            <p>Our colour palette reflects professionalism, innovation, and trust.</p>
+            <div class="colour-palette">
+                <div class="colour-swatch">
+                    <div class="colour-display" style="background: var(--pa-primary);">Primary</div>
+                    <div class="colour-info">
                         <strong>#825FFF</strong><br>
                         RGB(130, 95, 255)<br>
-                        Main brand color
+                        Main brand colour
                     </div>
                 </div>
-                <div class="color-swatch">
-                    <div class="color-display" style="background: var(--pa-secondary);">Secondary</div>
-                    <div class="color-info">
+                <div class="colour-swatch">
+                    <div class="colour-display" style="background: var(--pa-secondary);">Secondary</div>
+                    <div class="colour-info">
                         <strong>#3D3677</strong><br>
                         RGB(61, 54, 119)<br>
-                        Supporting color
+                        Supporting colour
                     </div>
                 </div>
-                <div class="color-swatch">
-                    <div class="color-display" style="background: var(--pa-accent);">Accent</div>
-                    <div class="color-info">
+                <div class="colour-swatch">
+                    <div class="colour-display" style="background: var(--pa-accent);">Accent</div>
+                    <div class="colour-info">
                         <strong>#A855F7</strong><br>
                         RGB(168, 85, 247)<br>
-                        Highlight color
+                        Highlight colour
                     </div>
                 </div>
             </div>
@@ -4062,16 +3525,16 @@ Contact</textarea>
             <h2>Typography</h2>
             <div class="typography-demo">
                 <h1 style="margin-bottom: 0.5rem;">Heading 1 - 3rem</h1>
-                <p style="margin-bottom: 2rem; color: #6B7280;">Used for main page titles and hero headings</p>
+                <p style="margin-bottom: 2rem; colour: #6B7280;">Used for main page titles and hero headings</p>
                 
                 <h2 style="margin-bottom: 0.5rem;">Heading 2 - 2rem</h2>
-                <p style="margin-bottom: 2rem; color: #6B7280;">Used for section headings and major content divisions</p>
+                <p style="margin-bottom: 2rem; colour: #6B7280;">Used for section headings and major content divisions</p>
                 
                 <h3 style="margin-bottom: 0.5rem;">Heading 3 - 1.5rem</h3>
-                <p style="margin-bottom: 2rem; color: #6B7280;">Used for subsections and card titles</p>
+                <p style="margin-bottom: 2rem; colour: #6B7280;">Used for subsections and card titles</p>
                 
                 <p style="font-size: 1rem; margin-bottom: 1rem;"><strong>Body Text Regular - 1rem</strong></p>
-                <p style="margin-bottom: 2rem; color: #6B7280;">Standard body text used for content, descriptions, and general information.</p>
+                <p style="margin-bottom: 2rem; colour: #6B7280;">Standard body text used for content, descriptions, and general information.</p>
             </div>
         </div>
         
@@ -4079,15 +3542,15 @@ Contact</textarea>
             <h2>Logo Usage</h2>
             <div class="logo-showcase">
                 <div class="logo-variant">
-                    <div style="font-size: 2rem; font-weight: bold; color: var(--pa-primary); margin-bottom: 1rem;">PA Media</div>
+                    <div style="font-size: 2rem; font-weight: bold; colour: var(--pa-primary); margin-bottom: 1rem;">PA Media</div>
                     <p><strong>Primary Logo</strong><br>Use on light backgrounds</p>
                 </div>
-                <div class="logo-variant" style="background: var(--pa-primary); color: white;">
+                <div class="logo-variant" style="background: var(--pa-primary); colour: white;">
                     <div style="font-size: 2rem; font-weight: bold; margin-bottom: 1rem;">PA Media</div>
                     <p><strong>Reverse Logo</strong><br>Use on dark backgrounds</p>
                 </div>
                 <div class="logo-variant">
-                    <div style="font-size: 1.5rem; font-weight: bold; color: var(--pa-secondary); margin-bottom: 1rem;">PA MEDIA</div>
+                    <div style="font-size: 1.5rem; font-weight: bold; colour: var(--pa-secondary); margin-bottom: 1rem;">PA MEDIA</div>
                     <p><strong>Text Only</strong><br>For small applications</p>
                 </div>
             </div>
@@ -4097,9 +3560,9 @@ Contact</textarea>
             <h2>Usage Guidelines</h2>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
                 <div>
-                    <h3 style="color: #10B981;">✓ Do</h3>
-                    <ul style="color: #374151;">
-                        <li>Use approved color combinations</li>
+                    <h3 style="colour: #10B981;">✓ Do</h3>
+                    <ul style="colour: #374151;">
+                        <li>Use approved colour combinations</li>
                         <li>Maintain consistent typography</li>
                         <li>Ensure proper logo spacing</li>
                         <li>Keep designs clean and professional</li>
@@ -4107,9 +3570,9 @@ Contact</textarea>
                     </ul>
                 </div>
                 <div>
-                    <h3 style="color: #DC2626;">✗ Don't</h3>
-                    <ul style="color: #374151;">
-                        <li>Alter logo proportions or colors</li>
+                    <h3 style="colour: #DC2626;">✗ Don't</h3>
+                    <ul style="colour: #374151;">
+                        <li>Alter logo proportions or colours</li>
                         <li>Use unauthorized fonts</li>
                         <li>Crowd the logo with other elements</li>
                         <li>Use low-quality or pixelated images</li>
@@ -4139,7 +3602,7 @@ Contact</textarea>
         </div>
     </div>
     
-    <footer style="background: var(--pa-secondary); color: var(--pa-white); padding: 2rem; text-align: center;">
+    <footer style="background: var(--pa-secondary); colour: var(--pa-white); padding: 2rem; text-align: center;">
         <p>&copy; 2024 PA Media Group. Brand Guidelines v1.0</p>
     </footer>
 </body>
@@ -4165,11 +3628,11 @@ Contact</textarea>
                     document.body.removeChild(a);
                     URL.revokeObjectURL(url);
                     
-                    button.textContent = '✅ Downloaded!';
+                    button.innerHTML = '<svg class="icon icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24"><use href="#icon-check-circle"></use></svg> Downloaded!';
                     button.style.background = '#059669';
                 } catch (error) {
                     console.error('Brand guidelines download failed:', error);
-                    button.textContent = '❌ Error';
+                    button.innerHTML = '<svg class="icon icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24"><use href="#icon-exclamation-triangle"></use></svg> Error';
                     button.style.background = '#dc2626';
                 } finally {
                     setTimeout(() => {
@@ -4211,11 +3674,11 @@ Contact</textarea>
                         }, index * 500);
                     });
                     
-                    button.textContent = '✅ Complete Suite Downloaded!';
+                    button.innerHTML = '<svg class="icon icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24"><use href="#icon-check-circle"></use></svg> Complete Suite Downloaded!';
                     button.style.background = '#059669';
                 } catch (error) {
                     console.error('Complete suite download failed:', error);
-                    button.textContent = '❌ Error';
+                    button.innerHTML = '<svg class="icon icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24"><use href="#icon-exclamation-triangle"></use></svg> Error';
                     button.style.background = '#dc2626';
                 } finally {
                     setTimeout(() => {
@@ -4287,6 +3750,42 @@ Contact</textarea>
             alert('PA TV Metadata Template Preview:\n\n• Dashboard Templates - TV metadata management interfaces\n• Schedule Templates - Broadcast schedule displays\n• Analytics Templates - Viewership metrics and performance charts\n• Content Management - Media library and asset organization\n\nUse the download buttons to get the complete template files.');
         }
         
+        // PA TV Metadata Logo Functions
+        function downloadPATVLogo(type) {
+            const logoAssets = {
+                'adjacent-png': ['PA TV Metadata Logos/Adjacent/PNG/PA TV Metadata_Black Adjacent.png', 'PA TV Metadata Logos/Adjacent/PNG/PA-TV-Metadata_White-Adjacent.png'],
+                'adjacent-svg': ['PA TV Metadata Logos/Adjacent/SVG/PA TV Metadata_Black Adjacent.svg', 'PA TV Metadata Logos/Adjacent/SVG/PA-TV-Metadata_White-Adjacent.svg'],
+                'stacked-png': ['PA TV Metadata Logos/Stacked/PNG/PA TV Metadata_Black Stacked.png', 'PA TV Metadata Logos/Stacked/PNG/PA TV Metadata_Stacked_White.png'],
+                'stacked-svg': ['PA TV Metadata Logos/Stacked/SVG/PA TV Metadata_Black Stacked.svg', 'PA TV Metadata Logos/Stacked/SVG/PA TV Metadata_Stacked_White.svg'],
+                'all-png': ['PA TV Metadata Logos/Adjacent/PNG/PA TV Metadata_Black Adjacent.png', 'PA TV Metadata Logos/Adjacent/PNG/PA-TV-Metadata_White-Adjacent.png', 'PA TV Metadata Logos/Stacked/PNG/PA TV Metadata_Black Stacked.png', 'PA TV Metadata Logos/Stacked/PNG/PA TV Metadata_Stacked_White.png'],
+                'all-svg': ['PA TV Metadata Logos/Adjacent/SVG/PA TV Metadata_Black Adjacent.svg', 'PA TV Metadata Logos/Adjacent/SVG/PA-TV-Metadata_White-Adjacent.svg', 'PA TV Metadata Logos/Stacked/SVG/PA TV Metadata_Black Stacked.svg', 'PA TV Metadata Logos/Stacked/SVG/PA TV Metadata_Stacked_White.svg']
+            };
+            
+            alert(`Downloading PA TV Metadata logos - ${type}.\n\nNote: These logos are located in your project folder at:\nPA TV Metadata Logos/\n\nIncluded formats:\n• PNG (high resolution, transparent)\n• SVG (vector, scalable)\n• Adjacent & Stacked orientations\n• Black & White variants`);
+        }
+        
+        function downloadAllPATVLogos() {
+            alert('Downloading complete PA TV Metadata logo asset package.\n\nIncluded:\n• All PNG files (4 logos)\n• All SVG files (4 logos)\n• Adjacent layouts (horizontal)\n• Stacked layouts (vertical)\n• Black and white variants\n• Usage guidelines\n\nLogos are located in: PA TV Metadata Logos/');
+        }
+        
+        function previewPATVLogos() {
+            alert('PA TV Metadata Logo Assets Preview:\n\n• Adjacent Layout - Horizontal orientation for headers and wide spaces\n• Stacked Layout - Vertical orientation for social media and square formats\n• PNG Format - High-resolution raster for most applications\n• SVG Format - Vector graphics for scalable applications\n• Black & White variants for different background colours\n\nAll assets maintain professional quality and brand consistency.');
+        }
+        
+        function downloadPATVLogoGuidelines() {
+            const guidelines = `PA TV Metadata Logo Usage Guidelines\n\nLogo Variants:\n• Adjacent Layout: Use for headers, footers, and wide horizontal spaces\n• Stacked Layout: Use for social media, square formats, and vertical layouts\n\nColor Usage:\n• Black logos: Use on light backgrounds\n• White logos: Use on dark backgrounds\n• Maintain proper contrast ratios\n\nFile Formats:\n• PNG: For most digital applications, social media, presentations\n• SVG: For web development, scalable applications, print\n\nMinimum Size:\n• Adjacent: 120px wide minimum\n• Stacked: 80px wide minimum\n\nClear Space:\n• Maintain clear space equal to the height of the 'TV' text around all logos`;
+            
+            const blob = new Blob([guidelines], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'PA-TV-Metadata-Logo-Guidelines.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+        
         // PA TV Metadata Template Generators
         function generatePATVDashboardTemplate() {
             return `<!DOCTYPE html>
@@ -4298,15 +3797,15 @@ Contact</textarea>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'greycliff-cf', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f8f9fa; }
-        .header { background: rgb(130, 95, 255); color: white; padding: 1rem 2rem; }
+        .header { background: rgb(130, 95, 255); colour: white; padding: 1rem 2rem; }
         .logo { font-size: 1.5rem; font-weight: 700; }
         .dashboard { display: grid; grid-template-columns: 250px 1fr; min-height: calc(100vh - 80px); }
         .sidebar { background: white; padding: 2rem 1rem; border-right: 1px solid #e5e7eb; }
         .main-content { padding: 2rem; }
         .card { background: white; border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
         .metric { text-align: center; }
-        .metric-value { font-size: 2rem; font-weight: 700; color: rgb(130, 95, 255); }
-        .metric-label { color: #6b7280; margin-top: 0.5rem; }
+        .metric-value { font-size: 2rem; font-weight: 700; colour: rgb(130, 95, 255); }
+        .metric-label { colour: #6b7280; margin-top: 0.5rem; }
     </style>
 </head>
 <body>
@@ -4317,15 +3816,15 @@ Contact</textarea>
         <aside class="sidebar">
             <nav>
                 <ul style="list-style: none;">
-                    <li style="margin-bottom: 1rem;"><a href="#" style="color: rgb(130, 95, 255); text-decoration: none; font-weight: 500;">Dashboard</a></li>
-                    <li style="margin-bottom: 1rem;"><a href="#" style="color: #6b7280; text-decoration: none;">Schedules</a></li>
-                    <li style="margin-bottom: 1rem;"><a href="#" style="color: #6b7280; text-decoration: none;">Analytics</a></li>
-                    <li style="margin-bottom: 1rem;"><a href="#" style="color: #6b7280; text-decoration: none;">Content</a></li>
+                    <li style="margin-bottom: 1rem;"><a href="#" style="colour: rgb(130, 95, 255); text-decoration: none; font-weight: 500;">Dashboard</a></li>
+                    <li style="margin-bottom: 1rem;"><a href="#" style="colour: #6b7280; text-decoration: none;">Schedules</a></li>
+                    <li style="margin-bottom: 1rem;"><a href="#" style="colour: #6b7280; text-decoration: none;">Analytics</a></li>
+                    <li style="margin-bottom: 1rem;"><a href="#" style="colour: #6b7280; text-decoration: none;">Content</a></li>
                 </ul>
             </nav>
         </aside>
         <main class="main-content">
-            <h1 style="margin-bottom: 2rem; color: #1f2937;">TV Metadata Dashboard</h1>
+            <h1 style="margin-bottom: 2rem; colour: #1f2937;">TV Metadata Dashboard</h1>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
                 <div class="card metric">
                     <div class="metric-value">1,247</div>
@@ -4341,15 +3840,15 @@ Contact</textarea>
                 </div>
             </div>
             <div class="card">
-                <h3 style="margin-bottom: 1rem; color: #1f2937;">Recent Activity</h3>
+                <h3 style="margin-bottom: 1rem; colour: #1f2937;">Recent Activity</h3>
                 <div style="space-y: 1rem;">
                     <div style="padding: 1rem; background: #f8f9fa; border-radius: 6px; margin-bottom: 1rem;">
-                        <div style="font-weight: 500; color: #1f2937;">Morning News Updated</div>
-                        <div style="color: #6b7280; font-size: 0.9rem;">Metadata synced for 06:00 broadcast</div>
+                        <div style="font-weight: 500; colour: #1f2937;">Morning News Updated</div>
+                        <div style="colour: #6b7280; font-size: 0.9rem;">Metadata synced for 06:00 broadcast</div>
                     </div>
                     <div style="padding: 1rem; background: #f8f9fa; border-radius: 6px; margin-bottom: 1rem;">
-                        <div style="font-weight: 500; color: #1f2937;">Evening Schedule Confirmed</div>
-                        <div style="color: #6b7280; font-size: 0.9rem;">Prime time lineup metadata complete</div>
+                        <div style="font-weight: 500; colour: #1f2937;">Evening Schedule Confirmed</div>
+                        <div style="colour: #6b7280; font-size: 0.9rem;">Prime time lineup metadata complete</div>
                     </div>
                 </div>
             </div>
@@ -4369,14 +3868,14 @@ Contact</textarea>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'greycliff-cf', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f8f9fa; }
-        .header { background: rgb(130, 95, 255); color: white; padding: 1rem 2rem; }
+        .header { background: rgb(130, 95, 255); colour: white; padding: 1rem 2rem; }
         .logo { font-size: 1.5rem; font-weight: 700; }
         .schedule { padding: 2rem; }
         .time-slot { display: grid; grid-template-columns: 100px 1fr; gap: 1rem; padding: 1rem; border-bottom: 1px solid #e5e7eb; background: white; margin-bottom: 1px; }
-        .time { font-weight: 600; color: rgb(130, 95, 255); }
+        .time { font-weight: 600; colour: rgb(130, 95, 255); }
         .program { }
-        .program-title { font-weight: 600; color: #1f2937; margin-bottom: 0.25rem; }
-        .program-desc { color: #6b7280; font-size: 0.9rem; }
+        .program-title { font-weight: 600; colour: #1f2937; margin-bottom: 0.25rem; }
+        .program-desc { colour: #6b7280; font-size: 0.9rem; }
     </style>
 </head>
 <body>
@@ -4384,7 +3883,7 @@ Contact</textarea>
         <div class="logo">PA TV Metadata - Schedule</div>
     </header>
     <div class="schedule">
-        <h1 style="margin-bottom: 2rem; color: #1f2937;">Today's Broadcast Schedule</h1>
+        <h1 style="margin-bottom: 2rem; colour: #1f2937;">Today's Broadcast Schedule</h1>
         <div class="time-slot">
             <div class="time">06:00</div>
             <div class="program">
@@ -4435,14 +3934,14 @@ Contact</textarea>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'greycliff-cf', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f8f9fa; }
-        .header { background: rgb(130, 95, 255); color: white; padding: 1rem 2rem; }
+        .header { background: rgb(130, 95, 255); colour: white; padding: 1rem 2rem; }
         .logo { font-size: 1.5rem; font-weight: 700; }
         .analytics { padding: 2rem; }
-        .chart-placeholder { height: 300px; background: white; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #6b7280; margin-bottom: 2rem; }
+        .chart-placeholder { height: 300px; background: white; border-radius: 8px; display: flex; align-items: center; justify-content: center; colour: #6b7280; margin-bottom: 2rem; }
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
         .stat-card { background: white; padding: 1.5rem; border-radius: 8px; text-align: center; }
-        .stat-value { font-size: 2rem; font-weight: 700; color: rgb(130, 95, 255); }
-        .stat-label { color: #6b7280; margin-top: 0.5rem; }
+        .stat-value { font-size: 2rem; font-weight: 700; colour: rgb(130, 95, 255); }
+        .stat-label { colour: #6b7280; margin-top: 0.5rem; }
     </style>
 </head>
 <body>
@@ -4450,7 +3949,7 @@ Contact</textarea>
         <div class="logo">PA TV Metadata - Analytics</div>
     </header>
     <div class="analytics">
-        <h1 style="margin-bottom: 2rem; color: #1f2937;">Viewership Analytics</h1>
+        <h1 style="margin-bottom: 2rem; colour: #1f2937;">Viewership Analytics</h1>
         <div class="chart-placeholder">
             <div>📊 Viewership Chart Placeholder - Integrate with your analytics platform</div>
         </div>
@@ -4487,16 +3986,16 @@ Contact</textarea>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'greycliff-cf', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f8f9fa; }
-        .header { background: rgb(130, 95, 255); color: white; padding: 1rem 2rem; }
+        .header { background: rgb(130, 95, 255); colour: white; padding: 1rem 2rem; }
         .logo { font-size: 1.5rem; font-weight: 700; }
         .content-manager { padding: 2rem; }
         .content-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
         .content-card { background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-        .content-thumbnail { height: 150px; background: linear-gradient(135deg, rgb(130, 95, 255), rgb(61, 54, 119)); display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; }
+        .content-thumbnail { height: 150px; background: linear-gradient(135deg, rgb(130, 95, 255), rgb(61, 54, 119)); display: flex; align-items: center; justify-content: center; colour: white; font-size: 2rem; }
         .content-info { padding: 1rem; }
-        .content-title { font-weight: 600; color: #1f2937; margin-bottom: 0.5rem; }
-        .content-meta { color: #6b7280; font-size: 0.9rem; }
-        .tag { background: #f3f4f6; color: #6b7280; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem; margin-right: 0.5rem; }
+        .content-title { font-weight: 600; colour: #1f2937; margin-bottom: 0.5rem; }
+        .content-meta { colour: #6b7280; font-size: 0.9rem; }
+        .tag { background: #f3f4f6; colour: #6b7280; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem; margin-right: 0.5rem; }
     </style>
 </head>
 <body>
@@ -4504,7 +4003,7 @@ Contact</textarea>
         <div class="logo">PA TV Metadata - Content Management</div>
     </header>
     <div class="content-manager">
-        <h1 style="margin-bottom: 2rem; color: #1f2937;">Content Library</h1>
+        <h1 style="margin-bottom: 2rem; colour: #1f2937;">Content Library</h1>
         <div class="content-grid">
             <div class="content-card">
                 <div class="content-thumbnail">📺</div>
@@ -4573,7 +4072,7 @@ Contact</textarea>
                 z-index: 1000;
             `;
             
-            notification.textContent = `✅ ${typeNames[type] || 'Templates'} downloaded successfully!`;
+            notification.innerHTML = `<svg class="icon icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24"><use href="#icon-check-circle"></use></svg> ${typeNames[type] || 'Templates'} downloaded successfully!`;
             document.body.appendChild(notification);
             
             setTimeout(() => {
@@ -4641,17 +4140,17 @@ Contact</textarea>
             } else if (type === 'print') {
                 title = 'PA Media Print Templates Preview';
                 content = `<div style="padding: 2rem; background: #f8fafc;">
-                    <h2 style="color: #825FFF; margin-bottom: 1rem;">Print Template Preview</h2>
-                    <p style="color: #6b7280; margin-bottom: 2rem;">Professional print-ready templates with PA Media branding</p>
+                    <h2 style="colour: #825FFF; margin-bottom: 1rem;">Print Template Preview</h2>
+                    <p style="colour: #6b7280; margin-bottom: 2rem;">Professional print-ready templates with PA Media branding</p>
                     <div style="background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
                         <div style="text-align: center; border-bottom: 3px solid #825FFF; padding-bottom: 1rem; margin-bottom: 2rem;">
-                            <h1 style="color: #825FFF; font-size: 2rem; margin-bottom: 0.5rem;">PA MEDIA</h1>
-                            <p style="color: #3D3677; font-size: 1.1rem;">Professional Communication Solutions</p>
+                            <h1 style="colour: #825FFF; font-size: 2rem; margin-bottom: 0.5rem;">PA MEDIA</h1>
+                            <p style="colour: #3D3677; font-size: 1.1rem;">Professional Communication Solutions</p>
                         </div>
                         <div style="margin-bottom: 2rem;">
-                            <h3 style="color: #374151; margin-bottom: 1rem;">Business Card Template</h3>
-                            <div style="background: #825FFF; color: white; padding: 1.5rem; border-radius: 8px; display: inline-block;">
-                                <h4 style="color: white; margin-bottom: 0.5rem;">PA MEDIA</h4>
+                            <h3 style="colour: #374151; margin-bottom: 1rem;">Business Card Template</h3>
+                            <div style="background: #825FFF; colour: white; padding: 1.5rem; border-radius: 8px; display: inline-block;">
+                                <h4 style="colour: white; margin-bottom: 0.5rem;">PA MEDIA</h4>
                                 <p style="font-size: 0.9rem; margin-bottom: 1rem;">Your Name • Your Title</p>
                                 <p style="font-size: 0.8rem; line-height: 1.4;">
                                     email@pamedia.com<br>
@@ -4661,13 +4160,13 @@ Contact</textarea>
                             </div>
                         </div>
                         <div>
-                            <h3 style="color: #374151; margin-bottom: 1rem;">Letterhead Template</h3>
+                            <h3 style="colour: #374151; margin-bottom: 1rem;">Letterhead Template</h3>
                             <div style="border: 1px solid #e5e7eb; padding: 2rem; background: white;">
                                 <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #825FFF; padding-bottom: 1rem; margin-bottom: 2rem;">
-                                    <h2 style="color: #825FFF; margin: 0;">PA MEDIA</h2>
-                                    <p style="color: #6b7280; margin: 0; font-size: 0.9rem;">Professional Communication Solutions</p>
+                                    <h2 style="colour: #825FFF; margin: 0;">PA MEDIA</h2>
+                                    <p style="colour: #6b7280; margin: 0; font-size: 0.9rem;">Professional Communication Solutions</p>
                                 </div>
-                                <p style="color: #374151; line-height: 1.6;">
+                                <p style="colour: #374151; line-height: 1.6;">
                                     [Your letter content goes here. This letterhead template provides a professional foundation for all PA Media correspondence.]
                                 </p>
                             </div>
